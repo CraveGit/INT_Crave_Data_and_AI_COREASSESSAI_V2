@@ -61,7 +61,34 @@ def _readConfig() -> pd.DataFrame:
 config_all = _require("CONFIG_MSTR", _readConfig())
 config_numeric = config_all.replace("Low", "1").replace("Medium", "2").replace("High", "3")
 
-tshirt_config = _require("TSHIRT_CONFIG", _read("TSHIRT_CONFIG", ["FROM_HRS", "TO_HRS", "TSHIRT"]))
+# T-shirt bands. The deployed refdata prefix (KCC_ vs CRA_) can point at a stale
+# TSHIRT_CONFIG table, so an env override takes precedence over HANA -- set it once
+# with `cf set-env` (no HANA access / reseed needed) and it can never drift again.
+# Format: "from:to:SIZE,from:to:SIZE,..." e.g.
+#   TSHIRT_BANDS="1:40:XS,41:120:S,121:320:M,321:640:L,641:99999:XL"
+def _tshirt_bands_from_env():
+    raw = (os.getenv("TSHIRT_BANDS") or "").strip()
+    if not raw:
+        return None
+    rows = []
+    for part in raw.split(","):
+        seg = part.split(":")
+        if len(seg) != 3:
+            continue
+        try:
+            rows.append({"FROM_HRS": float(seg[0]), "TO_HRS": float(seg[1]), "TSHIRT": seg[2].strip().upper()})
+        except (TypeError, ValueError):
+            continue
+    df = pd.DataFrame(rows)
+    return df if not df.empty else None
+
+
+_env_tshirt = _tshirt_bands_from_env()
+if _env_tshirt is not None:
+    logger.info(f"TSHIRT_CONFIG from env TSHIRT_BANDS ({len(_env_tshirt)} bands); HANA table ignored")
+    tshirt_config = _env_tshirt
+else:
+    tshirt_config = _require("TSHIRT_CONFIG", _read("TSHIRT_CONFIG", ["FROM_HRS", "TO_HRS", "TSHIRT"]))
 priority_weights = _require("PRIORITY_CONFIG", _read("PRIORITY_CONFIG", ["METRIC", "COMPLEXITY", "HIGH_IMPACT"]))
 
 if LOAD_ERRORS:
