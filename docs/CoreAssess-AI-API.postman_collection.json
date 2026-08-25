@@ -1,0 +1,324 @@
+{
+  "info": {
+    "name": "CoreAssess AI API",
+    "description": "AI API (coreassess-ai): analysis + docgen + health + logs. Set collection variable baseUrl to the app route (no trailing slash). CAP endpoints will be added later.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://coreassess-ai-api-v2.cfapps.us10-001.hana.ondemand.com",
+      "type": "string"
+    },
+    {
+      "key": "logToken",
+      "value": "HqZyRFKxz1bBL1XRSBxsvotoEOBjqcOOG5ehAFKoFI8",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Liveness (root)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health (deep: hana/aicore/mcp)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Models (admin panel dropdown)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/models",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "models"
+              ]
+            }
+          },
+          "description": "Live AI Core deployments, minus non-chat models (embeddings/rerankers). Feeds the admin model selector. `default` is what runs when a request sends no model."
+        }
+      ]
+    },
+    {
+      "name": "Logs",
+      "item": [
+        {
+          "name": "View logs (tail)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Log-Token",
+                "value": "{{logToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/logs?lines=200",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logs"
+              ],
+              "query": [
+                {
+                  "key": "lines",
+                  "value": "200"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Clear logs",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "X-Log-Token",
+                "value": "{{logToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/logs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "logs"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Refresh price list (dry run)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Log-Token",
+                "value": "{{logToken}}",
+                "description": "required when LOG_ADMIN_TOKEN is set"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pricing/refresh?dry_run=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pricing",
+                "refresh"
+              ],
+              "query": [
+                {
+                  "key": "dry_run",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "description": "KNOWN GAP: no priced source is configured, so validation rejects the fetch and this is a safe no-op. dry_run=true reports the delta without writing."
+        }
+      ]
+    },
+    {
+      "name": "Analysis",
+      "item": [
+        {
+          "name": "Analyze (JSON body)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"abap_object\": \"REPORT ztest.\\nSELECT * FROM mara INTO TABLE @DATA(lt_mara).\\nWRITE: 'hello'.\",\n  \"ObjectName\": \"ZTEST\",\n  \"SkillSet\": { \"Name\": \"NodeJS\" }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/analyze",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analyze"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Analyze files (multipart upload)",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "files",
+                  "type": "file",
+                  "src": [],
+                  "description": "attach one or more .abap/.txt files; repeat key for multiple"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/analyze/files",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "analyze",
+                "files"
+              ]
+            }
+          },
+          "description": "Body -> form-data -> key 'files' type File. Add the key again to attach multiple files."
+        },
+        {
+          "name": "Estimate services",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analysis\": { \"basic_analysis\": {}, \"technical_analysis\": {} },\n  \"qna\": []\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/estimateservices",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "estimateservices"
+              ]
+            }
+          },
+          "description": "Replace analysis with a real /analyze response object."
+        }
+      ]
+    },
+    {
+      "name": "DocGen",
+      "item": [
+        {
+          "name": "Docs export (.docx download)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analysis\": {},\n  \"docType\": \"FSD\",\n  \"objectName\": \"ZTEST\",\n  \"CompanyName\": \"Acme\",\n  \"ProjectName\": \"Migration\",\n  \"prompt\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/docs/export",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "docs",
+                "export"
+              ]
+            }
+          },
+          "description": "docType: FSD | TSD | BBD. Returns a .docx (Save Response -> Save to a file). analysis must be a real /analyze response."
+        },
+        {
+          "name": "Docs chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analysis\": {},\n  \"docType\": \"FSD\",\n  \"objectName\": \"ZTEST\",\n  \"CompanyName\": \"Acme\",\n  \"ProjectName\": \"Migration\",\n  \"user\": \"tester\",\n  \"chat_prompt\": \"Summarize the clean-core approach.\",\n  \"history\": []\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/docs/chat",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "docs",
+                "chat"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Docs from-response (.docx download)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"analysis\": {},\n  \"docType\": \"FSD\",\n  \"objectName\": \"ZTEST\",\n  \"CompanyName\": \"Acme\",\n  \"ProjectName\": \"Migration\",\n  \"last_response\": \"<p>previous chat html</p>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/docs/from-response",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "docs",
+                "from-response"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

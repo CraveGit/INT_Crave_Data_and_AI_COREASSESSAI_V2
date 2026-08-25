@@ -1,0 +1,722 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.AssessmentReport"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns:t="sap.ui.table"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:comm="sap.suite.ui.commons"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data"
+    height="100%"
+    id="assessment"
+>
+    <Page
+        id="page3"
+        title="{i18n>title}"
+        showHeader="false"
+    >
+        <content>
+            <tnt:ToolHeader
+                id="shellLikeToolHeaderOnlyMandatoryControls3"
+                class="sapUiTinyMargin sideNavBackground"
+            >
+                <Image
+                    src="{ImgModel>/Path}/image/crave_logo.png"
+                    decorative="false"
+                    press="onLogoPressed"
+                    tooltip="Crave Infotech"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Image>
+                <ToolbarSpacer />
+                <Title
+                    text="CoreAssess.AI"
+                    wrapping="false"
+                    class="sapUiTinyMarginBegin"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="Disappear" />
+                    </layoutData>
+                </Title>
+                <ToolbarSpacer />
+                <Label text="Hello {userModel>/Name} !!" />
+                <Avatar
+                    displaySize="XS"
+                    press=".onAvatarPressed"
+                    tooltip="Profile"
+                    initials="{userModel>/initials}"
+                >
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Avatar>
+            </tnt:ToolHeader>
+            <HBox height="100%">
+                <VBox
+                    renderType="Bare"
+                    alignItems="Start"
+                    height="100%"
+                    class="sapUiTinyMargin "
+                >
+                    <tnt:SideNavigation
+                        id="sideNavigation3"
+                        class="sideNavBackground"
+                        expanded="true"
+                        itemSelect="changeView"
+                    >
+                        <tnt:NavigationList>
+                            <tnt:NavigationListItem
+                                text="Upload File"
+                                icon="sap-icon://upload-to-cloud"
+                                key="uploadFile"
+                            />
+                            <tnt:NavigationListItem
+                                text="Projects"
+                                icon="sap-icon://project-definition-triangle-2"
+                                key="projects"
+                            />
+                             <tnt:NavigationListItem
+                                text="Custom Prompts"
+                                icon="sap-icon://syntax"
+                                key="customPrompts"
+                                visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'INT_USER' ? true : false}"
+                            />
+                             <tnt:NavigationListItem
+                                text="Configuration"
+                                icon="sap-icon://wrench"
+                                key="config"
+                                visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER'? true:false}"
+                            />
+                            <tnt:NavigationListItem
+                                text="ROI"
+                                icon="sap-icon://simulate"
+                                key="roi"
+                                visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER'? true:false}"
+                                expanded="false"
+                            >
+                                <tnt:NavigationListItem
+                                    text="Input"
+                                    icon="sap-icon://text-align-justified"
+                                    key="roiInput"
+                                />
+                                <tnt:NavigationListItem
+                                    text="Output"
+                                    icon="sap-icon://message-information"
+                                    key="roiOutput"
+                                />
+                            </tnt:NavigationListItem>
+                        </tnt:NavigationList>
+                    </tnt:SideNavigation>
+                </VBox>
+                <VBox
+                    class="sapUiSmallMargin"
+                    width="100%"
+                >
+                    <HBox justifyContent="Center">
+                        <GenericTile
+                            class=" sapUiTinyMarginEnd tileLayout tileColor"
+                            header="Project Name" sizeBehavior="Responsive" 
+                            frameType="OneByHalf" wrappingType="Normal"
+                             subheader="{dataModel>/title}"
+                            press="press"
+                        >
+                            <TileContent
+                                
+                            >
+                              <Text text="{dataModel>/projectData/PROJECT_NAME}" wrapping="true"/>
+                            </TileContent>
+                        </GenericTile>
+
+                        <GenericTile
+                            class=" sapUiTinyMarginEnd tileLayout tileColor "
+                            frameType="OneByHalf"
+                            header="Total No. Of Objects"
+                            subheader="Expenses"
+                            press="navigateToObjects"
+                        >
+                            <TileContent
+                                unit="Unit"
+                                footer="ABAP Objects"
+                            >
+                                <NumericContent
+                                    id="totalNoOfObjects"
+                                    value="{dataModel>/objectLength}"
+                                    valueColor="Good"
+                                    icon="sap-icon://database"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+                        <!-- <GenericTile
+                            class="sapUiTinyMarginEnd tileLayout tileColor"
+                            frameType="OneByHalf"
+                            header="Workflows"
+                            subheader="Expenses"
+                            press="press"
+                            wrappingType="Normal"
+                        >
+                            <TileContent
+                                unit="Unit"
+                                footer="Footer Text"
+                            >
+                                <NumericContent
+                                    value="-"
+                                    valueColor="Good"
+                                    icon="sap-icon://connected"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile>
+                        <GenericTile
+                            class="sapUiTinyMarginEnd tileLayout tileColor"
+                            frameType="OneByHalf"
+                            header="Enhancements"
+                            subheader="Expenses"
+                            press="press"
+                            wrappingType="Normal"
+                        >
+                            <TileContent
+                                unit="Unit"
+                                footer="Footer Text"
+                            >
+                                <NumericContent
+                                    value="-"
+                                    valueColor="Good"
+                                    icon="sap-icon://add-equipment"
+                                    withMargin="false"
+                                />
+                            </TileContent>
+                        </GenericTile> -->
+                    </HBox>
+                    <HBox
+                        justifyContent="SpaceAround"
+                        class="sapUiTinyMarginTop"
+                    >
+                        <VBox width="49%">
+                            <comm:ChartContainer
+                                id="chartContainer1"
+                                showFullScreen="true"
+                                showPersonalization="true"
+                                autoAdjustHeight="false"
+                                personalizationPress="attachPersonalizationPress"
+                                contentChange="attachContentChange"
+                                title="Functional Module Analysis"
+                            >
+                                <comm:content>
+                                    <comm:ChartContainerContent>
+                                        <comm:content>
+                                            <viz:VizFrame
+                                                id="chartContainerContentVizFrame1"
+                                                uiConfig="{applicationSet:'fiori'}"
+                                                height='290px'
+                                                width="800px"
+                                                vizType='column'
+                                                vizProperties="{
+                                                'title': {
+                                                    'text': 'Total Prices vs Vendors',
+                                                    'visible': false, 'level': 'H6'
+                                                },
+                                                'plotArea': {
+                                                    'colorPalette': ['#5cbae6', '#b6d957']
+                                                }}"
+                                            >
+                                                <viz:dataset>
+                                                    <viz.data:FlattenedDataset
+                                                        data="{Graph1Model>/graph1Array}"
+                                                    >
+                                                        <viz.data:dimensions>
+                                                            <viz.data:DimensionDefinition
+                                                                name="Objects"
+                                                                value="{Graph1Model>name}"
+                                                            />
+                                                        </viz.data:dimensions>
+                                                        <viz.data:measures>
+                                                            <viz.data:MeasureDefinition
+                                                                name="Count"
+                                                                value="{Graph1Model>value}"
+                                                            />
+                                                        </viz.data:measures>
+                                                    </viz.data:FlattenedDataset>
+                                                </viz:dataset>
+
+                                                <viz:feeds>
+                                                    <viz.feeds:FeedItem
+                                                        id='valueAxisFeed1'
+                                                        uid="valueAxis"
+                                                        type="Measure"
+                                                        values="Count"
+                                                    />
+                                                    <viz.feeds:FeedItem
+                                                        id='categoryAxisFeed1'
+                                                        uid="categoryAxis"
+                                                        type="Dimension"
+                                                        values="Objects"
+                                                    />
+                                                </viz:feeds>
+                                                <viz:dependents>
+                                                    <viz:Popover
+                                                        id="idPopOver1"
+                                                    />
+                                                </viz:dependents>
+                                            </viz:VizFrame>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                    <comm:ChartContainerContent
+                                        icon="sap-icon://table-view"
+                                        title="Table"
+                                    >
+                                        <comm:content>
+                                            <t:Table
+                                                rows="{Graph1Model>/graph1Array}"
+                                                selectionMode="None"
+                                                visibleRowCount="7"
+                                                enableColumnFreeze="true"
+                                                rowSelectionChange="showData"
+                                                ariaLabelledBy="title"
+                                                enableSelectAll="false"
+                                            >
+                                                <t:columns>
+                                                    <t:Column width="15rem">
+                                                        <Label
+                                                            text="Object Name"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph1Model>name}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column width="10rem">
+                                                        <Label
+                                                            text="Count"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph1Model>value}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                </t:columns>
+                                            </t:Table>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                </comm:content>
+                            </comm:ChartContainer>
+                        </VBox>
+                        <VBox width="49%">
+                            <comm:ChartContainer
+                                id="chartContainer2"
+                                showFullScreen="true"
+                                showPersonalization="true"
+                                autoAdjustHeight="false"
+                                personalizationPress="attachPersonalizationPress"
+                                contentChange="attachContentChange"
+                                title="Module Efforts Analysis"
+                            >
+                                <comm:content>
+                                    <comm:ChartContainerContent
+                                        icon="sap-icon://bubble-chart"
+                                        title="Bubble Chart"
+                                    >
+                                        <comm:content>
+                                            <viz:VizFrame
+                                                id="chartContainerContentVizFrame2"
+                                                uiConfig="{applicationSet:'fiori'}"
+                                                height='290px'
+                                                width="800px"
+                                                vizType='stacked_bar'
+                                                vizProperties="{
+                                                'title': {
+                                                    'text': 'Total Prices vs Vendors',
+                                                    'visible': false, 'level': 'H6'
+                                                },
+                                                'plotArea': {
+                                                    'colorPalette': ['#98e37d', '#b6d957']
+                                                }}"
+                                            >
+                                                <viz:dataset>
+                                                    <viz.data:FlattenedDataset
+                                                        data="{Graph2Model>/graph2Array}"
+                                                    >
+                                                        <viz.data:dimensions>
+                                                            <viz.data:DimensionDefinition
+                                                                name="Objects"
+                                                                value="{Graph2Model>name}"
+                                                            />
+                                                        </viz.data:dimensions>
+                                                        <viz.data:measures>
+                                                            <viz.data:MeasureDefinition
+                                                                name="Hours"
+                                                                value="{Graph2Model>value}"
+                                                            />
+                                                        </viz.data:measures>
+                                                    </viz.data:FlattenedDataset>
+                                                </viz:dataset>
+
+                                                <viz:feeds>
+                                                    <viz.feeds:FeedItem
+                                                        id='valueAxisFeed2'
+                                                        uid="valueAxis"
+                                                        type="Measure"
+                                                        values="Hours"
+                                                    />
+                                                    <viz.feeds:FeedItem
+                                                        id='categoryAxisFeed2'
+                                                        uid="categoryAxis"
+                                                        type="Dimension"
+                                                        values="Objects"
+                                                    />
+                                                </viz:feeds>
+                                                <viz:dependents>
+                                                    <viz:Popover
+                                                        id="idPopOver2"
+                                                    />
+                                                </viz:dependents>
+                                            </viz:VizFrame>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                    <comm:ChartContainerContent
+                                        icon="sap-icon://table-view"
+                                        title="Table"
+                                    >
+                                        <comm:content>
+                                            <t:Table
+                                                rows="{Graph2Model>/graph2Array}"
+                                                selectionMode="None"
+                                                visibleRowCount="7"
+                                                enableColumnFreeze="true"
+                                                rowSelectionChange="showData"
+                                                ariaLabelledBy="title"
+                                                enableSelectAll="false"
+                                            >
+                                                <t:columns>
+                                                    <t:Column width="15rem">
+                                                        <Label
+                                                            text="Object Name"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph2Model>name}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column width="10rem">
+                                                        <Label
+                                                            text="Count"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph2Model>value}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                </t:columns>
+                                            </t:Table>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                </comm:content>
+                            </comm:ChartContainer>
+                        </VBox>
+                    </HBox>
+
+                    <HBox
+                        justifyContent="SpaceAround"
+                        class="sapUiTinyMarginTop"
+                    >
+                        <VBox width="49%">
+                            <comm:ChartContainer
+                                id="chartContainer3"
+                                showFullScreen="true"
+                                showPersonalization="true"
+                                autoAdjustHeight="false"
+                                personalizationPress="attachPersonalizationPress"
+                                contentChange="attachContentChange"
+                                title="Resource Breakdown: Tables, APIs, and Efforts"
+                            >
+                                <comm:content>
+                                    <comm:ChartContainerContent
+                                        icon="sap-icon://bubble-chart"
+                                        title="Bubble Chart"
+                                    >
+                                        <comm:content>
+                                            <viz:VizFrame
+                                                id="chartContainerContentVizFrame3"
+                                                uiConfig="{applicationSet:'fiori'}"
+                                                height='290px'
+                                                width="800px"
+                                                vizType='column'
+                                                vizProperties="{
+                                                'title': {
+                                                    'text': 'Total Prices vs Vendors',
+                                                    'visible': false, 'level': 'H6'
+                                                },
+                                                'plotArea': {
+                                                    'colorPalette': ['#d1a971', '#b6d957']
+                                                }}"
+                                            >
+                                                <viz:dataset>
+                                                    <viz.data:FlattenedDataset
+                                                        data="{Graph3Model>/graph3Array}"
+                                                    >
+                                                        <viz.data:dimensions>
+                                                            <viz.data:DimensionDefinition
+                                                                name="Objects"
+                                                                value="{Graph3Model>name}"
+                                                            />
+                                                        </viz.data:dimensions>
+                                                        <viz.data:measures>
+                                                            <viz.data:MeasureDefinition
+                                                                name="Count"
+                                                                value="{Graph3Model>value}"
+                                                            />
+                                                        </viz.data:measures>
+                                                    </viz.data:FlattenedDataset>
+                                                </viz:dataset>
+
+                                                <viz:feeds>
+                                                    <viz.feeds:FeedItem
+                                                        id='valueAxisFeed3'
+                                                        uid="valueAxis"
+                                                        type="Measure"
+                                                        values="Count"
+                                                    />
+                                                    <viz.feeds:FeedItem
+                                                        id='categoryAxisFeed3'
+                                                        uid="categoryAxis"
+                                                        type="Dimension"
+                                                        values="Objects"
+                                                    />
+                                                </viz:feeds>
+                                                <viz:dependents>
+                                                    <viz:Popover
+                                                        id="idPopOver3"
+                                                    />
+                                                </viz:dependents>
+                                            </viz:VizFrame>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                    <comm:ChartContainerContent
+                                        icon="sap-icon://table-view"
+                                        title="Table"
+                                    >
+                                        <comm:content>
+                                            <t:Table
+                                                rows="{Graph3Model>/graph3Array}"
+                                                selectionMode="None"
+                                                visibleRowCount="7"
+                                                enableColumnFreeze="true"
+                                                rowSelectionChange="showData"
+                                                ariaLabelledBy="title"
+                                                enableSelectAll="false"
+                                            >
+                                                <t:columns>
+                                                    <t:Column width="15rem">
+                                                        <Label
+                                                            text="Object Name"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph3Model>name}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column width="10rem">
+                                                        <Label
+                                                            text="Count"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph3Model>value}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                </t:columns>
+                                            </t:Table>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                </comm:content>
+                            </comm:ChartContainer>
+                        </VBox>
+                        <VBox width="49%">
+                            <comm:ChartContainer
+                                id="chartContainer4"
+                                showFullScreen="true"
+                                showPersonalization="true"
+                                autoAdjustHeight="false"
+                                personalizationPress="attachPersonalizationPress"
+                                contentChange="attachContentChange"
+                                title="Module Based Complexity"
+                            >
+                                <comm:content>
+                                    <comm:ChartContainerContent
+                                        icon="sap-icon://bubble-chart"
+                                    >
+                                        <comm:content>
+                                            <viz:VizFrame
+                                                id="chartContainerContentVizFrame4"
+                                                uiConfig="{applicationSet:'fiori'}"
+                                                height='290px'
+                                                width="800px"
+                                                vizType='stacked_bar'
+                                                vizProperties="{
+                                                'title': {
+                                                    'text': 'Total Prices vs Vendors',
+                                                    'visible': false, 'level': 'H6'
+                                                },
+                                                'plotArea': {
+                                                    'colorPalette': ['#92bfe0 ', '#6d9cbf', '#2c78b0']
+                                                }}"
+                                            >
+                                                <viz:dataset>
+                                                    <viz.data:FlattenedDataset
+                                                        data="{Graph4Model>/graph4Array}"
+                                                    >
+                                                        <viz.data:dimensions>
+                                                            <viz.data:DimensionDefinition
+                                                                name="Objects"
+                                                                value="{Graph4Model>name}"
+                                                            />
+                                                        </viz.data:dimensions>
+                                                        <viz.data:measures>
+                                                            <viz.data:MeasureDefinition
+                                                                name="High"
+                                                                value="{Graph4Model>High}"
+                                                            />
+                                                            <viz.data:MeasureDefinition
+                                                                name="Medium"
+                                                                value="{Graph4Model>Medium}"
+                                                            />
+                                                            <viz.data:MeasureDefinition
+                                                                name="Low"
+                                                                value="{Graph4Model>Low}"
+                                                            />
+                                                        </viz.data:measures>
+                                                    </viz.data:FlattenedDataset>
+                                                </viz:dataset>
+
+                                                <viz:feeds>
+                                                    <viz.feeds:FeedItem
+                                                        id='valueAxisFeed45'
+                                                        uid="valueAxis"
+                                                        type="Measure"
+                                                        values="Low"
+                                                    />
+                                                    <viz.feeds:FeedItem
+                                                        id='valueAxisFeed4'
+                                                        uid="valueAxis"
+                                                        type="Measure"
+                                                        values="Medium"
+                                                    />
+                                                    <viz.feeds:FeedItem
+                                                        id='valueAxisFeed42'
+                                                        uid="valueAxis"
+                                                        type="Measure"
+                                                        values="High"
+                                                    />
+                                                    <viz.feeds:FeedItem
+                                                        id='categoryAxisFeed4'
+                                                        uid="categoryAxis"
+                                                        type="Dimension"
+                                                        values="Objects"
+                                                    />
+                                                </viz:feeds>
+                                                <viz:dependents>
+                                                    <viz:Popover
+                                                        id="idPopOver4"
+                                                    />
+                                                </viz:dependents>
+                                            </viz:VizFrame>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                    <comm:ChartContainerContent
+                                        icon="sap-icon://table-view"
+                                        title="Table"
+                                    >
+                                        <comm:content>
+                                            <t:Table
+                                                rows="{Graph4Model>/graph4Array}"
+                                                selectionMode="None"
+                                                visibleRowCount="7"
+                                                enableColumnFreeze="true"
+                                                rowSelectionChange="showData"
+                                                ariaLabelledBy="title"
+                                                enableSelectAll="false"
+                                            >
+                                                <t:columns>
+                                                    <t:Column width="15rem">
+                                                        <Label
+                                                            text="Object Name"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph4Model>name}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column width="6rem">
+                                                        <Label
+                                                            text="Medium"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph4Model>Medium}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column width="6rem">
+                                                        <Label
+                                                            text="Complex"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph4Model>High}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column width="6rem">
+                                                        <Label
+                                                            text="Low"
+                                                            textAlign="Center"
+                                                        />
+                                                        <t:template>
+                                                            <Text
+                                                                text="{Graph4Model>Low}"
+                                                                wrapping="false"
+                                                            />
+                                                        </t:template>
+                                                    </t:Column>
+                                                </t:columns>
+                                            </t:Table>
+                                        </comm:content>
+                                    </comm:ChartContainerContent>
+                                </comm:content>
+                            </comm:ChartContainer>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </content>
+    </Page>
+</mvc:View>

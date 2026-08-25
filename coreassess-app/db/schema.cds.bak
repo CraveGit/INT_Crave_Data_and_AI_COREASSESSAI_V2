@@ -1,0 +1,714 @@
+namespace KCC_prod;
+
+using {managed} from '@sap/cds/common';
+
+entity MSTR_USER : managed {
+  key ID           : Integer;
+      USERNAME     : String;
+      ROLE         : String;
+      COMPANY      : Association to MSTR_COMPANY;
+      LICENSE_ROLE : String;
+      ALLOWEDOBJECTS: Integer;
+      UPLOADEDOBJECTS: Integer;
+      LicenseRoles : Composition of many MSTR_USER_LICENSE
+                       on LicenseRoles.USER_ID = $self;
+}
+
+entity MSTR_USER_LICENSE : managed {
+  key ID             : Integer;
+      USER_ID        : Association to MSTR_USER;
+      RoleType       : String; // superuser, limiteduser
+      AssignedAt     : DateTime;
+      RemainingCount : Integer;
+      TotalCount     : Integer;
+      COMPANY_ID     : Association to MSTR_COMPANY;
+}
+
+// entity MSTR_LICENSE_PLAN : managed
+
+
+entity MSTR_COMPANY : managed {
+  key ID           : Integer;
+      COMPANY_NAME : String(100);
+      IMAGE_URL    : String;
+}
+
+entity MSTR_PROJECT : managed {
+  key ID            : Integer;
+  key COMPANY       : Association to MSTR_COMPANY;
+      PROJECT_NAME  : String(100);
+      SkillSet      : Association to SkillSet;
+      ACTIVE_STATUS : Boolean default true;
+}
+
+entity COMPANY_USER_MAP {
+  key USERNAME   : String;
+  key COMPANY_ID : Integer;
+}
+
+// Graph 1 -> SAP_MODULE_NAME
+
+entity READ_CRUD {
+  key ID        : UUID;
+      ASSESMENT : Association to ASSESMENT;
+      READ_CRUD : String;
+}
+
+entity ASSESMENT : managed {
+  key ID                         : Integer;
+      PROJECT                    : Association to MSTR_PROJECT;
+      OBJECT_NAME                : String(400);
+      BDC_USED                   : Integer; // new
+      PRIORITY                   : String; // new
+      READ_CRUD                  : Composition of many READ_CRUD
+                                     on READ_CRUD.ASSESMENT = $self;
+      SAP_MODULE_NAME            : String(400);
+      CLEAN_CORE_ANALYSIS        : Composition of many CLEAN_CORE_ANALYSIS
+                                     on CLEAN_CORE_ANALYSIS.ASSESMENT = $self;
+      FUNCTIONAL_ANALYSIS        : String;
+      TShirt                     : String;
+      Efforts                    : Integer;
+      WRICEF_OBJECT_TYPE         : Composition of many WRICEF_TYPES
+                                     on WRICEF_OBJECT_TYPE.ASSESMENT_ID = $self;
+      HIGH_LVL_RECOMMENDATIONS   : Composition of many ASSESSMENT_RECOMMENDATIONS
+                                     on HIGH_LVL_RECOMMENDATIONS.ASSESSMENT = $self;
+      CODE_COMPLEXITY            : String;
+      STANDARD_TABLES            : Composition of many ASSESSMENT_STANDARD_TABLES
+                                     on STANDARD_TABLES.ASSESMENT = $self;
+      CUSTOM_TABLES              : Composition of many ASSESSMENT_CUSTOM_TABLES
+                                     on CUSTOM_TABLES.ASSESMENT = $self;
+      NEW_S4_TABLES              : Composition of many NEW_S4_TABLES
+                                     on NEW_S4_TABLES.ASSESMENT = $self;
+      SQL_ANALYSIS_TABLES_API    : Composition of many SQL_ANALYSIS_TABLES_API
+                                     on SQL_ANALYSIS_TABLES_API.ASSESMENT = $self;
+      SQL_ANALYSIS_TABLES_CDS    : Composition of many SQL_ANALYSIS_TABLES_CDS
+                                     on SQL_ANALYSIS_TABLES_CDS.ASSESMENT = $self;
+      COUPLING                   : String(20);
+      SQL_ANALYSIS_TABLES_DIRECT : Composition of many SQL_ANALYSIS_TABLES_DIRECT
+                                     on SQL_ANALYSIS_TABLES_DIRECT.ASSESMENT = $self;
+      SQL_RECOMMENDATION         : String;
+      APPROACH                   : String;
+      BTP_SERVICES               : Composition of many BTP_SERVICES
+                                     on BTP_SERVICES.ASSESMENT_ID = $self;
+      ADHERENCE                  : String;
+      BTP_SERVICES_SEARCH        : String;
+      TOKEN_SIZE                 : Integer;
+      CODELENGTH                 : String;
+      DEVELOPMENTAPPROACH        : String;
+      SCREENS_USED               : Integer;
+      BAPIS                      : Composition of many BAPIS
+                                     on BAPIS.ASSESMENT = $self;
+      FUNCTION_MODULES           : Composition of many FUNCTION_MODULES
+                                     on FUNCTION_MODULES.ASSESMENT = $self;
+      S4_ANALYSIS                : String;
+      S4_RECOMMENDATIONS         : Composition of many S4_RECOMMENDATIONS
+                                     on S4_RECOMMENDATIONS.ASSESMENT = $self;
+      UI_INTEGRATION             : String;
+      THIRD_PARTY_INTEGRATION    : String;
+      INTEGERATION_RESULT        : Composition of many INTEGERATION_RESULT
+                                     on INTEGERATION_RESULT.ASSESMENT = $self;
+      INTERFACE_IDOCS            : Composition of many INTERFACE_IDOCS
+                                     on INTERFACE_IDOCS.ASSESMENT = $self;
+      INTERFACE_STANDARD_API     : Composition of many INTERFACE_STANDARD_API
+                                     on INTERFACE_STANDARD_API.ASSESMENT = $self;
+
+      USE_CASE_AREA              : Composition of many USE_CASE_AREA
+                                     on USE_CASE_AREA.ASSESMENT = $self;
+      EVENTS                     : Composition of many EVENTS
+                                     on EVENTS.ASSESMENT = $self;
+      STANDARD_EVENTS            : Composition of many STANDARD_EVENTS
+                                     on STANDARD_EVENTS.ASSESMENT = $self;
+      TOPICS                     : Composition of many TOPICS
+                                     on TOPICS.ASSESMENT = $self;
+      USE_CASE_AREA_EXPLANATION  : String;
+      INTEGRATION_MODERNIZATION  : String;
+      SAP_SUB_MODULE             : String;
+      RAW_ANALYSIS               : LargeString;
+      IS_ESTIMATED               : Boolean default false;
+      SAP_STANDARD_API           : Composition of many USE_CASE_AREA
+                                     on SAP_STANDARD_API.ASSESMENT = $self;
+      SAP_STANDARD_FIORI_APP     : Composition of many USE_CASE_AREA
+                                     on SAP_STANDARD_FIORI_APP.ASSESMENT = $self;
+      AUTHORIZATION_CHECK        : Composition of many AUTHORIZATION_CHECK
+                                     on AUTHORIZATION_CHECK.ASSESSMENT = $self;
+      IDENTIFIER                 : String(20);
+      RETIRE_EXPLAINATION        : String;
+      REIMPLEMENTATION           : String;
+      CODEQUALITYSCORE           : String;
+      CODEQUALITYSCORERATIO      : String;
+      CRITICALITY                : String;
+      USAGECONTEXT               : String;
+      CODEREFERENCE              : String;
+      DETAILEDBREAKDOWN          : LargeString;
+      SCOREANALYSIS              : LargeString;
+      FIELD_VALUES               : Composition of many FIELD_VALUES
+                                     on FIELD_VALUES.ASSESSMENT = $self;
+}
+
+entity FIELD_VALUES : managed {
+  key ID         : UUID;
+      ACTVT      : String;
+      OBTYP      : String;
+      STSMA      : String;
+      BERSL      : String;
+      ASSESSMENT : Association to ASSESMENT;
+}
+
+entity AUTHORIZATION_CHECK : managed {
+  key ID            : UUID;
+      AUTHOBJECT    : String;
+      FIELDSCHECKED : String;
+      CHECKTYPE     : String;
+      CODEREFERENCE : String;
+      ASSESSMENT    : Association to ASSESMENT;
+}
+
+// entity FIELDSCHECKED {
+//   key ID : UUID;
+//   key AUTHORIZATION_CHECK : Association to AUTHORIZATION_CHECK;
+//   NAME : String;
+// }
+
+entity SAP_STANDARD_FIORI_APP : managed {
+  key ID                     : UUID;
+      SAP_STANDARD_FIORI_APP : String;
+      ASSESSMENT             : Association to ASSESMENT;
+}
+
+entity SAP_STANDARD_API : managed {
+  key ID               : UUID;
+      SAP_STANDARD_API : String;
+      ASSESSMENT       : Association to ASSESMENT;
+}
+
+entity MSTR_QUESTIONNAIRE : managed {
+  key ID          : Integer;
+      QUESTION    : String;
+      PLATFORM    : String;
+      IDENTIFIER  : String;
+      PLACEHOLDER : String;
+}
+
+entity EVENTS : managed {
+  key ID        : UUID;
+      ASSESMENT : Association to ASSESMENT;
+      EVENTS    : String;
+}
+
+entity TOPICS : managed {
+  key ID        : UUID;
+      ASSESMENT : Association to ASSESMENT;
+      TOPICS    : String;
+}
+
+entity STANDARD_EVENTS : managed {
+  key ID              : UUID;
+      ASSESMENT       : Association to ASSESMENT;
+      STANDARD_EVENTS : String;
+}
+
+entity OBJECT_ESTIMATE_ANSWER : managed {
+  key ID            : UUID;
+      ASSESMENT     : Association to ASSESMENT;
+      QUESTIONNAIRE : Association to MSTR_QUESTIONNAIRE;
+      PROJECT       : Association to MSTR_PROJECT;
+      ANSWER        : String;
+}
+
+entity INTERFACE_IDOCS {
+  key ID        : UUID;
+      ASSESMENT : Association to ASSESMENT;
+      IDOCS     : String;
+}
+
+entity INTERFACE_STANDARD_API {
+  key ID           : UUID;
+      ASSESMENT    : Association to ASSESMENT;
+      STANDARD_API : String;
+}
+
+entity USE_CASE_AREA {
+  key ID            : UUID;
+      ASSESMENT     : Association to ASSESMENT;
+      USE_CASE_AREA : String;
+}
+
+entity USE_CASE_AREA_EXPLANATION {
+  key ID                        : UUID;
+      ASSESMENT                 : Association to ASSESMENT;
+      USE_CASE_AREA_EXPLANATION : String;
+}
+
+entity BAPIS {
+  key ID        : UUID;
+      ASSESMENT : Association to ASSESMENT;
+      BAPIS     : String;
+}
+
+entity NEW_S4_TABLES {
+  key ID        : UUID;
+      ASSESMENT : Association to ASSESMENT;
+      S4_TABLES : String;
+}
+
+entity SQL_ANALYSIS_TABLES_API {
+  key ID                      : UUID;
+      ASSESMENT               : Association to ASSESMENT;
+      SQL_ANALYSIS_TABLES_API : String;
+}
+
+entity SQL_ANALYSIS_TABLES_CDS {
+  key ID                      : UUID;
+      ASSESMENT               : Association to ASSESMENT;
+      SQL_ANALYSIS_TABLES_CDS : String;
+}
+
+entity CLEAN_CORE_ANALYSIS {
+  key ID          : UUID;
+      ASSESMENT   : Association to ASSESMENT;
+      TITLE       : String;
+      DESCRIPTION : String;
+}
+
+entity SQL_ANALYSIS_TABLES_DIRECT {
+  key ID         : UUID;
+      ASSESMENT  : Association to ASSESMENT;
+      TABLE_NAME : String;
+}
+
+entity INTEGERATION_RESULT {
+  key ID          : UUID;
+      ASSESMENT   : Association to ASSESMENT;
+      TITLE       : String;
+      DESCRIPTION : String;
+}
+
+entity FUNCTION_MODULES {
+  key ID               : UUID;
+      ASSESMENT        : Association to ASSESMENT;
+      FUNCTION_MODULES : String;
+}
+
+entity S4_RECOMMENDATIONS {
+  key ID          : UUID;
+      ASSESMENT   : Association to ASSESMENT;
+      TITLE       : String;
+      DESCRIPTION : String;
+}
+
+entity ASSESSMENT_STANDARD_TABLES : managed {
+  key ID         : UUID;
+      ASSESMENT  : Association to ASSESMENT;
+      TABLE_NAME : String;
+}
+
+entity ASSESSMENT_CUSTOM_TABLES : managed {
+  key ID         : UUID;
+      ASSESMENT  : Association to ASSESMENT;
+      TABLE_NAME : String;
+}
+
+entity ASSESSMENT_RECOMMENDATIONS : managed {
+  key ID          : UUID;
+  key ASSESSMENT  : Association to ASSESMENT;
+      TITLE       : String(200);
+      DESCRIPTION : String;
+}
+
+entity WRICEF_TYPES : managed {
+  key ID                 : UUID;
+  key ASSESMENT_ID       : Association to ASSESMENT;
+      WRICEF_OBJECT_TYPE : String;
+}
+
+entity BTP_SERVICES : managed {
+  key ID              : Integer;
+  key ASSESMENT_ID    : Association to ASSESMENT;
+      BLOCKS_REQUIRED : Integer; //
+      METRIC          : String;
+      SERVICE_NAME    : String;
+      PRICE           : String; //
+      CURRENCY        : String;
+      SERVICE_ID      : String;
+      UNITPRICE       : String; //
+}
+
+entity BTP_SERVICES_PRICE_LIST : managed {
+  key ID             : Integer;
+      ITEMCODE       : String;
+      ITEM           : String;
+      IN_BLOCKS_OF   : Integer; //
+      METRICS        : String(100);
+      PRICE_PER_UNIT : Decimal(10, 2); //
+      CURRENCY       : String;
+      FEES           : String; //
+      VOLUME_FROM    : String;
+      VOLUME_TO      : String;
+}
+
+entity KPI_D_GRAPH_1 {
+  key ID                   : Integer;
+      PROGRAM              : Integer;
+      TABLE_NAME           : Integer;
+      CLASS                : Integer;
+      TRANSACTION          : Integer;
+      DATA_ELEMENT         : Integer;
+      TABLE_TYPE           : Integer;
+      FUNCTION_GROUP       : Integer;
+      VIEW                 : Integer;
+      DATA_DEFINATION_LANG : Integer;
+      DOMAIN               : Integer;
+      SAP_SCRIPT_FORM      : Integer;
+      ABAP_QUERY           : Integer;
+      CUSTOMER_ENHANCE     : Integer;
+      SEARCH_HELP          : Integer;
+      NUMBER_RANGE_OBJECT  : Integer;
+}
+
+entity KPI_D_GRAPH_2 {
+  key ID                    : Integer;
+      FINANCIAL_ACCOUNTING  : Integer;
+      CROSS_APPLICATION     : Integer;
+      ASSET_ACCOUNTING      : Integer;
+      ENTERPRISE_DATA_MODEL : Integer;
+      GENERAL_LEDGER        : Integer;
+}
+
+entity KPI_D_GRAPH_3 {
+  key ID                 : Integer;
+      CALL_TRANS         : Integer;
+      MAIL_SENDING       : Integer;
+      UPLOAD_DOWNLOAD    : Integer;
+      LOGICAL_DATA       : Integer;
+      ALV_REPORT         : Integer;
+      DOWNLOADED_PROGRAM : Integer;
+      UPLOADED_PROGRAM   : Integer;
+      HTTP_CALLS         : Integer;
+      BAPI_PROGRAM       : Integer;
+}
+
+entity KPI_D_GRAPH_4 {
+  key ID                       : Integer;
+      FINANCIAL_ACCOUNTING_V1  : Integer;
+      FINANCIAL_ACCOUNTING_V2  : Integer;
+      CROSS_APPLICATION_V1     : Integer;
+      CROSS_APPLICATION_V2     : Integer;
+      ASSET_ACCOUNTING_V1      : Integer;
+      ASSET_ACCOUNTING_V2      : Integer;
+      ENTERPRISE_DATA_MODEL_V1 : Integer;
+      ENTERPRISE_DATA_MODEL_V2 : Integer;
+      GENERAL_LEDGER_V1        : Integer;
+      GENERAL_LEDGER_V2        : Integer;
+}
+
+entity PROPMT : managed {
+  key ID         : Integer;
+      COMPANY    : Association to many MSTR_COMPANY;
+      USER       : String;
+      PROJECT    : Association to many MSTR_PROJECT;
+      PROMPT_STR : String(1000);
+}
+
+entity CONFIG_MSTR {
+  key ID             : Integer;
+      FIELD          : String;
+      CONFIG_DETAILS : Composition of many CONFIG_DETAILS
+                         on CONFIG_DETAILS.CONFIG_MSTR = $self;
+}
+
+entity CONFIG_DETAILS {
+  key ID          : Integer;
+  key CONFIG_MSTR : Association to CONFIG_MSTR;
+      SUBFIELD    : String;
+      COUNT_FROM  : Integer;
+      COUNT_TO    : Integer;
+      COMPLEXITY  : String;
+      EFFORTS     : Integer;
+}
+
+entity S4_STANDARD_EVENTS {
+  key EVENT : String
+}
+
+
+//Shital
+entity Project_Header : managed {
+  key ProjectId       : String(50);
+      ProjectDesc     : String(100);
+      CustomerId      : String(20);
+      CustomerDetails : String;
+      ProjectType     : String;
+      Variant         : String;
+      Project_Config  : Composition of many Project_Config
+                          on Project_Config.ProjectId = $self;
+}
+
+entity Project_Config : managed {
+  key RowID                      : Integer;
+  key ProjectId                  : Association to Project_Header;
+      Priority                   : Integer;
+      CheckTitle                 : String(255);
+      CheckMessage               : String(255);
+      ObjectType                 : String(10); //increse length
+      ObjectName                 : String(80);
+      Package                    : String(30);
+      Processor                  : String(12);
+      Approach                   : String(100);
+      SimplificationItemCategory : String(80);
+      SapNoteNumber              : String(50);
+      QuickFixAvailability       : String(100);
+      ChangeCategory             : String(100);
+      AppComponent               : String(80);
+      RefObjectType              : String(80);
+      RefObjectName              : String(80);
+      ScopeInformation           : String(100);
+      UsageInformation           : String(100);
+      AdditionalInformation      : String(80);
+      SapNoteNumberDesc          : String(150);
+      Btp                        : String(5); //additional fields
+      CraveComment               : String(100);
+      Scenario                   : String(50);
+      Migration_Option           : Composition of many Migration_Option
+                                     on Migration_Option.Project_Config = $self;
+      Migration_Efforts          : String(15); //drop down
+}
+
+entity Migration_Option : managed {
+      //  key RowID :Association to Project_Config;
+      //  key ProjectId :Association to Project_Header;
+  key Project_Config   : Association to Project_Config;
+  key RowID            : Integer;
+      RICEFW           : String(30);
+      Migration_Option : String(300);
+}
+
+entity ExportMWC : managed {
+  key ID                   : Integer;
+  key ProjectId            : Association to Project_Header;
+  key ProgramID            : String(100);
+      ObjectType           : String(100);
+      ObjectName           : String(300);
+      RequestTask          : String(200);
+      OriginalSystem       : String(200);
+      PersonResponsible    : String(100);
+      RepairFlag           : String(2);
+      Package              : String(300);
+      Editable             : String(30);
+      Approach             : String(50);
+      GenerationFlag       : String(50);
+      InternalUse          : String(2);
+      OriginalLanguage     : String(10);
+      VersionNumber        : Integer;
+      PackageException     : String(2);
+      ObsoleteField        : String(100);
+      SoftwareComponent    : String(100);
+      SAPRelease           : String(100);
+      Object               : String(2);
+      TranslateDevLanguage : String(2);
+      CreatedOn            : Date;
+      CheckedOn            : Date;
+      CheckConfiguration   : String(100);
+}
+
+entity RICEFW_Objects : managed {
+  key ObjectType : String(10);
+      OTDesc     : String(50);
+      RICEFW     : String(30);
+      Solution   : String(80);
+}
+
+entity CustomerData_ROI : managed {
+  key ID                     : Integer;
+  key Project                : Association to MSTR_PROJECT;
+  key COMPANY                : Association to MSTR_COMPANY;
+      Revenue                : Integer;
+      OperationIncome        : Integer;
+      AnnualMaintainanceCost : Integer;
+      NumberOfEmployees      : Integer;
+      CURRENCY               : String;
+}
+
+entity ROI_Calculation : managed {
+  key ID                   : Integer;
+      projectID            : Association to MSTR_PROJECT;
+      SoftwareSubscription : Decimal(10, 2);
+      Implementation_Cost  : Integer;
+      Internal_FTE_Cost    : Integer;
+      Productivity_Impact  : Integer;
+      Any_Other_Cost       : Integer;
+      Total_Cost           : Integer;
+      YearID               : Association to YEAR;
+}
+
+entity YEAR : managed {
+  key YearID : Integer;
+      Year   : String
+}
+
+entity ROI_Calculation_Output : managed {
+  key ID                 : Integer;
+      ROI_ID             : Association to ROI_Calculation;
+      project            : Association to MSTR_PROJECT;
+      Business_Outcome   : String;
+      Value_Driver       : String;
+      Applicable         : String;
+      Rationalization    : String;
+      Expected_Benefits  : Integer;
+      Clean_Core_Enabler : String;
+      Yearly_Benefits    : String;
+      Proof_Point1       : String;
+      Proof_Point2       : String
+}
+
+
+entity SkillSet : managed {
+  key ID   : Integer;
+      Name : String
+}
+
+
+entity YearCalculation : managed {
+  key ID                         : Integer;
+      projectID                  : Association to MSTR_PROJECT;
+      Benefit_Realization_Dactor : Integer;
+      YearID                     : Association to YEAR;
+
+}
+
+
+entity REF_FIORIAPPS : managed {
+  key FIORI_ID                            : String;
+      LINE_OF_BUSINESS                    : String;
+      SCOPE_ITEM                          : String;
+      ROLE_NAME                           : String;
+      APP_NAME                            : String;
+      APPLICATION_TYPE                    : String;
+      APP_LAUNCHER_TITLE                  : String;
+      LIGHTHOUSE                          : String;
+      APPLICATION_COMPONENT               : String;
+      UI_TECHNOLOGY                       : String;
+      DEVICE_TYPE                         : String;
+      PRODUCT_CATEGORY                    : String;
+      DATABASE                            : String;
+      FRONTEND_SOFTWARE_COMPONENT         : String;
+      FRONTEND_MIN_SP                     : String;
+      BACKEND_SOFTWARE_COMPONENT_VERSIONS : String;
+      BACKEND_MIN_SP                      : String;
+      HANA_SOFTWARE_COMPONENT_VERSIONS    : String;
+      HANA_MIN_SP                         : String;
+      FRONTEND_PRODUCT_VERSION            : String;
+      PRODUCT_VERSIONNAME_BACKEND         : String;
+      HANA_PRODUCT_VERSION                : String;
+      FRONTEND_PRODUCT_VERSION_STACK      : String;
+      BACKEND_PRODUCT_VERSION_STACK       : String;
+      HANA_PRODUCT_VERSION_STACK          : String;
+      NOTE_COLLECTION                     : String;
+      SEMENTIC_OBJECT_ACTION              : String;
+      TECHNICAL_CATALOG_NAME              : String;
+      TECHNICAL_CATALOG_DESCRIPTION       : String;
+      BUSINESS_CATALOG_NAME               : String;
+      BUSINESS_CATALOG_DESCRIPTION        : String;
+      BUSINESS_GROUP_NAME                 : String;
+      BUSINESS_GROUP_DESCRIPTION          : String;
+      PAGE                                : String;
+      PAGE_TITLE                          : String;
+      SPACE                               : String;
+      SPACE_TITLE                         : String;
+      LEADING_BUSINESSROLE_NAME           : String;
+      LEADING_BUSINESSROLE_DESCRIPTION    : String;
+      ADDITIONAL_BUSINESSROLE_NAME        : String;
+      ADDITIONAL_BUSINESSROLE_DESCRIPTION : String;
+      INDUSTRY                            : String;
+      EXTENSIBILITY_VIA_SAPUI5_ADAPTATION : String;
+      GTM_APP_DESCRIPTION                 : String;
+      BSP_NAME                            : String;
+      BSP_APPLICATION_URL                 : String;
+      SAPUI5_COMPONENT_ID                 : String;
+      PRIMARY_ODATA_SERVICE_NAME          : String;
+      PRIMARY_ODATA_SERVICE_VERSION       : String;
+      ADDITIONAL_ODATA_SERVICES           : String;
+      ADDITIONAL_ODATA_SERVICES_VERSIONS  : String;
+      BEX_QUERY_NAME                      : String;
+      LEADING_TRANSACTION_CODES           : String;
+      WDA_CONGIGURATION                   : String;
+      ODATA_V4_SERVICE_GROUP              : String;
+      LINK                                : String;
+}
+
+entity REF_PRICELIST : managed {
+  key ID             : Integer;
+      ITEMCODE       : String;
+      ITEM           : String;
+      IN_BLOCKS      : Integer;
+      METRICS        : String;
+      PRICE_PER_UNIT : String;
+      CURRENCY       : String;
+      FEES           : String;
+      VOLUME_FROM    : String;
+      VOLUME_TO      : String;
+}
+
+entity REF_EVENTS : managed {
+  key ID        : Integer;
+      EVENTNAME : String;
+}
+
+entity FILE_STORAGE : managed {
+  key ID        : Integer;
+      ASSESMENT : Association to ASSESMENT;
+      CONTENT   : LargeString;
+}
+
+entity TSHIRT_CONFIG : managed {
+  key ID       : Integer;
+      FROM_HRS : Integer;
+      TO_HRS   : Integer;
+      TSHIRT   : String
+}
+
+entity PRIORITY_CONFIG : managed {
+  key ID          : Integer;
+      METRIC      : String;
+      COMPLEXITY  : Integer;
+      HIGH_IMPACT : Integer
+}
+
+
+entity EncryptedData {
+  key LICID     : Integer;
+      CREATEDAT : DateTime;
+      BASE64    : LargeString;
+      IV        : String(32);
+      COMPANY   : Association to MSTR_COMPANY;
+      PROJECT   : Association to MSTR_PROJECT;
+      LICENSE_TYPE : String(30);
+
+}
+
+// entity MSTR_OBJECT_COMPARE : managed {
+//   key ASSESMENT : Association to ASSESMENT;
+//   PROJECT :  Association to MSTR_PROJECT;
+//   OBJECT_NAME : String(200);
+// }
+
+
+entity OBJECT_LIMIT {
+  key ID                 : Integer;
+      LimitOfObjects     : Integer;
+      InitialObjectCount : Integer;
+      COMPANY_ID         : Association to MSTR_COMPANY;
+}
+
+entity LLMChatHistory {
+  key ID : Integer;
+  assessmentID: String(100);
+  projectID: String(100);
+  docType: String(100);
+  user: String(100);
+  prompt: String(400);
+  response: LargeString;
+  upvotes: Integer;
+  downvotes: Integer;
+  remarks: String(500);
+}
+

@@ -1,0 +1,136 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.DocGen"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:rte="sap.ui.richtexteditor"
+    xmlns:core="sap.ui.core"
+    height="100%"
+    id="docGenPage"
+>
+    <f:DynamicPage id="docGenDynPage" headerExpanded="true" toggleHeaderOnTitleClick="false" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <VBox class="craHeroBlock">
+                        <Text text="{docGenModel>/objectName}" class="craHeroWelcome" />
+                        <Title text="Generate Document" level="H2" class="craHeroTitle" />
+                    </VBox>
+                </f:heading>
+                <f:actions>
+                    <!-- Doc type: switches which document is generated. -->
+                    <SegmentedButton selectedKey="{docGenModel>/docType}" selectionChange="onDocTypeChange">
+                        <items>
+                            <SegmentedButtonItem key="FSD" text="FSD"/>
+                            <SegmentedButtonItem key="TSD" text="TSD"/>
+                            <SegmentedButtonItem key="BBP" text="BBP"/>
+                        </items>
+                    </SegmentedButton>
+                    <Select tooltip="Model" selectedKey="{docGenModel>/model}" items="{docGenModel>/models}" autoAdjustWidth="true">
+                        <core:Item key="{docGenModel>name}" text="{docGenModel>name}"/>
+                    </Select>
+                    <!-- Version history: every generated/refined document is stored;
+                         pick an earlier snapshot here. Shown once at least one exists. -->
+                    <Select tooltip="Document version" selectedKey="{docGenModel>/selectedVersion}"
+                        items="{docGenModel>/versions}" selectionChange="onVersionChange" autoAdjustWidth="true"
+                        visible="{= ${docGenModel>/versions}.length &gt; 0 }">
+                        <core:Item key="{docGenModel>ID}" text="{docGenModel>LABEL}"/>
+                    </Select>
+                    <!-- Cross (decline), not the bin: delete the selected saved version. -->
+                    <Button icon="sap-icon://decline" tooltip="Delete this version" press="onDeleteVersion"
+                        type="Transparent"
+                        visible="{= ${docGenModel>/versions}.length &gt; 0 }"
+                        enabled="{= !${docGenModel>/busy} &amp;&amp; !!${docGenModel>/selectedVersion} }"/>
+                    <!-- OverflowToolbarButtons show icon-only in the bar but icon+text
+                         in the mobile 3-dot overflow menu, so every action is labelled
+                         there (not just Regenerate/Download). -->
+                    <!-- Deep analysis: when on, the document is grounded on an
+                         implementation-grade spec extracted from the ABAP source
+                         (validations, entities, locking, messages): slower but far
+                         richer. Off = the faster, thinner document. -->
+                    <Label id="deepSwitchLabel" text="Deep analysis" labelFor="deepSwitch" class="sapUiTinyMarginEnd"/>
+                    <Switch id="deepSwitch" state="{docGenModel>/deep}" type="Default"
+                        tooltip="Extract a detailed spec from the ABAP source before generating (slower, richer)"
+                        enabled="{= !${docGenModel>/busy} }"/>
+                    <!-- Generate: starts the first document (no autostart). A plain
+                         text button (not icon-only) so the label always shows. Shown
+                         until a document exists; Regenerate takes over afterwards. -->
+                    <Button text="Generate" press="onGenerate" type="Emphasized"
+                        visible="{= !${docGenModel>/docHtml} }" enabled="{= !${docGenModel>/busy} }"/>
+                    <OverflowToolbarButton text="Regenerate" tooltip="Regenerate" icon="sap-icon://refresh" press="onRegenerate" type="Transparent"
+                        visible="{= !!${docGenModel>/docHtml} }" enabled="{= !${docGenModel>/busy} }"/>
+                    <!-- Save the current draft as a version; nothing is kept in the
+                         version picker until this is pressed. -->
+                    <OverflowToolbarButton text="Save version" tooltip="Save this document as a version" icon="sap-icon://save" press="onSaveVersion" type="Transparent"
+                        visible="{= !!${docGenModel>/docHtml} }" enabled="{= !${docGenModel>/busy} }"/>
+                    <!-- Was this document helpful? Highlighted once voted. -->
+                    <OverflowToolbarButton id="docFbUp" text="Helpful" tooltip="Helpful" icon="sap-icon://thumb-up" press="onDocFeedback"
+                        type="{= ${docGenModel>/fbVote} === 'up' ? 'Emphasized' : 'Transparent' }"/>
+                    <OverflowToolbarButton id="docFbDown" text="Not helpful" tooltip="Not helpful" icon="sap-icon://thumb-down" press="onDocFeedback"
+                        type="{= ${docGenModel>/fbVote} === 'down' ? 'Emphasized' : 'Transparent' }"/>
+                    <OverflowToolbarButton text="Download docx" tooltip="Download docx" icon="sap-icon://download" press="onDownload" type="Emphasized"
+                        enabled="{= !${docGenModel>/busy} &amp;&amp; !!${docGenModel>/docHtml} }"/>
+                    <OverflowToolbarButton text="AI Assistant" icon="sap-icon://ai" tooltip="Toggle AI assistant"
+                        press="onToggleAssistant" type="Transparent"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <VBox height="100%" width="100%" class="craDocGenBody">
+                <!-- AI note: same treatment as the analysis detail (grey, small,
+                     italic, warning icon) rather than a blue info strip. -->
+                <HBox class="craAiNoteBox" alignItems="Center">
+                    <core:Icon src="sap-icon://message-warning" class="craAiNoteIcon"/>
+                    <Text text="Document content is AI-generated. Review for accuracy and compliance before use. Diagrams are not shown in this preview - they are rendered as images in the downloaded Word document." class="craAiNote"/>
+                </HBox>
+                <HBox width="100%" class="craDocGenSplit">
+                    <!-- Document canvas: single editable rich-text document. -->
+                    <VBox class="craDocCanvas" busy="{docGenModel>/busy}" busyIndicatorDelay="0">
+                        <rte:RichTextEditor
+                            id="docEditor"
+                            value="{docGenModel>/docHtml}"
+                            editable="true"
+                            sanitizeValue="false"
+                            beforeEditorInit="onEditorInit"
+                            width="100%"
+                            height="72vh"
+                            customToolbarEnabled="true"
+                            showGroupFont="true"
+                            showGroupTextAlign="true"
+                            showGroupStructure="true"
+                            showGroupClipboard="false"
+                            showGroupInsert="false"
+                            showGroupLink="false"
+                            showGroupUndo="true"/>
+                    </VBox>
+                    <!-- AI assistant: conversational edits, collapsible. -->
+                    <VBox class="craAssistantPanel" visible="{docGenModel>/assistantOpen}">
+                        <HBox class="craAssistantHeader" alignItems="Center" justifyContent="SpaceBetween">
+                            <Title text="AI Assistant" level="H4"/>
+                            <Button icon="sap-icon://navigation-right-arrow" type="Transparent"
+                                tooltip="Hide" press="onToggleAssistant"/>
+                        </HBox>
+                        <ScrollContainer class="craAssistantMsgs" vertical="true" height="100%" width="100%">
+                            <!-- Items built via a factory so the role class is applied
+                                 imperatively with addStyleClass. A bound class attribute
+                                 does not reach the DOM in this app, so the bubble colour
+                                 would otherwise never show. -->
+                            <List items="{path:'docGenModel>/messages', factory:'.msgFactory'}"
+                                showSeparators="None" class="craMsgList"/>
+                        </ScrollContainer>
+                        <!-- renderType Bare: no per-item wrapper divs, so the TextArea
+                             itself is the flex child and can grow to fill the row. -->
+                        <HBox class="craAssistantInput" alignItems="End" renderType="Bare">
+                            <TextArea value="{docGenModel>/draft}" rows="2" growing="true"
+                                class="craChatInput" width="100%"
+                                placeholder="Describe the modifications required to this document..."
+                                enabled="{= !${docGenModel>/busy} }"/>
+                            <Button icon="sap-icon://paper-plane" type="Emphasized" tooltip="Send"
+                                press="onSendChat" enabled="{= !${docGenModel>/busy} }"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

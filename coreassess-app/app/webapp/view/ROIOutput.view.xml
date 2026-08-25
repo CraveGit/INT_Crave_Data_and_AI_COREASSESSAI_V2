@@ -1,0 +1,307 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.ROIOutput"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    height="100%"
+    id="ROIOutputPage"
+>
+    <Page
+        id="ROIOutput"
+        title="{i18n>title}"
+        showHeader="false"
+    >
+        <content>
+           
+           
+                <VBox
+                    width="100%"
+                    class="sapUiTinyMarginEnd sapUiTinyMarginTop"
+                >
+                    <Panel
+                        width="100%"
+                        expandable="false"
+                        expanded="true"
+                        headerText="ROI Output table"
+                    >
+                      <VBox
+                            class="sapUiSmallMargin"
+                            width="400px"
+                        >
+                        <VBox class="sapUiSmallMarginBottom">
+                            <Label text="Select Company" />
+                            <ComboBox
+                                id="ROIOutputPageSelectCompany"
+                                width="100%"
+                                class="sapUiSmallMarginEnd"
+                                change="onCompanyChange"
+                                items="{
+                path: 'listPageCompanyModel>/companyArray'}"
+                            >
+                                <core:Item
+                                    key="{listPageCompanyModel>ID}"
+                                    text="{listPageCompanyModel>COMPANY_NAME}"
+                                />
+                            </ComboBox>
+                        </VBox>
+
+                        <!-- Project Selection -->
+                        <VBox class="sapUiSmallMarginBottom">
+                            <Label text="Select Projects" />
+                            <ComboBox
+                                id="ROIOutputPageSelectProject"
+                                width="100%"
+                                class="sapUiSmallMarginEnd"
+                                items="{
+                                path: 'listPageProjectModel>/projectArray'}"
+                                selectionChange="callOutput"
+                            >
+                                <core:Item
+                                    key="{listPageProjectModel>ID}"
+                                    text="{listPageProjectModel>PROJECT_NAME}"
+                                />
+                            </ComboBox>
+                        </VBox>
+                        </VBox>
+
+                       
+                        <content>
+                            <t:Table
+                             
+                                rows="{ROI_Out_Model>/RO_Out}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="8"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None" width="1200px" fixedColumnCount="2"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Business Outcome" />
+                                        <ToolbarSpacer />
+
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                   
+                                    <t:Column width="14rem">
+                                        <Label
+                                            text="Business outcomes"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{ROI_Out_Model>Business_Outcome}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="344px">
+                                        <Label
+                                            text="Value Driver"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{ROI_Out_Model>Value_Driver}"
+                                                wrapping="true"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <!-- <t:Column width="7rem">
+                                        <Label
+                                            text="Applicable"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{ROI_Out_Model>Applicable}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Rationalization"
+                                            textAlign="Center"
+                                        />
+                                       <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{ROI_Out_Model>Rationalization}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="10rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Expected benefits"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{ROI_Out_Model>Expected_Benefits}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="10rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Clean Core Enabler"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{ROI_Out_Model>Clean_Core_Enabler}"
+                                            />
+                                        </t:template>
+                                    </t:Column> -->
+                                    <t:Column
+                                        width="12rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Yearly Benefits ($)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{ROI_Out_Model>Yearly_Benefits}" valueState="Success" valueStateText=" "
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <!-- <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Proof Point 1"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{ROI_Out_Model>Proof_Point1}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Proof Point 2"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{ROI_Out_Model>Proof_Point2}"
+                                            />
+                                        </t:template>
+                                    </t:Column> -->
+                                </t:columns>
+                            </t:Table>
+                        </content>
+               
+<!--                 
+                                <t:Table
+                                    id="benefitRealizationDactor"
+                                    rows="{benefitRealizationDactorModel>/rows}"
+                                    visibleRowCount="1"
+                                    selectionMode="None"
+                                    editable="true"
+                                    width="100%"
+                                 
+                                >
+ 
+                                    <t:Column>
+                                        <Label text="Description" />
+                                        <t:template>
+                                            <Text text="{benefitRealizationDactorModel>desc}" />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column>
+                                        <Label text="Year 1" />
+                                        <t:template>
+                                            <Input
+                                                value="{benefitRealizationDactorModel>year1}"
+                                                editable="{editable}"
+                                                liveChange="onLiveChange2"
+                                                type="Number"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column>
+                                        <Label text="Year 2" />
+                                        <t:template>
+                                            <Input
+                                                value="{benefitRealizationDactorModel>year2}"
+                                                editable="{editable}"
+                                                liveChange="onLiveChange2"
+                                                type="Number"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column>
+                                        <Label text="Year 3" />
+                                        <t:template>
+                                            <Input
+                                                value="{benefitRealizationDactorModel>year3}"
+                                                editable="{editable}"
+                                                liveChange="onLiveChange2"
+                                                type="Number"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column>
+                                        <Label text="Year 4" />
+                                        <t:template>
+                                            <Input
+                                                value="{benefitRealizationDactorModel>year4}"
+                                                editable="{editable}"
+                                                liveChange="onLiveChange2"
+                                                type="Number"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    
+                                    <t:Column>
+                                        <Label text="Year 5" />
+                                        <t:template>
+                                            <Input
+                                                value="{benefitRealizationDactorModel>year5}"
+                                                editable="{editable}"
+                                                liveChange="onLiveChange2"
+                                                type="Number"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:Table> -->
+                    
+                  
+                    </Panel>
+                </VBox>
+          
+        </content>
+    </Page>
+</mvc:View>

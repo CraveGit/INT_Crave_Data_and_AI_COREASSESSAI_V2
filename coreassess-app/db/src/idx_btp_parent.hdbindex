@@ -1,0 +1,1 @@
+INDEX "idx_btp_parent" ON CRA_BTP_SERVICES (ASSESSMENT_ID_ID)

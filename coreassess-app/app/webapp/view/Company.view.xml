@@ -1,0 +1,138 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.Company"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    height="100%"
+    id="companyPage"
+>
+    <!-- Was a hand-built table: percentage-width HBox headers stacked above a List
+         of percentage-width HBox cells. The two never stayed aligned and rows had
+         no separation. sap.m.Table gives real columns, aligned headers and
+         responsive column hiding. -->
+    <f:DynamicPage
+        id="company"
+        headerExpanded="true"
+        toggleHeaderOnTitleClick="false"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Companies" level="H2" class="craHeroTitle" />
+                </f:heading>
+                <f:expandedContent>
+                    <Text text="Select a company to open its projects." />
+                </f:expandedContent>
+                <f:actions>
+                    <Button
+                        text="Create Company"
+                        icon="sap-icon://add"
+                        type="Emphasized"
+                        visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }"
+                        press="createCompanyFrag"
+                    />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:content>
+            <Table
+                id="companyList"
+                items="{companyObjectsModel>/objectArray}"
+                growing="true"
+                growingThreshold="20"
+                sticky="ColumnHeaders,HeaderToolbar"
+                class="craBorderedTable"
+                width="auto"
+                mode="None"
+                showSeparators="All"
+                noDataText="No companies yet"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="{= 'Company (' + ${companyObjectsModel>/objectArray}.length + ')' }"
+                            level="H3"
+                        />
+                        <ToolbarSpacer />
+                        <SearchField
+                            placeholder="Search companies"
+                            width="18rem"
+                            liveChange="onSearchCompany"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column width="4rem" hAlign="Center">
+                        <Text text="" />
+                    </Column>
+                    <Column>
+                        <Text text="Company" />
+                    </Column>
+                    <Column
+                        width="7rem"
+                        hAlign="End"
+                        visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }"
+                    >
+                        <Text text="Actions" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press="navigateToProjects"
+                        vAlign="Middle"
+                        highlight="{= ${companyObjectsModel>ARCHIVED_AT} ? 'Warning' : 'None' }"
+                    >
+                        <customData>
+                            <!-- Bound class does not reach the DOM in this app, so an
+                                 attribute is written instead and the CSS greys the row. -->
+                            <core:CustomData key="archived" writeToDom="true"
+                                value="{= ${companyObjectsModel>ARCHIVED_AT} ? 'true' : 'false' }"/>
+                        </customData>
+                        <cells>
+                            <!-- Only use a logo when the company actually has one;
+                                 otherwise src is empty so the Avatar shows the name
+                                 initials instead of a broken/placeholder image. -->
+                            <!-- Show company initials (from the name), not the default
+                                 Crave logo that every company's IMAGE_URL points at. -->
+                            <Avatar
+                                initials="{ path: 'companyObjectsModel>COMPANY_NAME', formatter: '.formatInitials' }"
+                                fallbackIcon="sap-icon://building"
+                                displaySize="XS"
+                                displayShape="Square"
+                            />
+                            <HBox alignItems="Center">
+                                <ObjectIdentifier title="{companyObjectsModel>COMPANY_NAME}" />
+                                <ObjectStatus text="Inactive" state="Warning" class="sapUiTinyMarginBegin"
+                                    visible="{= !!${companyObjectsModel>ARCHIVED_AT} }"/>
+                            </HBox>
+                            <HBox justifyContent="End">
+                                <!-- Active company: edit + archive (soft delete). -->
+                                <Button icon="sap-icon://edit" type="Transparent" tooltip="Edit company"
+                                    press="onEditCompany"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER') &amp;&amp; !${companyObjectsModel>ARCHIVED_AT} }"/>
+                                <Button icon="sap-icon://delete" type="Transparent" tooltip="Archive company"
+                                    press="onDeleteCompany"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER') &amp;&amp; !${companyObjectsModel>ARCHIVED_AT} }"/>
+                                <!-- Archived company: restore + permanent delete. -->
+                                <Button icon="sap-icon://restart" type="Transparent" tooltip="Restore company"
+                                    press="onRestoreCompany"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER') &amp;&amp; !!${companyObjectsModel>ARCHIVED_AT} }"/>
+                                <Button icon="sap-icon://delete" type="Reject" tooltip="Delete permanently"
+                                    press="onPermaDeleteCompany"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER') &amp;&amp; !!${companyObjectsModel>ARCHIVED_AT} }"/>
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

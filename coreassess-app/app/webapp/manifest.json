@@ -1,0 +1,312 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "com.crave.coreassessv2",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.15.3",
+      "toolsId": "391ec6aa-c7d2-4492-8c14-2ab8a54ba67e"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/odata/v4/assessment/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ZCOREASSESSV2-manage": {
+          "semanticObject": "ZCOREASSESSV2",
+          "action": "manage",
+          "title": "{{flpTitle}}",
+          "subTitle": "{{flpSubTitle}}",
+          "icon": "sap-icon://business-objects-experience",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "image/favico.png",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.130.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.ui.layout": {},
+        "sap.tnt": {},
+        "sap.ui.unified": {},
+        "sap.ui.table": {},
+        "sap.suite.ui.commons": {},
+        "sap.viz": {},
+        "sap.ui.comp": {},
+        "sap.uxap": {},
+        "sap.ui.richtexteditor": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.crave.coreassessv2.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "com.crave.coreassessv2.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteListPage",
+          "pattern": ":?query:",
+          "target": [
+            "TargetListPage"
+          ]
+        },
+        {
+          "name": "Objects",
+          "pattern": "Objects",
+          "target": [
+            "Objects"
+          ]
+        },
+        {
+          "name": "AssessmentReport",
+          "pattern": "AssessmentReport",
+          "target": [
+            "AssessmentReport"
+          ]
+        },
+        {
+          "name": "Company",
+          "pattern": "Company",
+          "target": [
+            "Company"
+          ]
+        },
+        {
+          "name": "Projects",
+          "pattern": "Projects",
+          "target": [
+            "Projects"
+          ]
+        },
+        {
+          "name": "CustomPrompt",
+          "pattern": "CustomPrompt",
+          "target": [
+            "CustomPrompt"
+          ]
+        },
+        {
+          "name": "Configuration",
+          "pattern": "Configuration",
+          "target": [
+            "Configuration"
+          ]
+        },
+        {
+          "name": "ROIInput",
+          "pattern": "ROIInput",
+          "target": [
+            "ROIInput"
+          ]
+        },
+        {
+          "name": "ROIOutput",
+          "pattern": "ROIOutput",
+          "target": [
+            "ROIOutput"
+          ]
+        },
+        {
+          "name": "AdminPanel",
+          "pattern": "AdminPanel",
+          "target": [
+            "AdminPanel"
+          ]
+        },
+        {
+          "name": "Innovate",
+          "pattern": "Innovate",
+          "target": [
+            "Innovate"
+          ]
+        },
+        {
+          "name": "DocGen",
+          "pattern": "DocGen/{assessmentID}/{projectID}/{docType}",
+          "target": [
+            "DocGen"
+          ]
+        },
+        {
+          "name": "RaiseTicket",
+          "pattern": "RaiseTicket",
+          "target": [
+            "RaiseTicket"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetListPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ListPage",
+          "viewName": "ListPage"
+        },
+        "Objects": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "object",
+          "viewName": "Objects"
+        },
+        "AssessmentReport": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "assessment",
+          "viewName": "AssessmentReport"
+        },
+        "Company": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "company",
+          "viewName": "Company"
+        },
+        "Projects": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "projectPage",
+          "viewName": "Projects"
+        },
+        "CustomPrompt": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "customPrompt",
+          "viewName": "CustomPrompt"
+        },
+        "Configuration": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "configPage",
+          "viewName": "Configuration"
+        },
+        "ROIInput": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ROIInputPage",
+          "viewName": "ROIInput"
+        },
+        "ROIOutput": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ROIOutputPage",
+          "viewName": "ROIOutput"
+        },
+        "AdminPanel": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "adminPanel",
+          "viewName": "AdminPanel"
+        },
+        "Innovate": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "innovate",
+          "viewName": "Innovate"
+        },
+        "DocGen": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "docGen",
+          "viewName": "DocGen"
+        },
+        "RaiseTicket": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "raiseTicket",
+          "viewName": "RaiseTicket"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "com.crave.coreassessv2.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "comcravecoreassessv2"
+  }
+}

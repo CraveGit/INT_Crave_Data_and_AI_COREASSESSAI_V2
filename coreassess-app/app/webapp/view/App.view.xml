@@ -1,0 +1,159 @@
+<mvc:View controllerName="com.crave.coreassessv2.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"  xmlns:tnt="sap.tnt"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+   	<App autoFocus="false">
+			<tnt:ToolPage id="toolPage">
+		
+			<tnt:header>
+				<tnt:ToolHeader >
+
+					<!-- Sidebar toggle. Icon flips to point where the panel will go:
+					     > when collapsed, < when expanded. -->
+					<Button
+						id="sideNavigationToggleButton"
+						icon="{= ${sideNavModel>/expanded} ? 'sap-icon://navigation-left-arrow' : 'sap-icon://navigation-right-arrow' }"
+						tooltip="{= ${sideNavModel>/expanded} ? 'Collapse menu' : 'Expand menu' }"
+						type="Transparent"
+						class="sapUiTinyMarginEnd"
+						press="onSideNavButtonPress"
+					>
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Button>
+					<!-- Crave mark, deliberately smaller than the product logo.
+					     Hidden on narrow viewports via CSS (craHeaderCraveLogo) so the
+					     CoreAssess product logo takes the brand slot there instead.
+					     CSS width media queries are used rather than the phone device
+					     model because that model is user-agent based: it does not react
+					     to window resize and is unreliable across refreshes. -->
+					<Image
+						src="{= ${themeModel>/state} ? ${ImgModel>/Path} + '/image/crave_logo_dark.png' : ${ImgModel>/Path} + '/image/crave_logo.png' }"
+						decorative="false"
+						press="onLogoPressed"
+						tooltip="Crave Infotech"
+						height="22px"
+						width="58px"
+						class="craHeaderCraveLogo"
+					>
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Image>
+
+					<ToolbarSpacer/>
+
+					<!-- Product logo. Always present; CSS (craHeaderMainLogo) shrinks it
+					     on narrow viewports from 42px to 26px so its wide 777x175 ratio
+					     fits without forcing a horizontal scrollbar, and it replaces the
+					     Crave mark on mobile. -->
+					<Image
+						src="{ImgModel>/Path}/image/coreassess-logo-main.png"
+						decorative="false"
+						tooltip="CoreAssess v2"
+						height="42px"
+						width="auto"
+						class="craHeaderMainLogo"
+					>
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Image>
+
+					<ToolbarSpacer/>
+					<!-- Background analysis indicator: appears while objects are being
+					     analysed (or just finished) so the user can navigate freely.
+					     Shows the running count; opens a progress popover. -->
+					<Button
+						id="uploadJobBtn"
+						icon="sap-icon://activity-2"
+						text="{= ${foldersModel>/running} ? ${foldersModel>/progressText} : '' }"
+						tooltip="Analysis jobs"
+						type="Transparent"
+						press="onOpenUploadJobs"
+						visible="true"
+						enabled="{= ${foldersModel>/running} === true }"
+						class="sapUiTinyMarginEnd craUploadJobBtn">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Button>
+					<Avatar
+						id="userAvatar"
+						initials="{path:'userModel>/displayName', formatter:'.formatAvatarInitials'}"
+						fallbackIcon="sap-icon://person-placeholder"
+						displaySize="XS"
+						active="true"
+						press=".onAvatarPressed"
+						tooltip="Profile settings"
+						class="sapUiTinyMarginEnd"
+					>
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Avatar>
+					<!-- <Button icon="sap-icon://person-placeholder" type="Transparent" press="handleUserNamePress" text="{details>/full_name}"/>
+					<Button icon="sap-icon://action-settings" id="pSwitchBtn" press="onPressSettings" visible="{= ${userModel>/Role} === 'CONS' ? false:true}" type="Transparent" />
+					<OverflowToolbarButton icon="{= ${userModel>/theme}==='sap_horizon'? 'sap-icon://light-mode':'sap-icon://dark-mode'}" press="onToggleThemePress"></OverflowToolbarButton>
+					<Button icon="sap-icon://log" type="Reject" press="logout"></Button> -->
+				</tnt:ToolHeader>
+
+			</tnt:header>
+			<tnt:sideContent  >
+				<tnt:SideNavigation id="sidenav" class="craSideNavPanel" expanded="true" itemSelect=".onItemSelect" selectedKey="uploadFile">
+					<tnt:NavigationList>
+							<tnt:NavigationListItem id="sHomeId" icon="sap-icon://upload-to-cloud" key="uploadFile" text="Upload File" tooltip="Upload File"/>
+							<tnt:NavigationListItem id="sProjectId" icon="sap-icon://company-view" key="projects" text="Companies" tooltip="Companies"/>
+							<tnt:NavigationListItem id="sInnovateId" icon="sap-icon://lightbulb" key="innovate" text="Innovate" tooltip="Innovate"/>
+						</tnt:NavigationList>
+
+					<!-- Extras and Configuration are docked to the bottom: secondary
+					     destinations, not part of the main task flow. SAC Report opens
+					     the dashboard in a new tab via the item's own href/target
+					     (no routing key, so onItemSelect ignores it). -->
+					<tnt:fixedItem>
+						<tnt:NavigationList>
+								<!-- SAC Report and Configuration are plain first-level items,
+								     identical in behaviour to the main nav buttons. SAC opens
+								     its dashboard in a new tab from onItemSelect (window.open)
+								     rather than a native href, so it renders as a plain button
+								     with no external-link arrow, like the others. -->
+								<tnt:NavigationListItem
+									id="sSacReportId"
+									icon="sap-icon://business-objects-experience"
+									key="sacReport"
+									text="SAC Report"
+									tooltip="Open SAC Report in a new tab"
+									enabled="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }"
+								/>
+								<!-- Raise Ticket: available to everyone. -->
+								<tnt:NavigationListItem
+									id="sRaiseTicketId"
+									icon="sap-icon://headset"
+									key="raiseTicket"
+									text="Raise Ticket"
+									tooltip="Raise a support ticket"
+								/>
+								<!-- Admin Panel: users, access requests, project cost stats.
+								     Elevated roles only (superuser and above). -->
+								<tnt:NavigationListItem
+									id="sAdminPanelId"
+									icon="sap-icon://key-user-settings"
+									key="adminPanel"
+									text="Admin Panel"
+									tooltip="Admin Panel"
+									visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER' }"
+								/>
+							</tnt:NavigationList>
+					</tnt:fixedItem>
+				</tnt:SideNavigation>
+			</tnt:sideContent>
+			<tnt:mainContents>
+				<NavContainer class="sapUiSizeCompact" autoFocus="false" id="app">
+					<pages></pages>
+				</NavContainer>
+			</tnt:mainContents>
+		</tnt:ToolPage>
+	</App>
+</mvc:View>

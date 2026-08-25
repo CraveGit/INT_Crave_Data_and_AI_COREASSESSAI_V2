@@ -1,0 +1,1923 @@
+ID,ITEMCODE,ITEM,IN_BLOCKS_OF,METRICS,PRICE_PER_UNIT,CURRENCY,FEES,VOLUME_FROM,VOLUME_TO
+1,*,Cloud - Applications,0,,0.00,,,,
+2,**,Cloud - Business Transformation Management,0,,0.00,,,,
+3,8011437,SAP Signavio Process Manager,1,User,829.00,USD,Month,1,19
+4,8011437,SAP Signavio Process Manager,1,User,532.00,USD,Month,20,49
+5,8011437,SAP Signavio Process Manager,1,User,425.00,USD,Month,50,99
+6,8011437,SAP Signavio Process Manager,1,User,338.00,USD,Month,100,199
+7,8011437,SAP Signavio Process Manager,1,User,265.00,USD,Month,200,499
+8,8011437,SAP Signavio Process Manager,1,User,213.00,USD,Month,500,Infinite
+9,8011438,SAP Signavio Journey Modeler,1,User,684.00,USD,Month,1,19
+10,8011438,SAP Signavio Journey Modeler,1,User,435.00,USD,Month,20,49
+11,8011438,SAP Signavio Journey Modeler,1,User,343.00,USD,Month,50,99
+12,8011438,SAP Signavio Journey Modeler,1,User,296.00,USD,Month,100,199
+13,8011438,SAP Signavio Journey Modeler,1,User,245.00,USD,Month,200,Infinite
+14,8011439,SAP Signavio Process Governance,1,User,85.00,USD,Month,1,19
+15,8011439,SAP Signavio Process Governance,1,User,53.00,USD,Month,20,49
+16,8011439,SAP Signavio Process Governance,1,User,40.00,USD,Month,50,99
+17,8011439,SAP Signavio Process Governance,1,User,35.00,USD,Month,100,199
+18,8011439,SAP Signavio Process Governance,1,User,28.00,USD,Month,200,Infinite
+19,8011440,SAP Signavio Process Collaboration Hub,10,User,77.00,USD,Month,1,99
+20,8011440,SAP Signavio Process Collaboration Hub,10,User,39.00,USD,Month,100,299
+21,8011440,SAP Signavio Process Collaboration Hub,10,User,19.00,USD,Month,300,999
+22,8011440,SAP Signavio Process Collaboration Hub,10,User,12.00,USD,Month,1000,4999
+23,8011440,SAP Signavio Process Collaboration Hub,10,User,8.87,USD,Month,5000,9999
+24,8011440,SAP Signavio Process Collaboration Hub,10,User,7.76,USD,Month,10000,19999
+25,8011440,SAP Signavio Process Collaboration Hub,10,User,6.10,USD,Month,20000,Infinite
+26,8011441,SAP Signavio Process Governance Collaborator,10,User,157.00,USD,Month,1,99
+27,8011441,SAP Signavio Process Governance Collaborator,10,User,116.00,USD,Month,100,499
+28,8011441,SAP Signavio Process Governance Collaborator,10,User,88.00,USD,Month,500,999
+29,8011441,SAP Signavio Process Governance Collaborator,10,User,55.00,USD,Month,1000,4999
+30,8011441,SAP Signavio Process Governance Collaborator,10,User,45.00,USD,Month,5000,9999
+31,8011441,SAP Signavio Process Governance Collaborator,10,User,35.00,USD,Month,10000,19999
+32,8011441,SAP Signavio Process Governance Collaborator,10,User,27.00,USD,Month,20000,Infinite
+33,8011444,"SAP Signavio Process Insights, additional storage",50,Gigabyte,2720.00,USD,Month,1,Infinite
+34,8013422,"SAP Signavio Process Transformation Suite, private cloud edition",1,Tenant,138588.00,USD,Month,1,Infinite
+35,8014823,SAP Signavio Process Intelligence,200000,Record,3276.00,USD,Month,1,9
+36,8014823,SAP Signavio Process Intelligence,200000,Record,2567.00,USD,Month,10,19
+37,8014823,SAP Signavio Process Intelligence,200000,Record,1865.00,USD,Month,20,49
+38,8014823,SAP Signavio Process Intelligence,200000,Record,1162.00,USD,Month,50,99
+39,8014823,SAP Signavio Process Intelligence,200000,Record,722.00,USD,Month,100,249
+40,8014823,SAP Signavio Process Intelligence,200000,Record,493.00,USD,Month,250,499
+41,8014823,SAP Signavio Process Intelligence,200000,Record,389.00,USD,Month,500,999
+42,8014823,SAP Signavio Process Intelligence,200000,Record,335.00,USD,Month,1000,1499
+43,8014823,SAP Signavio Process Intelligence,200000,Record,308.00,USD,Month,1500,Infinite
+44,8015166,"SAP Signavio Journey-to-Process Analytics, base package",50000,Record,5602.00,USD,Month,1,Infinite
+45,8015208,"SAP Signavio Journey-to-Process Analytics, additional records",50000,Record,2784.00,USD,Month,1,4
+46,8015208,"SAP Signavio Journey-to-Process Analytics, additional records",50000,Record,2042.00,USD,Month,5,9
+47,8015208,"SAP Signavio Journey-to-Process Analytics, additional records",50000,Record,1618.00,USD,Month,10,19
+48,8015208,"SAP Signavio Journey-to-Process Analytics, additional records",50000,Record,1294.00,USD,Month,20,49
+49,8015208,"SAP Signavio Journey-to-Process Analytics, additional records",50000,Record,1053.00,USD,Month,50,Infinite
+50,8015441,"SAP Signavio Process Insights, base package",1,Flat Fee,8653.00,USD,Month,1,Infinite
+51,8015451,"SAP Signavio Process Insights, additional connections",1,Connection,4377.00,USD,Month,1,Infinite
+52,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,2304.00,USD,Month,1,2
+53,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,1275.00,USD,Month,3,5
+54,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,935.00,USD,Month,6,9
+55,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,748.00,USD,Month,10,13
+56,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,641.00,USD,Month,14,28
+57,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,514.00,USD,Month,29,44
+58,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,445.00,USD,Month,45,60
+59,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,402.00,USD,Month,61,80
+60,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,366.00,USD,Month,81,110
+61,8018114,SAP LeanIX Technology Risk and Compliance,100,Application,330.00,USD,Month,111,Infinite
+62,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,1383.00,USD,Month,1,2
+63,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,765.00,USD,Month,3,5
+64,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,561.00,USD,Month,6,9
+65,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,449.00,USD,Month,10,13
+66,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,385.00,USD,Month,14,28
+67,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,308.00,USD,Month,29,44
+68,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,267.00,USD,Month,45,60
+69,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,242.00,USD,Month,61,80
+70,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,220.00,USD,Month,81,110
+71,8018115,SAP LeanIX Architecture and Road Map Planning,100,Application,198.00,USD,Month,111,Infinite
+72,8018161,SAP LeanIX Application Portfolio Management,100,Application,4608.00,USD,Month,1,2
+73,8018161,SAP LeanIX Application Portfolio Management,100,Application,2549.00,USD,Month,3,5
+74,8018161,SAP LeanIX Application Portfolio Management,100,Application,1869.00,USD,Month,6,9
+75,8018161,SAP LeanIX Application Portfolio Management,100,Application,1498.00,USD,Month,10,13
+76,8018161,SAP LeanIX Application Portfolio Management,100,Application,1282.00,USD,Month,14,28
+77,8018161,SAP LeanIX Application Portfolio Management,100,Application,1029.00,USD,Month,29,44
+78,8018161,SAP LeanIX Application Portfolio Management,100,Application,889.00,USD,Month,45,60
+79,8018161,SAP LeanIX Application Portfolio Management,100,Application,805.00,USD,Month,61,80
+80,8018161,SAP LeanIX Application Portfolio Management,100,Application,731.00,USD,Month,81,110
+81,8018161,SAP LeanIX Application Portfolio Management,100,Application,660.00,USD,Month,111,Infinite
+82,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,1236.00,USD,Month,1,2
+83,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,684.00,USD,Month,3,5
+84,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,401.00,USD,Month,6,9
+85,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,282.00,USD,Month,10,13
+86,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,206.00,USD,Month,14,28
+87,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,137.00,USD,Month,29,44
+88,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,120.00,USD,Month,45,60
+89,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,108.00,USD,Month,61,80
+90,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,98.00,USD,Month,81,110
+91,8018191,"SAP LeanIX solutions, sandbox environment",100,Application,89.00,USD,Month,111,Infinite
+92,8018281,SAP Signavio Process Transformation Manager,1,User,243.00,USD,Month,1,19
+93,8018281,SAP Signavio Process Transformation Manager,1,User,195.00,USD,Month,20,49
+94,8018281,SAP Signavio Process Transformation Manager,1,User,171.00,USD,Month,50,99
+95,8018281,SAP Signavio Process Transformation Manager,1,User,146.00,USD,Month,100,Infinite
+96,**,Cloud - ERP,0,,0.00,,,,
+97,8008794,"SAP Additional File Storage, private cloud edition",128,Gigabyte,188.00,USD,Month,1,Infinite
+98,8008860,"SAP Fiori Hub on ASE Cloud, private edition (XXS)",1,Tenant,13644.00,USD,Month,1,Infinite
+99,8008861,"SAP Fiori Hub on ASE Cloud, private edition (XS)",1,Tenant,19424.00,USD,Month,1,Infinite
+100,8008862,"SAP Fiori Hub on ASE Cloud, private edition (S)",1,Tenant,18398.00,USD,Month,1,Infinite
+101,8008863,"SAP Fiori Hub on ASE Cloud, private edition (M)",1,Tenant,20005.00,USD,Month,1,Infinite
+102,8008864,"SAP Fiori Hub on ASE Cloud, private edition (L)",1,Tenant,23993.00,USD,Month,1,Infinite
+103,8009314,"SAP IaaS server Windows Cloud, private edition (32GB)",1,Tenant,1459.00,USD,Month,1,Infinite
+104,8009318,"SAP IaaS server Linux Cloud, private edition (64GB)",1,Tenant,2042.00,USD,Month,1,Infinite
+105,8009319,"SAP IaaS server Linux Cloud, private edition (128GB)",1,Tenant,3203.00,USD,Month,1,Infinite
+106,8009320,"SAP IaaS server Windows Cloud, private edition (64GB)",1,Tenant,1879.00,USD,Month,1,Infinite
+107,8009321,"SAP IaaS server Windows Cloud, private edition (128GB)",1,Tenant,2947.00,USD,Month,1,Infinite
+108,8009322,"SAP IaaS server Linux Cloud, private edition (32GB)",1,Tenant,1459.00,USD,Month,1,Infinite
+109,8009323,"SAP content server Cloud, private edition (S)",1,Tenant,16438.00,USD,Month,1,Infinite
+110,8009324,"SAP content server Cloud, private edition (M)",1,Tenant,26689.00,USD,Month,1,Infinite
+111,8009325,"SAP content server Cloud, private edition (L)",1,Tenant,37685.00,USD,Month,1,Infinite
+112,8011322,"SAP NetWeaver ABAP Server Cloud on HANA, private edition (S)",1,Tenant,72291.00,USD,Month,1,Infinite
+113,8011323,"SAP NetWeaver ABAP Server Cloud on HANA, private edition (M)",1,Tenant,92216.00,USD,Month,1,Infinite
+114,8011324,"SAP NetWeaver ABAP Server Cloud on HANA, private edition (L)",1,Tenant,128578.00,USD,Month,1,Infinite
+115,8011325,"SAP NetWeaver ABAP Server Cloud on HANA, private edition (XL)",1,Tenant,193225.00,USD,Month,1,Infinite
+116,8011326,"SAP NetWeaver ABAP Server Cloud on HANA, private edition (XXL)",1,Tenant,252809.00,USD,Month,1,Infinite
+117,8011327,"SAP NetWeaver ABAP Server Cloud on HANA, private edition (4XL)",1,Tenant,537929.00,USD,Month,1,Infinite
+118,8011726,"SAP Cloud, memory extension for productive tiers, private edition",256,Gigabyte,4560.00,USD,Month,1,Infinite
+119,8011727,"SAP Cloud, memory extension for non-productive tiers, private edition",256,Gigabyte,2385.00,USD,Month,1,Infinite
+120,8012156,"SAP content server Cloud, private edition (XL)",1,Tenant,61939.00,USD,Month,1,Infinite
+121,8012625,"SAP Fiori Hub for HANA, private cloud edition (XXS)",1,Tenant,17333.00,USD,Month,1,Infinite
+122,8012626,"SAP Fiori Hub for HANA, private cloud edition (XS)",1,Tenant,26111.00,USD,Month,1,Infinite
+123,8012627,"SAP Fiori Hub for HANA, private cloud edition (S)",1,Tenant,24548.00,USD,Month,1,Infinite
+124,8012628,"SAP Fiori Hub for HANA, private cloud edition (M)",1,Tenant,26155.00,USD,Month,1,Infinite
+125,8012629,"SAP Fiori Hub for HANA, private cloud edition (L)",1,Tenant,30143.00,USD,Month,1,Infinite
+126,8012630,"SAP Fiori Hub for HANA, private cloud edition (XL)",1,Tenant,37247.00,USD,Month,1,Infinite
+127,8014268,"SAP Connection Package for productive tiers, private cloud edition",1,Tenant,4011.00,USD,Month,1,Infinite
+128,8014275,"SAP Connection Package for non-productive tiers, private cloud edition",1,Tenant,1608.00,USD,Month,1,Infinite
+129,8014539,"SAP Fiori Hub on ASE Cloud, additional non-productive tier, private edition (S)",1,Tenant,5092.00,USD,Month,1,Infinite
+130,8014540,"SAP Fiori Hub on ASE Cloud, additional non-productive tier, private edition (L)",1,Tenant,8625.00,USD,Month,1,Infinite
+131,8014554,"SAP Fiori Hub on ASE Cloud, additional non-productive tier, private edition (M)",1,Tenant,5964.00,USD,Month,1,Infinite
+132,8014571,"SAP Fiori Hub on ASE Cloud, additional productive tier, private edition (L)",1,Tenant,14209.00,USD,Month,1,Infinite
+133,8015458,"PLM system integration for SAP ERP, private cloud edition",1,Active User,27.00,USD,Month,1,250
+134,8015458,"PLM system integration for SAP ERP, private cloud edition",1,Active User,22.00,USD,Month,251,1000
+135,8015458,"PLM system integration for SAP ERP, private cloud edition",1,Active User,17.00,USD,Month,1001,2500
+136,8015458,"PLM system integration for SAP ERP, private cloud edition",1,Active User,12.00,USD,Month,2501,5000
+137,8015458,"PLM system integration for SAP ERP, private cloud edition",1,Active User,8.04,USD,Month,5001,Infinite
+138,8016037,"SAP Fiori Hub for HANA cloud, additional non-productive tier, private edition (XS)",1,Tenant,10671.00,USD,Month,1,Infinite
+139,8016038,"SAP Fiori Hub for HANA cloud, additional non-productive tier, private edition (L)",1,Tenant,13503.00,USD,Month,1,Infinite
+140,8016078,"SAP Fiori Hub for HANA cloud, additional productive tier, private edition (S)",1,Tenant,13497.00,USD,Month,1,Infinite
+141,8016120,"SAP Fiori Hub for HANA cloud, additional non-productive tier, private edition (XL)",1,Tenant,15669.00,USD,Month,1,Infinite
+142,8016130,"SAP Fiori Hub for HANA cloud, additional productive tier, private edition (M)",1,Tenant,14735.00,USD,Month,1,Infinite
+143,8016138,"SAP Fiori Hub for HANA cloud, additional non-productive tier, private edition (S)",1,Tenant,10942.00,USD,Month,1,Infinite
+144,8016146,"SAP Fiori Hub for HANA cloud, additional productive tier, private edition (XS)",1,Tenant,13227.00,USD,Month,1,Infinite
+145,8016147,"SAP Fiori Hub for HANA cloud, additional non-productive tier, private edition (M)",1,Tenant,11507.00,USD,Month,1,Infinite
+146,8016183,"SAP Fiori Hub for HANA cloud, additional productive tier, private edition (XL)",1,Tenant,19569.00,USD,Month,1,Infinite
+147,8016184,"SAP Fiori Hub for HANA cloud, additional productive tier, private edition (L)",1,Tenant,17402.00,USD,Month,1,Infinite
+148,8017352,"SAP Log Service, private cloud edition",1,Tenant,4102.00,USD,Month,1,Infinite
+149,8017582,enhanced operations service for large enterprises for RISE with SAP S/4HANA Cloud Private Edition,1,% of Net Recurring Fee,11.00,%,Month,1,Infinite
+150,8018022,"SAP S/4HANA Cloud Private Edition Application Server for Linux, additional production tenant",1,Tenant,4712.00,USD,Month,1,Infinite
+151,8018041,"SAP S/4HANA Cloud Private Edition Application Server for Linux, additional nonproduction tenant",1,Tenant,3880.00,USD,Month,1,Infinite
+152,8018042,"SAP S/4HANA Cloud Private Edition Application Server for Linux, additional production tenant, upgrade",64,Gigabyte,1347.00,USD,Month,1,Infinite
+153,8018051,"SAP S/4HANA Cloud Private Edition Application Server for Linux, additional nonproduction tenant, upgrade",64,Gigabyte,1347.00,USD,Month,1,Infinite
+154,8018398,"SAP ERP for defense forces and public security, private cloud edition",1,User,82.00,USD,Month,1,1000
+155,8018398,"SAP ERP for defense forces and public security, private cloud edition",1,User,79.00,USD,Month,1001,10000
+156,8018398,"SAP ERP for defense forces and public security, private cloud edition",1,User,78.00,USD,Month,10001,100000
+157,8018398,"SAP ERP for defense forces and public security, private cloud edition",1,User,72.00,USD,Month,100001,Infinite
+158,**,Cloud - Line of Business Portfolio,0,,0.00,,,,
+159,***,Cloud - Customer Experience,0,,0.00,,,,
+160,8003186,"SAP Sales and Service Core, limited access edition",1,User,42.00,USD,Month,1,Infinite
+161,8007911,"SAP Knowledge Central by NICE, professional edition",1,User,83.00,USD,Month,1,500
+162,8007911,"SAP Knowledge Central by NICE, professional edition",1,User,67.00,USD,Month,501,1000
+163,8007911,"SAP Knowledge Central by NICE, professional edition",1,User,59.00,USD,Month,1001,5000
+164,8007911,"SAP Knowledge Central by NICE, professional edition",1,User,52.00,USD,Month,5001,Infinite
+165,8007912,"SAP Knowledge Central by NICE, instance",1,Connection,4435.00,USD,Month,1,5
+166,8007912,"SAP Knowledge Central by NICE, instance",1,Connection,2883.00,USD,Month,6,15
+167,8007912,"SAP Knowledge Central by NICE, instance",1,Connection,1996.00,USD,Month,16,30
+168,8007912,"SAP Knowledge Central by NICE, instance",1,Connection,1497.00,USD,Month,31,50
+169,8007912,"SAP Knowledge Central by NICE, instance",1,Connection,1164.00,USD,Month,51,Infinite
+170,8008051,"SAP Commerce Cloud, financial services accelerator, access",50000,Order,9495.00,USD,Month,1,Infinite
+171,8008052,"SAP Commerce Cloud, financial services accelerator",50000,Order,1520.00,USD,Month,1,9
+172,8008052,"SAP Commerce Cloud, financial services accelerator",50000,Order,998.00,USD,Month,10,19
+173,8008052,"SAP Commerce Cloud, financial services accelerator",50000,Order,887.00,USD,Month,20,39
+174,8008052,"SAP Commerce Cloud, financial services accelerator",50000,Order,855.00,USD,Month,40,99
+175,8008052,"SAP Commerce Cloud, financial services accelerator",50000,Order,722.00,USD,Month,100,Infinite
+176,8008053,"SAP Commerce Cloud, citizen engagement accelerator, access",50000,Order,8862.00,USD,Month,1,Infinite
+177,8008054,"SAP Commerce Cloud, citizen engagement accelerator",50000,Order,1118.00,USD,Month,1,9
+178,8008054,"SAP Commerce Cloud, citizen engagement accelerator",50000,Order,652.00,USD,Month,10,19
+179,8008054,"SAP Commerce Cloud, citizen engagement accelerator",50000,Order,558.00,USD,Month,20,39
+180,8008054,"SAP Commerce Cloud, citizen engagement accelerator",50000,Order,418.00,USD,Month,40,99
+181,8008054,"SAP Commerce Cloud, citizen engagement accelerator",50000,Order,374.00,USD,Month,100,Infinite
+182,8008055,"SAP Commerce Cloud, Travel accelerator, access",50000,Order,10092.00,USD,Month,1,Infinite
+183,8008056,"SAP Commerce Cloud, travel accelerator",50000,Order,1491.00,USD,Month,1,9
+184,8008056,"SAP Commerce Cloud, travel accelerator",50000,Order,979.00,USD,Month,10,19
+185,8008056,"SAP Commerce Cloud, travel accelerator",50000,Order,870.00,USD,Month,20,39
+186,8008056,"SAP Commerce Cloud, travel accelerator",50000,Order,631.00,USD,Month,40,99
+187,8008056,"SAP Commerce Cloud, travel accelerator",50000,Order,544.00,USD,Month,100,Infinite
+188,8008057,"SAP Commerce Cloud, telco and utilities accelerator, orders, access",50000,Order,9964.00,USD,Month,1,Infinite
+189,8008058,"SAP Commerce Cloud, telco and utilities accelerator, orders",50000,Order,1491.00,USD,Month,1,9
+190,8008058,"SAP Commerce Cloud, telco and utilities accelerator, orders",50000,Order,979.00,USD,Month,10,19
+191,8008058,"SAP Commerce Cloud, telco and utilities accelerator, orders",50000,Order,870.00,USD,Month,20,39
+192,8008058,"SAP Commerce Cloud, telco and utilities accelerator, orders",50000,Order,631.00,USD,Month,40,99
+193,8008058,"SAP Commerce Cloud, telco and utilities accelerator, orders",50000,Order,544.00,USD,Month,100,Infinite
+194,8008059,"SAP Commerce Cloud, telco and utilities accelerator, GMV, access",13304400,Gross Merchandise Value,116771.00,USD,Year,1,Infinite
+195,8008060,"SAP Commerce Cloud, telco and utilities accelerator, GMV",1,Gross Merchandise Value,1.17,%,Year,1.11,31043600
+196,8008060,"SAP Commerce Cloud, telco and utilities accelerator, GMV",1,Gross Merchandise Value,0.99,%,Year,31043601,75391600
+197,8008060,"SAP Commerce Cloud, telco and utilities accelerator, GMV",1,Gross Merchandise Value,0.86,%,Year,75391601,153000600
+198,8008060,"SAP Commerce Cloud, telco and utilities accelerator, GMV",1,Gross Merchandise Value,0.66,%,Year,153000601,319305600
+199,8008060,"SAP Commerce Cloud, telco and utilities accelerator, GMV",1,Gross Merchandise Value,0.57,%,Year,319305601,Infinite
+200,8008139,"SAP Sales and Service Core, test tenant",1,Tenant,1959.00,USD,Month,1,Infinite
+201,8008144,"SAP Commerce Cloud, additional storage",500,Gigabyte,104.00,USD,Month,1,Infinite
+202,8008508,"SAP Commerce Cloud, solution sales configuration, orders, access",50000,Order,28632.00,USD,Month,1,Infinite
+203,8008509,"SAP Commerce Cloud, solution sales configuration, orders",50000,Order,2406.00,USD,Month,1,9
+204,8008509,"SAP Commerce Cloud, solution sales configuration, orders",50000,Order,2062.00,USD,Month,10,19
+205,8008509,"SAP Commerce Cloud, solution sales configuration, orders",50000,Order,1604.00,USD,Month,20,39
+206,8008509,"SAP Commerce Cloud, solution sales configuration, orders",50000,Order,1243.00,USD,Month,40,99
+207,8008509,"SAP Commerce Cloud, solution sales configuration, orders",50000,Order,622.00,USD,Month,100,Infinite
+208,8010965,"SAP Sales and Service Core, intelligent sales add-on",1,User,24.00,USD,Month,1,Infinite
+209,8010990,SAP Emarsys Customer Engagement,100000,Contact,996.00,USD,Month,1,9
+210,8010990,SAP Emarsys Customer Engagement,100000,Contact,707.00,USD,Month,10,19
+211,8010990,SAP Emarsys Customer Engagement,100000,Contact,486.00,USD,Month,20,49
+212,8010990,SAP Emarsys Customer Engagement,100000,Contact,328.00,USD,Month,50,99
+213,8010990,SAP Emarsys Customer Engagement,100000,Contact,263.00,USD,Month,100,199
+214,8010990,SAP Emarsys Customer Engagement,100000,Contact,197.00,USD,Month,200,Infinite
+215,8010993,"SAP Emarsys Customer Engagement, advanced integration capabilities",100000,Contact,700.00,USD,Month,1,9
+216,8010993,"SAP Emarsys Customer Engagement, advanced integration capabilities",100000,Contact,508.00,USD,Month,10,19
+217,8010993,"SAP Emarsys Customer Engagement, advanced integration capabilities",100000,Contact,438.00,USD,Month,20,49
+218,8010993,"SAP Emarsys Customer Engagement, advanced integration capabilities",100000,Contact,298.00,USD,Month,50,99
+219,8010993,"SAP Emarsys Customer Engagement, advanced integration capabilities",100000,Contact,228.00,USD,Month,100,199
+220,8010993,"SAP Emarsys Customer Engagement, advanced integration capabilities",100000,Contact,157.00,USD,Month,200,Infinite
+221,8010994,"SAP Emarsys Customer Engagement, e-commerce accelerator, loyalty module",100000,Contact,725.00,USD,Month,1,9
+222,8010994,"SAP Emarsys Customer Engagement, e-commerce accelerator, loyalty module",100000,Contact,691.00,USD,Month,10,19
+223,8010994,"SAP Emarsys Customer Engagement, e-commerce accelerator, loyalty module",100000,Contact,622.00,USD,Month,20,49
+224,8010994,"SAP Emarsys Customer Engagement, e-commerce accelerator, loyalty module",100000,Contact,518.00,USD,Month,50,99
+225,8010994,"SAP Emarsys Customer Engagement, e-commerce accelerator, loyalty module",100000,Contact,346.00,USD,Month,100,199
+226,8010994,"SAP Emarsys Customer Engagement, e-commerce accelerator, loyalty module",100000,Contact,259.00,USD,Month,200,Infinite
+227,8010995,"SAP Emarsys Customer Engagement, e-commerce accelerator",100000,Contact,1036.00,USD,Month,1,9
+228,8010995,"SAP Emarsys Customer Engagement, e-commerce accelerator",100000,Contact,864.00,USD,Month,10,19
+229,8010995,"SAP Emarsys Customer Engagement, e-commerce accelerator",100000,Contact,691.00,USD,Month,20,49
+230,8010995,"SAP Emarsys Customer Engagement, e-commerce accelerator",100000,Contact,518.00,USD,Month,50,99
+231,8010995,"SAP Emarsys Customer Engagement, e-commerce accelerator",100000,Contact,346.00,USD,Month,100,199
+232,8010995,"SAP Emarsys Customer Engagement, e-commerce accelerator",100000,Contact,259.00,USD,Month,200,Infinite
+233,8010996,"SAP Emarsys Customer Engagement, e-commerce accelerator, offline stores option",100000,Contact,915.00,USD,Month,1,9
+234,8010996,"SAP Emarsys Customer Engagement, e-commerce accelerator, offline stores option",100000,Contact,518.00,USD,Month,10,19
+235,8010996,"SAP Emarsys Customer Engagement, e-commerce accelerator, offline stores option",100000,Contact,346.00,USD,Month,20,49
+236,8010996,"SAP Emarsys Customer Engagement, e-commerce accelerator, offline stores option",100000,Contact,259.00,USD,Month,50,99
+237,8010996,"SAP Emarsys Customer Engagement, e-commerce accelerator, offline stores option",100000,Contact,191.00,USD,Month,100,199
+238,8010996,"SAP Emarsys Customer Engagement, e-commerce accelerator, offline stores option",100000,Contact,156.00,USD,Month,200,Infinite
+239,8011001,"SAP Emarsys Customer Engagement, additional e-mails",100000,Transaction,3.79,USD,Month,1,Infinite
+240,8011002,"SAP Emarsys Customer Engagement, additional Web channel impressions",100000,Transaction,58.00,USD,Month,1,Infinite
+241,8011003,"SAP Emarsys Customer Engagement, additional business units",1,Tenant,1524.00,USD,Month,1,Infinite
+242,8011334,SAP Sales and Service Core,1,User,161.00,USD,Month,1,100
+243,8011334,SAP Sales and Service Core,1,User,155.00,USD,Month,101,250
+244,8011334,SAP Sales and Service Core,1,User,116.00,USD,Month,251,1000
+245,8011334,SAP Sales and Service Core,1,User,99.00,USD,Month,1001,2500
+246,8011334,SAP Sales and Service Core,1,User,77.00,USD,Month,2501,Infinite
+247,8011339,"SAP Sales and Service Core, service agent console",1,User,29.00,USD,Month,1,Infinite
+248,8011340,"SAP Sales and Service Core, dynamic visit planning add-on",1,User,35.00,USD,Month,1,Infinite
+249,8011376,"SAP Commerce Cloud, code replication production environment",1,Tenant,18941.00,USD,Month,1,Infinite
+250,8011520,"SAP Data Maintenance by Vistex pricing option for SAP ERP, private cloud edition",55435000,Revenue,1068.00,USD,Month,1,10
+251,8011520,"SAP Data Maintenance by Vistex pricing option for SAP ERP, private cloud edition",55435000,Revenue,763.00,USD,Month,11,30
+252,8011520,"SAP Data Maintenance by Vistex pricing option for SAP ERP, private cloud edition",55435000,Revenue,610.00,USD,Month,31,60
+253,8011520,"SAP Data Maintenance by Vistex pricing option for SAP ERP, private cloud edition",55435000,Revenue,549.00,USD,Month,61,100
+254,8011520,"SAP Data Maintenance by Vistex pricing option for SAP ERP, private cloud edition",55435000,Revenue,488.00,USD,Month,101,200
+255,8011520,"SAP Data Maintenance by Vistex pricing option for SAP ERP, private cloud edition",55435000,Revenue,397.00,USD,Month,201,Infinite
+256,8011521,"SAP Data Maintenance by Vistex resources option for SAP ERP, private cloud edition",55435000,Revenue,1068.00,USD,Month,1,10
+257,8011521,"SAP Data Maintenance by Vistex resources option for SAP ERP, private cloud edition",55435000,Revenue,763.00,USD,Month,11,30
+258,8011521,"SAP Data Maintenance by Vistex resources option for SAP ERP, private cloud edition",55435000,Revenue,610.00,USD,Month,31,60
+259,8011521,"SAP Data Maintenance by Vistex resources option for SAP ERP, private cloud edition",55435000,Revenue,549.00,USD,Month,61,100
+260,8011521,"SAP Data Maintenance by Vistex resources option for SAP ERP, private cloud edition",55435000,Revenue,488.00,USD,Month,101,200
+261,8011521,"SAP Data Maintenance by Vistex resources option for SAP ERP, private cloud edition",55435000,Revenue,397.00,USD,Month,201,Infinite
+262,8011522,"SAP Incentive Administration by Vistex for SAP ERP, private cloud edition",55435000,Revenue,1677.00,USD,Month,1,10
+263,8011522,"SAP Incentive Administration by Vistex for SAP ERP, private cloud edition",55435000,Revenue,1373.00,USD,Month,11,30
+264,8011522,"SAP Incentive Administration by Vistex for SAP ERP, private cloud edition",55435000,Revenue,1109.00,USD,Month,31,60
+265,8011522,"SAP Incentive Administration by Vistex for SAP ERP, private cloud edition",55435000,Revenue,970.00,USD,Month,61,100
+266,8011522,"SAP Incentive Administration by Vistex for SAP ERP, private cloud edition",55435000,Revenue,832.00,USD,Month,101,200
+267,8011522,"SAP Incentive Administration by Vistex for SAP ERP, private cloud edition",55435000,Revenue,808.00,USD,Month,201,Infinite
+268,8011523,"SAP Paybacks and Chargebacks by Vistex for SAP ERP, private cloud edition",55435000,Revenue,1677.00,USD,Month,1,10
+269,8011523,"SAP Paybacks and Chargebacks by Vistex for SAP ERP, private cloud edition",55435000,Revenue,1373.00,USD,Month,11,30
+270,8011523,"SAP Paybacks and Chargebacks by Vistex for SAP ERP, private cloud edition",55435000,Revenue,1109.00,USD,Month,31,60
+271,8011523,"SAP Paybacks and Chargebacks by Vistex for SAP ERP, private cloud edition",55435000,Revenue,970.00,USD,Month,61,100
+272,8011523,"SAP Paybacks and Chargebacks by Vistex for SAP ERP, private cloud edition",55435000,Revenue,832.00,USD,Month,101,200
+273,8011523,"SAP Paybacks and Chargebacks by Vistex for SAP ERP, private cloud edition",55435000,Revenue,808.00,USD,Month,201,Infinite
+274,8011524,"SAP Promotions and Agreements by Vistex for ERP, private cloud edition",55435000,Revenue,3049.00,USD,Month,1,10
+275,8011524,"SAP Promotions and Agreements by Vistex for ERP, private cloud edition",55435000,Revenue,2592.00,USD,Month,11,30
+276,8011524,"SAP Promotions and Agreements by Vistex for ERP, private cloud edition",55435000,Revenue,2079.00,USD,Month,31,60
+277,8011524,"SAP Promotions and Agreements by Vistex for ERP, private cloud edition",55435000,Revenue,1940.00,USD,Month,61,100
+278,8011524,"SAP Promotions and Agreements by Vistex for ERP, private cloud edition",55435000,Revenue,1829.00,USD,Month,101,200
+279,8011524,"SAP Promotions and Agreements by Vistex for ERP, private cloud edition",55435000,Revenue,1478.00,USD,Month,201,Infinite
+280,8012227,"SAP Emarsys Customer Engagement, omnichannel marketing option",100000,Contact,518.00,USD,Month,1,9
+281,8012227,"SAP Emarsys Customer Engagement, omnichannel marketing option",100000,Contact,369.00,USD,Month,10,19
+282,8012227,"SAP Emarsys Customer Engagement, omnichannel marketing option",100000,Contact,268.00,USD,Month,20,49
+283,8012227,"SAP Emarsys Customer Engagement, omnichannel marketing option",100000,Contact,217.00,USD,Month,50,99
+284,8012227,"SAP Emarsys Customer Engagement, omnichannel marketing option",100000,Contact,185.00,USD,Month,100,199
+285,8012227,"SAP Emarsys Customer Engagement, omnichannel marketing option",100000,Contact,171.00,USD,Month,200,Infinite
+286,8012579,SAP Service Cloud Version 2,1,User,108.00,USD,Month,1,100
+287,8012579,SAP Service Cloud Version 2,1,User,102.00,USD,Month,101,250
+288,8012579,SAP Service Cloud Version 2,1,User,96.00,USD,Month,251,1000
+289,8012579,SAP Service Cloud Version 2,1,User,91.00,USD,Month,1001,2500
+290,8012579,SAP Service Cloud Version 2,1,User,85.00,USD,Month,2501,Infinite
+291,8012580,"SAP Sales Cloud and SAP Service Cloud Version 2, test tenant",1,Tenant,2256.00,USD,Month,1,Infinite
+292,8013363,"SAP Emarsys Customer Engagement, account engagement option",10000,Record,926.00,USD,Month,1,5
+293,8013363,"SAP Emarsys Customer Engagement, account engagement option",10000,Record,698.00,USD,Month,6,10
+294,8013363,"SAP Emarsys Customer Engagement, account engagement option",10000,Record,524.00,USD,Month,11,15
+295,8013363,"SAP Emarsys Customer Engagement, account engagement option",10000,Record,408.00,USD,Month,16,20
+296,8013363,"SAP Emarsys Customer Engagement, account engagement option",10000,Record,292.00,USD,Month,21,50
+297,8013363,"SAP Emarsys Customer Engagement, account engagement option",10000,Record,245.00,USD,Month,51,Infinite
+298,8014283,"SAP Customer Data Platform, records, access",100000,Record,12974.00,USD,Month,1,Infinite
+299,8014284,"SAP Customer Data Platform, additional activations",1000000,Transaction,54.00,USD,Month,1,Infinite
+300,8014285,"SAP Customer Data Platform, additional storage",12,Gigabyte,171.00,USD,Month,1,Infinite
+301,8014294,"SAP Customer Data Platform, records",100000,Record,1262.00,USD,Month,1,9
+302,8014294,"SAP Customer Data Platform, records",100000,Record,950.00,USD,Month,10,19
+303,8014294,"SAP Customer Data Platform, records",100000,Record,726.00,USD,Month,20,49
+304,8014294,"SAP Customer Data Platform, records",100000,Record,630.00,USD,Month,50,99
+305,8014294,"SAP Customer Data Platform, records",100000,Record,561.00,USD,Month,100,199
+306,8014294,"SAP Customer Data Platform, records",100000,Record,485.00,USD,Month,200,Infinite
+307,8014321,SAP Sales Cloud Version 2,1,User,131.00,USD,Month,1,100
+308,8014321,SAP Sales Cloud Version 2,1,User,124.00,USD,Month,101,250
+309,8014321,SAP Sales Cloud Version 2,1,User,118.00,USD,Month,251,1000
+310,8014321,SAP Sales Cloud Version 2,1,User,110.00,USD,Month,1001,2500
+311,8014321,SAP Sales Cloud Version 2,1,User,103.00,USD,Month,2501,Infinite
+312,8014331,"SAP Service Cloud Version 2, utilities add-on",1,User,49.00,USD,Month,1,100
+313,8014331,"SAP Service Cloud Version 2, utilities add-on",1,User,47.00,USD,Month,101,250
+314,8014331,"SAP Service Cloud Version 2, utilities add-on",1,User,45.00,USD,Month,251,1000
+315,8014331,"SAP Service Cloud Version 2, utilities add-on",1,User,43.00,USD,Month,1001,2500
+316,8014331,"SAP Service Cloud Version 2, utilities add-on",1,User,42.00,USD,Month,2501,Infinite
+317,8014791,"SAP Customer Identity and Access Management for B2B, contacts, access",50000,Contact,18084.00,USD,Month,1,Infinite
+318,8014792,"SAP Customer Identity and Access Management for B2B, contacts",50000,Contact,5252.00,USD,Month,1,8
+319,8014792,"SAP Customer Identity and Access Management for B2B, contacts",50000,Contact,4377.00,USD,Month,9,19
+320,8014792,"SAP Customer Identity and Access Management for B2B, contacts",50000,Contact,3297.00,USD,Month,20,39
+321,8014792,"SAP Customer Identity and Access Management for B2B, contacts",50000,Contact,2598.00,USD,Month,40,Infinite
+322,8015120,"SAP Commerce Cloud, additional logging option",1,Flat Fee,11549.00,USD,Month,1,Infinite
+323,8015435,"SAP Commerce Cloud, premier edition, GMV, access",13304400,Gross Merchandise Value,554350.00,USD,Year,1,Infinite
+324,8015439,"SAP Commerce Cloud, product information management add-on",1,% of Net Recurring Fee,37.50,%,Year,1,Infinite
+325,8015457,"SAP Commerce Cloud, order management add-on",1,% of Net Recurring Fee,37.50,%,Year,1,Infinite
+326,8015463,"SAP Commerce Cloud, composable edition, orders, access",50000,Order,29177.00,USD,Month,1,Infinite
+327,8015467,"SAP Commerce Cloud, storefront composer",1,% of Net Recurring Fee,37.50,%,Year,1,Infinite
+328,8015469,"SAP Sales Cloud Version 2, service capabilities add-on",1,User,21.00,USD,Month,1,100
+329,8015469,"SAP Sales Cloud Version 2, service capabilities add-on",1,User,19.00,USD,Month,101,250
+330,8015469,"SAP Sales Cloud Version 2, service capabilities add-on",1,User,18.00,USD,Month,251,1000
+331,8015469,"SAP Sales Cloud Version 2, service capabilities add-on",1,User,17.00,USD,Month,1001,2500
+332,8015469,"SAP Sales Cloud Version 2, service capabilities add-on",1,User,16.00,USD,Month,2501,Infinite
+333,8015477,"SAP Commerce Cloud, composable edition, orders",50000,Order,7294.00,USD,Month,1,9
+334,8015477,"SAP Commerce Cloud, composable edition, orders",50000,Order,4086.00,USD,Month,10,19
+335,8015477,"SAP Commerce Cloud, composable edition, orders",50000,Order,2918.00,USD,Month,20,39
+336,8015477,"SAP Commerce Cloud, composable edition, orders",50000,Order,2480.00,USD,Month,40,99
+337,8015477,"SAP Commerce Cloud, composable edition, orders",50000,Order,1663.00,USD,Month,100,Infinite
+338,8015478,"SAP Commerce Cloud, search add-on",1,% of Net Recurring Fee,37.50,%,Year,1,Infinite
+339,8015484,"SAP Commerce Cloud, premier edition, GMV",1,Gross Merchandise Value,3.07,%,Year,1.11,31043600
+340,8015484,"SAP Commerce Cloud, premier edition, GMV",1,Gross Merchandise Value,2.11,%,Year,31043601,75391600
+341,8015484,"SAP Commerce Cloud, premier edition, GMV",1,Gross Merchandise Value,1.67,%,Year,75391601,153000600
+342,8015484,"SAP Commerce Cloud, premier edition, GMV",1,Gross Merchandise Value,1.41,%,Year,153000601,319305600
+343,8015484,"SAP Commerce Cloud, premier edition, GMV",1,Gross Merchandise Value,1.19,%,Year,319305601,Infinite
+344,8015492,"SAP Commerce Cloud, premier edition, orders, access",50000,Order,47771.00,USD,Month,1,Infinite
+345,8015493,"SAP Commerce Cloud, composable edition, GMV, access",13304400,Gross Merchandise Value,350116.00,USD,Year,1,Infinite
+346,8015507,"SAP Commerce Cloud, composable edition, GMV",1,Gross Merchandise Value,2.32,%,Year,1.11,31043600
+347,8015507,"SAP Commerce Cloud, composable edition, GMV",1,Gross Merchandise Value,1.68,%,Year,31043601,75391600
+348,8015507,"SAP Commerce Cloud, composable edition, GMV",1,Gross Merchandise Value,1.30,%,Year,75391601,153000600
+349,8015507,"SAP Commerce Cloud, composable edition, GMV",1,Gross Merchandise Value,1.08,%,Year,153000601,319305600
+350,8015507,"SAP Commerce Cloud, composable edition, GMV",1,Gross Merchandise Value,0.95,%,Year,319305601,Infinite
+351,8015508,"SAP Commerce Cloud, premier edition, orders",50000,Order,9391.00,USD,Month,1,9
+352,8015508,"SAP Commerce Cloud, premier edition, orders",50000,Order,5100.00,USD,Month,10,19
+353,8015508,"SAP Commerce Cloud, premier edition, orders",50000,Order,3833.00,USD,Month,20,39
+354,8015508,"SAP Commerce Cloud, premier edition, orders",50000,Order,3104.00,USD,Month,40,99
+355,8015508,"SAP Commerce Cloud, premier edition, orders",50000,Order,2301.00,USD,Month,100,Infinite
+356,8015513,"SAP Emarsys Customer Engagement, mobile app marketing option",100000,Active User,1326.00,USD,Month,1,9
+357,8015513,"SAP Emarsys Customer Engagement, mobile app marketing option",100000,Active User,1233.00,USD,Month,10,19
+358,8015513,"SAP Emarsys Customer Engagement, mobile app marketing option",100000,Active User,1126.00,USD,Month,20,49
+359,8015513,"SAP Emarsys Customer Engagement, mobile app marketing option",100000,Active User,928.00,USD,Month,50,99
+360,8015513,"SAP Emarsys Customer Engagement, mobile app marketing option",100000,Active User,835.00,USD,Month,100,199
+361,8015513,"SAP Emarsys Customer Engagement, mobile app marketing option",100000,Active User,793.00,USD,Month,200,Infinite
+362,8015561,"SAP Service Cloud Version 2, sales capabilities add-on",1,User,44.00,USD,Month,1,100
+363,8015561,"SAP Service Cloud Version 2, sales capabilities add-on",1,User,41.00,USD,Month,101,250
+364,8015561,"SAP Service Cloud Version 2, sales capabilities add-on",1,User,39.00,USD,Month,251,1000
+365,8015561,"SAP Service Cloud Version 2, sales capabilities add-on",1,User,35.00,USD,Month,1001,2500
+366,8015561,"SAP Service Cloud Version 2, sales capabilities add-on",1,User,33.00,USD,Month,2501,Infinite
+367,8016118,intelligent selling services for SAP Commerce Cloud,5000000,API Call,2772.00,USD,Month,1,10
+368,8016118,intelligent selling services for SAP Commerce Cloud,5000000,API Call,2356.00,USD,Month,11,20
+369,8016118,intelligent selling services for SAP Commerce Cloud,5000000,API Call,2079.00,USD,Month,21,35
+370,8016118,intelligent selling services for SAP Commerce Cloud,5000000,API Call,1774.00,USD,Month,36,Infinite
+371,8017083,"SAP Emarsys Customer Engagement, development account",1,Tenant,767.00,USD,Month,1,Infinite
+372,8017122,"SAP Commerce Cloud, code replication data center",1,Tenant,25777.00,USD,Month,1,Infinite
+373,8017283,"SAP Emarsys Customer Engagement, additional mobile wallet passes?",100000,Record,11087.00,USD,Month,1,Infinite
+374,8017354,"SAP Sales Cloud and SAP Service Cloud Version 2, limited use",1,User,15.00,USD,Month,1,Infinite
+375,8017592,SAP CX AI Toolkit,1,Tenant,5100.00,USD,Month,1,Infinite
+376,8017941,"SAP Commerce Cloud, scalability add-on",1,Entitlements Package,9921.00,USD,Month,1,Infinite
+377,8018083,"SAP Commerce Cloud, scalable sandbox",1,Tenant,4989.00,USD,Month,1,Infinite
+378,8018086,"SAP Customer Data Platform, advanced insights",1,Capacity Unit,577.00,USD,Month,1,Infinite
+379,8018120,"SAP Emarsys Customer Engagement, utilities accelerator",100000,Contact,499.00,USD,Month,1,9
+380,8018120,"SAP Emarsys Customer Engagement, utilities accelerator",100000,Contact,439.00,USD,Month,10,19
+381,8018120,"SAP Emarsys Customer Engagement, utilities accelerator",100000,Contact,329.00,USD,Month,20,49
+382,8018120,"SAP Emarsys Customer Engagement, utilities accelerator",100000,Contact,246.00,USD,Month,50,99
+383,8018120,"SAP Emarsys Customer Engagement, utilities accelerator",100000,Contact,185.00,USD,Month,100,199
+384,8018120,"SAP Emarsys Customer Engagement, utilities accelerator",100000,Contact,151.00,USD,Month,200,Infinite
+385,8018127,"SAP Customer Identity and Access Management for B2C Core, consent option",10000,Active User,269.00,USD,Month,1,19
+386,8018127,"SAP Customer Identity and Access Management for B2C Core, consent option",10000,Active User,200.00,USD,Month,20,49
+387,8018127,"SAP Customer Identity and Access Management for B2C Core, consent option",10000,Active User,175.00,USD,Month,50,99
+388,8018127,"SAP Customer Identity and Access Management for B2C Core, consent option",10000,Active User,169.00,USD,Month,100,149
+389,8018127,"SAP Customer Identity and Access Management for B2C Core, consent option",10000,Active User,159.00,USD,Month,150,299
+390,8018127,"SAP Customer Identity and Access Management for B2C Core, consent option",10000,Active User,153.00,USD,Month,300,Infinite
+391,8018153,"SAP Commerce Cloud, consumption credits",1,Capacity Unit,2.49,USD,Year,1,Infinite
+392,8018193,SAP Customer Identity and Access Management for B2C Core,10000,Active User,317.00,USD,Month,1,19
+393,8018193,SAP Customer Identity and Access Management for B2C Core,10000,Active User,244.00,USD,Month,20,49
+394,8018193,SAP Customer Identity and Access Management for B2C Core,10000,Active User,222.00,USD,Month,50,99
+395,8018193,SAP Customer Identity and Access Management for B2C Core,10000,Active User,213.00,USD,Month,100,149
+396,8018193,SAP Customer Identity and Access Management for B2C Core,10000,Active User,206.00,USD,Month,150,299
+397,8018193,SAP Customer Identity and Access Management for B2C Core,10000,Active User,200.00,USD,Month,300,Infinite
+398,8018194,"SAP Customer Identity and Access Management for B2C Core, enhanced option",10000,Active User,476.00,USD,Month,1,19
+399,8018194,"SAP Customer Identity and Access Management for B2C Core, enhanced option",10000,Active User,288.00,USD,Month,20,49
+400,8018194,"SAP Customer Identity and Access Management for B2C Core, enhanced option",10000,Active User,225.00,USD,Month,50,99
+401,8018194,"SAP Customer Identity and Access Management for B2C Core, enhanced option",10000,Active User,216.00,USD,Month,100,149
+402,8018194,"SAP Customer Identity and Access Management for B2C Core, enhanced option",10000,Active User,210.00,USD,Month,150,299
+403,8018194,"SAP Customer Identity and Access Management for B2C Core, enhanced option",10000,Active User,203.00,USD,Month,300,Infinite
+404,8018742,"SAP Enterprise Service Management, test tenant",1,Tenant,1591.00,USD,Month,1,Infinite
+405,8018799,SAP Enterprise Service Management,1000,Transaction,103.00,USD,Month,1,100
+406,8018799,SAP Enterprise Service Management,1000,Transaction,98.00,USD,Month,101,250
+407,8018799,SAP Enterprise Service Management,1000,Transaction,92.00,USD,Month,251,1000
+408,8018799,SAP Enterprise Service Management,1000,Transaction,86.00,USD,Month,1001,2500
+409,8018799,SAP Enterprise Service Management,1000,Transaction,81.00,USD,Month,2501,Infinite
+410,***,Cloud - Digital Supply Chain,0,,0.00,,,,
+411,8008006,"SAP Integrated Business Planning, additional test tenant",1,Tenant,4310.00,USD,Month,1,Infinite
+412,8008007,"SAP Integrated Business Planning, additional test tenant HANA upgrade",256,Gigabyte,1269.00,USD,Month,1,Infinite
+413,8008019,SAP Business Network Freight Collaboration,10000,Document,1340.00,USD,Month,1,10
+414,8008019,SAP Business Network Freight Collaboration,10000,Document,661.00,USD,Month,11,50
+415,8008019,SAP Business Network Freight Collaboration,10000,Document,326.00,USD,Month,51,200
+416,8008019,SAP Business Network Freight Collaboration,10000,Document,245.00,USD,Month,201,400
+417,8008019,SAP Business Network Freight Collaboration,10000,Document,196.00,USD,Month,401,1000
+418,8008019,SAP Business Network Freight Collaboration,10000,Document,171.00,USD,Month,1001,4000
+419,8008019,SAP Business Network Freight Collaboration,10000,Document,148.00,USD,Month,4001,Infinite
+420,8008021,SAP Business Network Material Traceability,10000,Document,854.00,USD,Month,1,10
+421,8008021,SAP Business Network Material Traceability,10000,Document,533.00,USD,Month,11,50
+422,8008021,SAP Business Network Material Traceability,10000,Document,366.00,USD,Month,51,100
+423,8008021,SAP Business Network Material Traceability,10000,Document,289.00,USD,Month,101,200
+424,8008021,SAP Business Network Material Traceability,10000,Document,230.00,USD,Month,201,300
+425,8008021,SAP Business Network Material Traceability,10000,Document,179.00,USD,Month,301,500
+426,8008021,SAP Business Network Material Traceability,10000,Document,130.00,USD,Month,501,1000
+427,8008021,SAP Business Network Material Traceability,10000,Document,79.00,USD,Month,1001,2500
+428,8008021,SAP Business Network Material Traceability,10000,Document,37.00,USD,Month,2501,5000
+429,8008021,SAP Business Network Material Traceability,10000,Document,27.00,USD,Month,5001,Infinite
+430,8008022,"SAP Business Network Material Traceability, participant option",10000,Document,467.00,USD,Month,1,10
+431,8008022,"SAP Business Network Material Traceability, participant option",10000,Document,344.00,USD,Month,11,50
+432,8008022,"SAP Business Network Material Traceability, participant option",10000,Document,276.00,USD,Month,51,Infinite
+433,8008229,"SAP Field Service Management, test tenant",1,Tenant,2027.00,USD,Month,1,Infinite
+434,8008874,SAP Business Network Global Track and Trace,10000,Document,1275.00,USD,Month,1,10
+435,8008874,SAP Business Network Global Track and Trace,10000,Document,667.00,USD,Month,11,50
+436,8008874,SAP Business Network Global Track and Trace,10000,Document,323.00,USD,Month,51,200
+437,8008874,SAP Business Network Global Track and Trace,10000,Document,226.00,USD,Month,201,400
+438,8008874,SAP Business Network Global Track and Trace,10000,Document,130.00,USD,Month,401,1000
+439,8008874,SAP Business Network Global Track and Trace,10000,Document,106.00,USD,Month,1001,4000
+440,8008874,SAP Business Network Global Track and Trace,10000,Document,92.00,USD,Month,4001,Infinite
+441,8008875,"SAP Business Network, shipper test tenant",1,Tenant,3884.00,USD,Month,1,Infinite
+442,8010809,"SAP Work Clearance Management for SAP ERP, private cloud edition",80000,Resource,3578.00,USD,Month,1,3
+443,8010809,"SAP Work Clearance Management for SAP ERP, private cloud edition",80000,Resource,1722.00,USD,Month,4,10
+444,8010809,"SAP Work Clearance Management for SAP ERP, private cloud edition",80000,Resource,817.00,USD,Month,11,20
+445,8010809,"SAP Work Clearance Management for SAP ERP, private cloud edition",80000,Resource,788.00,USD,Month,21,30
+446,8010809,"SAP Work Clearance Management for SAP ERP, private cloud edition",80000,Resource,701.00,USD,Month,31,Infinite
+447,8010958,"SAP Business Network Asset Collaboration, premium membership, test tenant add-on",1,Tenant,2349.00,USD,Month,1,Infinite
+448,8011022,"SAP Digital Manufacturing Cloud, test tenant",1,Tenant,6473.00,USD,Month,1,Infinite
+449,8011023,"SAP Digital Manufacturing Cloud, test tenant add-on HANA Service storage",64,Gigabyte,1978.00,USD,Month,1,Infinite
+450,8011047,"SAP Business Network, intelligent insights add-on",10000,Document,537.00,USD,Month,1,10
+451,8011047,"SAP Business Network, intelligent insights add-on",10000,Document,347.00,USD,Month,11,50
+452,8011047,"SAP Business Network, intelligent insights add-on",10000,Document,190.00,USD,Month,51,200
+453,8011047,"SAP Business Network, intelligent insights add-on",10000,Document,124.00,USD,Month,201,400
+454,8011047,"SAP Business Network, intelligent insights add-on",10000,Document,62.00,USD,Month,401,1000
+455,8011047,"SAP Business Network, intelligent insights add-on",10000,Document,46.00,USD,Month,1001,4000
+456,8011047,"SAP Business Network, intelligent insights add-on",10000,Document,35.00,USD,Month,4001,Infinite
+457,8011539,SAP Variant Configuration and Pricing,1,Tenant,9008.00,USD,Month,1,Infinite
+458,8011540,"SAP Variant Configuration and Pricing, test tenant",1,Tenant,3017.00,USD,Month,1,Infinite
+459,8013371,"SAP Integrated Business Planning, additional environment",1,Entitlements Package,76588.00,USD,Month,1,Infinite
+460,8013696,SAP E-Mobility,1,Object,12.00,USD,Month,1,1000
+461,8013696,SAP E-Mobility,1,Object,7.76,USD,Month,1001,10000
+462,8013696,SAP E-Mobility,1,Object,3.33,USD,Month,10001,Infinite
+463,8013721,SAP Digital Manufacturing Cloud for edge,1,Object,1379.00,USD,Month,1,Infinite
+464,8013728,"SAP Product and Process Governance by BDF for SAP S/4HANA Cloud, private edition",1,Active User,347.00,USD,Month,1,50
+465,8013728,"SAP Product and Process Governance by BDF for SAP S/4HANA Cloud, private edition",1,Active User,236.00,USD,Month,51,250
+466,8013728,"SAP Product and Process Governance by BDF for SAP S/4HANA Cloud, private edition",1,Active User,194.00,USD,Month,251,1000
+467,8013728,"SAP Product and Process Governance by BDF for SAP S/4HANA Cloud, private edition",1,Active User,153.00,USD,Month,1001,Infinite
+468,8013775,"SAP Product and Process Governance by BDF, private cloud edition",1,Active User,347.00,USD,Month,1,50
+469,8013775,"SAP Product and Process Governance by BDF, private cloud edition",1,Active User,236.00,USD,Month,51,250
+470,8013775,"SAP Product and Process Governance by BDF, private cloud edition",1,Active User,194.00,USD,Month,251,1000
+471,8013775,"SAP Product and Process Governance by BDF, private cloud edition",1,Active User,153.00,USD,Month,1001,Infinite
+472,8013792,"SAP Manufacturing Execution Cloud, private edition",1,Resource,370.00,USD,Month,1,300
+473,8013792,"SAP Manufacturing Execution Cloud, private edition",1,Resource,252.00,USD,Month,301,1000
+474,8013792,"SAP Manufacturing Execution Cloud, private edition",1,Resource,121.00,USD,Month,1001,3000
+475,8013792,"SAP Manufacturing Execution Cloud, private edition",1,Resource,84.00,USD,Month,3001,6000
+476,8013792,"SAP Manufacturing Execution Cloud, private edition",1,Resource,49.00,USD,Month,6001,Infinite
+477,8014845,"SAP Business Network Asset Collaboration, premium membership, supplemental object add-on",100,Object,14.00,USD,Month,1,1000
+478,8014845,"SAP Business Network Asset Collaboration, premium membership, supplemental object add-on",100,Object,7.86,USD,Month,1001,2000
+479,8014845,"SAP Business Network Asset Collaboration, premium membership, supplemental object add-on",100,Object,6.29,USD,Month,2001,4000
+480,8014845,"SAP Business Network Asset Collaboration, premium membership, supplemental object add-on",100,Object,4.99,USD,Month,4001,8000
+481,8014845,"SAP Business Network Asset Collaboration, premium membership, supplemental object add-on",100,Object,3.70,USD,Month,8001,16000
+482,8014845,"SAP Business Network Asset Collaboration, premium membership, supplemental object add-on",100,Object,2.32,USD,Month,16001,150000
+483,8014921,"SAP Business Network Asset Collaboration, premium membership",1,Entitlements Package,10834.00,USD,Month,1,Infinite
+484,8014931,"SAP Business Network Asset Collaboration, premium membership, supplemental maintenance management documents add-on",500,Document,94.00,USD,Year,1,1000
+485,8014931,"SAP Business Network Asset Collaboration, premium membership, supplemental maintenance management documents add-on",500,Document,67.00,USD,Year,1001,2000
+486,8014931,"SAP Business Network Asset Collaboration, premium membership, supplemental maintenance management documents add-on",500,Document,53.00,USD,Year,2001,4000
+487,8014931,"SAP Business Network Asset Collaboration, premium membership, supplemental maintenance management documents add-on",500,Document,49.00,USD,Year,4001,8000
+488,8014931,"SAP Business Network Asset Collaboration, premium membership, supplemental maintenance management documents add-on",500,Document,45.00,USD,Year,8001,16000
+489,8014931,"SAP Business Network Asset Collaboration, premium membership, supplemental maintenance management documents add-on",500,Document,31.00,USD,Year,16001,Infinite
+490,8015354,SAP Crowd Service,10000,Transaction,3880.00,USD,Month,1,5
+491,8015354,SAP Crowd Service,10000,Transaction,3326.00,USD,Month,6,10
+492,8015354,SAP Crowd Service,10000,Transaction,2403.00,USD,Month,11,50
+493,8015354,SAP Crowd Service,10000,Transaction,1848.00,USD,Month,51,70
+494,8015354,SAP Crowd Service,10000,Transaction,1663.00,USD,Month,71,100
+495,8015354,SAP Crowd Service,10000,Transaction,1386.00,USD,Month,101,Infinite
+496,8015485,"SAP Field Service Management, supplemental services",1,Resource,50.00,USD,Month,1,150
+497,8015485,"SAP Field Service Management, supplemental services",1,Resource,35.00,USD,Month,151,250
+498,8015485,"SAP Field Service Management, supplemental services",1,Resource,24.00,USD,Month,251,500
+499,8015485,"SAP Field Service Management, supplemental services",1,Resource,18.00,USD,Month,501,1500
+500,8015485,"SAP Field Service Management, supplemental services",1,Resource,14.00,USD,Month,1501,3000
+501,8015485,"SAP Field Service Management, supplemental services",1,Resource,11.00,USD,Month,3001,Infinite
+502,8015529,SAP Field Service Management,1,Resource,80.00,USD,Month,1,25
+503,8015529,SAP Field Service Management,1,Resource,75.00,USD,Month,26,150
+504,8015529,SAP Field Service Management,1,Resource,73.00,USD,Month,151,250
+505,8015529,SAP Field Service Management,1,Resource,68.00,USD,Month,251,500
+506,8015529,SAP Field Service Management,1,Resource,64.00,USD,Month,501,1500
+507,8015529,SAP Field Service Management,1,Resource,54.00,USD,Month,1501,3000
+508,8015529,SAP Field Service Management,1,Resource,45.00,USD,Month,3001,Infinite
+509,8015530,"SAP Field Service Management, connector for SAP ERP",1,Flat Fee,3349.00,USD,Month,1,Infinite
+510,8015803,SAP Integrated Business Planning for demand,388045000,Cost of Goods,10285.00,USD,Month,1,2
+511,8015803,SAP Integrated Business Planning for demand,388045000,Cost of Goods,6236.00,USD,Month,3,4
+512,8015803,SAP Integrated Business Planning for demand,388045000,Cost of Goods,5501.00,USD,Month,5,8
+513,8015803,SAP Integrated Business Planning for demand,388045000,Cost of Goods,4169.00,USD,Month,9,20
+514,8015803,SAP Integrated Business Planning for demand,388045000,Cost of Goods,3398.00,USD,Month,21,40
+515,8015803,SAP Integrated Business Planning for demand,388045000,Cost of Goods,1330.00,USD,Month,41,Infinite
+516,8015804,SAP Supply Chain Control Tower,388045000,Cost of Goods,10285.00,USD,Month,1,2
+517,8015804,SAP Supply Chain Control Tower,388045000,Cost of Goods,6236.00,USD,Month,3,4
+518,8015804,SAP Supply Chain Control Tower,388045000,Cost of Goods,5501.00,USD,Month,5,8
+519,8015804,SAP Supply Chain Control Tower,388045000,Cost of Goods,4169.00,USD,Month,9,20
+520,8015804,SAP Supply Chain Control Tower,388045000,Cost of Goods,3398.00,USD,Month,21,40
+521,8015804,SAP Supply Chain Control Tower,388045000,Cost of Goods,1330.00,USD,Month,41,Infinite
+522,8015843,SAP Integrated Business Planning for inventory,388045000,Cost of Goods,10285.00,USD,Month,1,2
+523,8015843,SAP Integrated Business Planning for inventory,388045000,Cost of Goods,6236.00,USD,Month,3,4
+524,8015843,SAP Integrated Business Planning for inventory,388045000,Cost of Goods,5501.00,USD,Month,5,8
+525,8015843,SAP Integrated Business Planning for inventory,388045000,Cost of Goods,4169.00,USD,Month,9,20
+526,8015843,SAP Integrated Business Planning for inventory,388045000,Cost of Goods,3398.00,USD,Month,21,40
+527,8015843,SAP Integrated Business Planning for inventory,388045000,Cost of Goods,1330.00,USD,Month,41,Infinite
+528,8015873,SAP Integrated Business Planning for sales & operations,388045000,Cost of Goods,10285.00,USD,Month,1,2
+529,8015873,SAP Integrated Business Planning for sales & operations,388045000,Cost of Goods,6236.00,USD,Month,3,4
+530,8015873,SAP Integrated Business Planning for sales & operations,388045000,Cost of Goods,5501.00,USD,Month,5,8
+531,8015873,SAP Integrated Business Planning for sales & operations,388045000,Cost of Goods,4169.00,USD,Month,9,20
+532,8015873,SAP Integrated Business Planning for sales & operations,388045000,Cost of Goods,3398.00,USD,Month,21,40
+533,8015873,SAP Integrated Business Planning for sales & operations,388045000,Cost of Goods,1330.00,USD,Month,41,Infinite
+534,8015921,SAP Integrated Business Planning for demand-driven replenishment,388045000,Cost of Goods,9258.00,USD,Month,1,2
+535,8015921,SAP Integrated Business Planning for demand-driven replenishment,388045000,Cost of Goods,6236.00,USD,Month,3,4
+536,8015921,SAP Integrated Business Planning for demand-driven replenishment,388045000,Cost of Goods,5501.00,USD,Month,5,8
+537,8015921,SAP Integrated Business Planning for demand-driven replenishment,388045000,Cost of Goods,4169.00,USD,Month,9,20
+538,8015921,SAP Integrated Business Planning for demand-driven replenishment,388045000,Cost of Goods,3398.00,USD,Month,21,40
+539,8015921,SAP Integrated Business Planning for demand-driven replenishment,388045000,Cost of Goods,1330.00,USD,Month,41,Infinite
+540,8015923,SAP Integrated Business Planning for response and supply,388045000,Cost of Goods,10285.00,USD,Month,1,2
+541,8015923,SAP Integrated Business Planning for response and supply,388045000,Cost of Goods,6236.00,USD,Month,3,4
+542,8015923,SAP Integrated Business Planning for response and supply,388045000,Cost of Goods,5501.00,USD,Month,5,8
+543,8015923,SAP Integrated Business Planning for response and supply,388045000,Cost of Goods,4169.00,USD,Month,9,20
+544,8015923,SAP Integrated Business Planning for response and supply,388045000,Cost of Goods,3398.00,USD,Month,21,40
+545,8015923,SAP Integrated Business Planning for response and supply,388045000,Cost of Goods,1330.00,USD,Month,41,Infinite
+546,8017054,SAP Sustainability Footprint Management,50000,Record,277.00,USD,Month,1,10
+547,8017054,SAP Sustainability Footprint Management,50000,Record,139.00,USD,Month,11,100
+548,8017054,SAP Sustainability Footprint Management,50000,Record,75.00,USD,Month,101,500
+549,8017054,SAP Sustainability Footprint Management,50000,Record,37.00,USD,Month,501,2000
+550,8017054,SAP Sustainability Footprint Management,50000,Record,26.00,USD,Month,2001,Infinite
+551,8017113,"SAP Sustainability Data Exchange, base membership",1,Record,0.16,USD,Month,1,5000
+552,8017113,"SAP Sustainability Data Exchange, base membership",1,Record,0.11,USD,Month,5001,50000
+553,8017113,"SAP Sustainability Data Exchange, base membership",1,Record,0.08,USD,Month,50001,100000
+554,8017113,"SAP Sustainability Data Exchange, base membership",1,Record,0.07,USD,Month,100001,Infinite
+555,8017193,SAP Digital Manufacturing Cloud for execution,110870000,Cost of Goods,10626.00,USD,Month,1,3
+556,8017193,SAP Digital Manufacturing Cloud for execution,110870000,Cost of Goods,6929.00,USD,Month,4,9
+557,8017193,SAP Digital Manufacturing Cloud for execution,110870000,Cost of Goods,3696.00,USD,Month,10,21
+558,8017193,SAP Digital Manufacturing Cloud for execution,110870000,Cost of Goods,2957.00,USD,Month,22,41
+559,8017193,SAP Digital Manufacturing Cloud for execution,110870000,Cost of Goods,2311.00,USD,Month,42,101
+560,8017193,SAP Digital Manufacturing Cloud for execution,110870000,Cost of Goods,1386.00,USD,Month,102,Infinite
+561,8017574,SAP Product Lifecycle Management,1,Capacity Unit,1.11,USD,Month,1,Infinite
+562,8018011,"SAP Field Service Management, SME option",1,Resource,102.00,USD,Month,1,100
+563,8018011,"SAP Field Service Management, SME option",1,Resource,96.00,USD,Month,101,150
+564,8018011,"SAP Field Service Management, SME option",1,Resource,94.00,USD,Month,151,250
+565,8018011,"SAP Field Service Management, SME option",1,Resource,91.00,USD,Month,251,500
+566,8018011,"SAP Field Service Management, SME option",1,Resource,88.00,USD,Month,501,1500
+567,8018011,"SAP Field Service Management, SME option",1,Resource,80.00,USD,Month,1501,3000
+568,8018011,"SAP Field Service Management, SME option",1,Resource,55.00,USD,Month,3001,Infinite
+569,8018119,SAP Dynamic Forms,1000,Document,31.00,USD,Month,1,50
+570,8018119,SAP Dynamic Forms,1000,Document,26.00,USD,Month,51,150
+571,8018119,SAP Dynamic Forms,1000,Document,24.00,USD,Month,151,Infinite
+572,8018282,SAP Mobile Execution and Dynamic Forms,1,Full Use Equivalent,137.00,USD,Month,1,150
+573,8018282,SAP Mobile Execution and Dynamic Forms,1,Full Use Equivalent,90.00,USD,Month,151,250
+574,8018282,SAP Mobile Execution and Dynamic Forms,1,Full Use Equivalent,78.00,USD,Month,251,500
+575,8018282,SAP Mobile Execution and Dynamic Forms,1,Full Use Equivalent,62.00,USD,Month,501,1500
+576,8018282,SAP Mobile Execution and Dynamic Forms,1,Full Use Equivalent,42.00,USD,Month,1501,3000
+577,8018282,SAP Mobile Execution and Dynamic Forms,1,Full Use Equivalent,28.00,USD,Month,3001,Infinite
+578,8018605,SAP Green Token,1000,Record,851.00,USD,Month,1,9
+579,8018605,SAP Green Token,1000,Record,632.00,USD,Month,10,14
+580,8018605,SAP Green Token,1000,Record,536.00,USD,Month,15,29
+581,8018605,SAP Green Token,1000,Record,414.00,USD,Month,30,64
+582,8018605,SAP Green Token,1000,Record,220.00,USD,Month,65,99
+583,8018605,SAP Green Token,1000,Record,159.00,USD,Month,100,199
+584,8018605,SAP Green Token,1000,Record,109.00,USD,Month,200,399
+585,8018605,SAP Green Token,1000,Record,73.00,USD,Month,400,699
+586,8018605,SAP Green Token,1000,Record,54.00,USD,Month,700,999
+587,8018605,SAP Green Token,1000,Record,43.00,USD,Month,1000,1499
+588,8018605,SAP Green Token,1000,Record,34.00,USD,Month,1500,1999
+589,8018605,SAP Green Token,1000,Record,28.00,USD,Month,2000,Infinite
+590,8018803,"SAP Asset Performance Management, additional productive tenant",1,Tenant,1197.00,USD,Month,1,Infinite
+591,8018872,"RISE with SAP, sustainability essentials package",1,Entitlements Package,2772.00,USD,Month,1,Infinite
+592,8018903,"SAP Asset Performance Management, additional non-productive tenant",1,Tenant,1197.00,USD,Month,1,Infinite
+593,8018912,SAP Asset Performance Management,100,Object,69.00,USD,Month,1,149
+594,8018912,SAP Asset Performance Management,100,Object,63.00,USD,Month,150,199
+595,8018912,SAP Asset Performance Management,100,Object,55.00,USD,Month,200,249
+596,8018912,SAP Asset Performance Management,100,Object,50.00,USD,Month,250,299
+597,8018912,SAP Asset Performance Management,100,Object,47.00,USD,Month,300,499
+598,8018912,SAP Asset Performance Management,100,Object,39.00,USD,Month,500,749
+599,8018912,SAP Asset Performance Management,100,Object,33.00,USD,Month,750,1499
+600,8018912,SAP Asset Performance Management,100,Object,26.00,USD,Month,1500,2499
+601,8018912,SAP Asset Performance Management,100,Object,21.00,USD,Month,2500,3999
+602,8018912,SAP Asset Performance Management,100,Object,18.00,USD,Month,4000,5999
+603,8018912,SAP Asset Performance Management,100,Object,12.00,USD,Month,6000,9999
+604,8018912,SAP Asset Performance Management,100,Object,11.00,USD,Month,10000,14999
+605,8018912,SAP Asset Performance Management,100,Object,8.87,USD,Month,15000,19999
+606,8018912,SAP Asset Performance Management,100,Object,7.76,USD,Month,20000,49999
+607,8018912,SAP Asset Performance Management,100,Object,5.54,USD,Month,50000,Infinite
+608,8018941,"SAP Asset Performance Management, advanced capabilities add on",1,Capacity Unit,1.11,USD,Month,1,Infinite
+609,***,Cloud - Human Capital Management (HCM),0,,0.00,,,,
+610,8005140,SAP SuccessFactors Employee Central Service Center,1,User,3.88,USD,Month,1,2000
+611,8005140,SAP SuccessFactors Employee Central Service Center,1,User,1.87,USD,Month,2001,5000
+612,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.88,USD,Month,5001,10000
+613,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.73,USD,Month,10001,15000
+614,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.59,USD,Month,15001,25000
+615,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.48,USD,Month,25001,50000
+616,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.45,USD,Month,50001,75000
+617,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.41,USD,Month,75001,100000
+618,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.37,USD,Month,100001,200000
+619,8005140,SAP SuccessFactors Employee Central Service Center,1,User,0.33,USD,Month,200001,Infinite
+620,8005447,"SAP SuccessFactors HCM Suite, additional test tenant in preview environment",1,Tenant,833.00,USD,Month,1,Infinite
+621,8005448,"SAP SuccessFactors HCM Suite, additional test tenant in production environment",1,Tenant,833.00,USD,Month,1,Infinite
+622,8005988,"SAP SuccessFactors Learning, content storage add-on (25GB)",25,Gigabyte,28.00,USD,Month,1,Infinite
+623,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,462.00,USD,Month,1,20
+624,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,443.00,USD,Month,21,50
+625,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,435.00,USD,Month,51,100
+626,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,407.00,USD,Month,101,150
+627,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,314.00,USD,Month,151,250
+628,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,231.00,USD,Month,251,500
+629,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,175.00,USD,Month,501,750
+630,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,139.00,USD,Month,751,1000
+631,8007704,SAP SuccessFactors Document Management Core by OpenText,100,User,120.00,USD,Month,1001,Infinite
+632,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,9.50,USD,Month,1,2000
+633,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,9.00,USD,Month,2001,5000
+634,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,8.25,USD,Month,5001,10000
+635,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,7.25,USD,Month,10001,15000
+636,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,6.50,USD,Month,15001,25000
+637,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,6.00,USD,Month,25001,50000
+638,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,5.00,USD,Month,50001,75000
+639,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,4.00,USD,Month,75001,100000
+640,8008014,"SAP U.S. Benefits Administration by Benefitfocus, full benefits option",1,User,3.25,USD,Month,100001,Infinite
+641,8008016,"SAP U.S. Benefits Administration by Benefitfocus, interface add-on",1,Connection,1700.00,USD,Month,1,Infinite
+642,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,7.08,USD,Month,1,2000
+643,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,6.75,USD,Month,2001,5000
+644,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,6.44,USD,Month,5001,10000
+645,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,6.16,USD,Month,10001,15000
+646,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,5.90,USD,Month,15001,25000
+647,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,5.67,USD,Month,25001,50000
+648,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,3.99,USD,Month,50001,75000
+649,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,3.82,USD,Month,75001,100000
+650,8008384,SAP Time and Attendance Management by WorkForce Software,1,User,3.67,USD,Month,100001,Infinite
+651,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,5.00,USD,Month,1,2000
+652,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,4.76,USD,Month,2001,5000
+653,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,4.55,USD,Month,5001,10000
+654,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,4.35,USD,Month,10001,15000
+655,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,4.17,USD,Month,15001,25000
+656,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,4.00,USD,Month,25001,50000
+657,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,2.78,USD,Month,50001,75000
+658,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,2.56,USD,Month,75001,100000
+659,8008385,SAP Workforce Forecasting and Scheduling by WorkForce Software,1,User,2.47,USD,Month,100001,Infinite
+660,8008386,"SAP Time & Attendance by Workforce Forecasting and Scheduling by WorkForce Software,  Adnl Instance",1,Tenant,10000.00,USD,Month,1,Infinite
+661,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,2.50,USD,Month,1,2000
+662,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,2.38,USD,Month,2001,5000
+663,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,2.27,USD,Month,5001,10000
+664,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,2.17,USD,Month,10001,15000
+665,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,2.08,USD,Month,15001,25000
+666,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,2.00,USD,Month,25001,50000
+667,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,1.81,USD,Month,50001,75000
+668,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,1.74,USD,Month,75001,100000
+669,8008387,SAP Absence and Leave Management by WorkForce Software,1,User,1.67,USD,Month,100001,Infinite
+670,8008428,SAP SuccessFactors Work Zone,1,User,6.01,USD,Month,1,2000
+671,8008428,SAP SuccessFactors Work Zone,1,User,5.08,USD,Month,2001,5000
+672,8008428,SAP SuccessFactors Work Zone,1,User,4.62,USD,Month,5001,10000
+673,8008428,SAP SuccessFactors Work Zone,1,User,4.16,USD,Month,10001,15000
+674,8008428,SAP SuccessFactors Work Zone,1,User,3.69,USD,Month,15001,25000
+675,8008428,SAP SuccessFactors Work Zone,1,User,2.69,USD,Month,25001,50000
+676,8008428,SAP SuccessFactors Work Zone,1,User,2.02,USD,Month,50001,75000
+677,8008428,SAP SuccessFactors Work Zone,1,User,1.88,USD,Month,75001,100000
+678,8008428,SAP SuccessFactors Work Zone,1,User,1.61,USD,Month,100001,200000
+679,8008428,SAP SuccessFactors Work Zone,1,User,1.44,USD,Month,200001,Infinite
+680,8008642,SAP SuccessFactors Employee Central Payroll,1,User,8.47,USD,Month,1,2000
+681,8008642,SAP SuccessFactors Employee Central Payroll,1,User,6.47,USD,Month,2001,5000
+682,8008642,SAP SuccessFactors Employee Central Payroll,1,User,3.76,USD,Month,5001,10000
+683,8008642,SAP SuccessFactors Employee Central Payroll,1,User,2.41,USD,Month,10001,15000
+684,8008642,SAP SuccessFactors Employee Central Payroll,1,User,1.73,USD,Month,15001,25000
+685,8008642,SAP SuccessFactors Employee Central Payroll,1,User,1.21,USD,Month,25001,50000
+686,8008642,SAP SuccessFactors Employee Central Payroll,1,User,0.99,USD,Month,50001,75000
+687,8008642,SAP SuccessFactors Employee Central Payroll,1,User,0.93,USD,Month,75001,100000
+688,8008642,SAP SuccessFactors Employee Central Payroll,1,User,0.71,USD,Month,100001,200000
+689,8008642,SAP SuccessFactors Employee Central Payroll,1,User,0.55,USD,Month,200001,Infinite
+690,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,2.59,USD,Month,1,2000
+691,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,1.73,USD,Month,2001,5000
+692,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,1.05,USD,Month,5001,10000
+693,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,0.69,USD,Month,10001,15000
+694,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,0.53,USD,Month,15001,25000
+695,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,0.34,USD,Month,25001,50000
+696,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,0.28,USD,Month,50001,75000
+697,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,0.26,USD,Month,75001,100000
+698,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,0.21,USD,Month,100001,200000
+699,8008645,"SAP SuccessFactors Employee Central Payroll, additional nonproductive tenant",1,User,0.16,USD,Month,200001,Infinite
+700,8008646,SAP Integration Suite for SAP SuccessFactors solutions,1,Entitlements Package,4324.00,USD,Month,1,Infinite
+701,8008975,SAP SuccessFactors Time Tracking,1,User,2.57,USD,Month,1,2000
+702,8008975,SAP SuccessFactors Time Tracking,1,User,2.36,USD,Month,2001,5000
+703,8008975,SAP SuccessFactors Time Tracking,1,User,2.17,USD,Month,5001,10000
+704,8008975,SAP SuccessFactors Time Tracking,1,User,2.09,USD,Month,10001,15000
+705,8008975,SAP SuccessFactors Time Tracking,1,User,1.59,USD,Month,15001,25000
+706,8008975,SAP SuccessFactors Time Tracking,1,User,1.45,USD,Month,25001,50000
+707,8008975,SAP SuccessFactors Time Tracking,1,User,1.21,USD,Month,50001,75000
+708,8008975,SAP SuccessFactors Time Tracking,1,User,1.16,USD,Month,75001,100000
+709,8008975,SAP SuccessFactors Time Tracking,1,User,1.10,USD,Month,100001,200000
+710,8008975,SAP SuccessFactors Time Tracking,1,User,0.99,USD,Month,200001,Infinite
+711,8009345,"SAP SuccessFactors HCM Suite, attachment storage add-on 500GB",500,Gigabyte,550.00,USD,Month,1,Infinite
+712,8011080,SAP SuccessFactors Agent Connection,1,User,8.76,USD,Month,1,2000
+713,8011080,SAP SuccessFactors Agent Connection,1,User,3.34,USD,Month,2001,5000
+714,8011080,SAP SuccessFactors Agent Connection,1,User,2.62,USD,Month,5001,10000
+715,8011080,SAP SuccessFactors Agent Connection,1,User,1.81,USD,Month,10001,15000
+716,8011080,SAP SuccessFactors Agent Connection,1,User,1.29,USD,Month,15001,25000
+717,8011080,SAP SuccessFactors Agent Connection,1,User,1.03,USD,Month,25001,50000
+718,8011080,SAP SuccessFactors Agent Connection,1,User,0.83,USD,Month,50001,75000
+719,8011080,SAP SuccessFactors Agent Connection,1,User,0.78,USD,Month,75001,100000
+720,8011080,SAP SuccessFactors Agent Connection,1,User,0.52,USD,Month,100001,Infinite
+721,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,4.00,USD,Month,1,2000
+722,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,2.50,USD,Month,2001,5000
+723,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,1.15,USD,Month,5001,10000
+724,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,1.00,USD,Month,10001,15000
+725,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,0.70,USD,Month,15001,25000
+726,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,0.65,USD,Month,25001,50000
+727,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,0.50,USD,Month,50001,75000
+728,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,0.38,USD,Month,75001,100000
+729,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,0.33,USD,Month,100001,200000
+730,8011503,SAP U.S. Payroll Tax Calculation by BSI,1,User,0.32,USD,Month,200001,Infinite
+731,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,1.92,USD,Month,1,2000
+732,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,1.18,USD,Month,2001,5000
+733,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.55,USD,Month,5001,10000
+734,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.46,USD,Month,10001,15000
+735,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.34,USD,Month,15001,25000
+736,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.30,USD,Month,25001,50000
+737,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.24,USD,Month,50001,75000
+738,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.18,USD,Month,75001,100000
+739,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.16,USD,Month,100001,200000
+740,8011504,"SAP U.S. Payroll Tax Calculation by BSI, private cloud edition",1,User,0.15,USD,Month,200001,Infinite
+741,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,1.86,USD,Month,1,2000
+742,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,1.36,USD,Month,2001,5000
+743,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,1.25,USD,Month,5001,10000
+744,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,1.13,USD,Month,10001,15000
+745,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,1.09,USD,Month,15001,25000
+746,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,1.04,USD,Month,25001,50000
+747,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,0.96,USD,Month,50001,75000
+748,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,0.92,USD,Month,75001,100000
+749,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,0.88,USD,Month,100001,200000
+750,8011514,SAP SuccessFactors Opportunity Marketplace,1,User,0.79,USD,Month,200001,Infinite
+751,8011733,SAP SuccessFactors Performance & Goals,1,User,3.72,USD,Month,1,2000
+752,8011733,SAP SuccessFactors Performance & Goals,1,User,3.43,USD,Month,2001,5000
+753,8011733,SAP SuccessFactors Performance & Goals,1,User,2.76,USD,Month,5001,10000
+754,8011733,SAP SuccessFactors Performance & Goals,1,User,2.17,USD,Month,10001,15000
+755,8011733,SAP SuccessFactors Performance & Goals,1,User,1.91,USD,Month,15001,25000
+756,8011733,SAP SuccessFactors Performance & Goals,1,User,1.48,USD,Month,25001,50000
+757,8011733,SAP SuccessFactors Performance & Goals,1,User,1.38,USD,Month,50001,75000
+758,8011733,SAP SuccessFactors Performance & Goals,1,User,1.33,USD,Month,75001,100000
+759,8011733,SAP SuccessFactors Performance & Goals,1,User,0.92,USD,Month,100001,200000
+760,8011733,SAP SuccessFactors Performance & Goals,1,User,0.83,USD,Month,200001,Infinite
+761,8011734,SAP SuccessFactors Compensation,1,User,1.95,USD,Month,1,2000
+762,8011734,SAP SuccessFactors Compensation,1,User,1.66,USD,Month,2001,5000
+763,8011734,SAP SuccessFactors Compensation,1,User,1.52,USD,Month,5001,10000
+764,8011734,SAP SuccessFactors Compensation,1,User,1.27,USD,Month,10001,15000
+765,8011734,SAP SuccessFactors Compensation,1,User,1.22,USD,Month,15001,25000
+766,8011734,SAP SuccessFactors Compensation,1,User,1.18,USD,Month,25001,50000
+767,8011734,SAP SuccessFactors Compensation,1,User,0.98,USD,Month,50001,75000
+768,8011734,SAP SuccessFactors Compensation,1,User,0.93,USD,Month,75001,100000
+769,8011734,SAP SuccessFactors Compensation,1,User,0.89,USD,Month,100001,200000
+770,8011734,SAP SuccessFactors Compensation,1,User,0.80,USD,Month,200001,Infinite
+771,8011735,SAP SuccessFactors Succession & Development,1,User,1.91,USD,Month,1,2000
+772,8011735,SAP SuccessFactors Succession & Development,1,User,1.68,USD,Month,2001,5000
+773,8011735,SAP SuccessFactors Succession & Development,1,User,1.23,USD,Month,5001,10000
+774,8011735,SAP SuccessFactors Succession & Development,1,User,1.18,USD,Month,10001,15000
+775,8011735,SAP SuccessFactors Succession & Development,1,User,1.13,USD,Month,15001,25000
+776,8011735,SAP SuccessFactors Succession & Development,1,User,1.07,USD,Month,25001,50000
+777,8011735,SAP SuccessFactors Succession & Development,1,User,0.97,USD,Month,50001,75000
+778,8011735,SAP SuccessFactors Succession & Development,1,User,0.92,USD,Month,75001,100000
+779,8011735,SAP SuccessFactors Succession & Development,1,User,0.88,USD,Month,100001,200000
+780,8011735,SAP SuccessFactors Succession & Development,1,User,0.79,USD,Month,200001,Infinite
+781,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,6.30,USD,Month,1,2000
+782,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,5.59,USD,Month,2001,5000
+783,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,4.38,USD,Month,5001,10000
+784,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,4.17,USD,Month,10001,15000
+785,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,3.88,USD,Month,15001,25000
+786,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,3.63,USD,Month,25001,50000
+787,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,3.20,USD,Month,50001,75000
+788,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,3.00,USD,Month,75001,100000
+789,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,2.82,USD,Month,100001,200000
+790,8011736,"SAP SuccessFactors Employee Central, core HR",1,User,2.54,USD,Month,200001,Infinite
+791,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,2.40,USD,Month,1,2000
+792,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,2.30,USD,Month,2001,5000
+793,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,2.19,USD,Month,5001,10000
+794,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,1.61,USD,Month,10001,15000
+795,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,1.52,USD,Month,15001,25000
+796,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,1.46,USD,Month,25001,50000
+797,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,0.63,USD,Month,50001,75000
+798,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,0.61,USD,Month,75001,100000
+799,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,0.58,USD,Month,100001,200000
+800,8011737,"SAP SuccessFactors Employee Central, core HR, functional use",1,User,0.52,USD,Month,200001,Infinite
+801,8011738,SAP SuccessFactors Workforce Analytics,1,User,2.79,USD,Month,1,2000
+802,8011738,SAP SuccessFactors Workforce Analytics,1,User,2.69,USD,Month,2001,5000
+803,8011738,SAP SuccessFactors Workforce Analytics,1,User,1.66,USD,Month,5001,10000
+804,8011738,SAP SuccessFactors Workforce Analytics,1,User,1.56,USD,Month,10001,15000
+805,8011738,SAP SuccessFactors Workforce Analytics,1,User,1.29,USD,Month,15001,25000
+806,8011738,SAP SuccessFactors Workforce Analytics,1,User,0.90,USD,Month,25001,50000
+807,8011738,SAP SuccessFactors Workforce Analytics,1,User,0.79,USD,Month,50001,75000
+808,8011738,SAP SuccessFactors Workforce Analytics,1,User,0.76,USD,Month,75001,100000
+809,8011738,SAP SuccessFactors Workforce Analytics,1,User,0.72,USD,Month,100001,200000
+810,8011738,SAP SuccessFactors Workforce Analytics,1,User,0.64,USD,Month,200001,Infinite
+811,8011739,SAP SuccessFactors Onboarding,1,User,1.18,USD,Month,1,2000
+812,8011739,SAP SuccessFactors Onboarding,1,User,0.98,USD,Month,2001,5000
+813,8011739,SAP SuccessFactors Onboarding,1,User,0.96,USD,Month,5001,10000
+814,8011739,SAP SuccessFactors Onboarding,1,User,0.92,USD,Month,10001,15000
+815,8011739,SAP SuccessFactors Onboarding,1,User,0.89,USD,Month,15001,25000
+816,8011739,SAP SuccessFactors Onboarding,1,User,0.85,USD,Month,25001,50000
+817,8011739,SAP SuccessFactors Onboarding,1,User,0.67,USD,Month,50001,75000
+818,8011739,SAP SuccessFactors Onboarding,1,User,0.64,USD,Month,75001,100000
+819,8011739,SAP SuccessFactors Onboarding,1,User,0.61,USD,Month,100001,200000
+820,8011739,SAP SuccessFactors Onboarding,1,User,0.55,USD,Month,200001,Infinite
+821,8011740,SAP SuccessFactors Recruiting,1,User,2.66,USD,Month,1,2000
+822,8011740,SAP SuccessFactors Recruiting,1,User,2.59,USD,Month,2001,5000
+823,8011740,SAP SuccessFactors Recruiting,1,User,2.43,USD,Month,5001,10000
+824,8011740,SAP SuccessFactors Recruiting,1,User,2.07,USD,Month,10001,15000
+825,8011740,SAP SuccessFactors Recruiting,1,User,1.60,USD,Month,15001,25000
+826,8011740,SAP SuccessFactors Recruiting,1,User,1.55,USD,Month,25001,50000
+827,8011740,SAP SuccessFactors Recruiting,1,User,1.48,USD,Month,50001,75000
+828,8011740,SAP SuccessFactors Recruiting,1,User,1.43,USD,Month,75001,100000
+829,8011740,SAP SuccessFactors Recruiting,1,User,1.37,USD,Month,100001,200000
+830,8011740,SAP SuccessFactors Recruiting,1,User,1.23,USD,Month,200001,Infinite
+831,8011741,SAP SuccessFactors Learning,1,User,1.85,USD,Month,1,2000
+832,8011741,SAP SuccessFactors Learning,1,User,1.77,USD,Month,2001,5000
+833,8011741,SAP SuccessFactors Learning,1,User,1.67,USD,Month,5001,10000
+834,8011741,SAP SuccessFactors Learning,1,User,1.40,USD,Month,10001,15000
+835,8011741,SAP SuccessFactors Learning,1,User,1.34,USD,Month,15001,25000
+836,8011741,SAP SuccessFactors Learning,1,User,1.27,USD,Month,25001,50000
+837,8011741,SAP SuccessFactors Learning,1,User,0.92,USD,Month,50001,75000
+838,8011741,SAP SuccessFactors Learning,1,User,0.88,USD,Month,75001,100000
+839,8011741,SAP SuccessFactors Learning,1,User,0.84,USD,Month,100001,200000
+840,8011741,SAP SuccessFactors Learning,1,User,0.76,USD,Month,200001,Infinite
+841,8011742,"SAP SuccessFactors Learning, functional use",1,User,1.23,USD,Month,1,2000
+842,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.77,USD,Month,2001,5000
+843,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.74,USD,Month,5001,10000
+844,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.71,USD,Month,10001,15000
+845,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.67,USD,Month,15001,25000
+846,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.64,USD,Month,25001,50000
+847,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.61,USD,Month,50001,75000
+848,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.58,USD,Month,75001,100000
+849,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.55,USD,Month,100001,200000
+850,8011742,"SAP SuccessFactors Learning, functional use",1,User,0.49,USD,Month,200001,Infinite
+851,8011743,SAP SuccessFactors Validated Learning,1,User,2.65,USD,Month,1,2000
+852,8011743,SAP SuccessFactors Validated Learning,1,User,2.59,USD,Month,2001,5000
+853,8011743,SAP SuccessFactors Validated Learning,1,User,1.97,USD,Month,5001,10000
+854,8011743,SAP SuccessFactors Validated Learning,1,User,1.76,USD,Month,10001,15000
+855,8011743,SAP SuccessFactors Validated Learning,1,User,1.43,USD,Month,15001,25000
+856,8011743,SAP SuccessFactors Validated Learning,1,User,1.40,USD,Month,25001,50000
+857,8011743,SAP SuccessFactors Validated Learning,1,User,1.17,USD,Month,50001,75000
+858,8011743,SAP SuccessFactors Validated Learning,1,User,1.15,USD,Month,75001,100000
+859,8011743,SAP SuccessFactors Validated Learning,1,User,1.12,USD,Month,100001,200000
+860,8011743,SAP SuccessFactors Validated Learning,1,User,1.01,USD,Month,200001,Infinite
+861,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,8.64,USD,Month,1,2000
+862,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,7.33,USD,Month,2001,5000
+863,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,6.00,USD,Month,5001,10000
+864,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,4.65,USD,Month,10001,15000
+865,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,4.00,USD,Month,15001,25000
+866,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,3.36,USD,Month,25001,50000
+867,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,2.64,USD,Month,50001,75000
+868,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,2.32,USD,Month,75001,100000
+869,8012128,"SAP U.S. Benefits Administration by Benefitfocus, healthcare spend insights option",1,User,2.16,USD,Month,100001,Infinite
+870,8014263,"SAP SuccessFactors Agent Lifecycle Management, additional nonproduction tenant",1,Tenant,8870.00,USD,Month,1,Infinite
+871,8014293,"SAP SuccessFactors Agent Connection, additional nonproduction tenant",1,Tenant,1552.00,USD,Month,1,Infinite
+872,8014306,"SAP SuccessFactors Incentive Management, additional nonproduction tenant",1,Tenant,11309.00,USD,Month,1,Infinite
+873,8014315,"SAP SuccessFactors Agent Performance Management, additional nonproduction tenant",1,Tenant,8870.00,USD,Month,1,Infinite
+874,8014323,"SAP SuccessFactors Territory and Quota, additional nonproduction tenant",1,Tenant,10533.00,USD,Month,1,Infinite
+875,8015494,SAP SuccessFactors Agent Performance Management,1,Record,34.00,USD,Month,1,2000
+876,8015494,SAP SuccessFactors Agent Performance Management,1,Record,16.00,USD,Month,2001,5000
+877,8015494,SAP SuccessFactors Agent Performance Management,1,Record,8.68,USD,Month,5001,10000
+878,8015494,SAP SuccessFactors Agent Performance Management,1,Record,6.89,USD,Month,10001,15000
+879,8015494,SAP SuccessFactors Agent Performance Management,1,Record,5.69,USD,Month,15001,25000
+880,8015494,SAP SuccessFactors Agent Performance Management,1,Record,3.89,USD,Month,25001,50000
+881,8015494,SAP SuccessFactors Agent Performance Management,1,Record,2.52,USD,Month,50001,75000
+882,8015494,SAP SuccessFactors Agent Performance Management,1,Record,1.92,USD,Month,75001,100000
+883,8015494,SAP SuccessFactors Agent Performance Management,1,Record,0.49,USD,Month,100001,Infinite
+884,8015506,SAP  SuccessFactors Territory and Quota,1,Record,35.00,USD,Month,1,2000
+885,8015506,SAP  SuccessFactors Territory and Quota,1,Record,23.00,USD,Month,2001,5000
+886,8015506,SAP  SuccessFactors Territory and Quota,1,Record,22.00,USD,Month,5001,10000
+887,8015506,SAP  SuccessFactors Territory and Quota,1,Record,10.00,USD,Month,10001,15000
+888,8015506,SAP  SuccessFactors Territory and Quota,1,Record,7.83,USD,Month,15001,25000
+889,8015506,SAP  SuccessFactors Territory and Quota,1,Record,5.99,USD,Month,25001,50000
+890,8015506,SAP  SuccessFactors Territory and Quota,1,Record,4.61,USD,Month,50001,75000
+891,8015506,SAP  SuccessFactors Territory and Quota,1,Record,4.02,USD,Month,75001,100000
+892,8015506,SAP  SuccessFactors Territory and Quota,1,Record,3.57,USD,Month,100001,Infinite
+893,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,21.00,USD,Month,1,2000
+894,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,11.00,USD,Month,2001,5000
+895,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,6.62,USD,Month,5001,10000
+896,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,5.18,USD,Month,10001,15000
+897,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,3.46,USD,Month,15001,25000
+898,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,1.87,USD,Month,25001,50000
+899,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,1.22,USD,Month,50001,75000
+900,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,0.93,USD,Month,75001,100000
+901,8015551,SAP SuccessFactors Agent Lifecycle Management,1,Record,0.23,USD,Month,100001,Infinite
+902,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,5.00,USD,Month,1,2000
+903,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,3.20,USD,Month,2001,5000
+904,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,2.92,USD,Month,5001,10000
+905,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,2.64,USD,Month,10001,15000
+906,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,2.48,USD,Month,15001,25000
+907,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,2.00,USD,Month,25001,50000
+908,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,1.68,USD,Month,50001,75000
+909,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,1.52,USD,Month,75001,100000
+910,8015971,"SAP U.S. Benefits Administration by Benefitfocus, reporting option for the Affordable Care Act (ACA)",1,Document,1.32,USD,Month,100001,Infinite
+911,8017111,"SAP SuccessFactors HCM Suite, advanced encryption add-on?",1,Tenant,6250.00,USD,Month,1,Infinite
+912,8017426,SAP SuccessFactors Onboarding,1,Transaction,91.00,USD,Year,1,300
+913,8017426,SAP SuccessFactors Onboarding,1,Transaction,67.00,USD,Year,301,1000
+914,8017426,SAP SuccessFactors Onboarding,1,Transaction,63.00,USD,Year,1001,2000
+915,8017426,SAP SuccessFactors Onboarding,1,Transaction,62.00,USD,Year,2001,3000
+916,8017426,SAP SuccessFactors Onboarding,1,Transaction,60.00,USD,Year,3001,5000
+917,8017426,SAP SuccessFactors Onboarding,1,Transaction,56.00,USD,Year,5001,10000
+918,8017426,SAP SuccessFactors Onboarding,1,Transaction,45.00,USD,Year,10001,15000
+919,8017426,SAP SuccessFactors Onboarding,1,Transaction,43.00,USD,Year,15001,20000
+920,8017426,SAP SuccessFactors Onboarding,1,Transaction,42.00,USD,Year,20001,40000
+921,8017426,SAP SuccessFactors Onboarding,1,Transaction,39.00,USD,Year,40001,Infinite
+922,8017452,SAP SuccessFactors Recruiting,1,Transaction,180.00,USD,Year,1,300
+923,8017452,SAP SuccessFactors Recruiting,1,Transaction,120.00,USD,Year,301,1000
+924,8017452,SAP SuccessFactors Recruiting,1,Transaction,108.00,USD,Year,1001,2000
+925,8017452,SAP SuccessFactors Recruiting,1,Transaction,105.00,USD,Year,2001,3000
+926,8017452,SAP SuccessFactors Recruiting,1,Transaction,101.00,USD,Year,3001,5000
+927,8017452,SAP SuccessFactors Recruiting,1,Transaction,95.00,USD,Year,5001,10000
+928,8017452,SAP SuccessFactors Recruiting,1,Transaction,94.00,USD,Year,10001,15000
+929,8017452,SAP SuccessFactors Recruiting,1,Transaction,87.00,USD,Year,15001,20000
+930,8017452,SAP SuccessFactors Recruiting,1,Transaction,84.00,USD,Year,20001,40000
+931,8017452,SAP SuccessFactors Recruiting,1,Transaction,82.00,USD,Year,40001,Infinite
+932,8018107,"SAP SuccessFactors Extended Enterprise Content Management by OpenText, additional nonproduction tenant",1,Tenant,8066.00,USD,Month,1,Infinite
+933,8018126,"GROW with SAP, core HR add-on",1,User,6.30,USD,Month,1,2000
+934,8018126,"GROW with SAP, core HR add-on",1,User,5.59,USD,Month,2001,5000
+935,8018126,"GROW with SAP, core HR add-on",1,User,4.38,USD,Month,5001,10000
+936,8018126,"GROW with SAP, core HR add-on",1,User,4.17,USD,Month,10001,15000
+937,8018126,"GROW with SAP, core HR add-on",1,User,3.88,USD,Month,15001,25000
+938,8018126,"GROW with SAP, core HR add-on",1,User,3.63,USD,Month,25001,50000
+939,8018126,"GROW with SAP, core HR add-on",1,User,3.20,USD,Month,50001,75000
+940,8018126,"GROW with SAP, core HR add-on",1,User,3.00,USD,Month,75001,100000
+941,8018126,"GROW with SAP, core HR add-on",1,User,2.82,USD,Month,100001,200000
+942,8018126,"GROW with SAP, core HR add-on",1,User,2.54,USD,Month,200001,Infinite
+943,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,5.00,USD,Month,1,2000
+944,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,4.75,USD,Month,2001,5000
+945,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,4.50,USD,Month,5001,10000
+946,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,4.33,USD,Month,10001,15000
+947,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,4.17,USD,Month,15001,25000
+948,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,4.00,USD,Month,25001,50000
+949,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,2.92,USD,Month,50001,75000
+950,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,2.75,USD,Month,75001,100000
+951,8018142,SAP Deskless Worker Experience by WorkForce Software?,1,User,2.67,USD,Month,100001,Infinite
+952,8018163,SAP SuccessFactors Managed Storage by OpenText,100,Gigabyte,216.00,USD,Month,1,Infinite
+953,8018165,SAP SuccessFactors Incentive Management,1,Record,63.00,USD,Month,1,500
+954,8018165,SAP SuccessFactors Incentive Management,1,Record,50.00,USD,Month,501,1000
+955,8018165,SAP SuccessFactors Incentive Management,1,Record,47.00,USD,Month,1001,2000
+956,8018165,SAP SuccessFactors Incentive Management,1,Record,31.00,USD,Month,2001,5000
+957,8018165,SAP SuccessFactors Incentive Management,1,Record,24.00,USD,Month,5001,10000
+958,8018165,SAP SuccessFactors Incentive Management,1,Record,18.00,USD,Month,10001,20000
+959,8018165,SAP SuccessFactors Incentive Management,1,Record,13.00,USD,Month,20001,35000
+960,8018165,SAP SuccessFactors Incentive Management,1,Record,9.98,USD,Month,35001,50000
+961,8018165,SAP SuccessFactors Incentive Management,1,Record,6.65,USD,Month,50001,75000
+962,8018165,SAP SuccessFactors Incentive Management,1,Record,4.43,USD,Month,75001,Infinite
+963,8018173,SAP SuccessFactors Extended Enterprise Content Management by OpenText,100,User,545.00,USD,Month,1,100
+964,8018173,SAP SuccessFactors Extended Enterprise Content Management by OpenText,100,User,421.00,USD,Month,101,150
+965,8018173,SAP SuccessFactors Extended Enterprise Content Management by OpenText,100,User,299.00,USD,Month,151,250
+966,8018173,SAP SuccessFactors Extended Enterprise Content Management by OpenText,100,User,244.00,USD,Month,251,500
+967,8018173,SAP SuccessFactors Extended Enterprise Content Management by OpenText,100,User,150.00,USD,Month,501,700
+968,8018173,SAP SuccessFactors Extended Enterprise Content Management by OpenText,100,User,116.00,USD,Month,701,1000
+969,8018173,SAP SuccessFactors Extended Enterprise Content Management by OpenText,100,User,89.00,USD,Month,1001,3000
+970,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,18.00,USD,Month,1,2000
+971,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,12.00,USD,Month,2001,5000
+972,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,6.58,USD,Month,5001,10000
+973,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,4.63,USD,Month,10001,15000
+974,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,3.40,USD,Month,15001,25000
+975,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,2.27,USD,Month,25001,50000
+976,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,1.81,USD,Month,50001,75000
+977,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,1.69,USD,Month,75001,100000
+978,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,1.51,USD,Month,100001,200000
+979,8018793,"SAP Content Stream by Skillsoft, compliance edition",1,User,1.45,USD,Month,200001,Infinite
+980,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,70.00,USD,Month,1,2000
+981,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,42.00,USD,Month,2001,5000
+982,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,25.00,USD,Month,5001,10000
+983,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,16.00,USD,Month,10001,15000
+984,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,11.00,USD,Month,15001,25000
+985,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,6.95,USD,Month,25001,50000
+986,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,4.55,USD,Month,50001,75000
+987,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,3.46,USD,Month,75001,100000
+988,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,3.21,USD,Month,100001,200000
+989,8018844,"SAP Content Stream by Skillsoft, premium edition?",1,User,1.95,USD,Month,200001,Infinite
+990,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,23.00,USD,Month,1,2000
+991,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,17.00,USD,Month,2001,5000
+992,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,11.00,USD,Month,5001,10000
+993,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,8.77,USD,Month,10001,15000
+994,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,7.11,USD,Month,15001,25000
+995,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,5.65,USD,Month,25001,50000
+996,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,4.91,USD,Month,50001,75000
+997,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,4.70,USD,Month,75001,100000
+998,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,3.74,USD,Month,100001,200000
+999,8018851,"SAP Content Stream by Skillsoft, base edition?",1,User,3.11,USD,Month,200001,Infinite
+1000,***,"Cloud - Finance & Governance, Risk and Compliance",0,,0.00,,,,
+1001,8004799,SAP Cloud for credit integration,1,Connection,3374.00,USD,Month,1,Infinite
+1002,8007077,"SAP Digital Payments, transaction package",20040,Transaction,115.00,USD,Month,1,5
+1003,8007077,"SAP Digital Payments, transaction package",20040,Transaction,93.00,USD,Month,6,25
+1004,8007077,"SAP Digital Payments, transaction package",20040,Transaction,73.00,USD,Month,26,50
+1005,8007077,"SAP Digital Payments, transaction package",20040,Transaction,63.00,USD,Month,51,250
+1006,8007077,"SAP Digital Payments, transaction package",20040,Transaction,49.00,USD,Month,251,Infinite
+1007,8007689,"SAP Convergent Mediation by DigitalRoute, public cloud edition",27717500,Revenue and Expense,4435.00,USD,Month,1,10
+1008,8007689,"SAP Convergent Mediation by DigitalRoute, public cloud edition",27717500,Revenue and Expense,3326.00,USD,Month,11,20
+1009,8007689,"SAP Convergent Mediation by DigitalRoute, public cloud edition",27717500,Revenue and Expense,2993.00,USD,Month,21,40
+1010,8007689,"SAP Convergent Mediation by DigitalRoute, public cloud edition",27717500,Revenue and Expense,2661.00,USD,Month,41,Infinite
+1011,8008118,"SAP Access Violation Management by Pathlock, cloud edition for system integration",1,Connection,8562.00,USD,Month,1,Infinite
+1012,8008173,"SAP Digital Payments, base package",20040,Transaction,2949.00,USD,Month,1,Infinite
+1013,8008254,"SAP Cloud Identity Access Governance, integration edition",1,Connection,12720.00,USD,Month,1,Infinite
+1014,8008260,"SAP Document and Reporting Compliance, cloud edition",10000,Document,774.00,USD,Month,1,5
+1015,8008260,"SAP Document and Reporting Compliance, cloud edition",10000,Document,588.00,USD,Month,6,10
+1016,8008260,"SAP Document and Reporting Compliance, cloud edition",10000,Document,445.00,USD,Month,11,50
+1017,8008260,"SAP Document and Reporting Compliance, cloud edition",10000,Document,309.00,USD,Month,51,100
+1018,8008260,"SAP Document and Reporting Compliance, cloud edition",10000,Document,196.00,USD,Month,101,250
+1019,8008260,"SAP Document and Reporting Compliance, cloud edition",10000,Document,134.00,USD,Month,251,Infinite
+1020,8008505,"SAP Document and Reporting Compliance, inbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,866.00,USD,Month,1,5
+1021,8008505,"SAP Document and Reporting Compliance, inbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,686.00,USD,Month,6,10
+1022,8008505,"SAP Document and Reporting Compliance, inbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,449.00,USD,Month,11,50
+1023,8008505,"SAP Document and Reporting Compliance, inbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,387.00,USD,Month,51,250
+1024,8008505,"SAP Document and Reporting Compliance, inbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,245.00,USD,Month,251,Infinite
+1025,8008888,"SAP Document and Reporting Compliance, outbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,226.00,USD,Month,1,5
+1026,8008888,"SAP Document and Reporting Compliance, outbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,174.00,USD,Month,6,10
+1027,8008888,"SAP Document and Reporting Compliance, outbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,104.00,USD,Month,11,50
+1028,8008888,"SAP Document and Reporting Compliance, outbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,45.00,USD,Month,51,250
+1029,8008888,"SAP Document and Reporting Compliance, outbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,18.00,USD,Month,251,1000
+1030,8008888,"SAP Document and Reporting Compliance, outbound invoicing option for Brazil (nota fiscal eletr????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????nica)",10000,Document,7.31,USD,Month,1001,Infinite
+1031,8009454,"SAP Document and Reporting Compliance, private cloud edition",10000,Document,333.00,USD,Month,1,50
+1032,8009454,"SAP Document and Reporting Compliance, private cloud edition",10000,Document,129.00,USD,Month,51,100
+1033,8009454,"SAP Document and Reporting Compliance, private cloud edition",10000,Document,67.00,USD,Month,101,Infinite
+1034,8010893,"SAP Entitlement Management, additional test tenant",1,Tenant,2621.00,USD,Month,1,Infinite
+1035,8010987,SAP Risk and Assurance Management,1,User,523.00,USD,Month,1,20
+1036,8010987,SAP Risk and Assurance Management,1,User,325.00,USD,Month,21,50
+1037,8010987,SAP Risk and Assurance Management,1,User,234.00,USD,Month,51,150
+1038,8010987,SAP Risk and Assurance Management,1,User,181.00,USD,Month,151,500
+1039,8010987,SAP Risk and Assurance Management,1,User,126.00,USD,Month,501,Infinite
+1040,8011319,"SAP Process Control, private cloud edition",1,User,222.00,USD,Month,1,20
+1041,8011319,"SAP Process Control, private cloud edition",1,User,196.00,USD,Month,21,50
+1042,8011319,"SAP Process Control, private cloud edition",1,User,125.00,USD,Month,51,100
+1043,8011319,"SAP Process Control, private cloud edition",1,User,77.00,USD,Month,101,200
+1044,8011319,"SAP Process Control, private cloud edition",1,User,51.00,USD,Month,201,Infinite
+1045,8011320,"SAP Risk Management, private cloud edition",1,User,222.00,USD,Month,1,20
+1046,8011320,"SAP Risk Management, private cloud edition",1,User,196.00,USD,Month,21,50
+1047,8011320,"SAP Risk Management, private cloud edition",1,User,125.00,USD,Month,51,100
+1048,8011320,"SAP Risk Management, private cloud edition",1,User,77.00,USD,Month,101,200
+1049,8011320,"SAP Risk Management, private cloud edition",1,User,51.00,USD,Month,201,Infinite
+1050,8011321,"SAP Audit Management, private cloud edition",1,User,225.00,USD,Month,1,20
+1051,8011321,"SAP Audit Management, private cloud edition",1,User,200.00,USD,Month,21,50
+1052,8011321,"SAP Audit Management, private cloud edition",1,User,126.00,USD,Month,51,100
+1053,8011321,"SAP Audit Management, private cloud edition",1,User,77.00,USD,Month,101,200
+1054,8011321,"SAP Audit Management, private cloud edition",1,User,52.00,USD,Month,201,Infinite
+1055,8011426,SAP Subscription Billing,13858750,Revenue and Expense,4998.00,USD,Month,1,20
+1056,8011426,SAP Subscription Billing,13858750,Revenue and Expense,2864.00,USD,Month,21,40
+1057,8011426,SAP Subscription Billing,13858750,Revenue and Expense,2416.00,USD,Month,41,80
+1058,8011426,SAP Subscription Billing,13858750,Revenue and Expense,1968.00,USD,Month,81,Infinite
+1059,8011621,"SAP Billing and Revenue Innovation Management Cloud, additional productive tier, private edition, (S)",1,Tenant,18845.00,USD,Month,1,Infinite
+1060,8011622,"SAP Billing and Revenue Innovation Management Cloud, additional productive tier, private edition, (M)",1,Tenant,20727.00,USD,Month,1,Infinite
+1061,8011623,"SAP Billing and Revenue Innovation Management Cloud, additional productive tier, private edition, (L)",1,Tenant,29942.00,USD,Month,1,Infinite
+1062,8011624,"SAP Billing and Revenue Innovation Management Cloud, additional productive tier, private edition, (XL)",1,Tenant,40812.00,USD,Month,1,Infinite
+1063,8011625,"SAP Billing and Revenue Innovation Management Cloud, additional non productive tier, private edition, (S)",1,Tenant,15023.00,USD,Month,1,Infinite
+1064,8011626,"SAP Billing and Revenue Innovation Management Cloud, additional non productive tier, private edition, (M)",1,Tenant,15042.00,USD,Month,1,Infinite
+1065,8011627,"SAP Billing and Revenue Innovation Management Cloud, additional non productive tier, private edition, (L)",1,Tenant,21772.00,USD,Month,1,Infinite
+1066,8011628,"SAP Billing and Revenue Innovation Management Cloud, additional non productive tier, private edition, (XL)",1,Tenant,27750.00,USD,Month,1,Infinite
+1067,8012134,SAP trading platform integration,500,Transaction,2073.00,USD,Month,1,2
+1068,8012134,SAP trading platform integration,500,Transaction,1818.00,USD,Month,3,6
+1069,8012134,SAP trading platform integration,500,Transaction,1534.00,USD,Month,7,Infinite
+1070,8012561,"SAP Account Substantiation and Automation by BlackLine, transaction matching option",100000,Transaction,5000.00,USD,Month,1,5
+1071,8012561,"SAP Account Substantiation and Automation by BlackLine, transaction matching option",100000,Transaction,4160.00,USD,Month,6,20
+1072,8012561,"SAP Account Substantiation and Automation by BlackLine, transaction matching option",100000,Transaction,2900.00,USD,Month,21,50
+1073,8012561,"SAP Account Substantiation and Automation by BlackLine, transaction matching option",100000,Transaction,2080.00,USD,Month,51,75
+1074,8012561,"SAP Account Substantiation and Automation by BlackLine, transaction matching option",100000,Transaction,1670.00,USD,Month,76,150
+1075,8012561,"SAP Account Substantiation and Automation by BlackLine, transaction matching option",100000,Transaction,1250.00,USD,Month,151,250
+1076,8012561,"SAP Account Substantiation and Automation by BlackLine, transaction matching option",100000,Transaction,835.00,USD,Month,251,Infinite
+1077,8012562,"SAP Account Substantiation and Automation by BlackLine, journal entry option",10000,Transaction,3250.00,USD,Month,1,5
+1078,8012562,"SAP Account Substantiation and Automation by BlackLine, journal entry option",10000,Transaction,2700.00,USD,Month,6,20
+1079,8012562,"SAP Account Substantiation and Automation by BlackLine, journal entry option",10000,Transaction,1900.00,USD,Month,21,50
+1080,8012562,"SAP Account Substantiation and Automation by BlackLine, journal entry option",10000,Transaction,1350.00,USD,Month,51,75
+1081,8012562,"SAP Account Substantiation and Automation by BlackLine, journal entry option",10000,Transaction,1100.00,USD,Month,76,150
+1082,8012562,"SAP Account Substantiation and Automation by BlackLine, journal entry option",10000,Transaction,810.00,USD,Month,151,250
+1083,8012562,"SAP Account Substantiation and Automation by BlackLine, journal entry option",10000,Transaction,540.00,USD,Month,251,Infinite
+1084,8012568,"SAP Account Substantiation and Automation by BlackLine, base edition",1,User,85.00,USD,Month,1,Infinite
+1085,8012570,"SAP Advanced Financial Closing, test tenant",1,Tenant,1194.00,USD,Month,1,Infinite
+1086,8013743,"SAP Tax Declaration Framework Brazil Cloud, private edition",1,Object,262.00,USD,Month,1,20
+1087,8013743,"SAP Tax Declaration Framework Brazil Cloud, private edition",1,Object,165.00,USD,Month,21,100
+1088,8013743,"SAP Tax Declaration Framework Brazil Cloud, private edition",1,Object,151.00,USD,Month,101,500
+1089,8013743,"SAP Tax Declaration Framework Brazil Cloud, private edition",1,Object,137.00,USD,Month,501,Infinite
+1090,8014071,"SAP Convergent Mediation by DigitalRoute, private cloud edition",55435000,Revenue and Expense,11819.00,USD,Month,1,10
+1091,8014071,"SAP Convergent Mediation by DigitalRoute, private cloud edition",55435000,Revenue and Expense,6275.00,USD,Month,11,30
+1092,8014071,"SAP Convergent Mediation by DigitalRoute, private cloud edition",55435000,Revenue and Expense,3237.00,USD,Month,31,60
+1093,8014071,"SAP Convergent Mediation by DigitalRoute, private cloud edition",55435000,Revenue and Expense,2406.00,USD,Month,61,120
+1094,8014071,"SAP Convergent Mediation by DigitalRoute, private cloud edition",55435000,Revenue and Expense,1663.00,USD,Month,121,Infinite
+1095,8014593,"SAP Access Control Cloud, extra stack, additional non-productive tier, private edition (XS)",1,Tenant,10591.00,USD,Month,1,Infinite
+1096,8014594,"SAP Access Control Cloud, extra stack, additional non-productive tier, private edition (M)",1,Tenant,14801.00,USD,Month,1,Infinite
+1097,8014602,"SAP Access Control Cloud, extra stack, additional non-productive tier, private edition (S)",1,Tenant,11960.00,USD,Month,1,Infinite
+1098,8014612,"SAP Access Control Cloud, extra stack, additional non-productive tier, private edition (XL)",1,Tenant,20958.00,USD,Month,1,Infinite
+1099,8015436,"SAP Access Violation Management by Pathlock, risk assessment cloud edition",100,Resource,571.00,USD,Month,1,50
+1100,8015436,"SAP Access Violation Management by Pathlock, risk assessment cloud edition",100,Resource,502.00,USD,Month,51,250
+1101,8015436,"SAP Access Violation Management by Pathlock, risk assessment cloud edition",100,Resource,434.00,USD,Month,251,Infinite
+1102,8015437,"SAP Enterprise Threat Detection, cloud edition",100,Resource,997.00,USD,Month,1,20
+1103,8015437,"SAP Enterprise Threat Detection, cloud edition",100,Resource,319.00,USD,Month,21,150
+1104,8015437,"SAP Enterprise Threat Detection, cloud edition",100,Resource,187.00,USD,Month,151,300
+1105,8015437,"SAP Enterprise Threat Detection, cloud edition",100,Resource,160.00,USD,Month,301,600
+1106,8015437,"SAP Enterprise Threat Detection, cloud edition",100,Resource,141.00,USD,Month,601,1500
+1107,8015452,"SAP Cloud Identity Access Governance, standard edition",1000,Resource,8681.00,USD,Month,1,5
+1108,8015452,"SAP Cloud Identity Access Governance, standard edition",1000,Resource,5871.00,USD,Month,6,15
+1109,8015452,"SAP Cloud Identity Access Governance, standard edition",1000,Resource,5765.00,USD,Month,16,75
+1110,8015452,"SAP Cloud Identity Access Governance, standard edition",1000,Resource,4989.00,USD,Month,76,125
+1111,8015452,"SAP Cloud Identity Access Governance, standard edition",1000,Resource,4324.00,USD,Month,126,Infinite
+1112,8015461,SAP Secure Login Service for SAP GUI,500,User,499.00,USD,Month,1,6
+1113,8015461,SAP Secure Login Service for SAP GUI,500,User,360.00,USD,Month,7,20
+1114,8015461,SAP Secure Login Service for SAP GUI,500,User,233.00,USD,Month,21,100
+1115,8015461,SAP Secure Login Service for SAP GUI,500,User,165.00,USD,Month,101,200
+1116,8015461,SAP Secure Login Service for SAP GUI,500,User,122.00,USD,Month,201,Infinite
+1117,8015465,"SAP Enterprise Threat Detection, private cloud edition",100,Resource,3217.00,USD,Month,1,35
+1118,8015465,"SAP Enterprise Threat Detection, private cloud edition",100,Resource,2053.00,USD,Month,36,75
+1119,8015465,"SAP Enterprise Threat Detection, private cloud edition",100,Resource,1073.00,USD,Month,76,200
+1120,8015465,"SAP Enterprise Threat Detection, private cloud edition",100,Resource,521.00,USD,Month,201,600
+1121,8015465,"SAP Enterprise Threat Detection, private cloud edition",100,Resource,368.00,USD,Month,601,Infinite
+1122,8015483,"SAP Identity Management, private cloud edition",100,Resource,5983.00,USD,Month,1,20
+1123,8015483,"SAP Identity Management, private cloud edition",100,Resource,2551.00,USD,Month,21,50
+1124,8015483,"SAP Identity Management, private cloud edition",100,Resource,1549.00,USD,Month,51,200
+1125,8015483,"SAP Identity Management, private cloud edition",100,Resource,504.00,USD,Month,201,Infinite
+1126,8015511,"SAP Access Control Cloud, extra stack, private cloud edition",100,Resource,2439.00,USD,Month,1,50
+1127,8015511,"SAP Access Control Cloud, extra stack, private cloud edition",100,Resource,1524.00,USD,Month,51,100
+1128,8015511,"SAP Access Control Cloud, extra stack, private cloud edition",100,Resource,1039.00,USD,Month,101,150
+1129,8015511,"SAP Access Control Cloud, extra stack, private cloud edition",100,Resource,956.00,USD,Month,151,500
+1130,8015511,"SAP Access Control Cloud, extra stack, private cloud edition",100,Resource,596.00,USD,Month,501,1000
+1131,8015511,"SAP Access Control Cloud, extra stack, private cloud edition",100,Resource,499.00,USD,Month,1001,Infinite
+1132,8016016,SAP Entitlement Management,50000,Record,3138.00,USD,Month,1,20
+1133,8016016,SAP Entitlement Management,50000,Record,2509.00,USD,Month,21,50
+1134,8016016,SAP Entitlement Management,50000,Record,1883.00,USD,Month,51,120
+1135,8016016,SAP Entitlement Management,50000,Record,1253.00,USD,Month,121,300
+1136,8016016,SAP Entitlement Management,50000,Record,657.00,USD,Month,301,900
+1137,8016016,SAP Entitlement Management,50000,Record,255.00,USD,Month,901,4000
+1138,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,867.00,USD,Month,1,5
+1139,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,765.00,USD,Month,6,10
+1140,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,714.00,USD,Month,11,15
+1141,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,663.00,USD,Month,16,20
+1142,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,638.00,USD,Month,21,30
+1143,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,618.00,USD,Month,31,50
+1144,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,597.00,USD,Month,51,100
+1145,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,574.00,USD,Month,101,200
+1146,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,551.00,USD,Month,201,500
+1147,8016592,SAP Account Substantiation and Automation by BlackLine,1,User,482.00,USD,Month,501,Infinite
+1148,8017274,"SAP Intercompany Governance by BlackLine, origination option",1,Object,580.00,USD,Month,1,100
+1149,8017274,"SAP Intercompany Governance by BlackLine, origination option",1,Object,470.00,USD,Month,101,250
+1150,8017274,"SAP Intercompany Governance by BlackLine, origination option",1,Object,350.00,USD,Month,251,500
+1151,8017274,"SAP Intercompany Governance by BlackLine, origination option",1,Object,310.00,USD,Month,501,Infinite
+1152,8017291,"SAP Intercompany Governance by BlackLine, account settlement option",1,Object,580.00,USD,Month,1,100
+1153,8017291,"SAP Intercompany Governance by BlackLine, account settlement option",1,Object,470.00,USD,Month,101,250
+1154,8017291,"SAP Intercompany Governance by BlackLine, account settlement option",1,Object,350.00,USD,Month,251,500
+1155,8017291,"SAP Intercompany Governance by BlackLine, account settlement option",1,Object,310.00,USD,Month,501,Infinite
+1156,8017891,SAP Intelligent Product Recommendation,100000,API Call,1167.00,USD,Month,1,10
+1157,8017891,SAP Intelligent Product Recommendation,100000,API Call,934.00,USD,Month,11,20
+1158,8017891,SAP Intelligent Product Recommendation,100000,API Call,701.00,USD,Month,21,35
+1159,8017891,SAP Intelligent Product Recommendation,100000,API Call,532.00,USD,Month,36,Infinite
+1160,8018145,"SAP Account Substantiation and Automation by BlackLine, financial review option",25,Object,6485.00,USD,Month,1,4
+1161,8018145,"SAP Account Substantiation and Automation by BlackLine, financial review option",25,Object,5370.00,USD,Month,5,9
+1162,8018145,"SAP Account Substantiation and Automation by BlackLine, financial review option",25,Object,5050.00,USD,Month,10,14
+1163,8018145,"SAP Account Substantiation and Automation by BlackLine, financial review option",25,Object,4925.00,USD,Month,15,19
+1164,8018145,"SAP Account Substantiation and Automation by BlackLine, financial review option",25,Object,4785.00,USD,Month,20,Infinite
+1165,8018551,"SAP Access Control, private cloud edition, option for Microsoft SQL",100,Resource,2439.00,USD,Month,1,50
+1166,8018551,"SAP Access Control, private cloud edition, option for Microsoft SQL",100,Resource,1524.00,USD,Month,51,100
+1167,8018551,"SAP Access Control, private cloud edition, option for Microsoft SQL",100,Resource,1039.00,USD,Month,101,150
+1168,8018551,"SAP Access Control, private cloud edition, option for Microsoft SQL",100,Resource,956.00,USD,Month,151,500
+1169,8018551,"SAP Access Control, private cloud edition, option for Microsoft SQL",100,Resource,596.00,USD,Month,501,1000
+1170,8018551,"SAP Access Control, private cloud edition, option for Microsoft SQL",100,Resource,499.00,USD,Month,1001,Infinite
+1171,***,Cloud - Leonardo Technology,0,,0.00,,,,
+1172,8005246,SAP Rural Sourcing Management,10000,Transaction,337.00,USD,Month,1,Infinite
+1173,***,Cloud - Procurement,0,,0.00,,,,
+1174,8002460,"SAP Ariba Procurement, supplemental site add-on",1,Tenant,7753.00,USD,Month,1,Infinite
+1175,8002461,"SAP Ariba Strategic Sourcing, supplemental site add-on",1,Tenant,2416.00,USD,Month,1,Infinite
+1176,8002471,"SAP Ariba Spend Analysis, monthly refresh add-on",1,% of Net Recurring Fee,40.00,%,Year,1,Infinite
+1177,8005967,"SAP Business Network Commerce Automation, buyer paid supplier fees option",1,Supplier,210.00,USD,Month,1,Infinite
+1178,8007062,"SAP Ariba Sourcing, BPO edition",1,Spend,0.40,%,Year,15000000,50000000
+1179,8007062,"SAP Ariba Sourcing, BPO edition",1,Spend,0.38,%,Year,50000001,100000000
+1180,8007062,"SAP Ariba Sourcing, BPO edition",1,Spend,0.36,%,Year,100000001,250000000
+1181,8007062,"SAP Ariba Sourcing, BPO edition",1,Spend,0.34,%,Year,250000001,500000000
+1182,8007062,"SAP Ariba Sourcing, BPO edition",1,Spend,0.33,%,Year,500000001,1000000000
+1183,8007062,"SAP Ariba Sourcing, BPO edition",1,Spend,0.32,%,Year,1000000001,Infinite
+1184,8007883,SAP Ariba Sourcing,1,User,730.00,USD,Month,1,25
+1185,8007883,SAP Ariba Sourcing,1,User,430.00,USD,Month,26,50
+1186,8007883,SAP Ariba Sourcing,1,User,270.00,USD,Month,51,100
+1187,8007883,SAP Ariba Sourcing,1,User,250.00,USD,Month,101,200
+1188,8007883,SAP Ariba Sourcing,1,User,230.00,USD,Month,201,Infinite
+1189,8007885,SAP Ariba Contracts,1,User,585.00,USD,Month,1,25
+1190,8007885,SAP Ariba Contracts,1,User,400.00,USD,Month,26,50
+1191,8007885,SAP Ariba Contracts,1,User,270.00,USD,Month,51,100
+1192,8007885,SAP Ariba Contracts,1,User,200.00,USD,Month,101,200
+1193,8007885,SAP Ariba Contracts,1,User,170.00,USD,Month,201,Infinite
+1194,8007886,SAP Ariba Strategic Sourcing Suite,1,User,2400.00,USD,Month,1,5
+1195,8007886,SAP Ariba Strategic Sourcing Suite,1,User,2288.00,USD,Month,6,10
+1196,8007886,SAP Ariba Strategic Sourcing Suite,1,User,2288.00,USD,Month,11,25
+1197,8007886,SAP Ariba Strategic Sourcing Suite,1,User,1575.00,USD,Month,26,50
+1198,8007886,SAP Ariba Strategic Sourcing Suite,1,User,1013.00,USD,Month,51,100
+1199,8007886,SAP Ariba Strategic Sourcing Suite,1,User,875.00,USD,Month,101,200
+1200,8007886,SAP Ariba Strategic Sourcing Suite,1,User,788.00,USD,Month,201,Infinite
+1201,8007887,SAP Ariba Contract Invoicing,1,Document,1.20,USD,Year,1,200000
+1202,8007887,SAP Ariba Contract Invoicing,1,Document,1.03,USD,Year,200001,300000
+1203,8007887,SAP Ariba Contract Invoicing,1,Document,0.70,USD,Year,300001,500000
+1204,8007887,SAP Ariba Contract Invoicing,1,Document,0.50,USD,Year,500001,Infinite
+1205,8007888,SAP Business Network Commerce Automation,1,Flat Fee,750000.00,USD,Year,1,Infinite
+1206,8007889,SAP Ariba Supplier Lifecycle and Performance,1,User,667.00,USD,Month,1,25
+1207,8007889,SAP Ariba Supplier Lifecycle and Performance,1,User,438.00,USD,Month,26,50
+1208,8007889,SAP Ariba Supplier Lifecycle and Performance,1,User,275.00,USD,Month,51,100
+1209,8007889,SAP Ariba Supplier Lifecycle and Performance,1,User,250.00,USD,Month,101,200
+1210,8007889,SAP Ariba Supplier Lifecycle and Performance,1,User,230.00,USD,Month,201,Infinite
+1211,8007890,SAP Ariba Supplier Risk,1,User,800.00,USD,Month,1,25
+1212,8007890,SAP Ariba Supplier Risk,1,User,567.00,USD,Month,26,50
+1213,8007890,SAP Ariba Supplier Risk,1,User,378.00,USD,Month,51,100
+1214,8007890,SAP Ariba Supplier Risk,1,User,288.00,USD,Month,101,200
+1215,8007890,SAP Ariba Supplier Risk,1,User,211.00,USD,Month,201,Infinite
+1216,8007891,SAP Ariba Buying,1,Spend,0.23,%,Year,105000000,200000000
+1217,8007891,SAP Ariba Buying,1,Spend,0.21,%,Year,200000001,500000000
+1218,8007891,SAP Ariba Buying,1,Spend,0.15,%,Year,500000001,750000000
+1219,8007891,SAP Ariba Buying,1,Spend,0.11,%,Year,750000001,1500000000
+1220,8007891,SAP Ariba Buying,1,Spend,0.08,%,Year,1500000001,5000000000
+1221,8007891,SAP Ariba Buying,1,Spend,0.06,%,Year,5000000001,Infinite
+1222,8007892,SAP Ariba Buying and Invoicing,1,Spend,0.25,%,Year,105000000,200000000
+1223,8007892,SAP Ariba Buying and Invoicing,1,Spend,0.23,%,Year,200000001,500000000
+1224,8007892,SAP Ariba Buying and Invoicing,1,Spend,0.17,%,Year,500000001,750000000
+1225,8007892,SAP Ariba Buying and Invoicing,1,Spend,0.13,%,Year,750000001,1500000000
+1226,8007892,SAP Ariba Buying and Invoicing,1,Spend,0.10,%,Year,1500000001,5000000000
+1227,8007892,SAP Ariba Buying and Invoicing,1,Spend,0.07,%,Year,5000000001,Infinite
+1228,8007894,SAP Ariba Catalog,1,Spend,0.22,%,Year,65000000,100000000
+1229,8007894,SAP Ariba Catalog,1,Spend,0.20,%,Year,100000001,200000000
+1230,8007894,SAP Ariba Catalog,1,Spend,0.19,%,Year,200000001,500000000
+1231,8007894,SAP Ariba Catalog,1,Spend,0.13,%,Year,500000001,750000000
+1232,8007894,SAP Ariba Catalog,1,Spend,0.09,%,Year,750000001,1000000000
+1233,8007894,SAP Ariba Catalog,1,Spend,0.06,%,Year,1000000001,Infinite
+1234,8007896,SAP Business Network Supply Chain Collaboration,1,Spend,0.18,%,Year,250000000,500000000
+1235,8007896,SAP Business Network Supply Chain Collaboration,1,Spend,0.13,%,Year,500000001,1000000000
+1236,8007896,SAP Business Network Supply Chain Collaboration,1,Spend,0.09,%,Year,1000000001,4000000000
+1237,8007896,SAP Business Network Supply Chain Collaboration,1,Spend,0.06,%,Year,4000000001,8000000000
+1238,8007896,SAP Business Network Supply Chain Collaboration,1,Spend,0.06,%,Year,8000000001,15000000000
+1239,8007896,SAP Business Network Supply Chain Collaboration,1,Spend,0.05,%,Year,15000000001,Infinite
+1240,8007898,"SAP Business Network Supply Chain Collaboration, quality add-on",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1241,8007899,"SAP Business Network Supply Chain Collaboration, inventory add-on",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1242,8007900,SAP Ariba Invoice Management,1,Document,1.50,USD,Year,1,200000
+1243,8007900,SAP Ariba Invoice Management,1,Document,1.28,USD,Year,200001,300000
+1244,8007900,SAP Ariba Invoice Management,1,Document,1.00,USD,Year,300001,500000
+1245,8007900,SAP Ariba Invoice Management,1,Document,0.80,USD,Year,500001,Infinite
+1246,8007902,SAP Ariba Spend Analysis,1,Spend,0.04,%,Year,500000000,1000000000
+1247,8007902,SAP Ariba Spend Analysis,1,Spend,0.03,%,Year,1000000001,2500000000
+1248,8007902,SAP Ariba Spend Analysis,1,Spend,0.02,%,Year,2500000001,5000000000
+1249,8007902,SAP Ariba Spend Analysis,1,Spend,0.01,%,Year,5000000001,10000000000
+1250,8007902,SAP Ariba Spend Analysis,1,Spend,0.01,%,Year,10000000001,50000000000
+1251,8007902,SAP Ariba Spend Analysis,1,Spend,0.01,%,Year,50000000001,Infinite
+1252,8007903,"SAP Ariba Procurement, additional site add-on",1,Tenant,6667.00,USD,Month,1,Infinite
+1253,8008080,"SAP Business Network Commerce Automation, BPO edition",1,Flat Fee,750000.00,USD,Year,1,Infinite
+1254,8008081,"SAP Ariba Buying, BPO edition",1,Spend,0.21,%,Year,105000000,200000000
+1255,8008081,"SAP Ariba Buying, BPO edition",1,Spend,0.16,%,Year,200000001,500000000
+1256,8008081,"SAP Ariba Buying, BPO edition",1,Spend,0.10,%,Year,500000001,750000000
+1257,8008081,"SAP Ariba Buying, BPO edition",1,Spend,0.08,%,Year,750000001,1500000000
+1258,8008081,"SAP Ariba Buying, BPO edition",1,Spend,0.07,%,Year,1500000001,5000000000
+1259,8008081,"SAP Ariba Buying, BPO edition",1,Spend,0.06,%,Year,5000000001,Infinite
+1260,8008082,"SAP Ariba Buying and Invoicing, BPO edition",1,Spend,0.25,%,Year,105000000,200000000
+1261,8008082,"SAP Ariba Buying and Invoicing, BPO edition",1,Spend,0.20,%,Year,200000001,500000000
+1262,8008082,"SAP Ariba Buying and Invoicing, BPO edition",1,Spend,0.12,%,Year,500000001,750000000
+1263,8008082,"SAP Ariba Buying and Invoicing, BPO edition",1,Spend,0.09,%,Year,750000001,1500000000
+1264,8008082,"SAP Ariba Buying and Invoicing, BPO edition",1,Spend,0.08,%,Year,1500000001,5000000000
+1265,8008082,"SAP Ariba Buying and Invoicing, BPO edition",1,Spend,0.07,%,Year,5000000001,Infinite
+1266,8008113,"SAP Business Network Commerce Automation, foundation option",200000,Document,75000.00,USD,Year,1,Infinite
+1267,8008177,SAP Ariba Snap Buying,1,Spend,0.42,%,Year,50000000,75000000
+1268,8008177,SAP Ariba Snap Buying,1,Spend,0.30,%,Year,75000001,100000000
+1269,8008177,SAP Ariba Snap Buying,1,Spend,0.28,%,Year,100000001,125000000
+1270,8008177,SAP Ariba Snap Buying,1,Spend,0.25,%,Year,125000001,150000000
+1271,8008177,SAP Ariba Snap Buying,1,Spend,0.20,%,Year,150000001,200000000
+1272,8008177,SAP Ariba Snap Buying,1,Spend,0.18,%,Year,200000001,500000000
+1273,8008178,SAP Ariba Snap Buying and Invoicing,1,Spend,0.57,%,Year,50000000,75000000
+1274,8008178,SAP Ariba Snap Buying and Invoicing,1,Spend,0.35,%,Year,75000001,100000000
+1275,8008178,SAP Ariba Snap Buying and Invoicing,1,Spend,0.33,%,Year,100000001,125000000
+1276,8008178,SAP Ariba Snap Buying and Invoicing,1,Spend,0.30,%,Year,125000001,150000000
+1277,8008178,SAP Ariba Snap Buying and Invoicing,1,Spend,0.25,%,Year,150000001,200000000
+1278,8008178,SAP Ariba Snap Buying and Invoicing,1,Spend,0.23,%,Year,200000001,500000000
+1279,8011078,SAP Ariba Source-to-Contract Suite,1,User,2000.00,USD,Month,1,5
+1280,8011078,SAP Ariba Source-to-Contract Suite,1,User,1647.00,USD,Month,6,10
+1281,8011078,SAP Ariba Source-to-Contract Suite,1,User,1647.00,USD,Month,11,25
+1282,8011078,SAP Ariba Source-to-Contract Suite,1,User,1146.00,USD,Month,26,50
+1283,8011078,SAP Ariba Source-to-Contract Suite,1,User,734.00,USD,Month,51,100
+1284,8011078,SAP Ariba Source-to-Contract Suite,1,User,630.00,USD,Month,101,200
+1285,8011078,SAP Ariba Source-to-Contract Suite,1,User,567.00,USD,Month,201,Infinite
+1286,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.64,%,Year,15000000,20000000
+1287,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.51,%,Year,20000001,50000000
+1288,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.31,%,Year,50000001,75000000
+1289,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.23,%,Year,75000001,100000000
+1290,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.17,%,Year,100000001,200000000
+1291,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.13,%,Year,200000001,500000000
+1292,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.09,%,Year,500000001,750000000
+1293,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.06,%,Year,750000001,1500000000
+1294,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.06,%,Year,1500000001,5000000000
+1295,8011337,SAP Ariba Buying for SAP S/4HANA,1,Spend,0.05,%,Year,5000000001,Infinite
+1296,8012540,SAP Business Network Planning Collaboration,1,Flat Fee,329800.00,USD,Year,1,Infinite
+1297,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,1226.00,USD,Month,1,25
+1298,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,659.00,USD,Month,26,55
+1299,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,425.00,USD,Month,56,150
+1300,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,278.00,USD,Month,151,275
+1301,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,192.00,USD,Month,276,500
+1302,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,123.00,USD,Month,501,1000
+1303,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,79.00,USD,Month,1001,1500
+1304,8012657,"SAP Ariba Direct Materials Sourcing for Automotive and Industrial Manufacturing in SAP S/4HANA Cloud, private edition",1,User,55.00,USD,Month,1501,Infinite
+1305,8014111,SAP Ariba Connector for iCertis,1,Flat Fee,3511.00,USD,Month,1,Infinite
+1306,8014432,"SAP Ariba Supplier Risk, base edition",1,User,490.00,USD,Month,1,25
+1307,8014432,"SAP Ariba Supplier Risk, base edition",1,User,321.00,USD,Month,26,50
+1308,8014432,"SAP Ariba Supplier Risk, base edition",1,User,231.00,USD,Month,51,100
+1309,8014432,"SAP Ariba Supplier Risk, base edition",1,User,203.00,USD,Month,101,200
+1310,8014432,"SAP Ariba Supplier Risk, base edition",1,User,168.00,USD,Month,201,Infinite
+1311,8014551,SAP Business Network Supplier Portal,200000,Document,105264.00,USD,Year,1,Infinite
+1312,8014573,SAP Ariba Sourcing and Procurement bundle,1,Spend,0.60,%,Year,1000000000,5000000000
+1313,8014573,SAP Ariba Sourcing and Procurement bundle,1,Spend,0.50,%,Year,5000000001,10000000000
+1314,8014573,SAP Ariba Sourcing and Procurement bundle,1,Spend,0.30,%,Year,10000000001,Infinite
+1315,8015105,SAP Ariba Category Management,1,User,809.00,USD,Month,1,25
+1316,8015105,SAP Ariba Category Management,1,User,635.00,USD,Month,26,50
+1317,8015105,SAP Ariba Category Management,1,User,462.00,USD,Month,51,100
+1318,8015105,SAP Ariba Category Management,1,User,405.00,USD,Month,101,200
+1319,8015105,SAP Ariba Category Management,1,User,347.00,USD,Month,201,Infinite
+1320,8015455,SAP Fieldglass Worker Prof.Mgmt.,1,Resource,3.80,USD,Month,1,5000
+1321,8015455,SAP Fieldglass Worker Prof.Mgmt.,1,Resource,3.30,USD,Month,5001,10000
+1322,8015455,SAP Fieldglass Worker Prof.Mgmt.,1,Resource,3.05,USD,Month,10001,15000
+1323,8015455,SAP Fieldglass Worker Prof.Mgmt.,1,Resource,2.80,USD,Month,15001,20000
+1324,8015455,SAP Fieldglass Worker Prof.Mgmt.,1,Resource,2.53,USD,Month,20001,25000
+1325,8015455,SAP Fieldglass Worker Prof.Mgmt.,1,Resource,2.28,USD,Month,25001,Infinite
+1326,8015520,Taulia Cash Flow Acceleration,1250000000,Spend,558840.00,USD,Year,1,1
+1327,8015520,Taulia Cash Flow Acceleration,1250000000,Spend,482628.00,USD,Year,2,Infinite
+1328,8015622,"SAP Ariba Sourcing, base edition",10,User,3965.00,USD,Month,1,Infinite
+1329,8016612,SAP Business Network Supplier Portal Upgrade Option,1,Flat Fee,210527.00,USD,Year,1,Infinite
+1330,8017057,"SAP Business Network Supply Chain Collaboration, secondary account option",1,Tenant,2083.00,USD,Month,1,Infinite
+1331,8017061,"SAP Business Network Commerce Automation, secondary account option",1,Tenant,25000.00,USD,Year,1,Infinite
+1332,8017590,SAP Fieldglass Cont. Wrkf. Mgmt.,1,Spend,0.90,%,Year,15000000,100000000
+1333,8017590,SAP Fieldglass Cont. Wrkf. Mgmt.,1,Spend,0.82,%,Year,100000001,250000000
+1334,8017590,SAP Fieldglass Cont. Wrkf. Mgmt.,1,Spend,0.80,%,Year,250000001,500000000
+1335,8017590,SAP Fieldglass Cont. Wrkf. Mgmt.,1,Spend,0.78,%,Year,500000001,750000000
+1336,8017590,SAP Fieldglass Cont. Wrkf. Mgmt.,1,Spend,0.75,%,Year,750000001,1000000000
+1337,8017590,SAP Fieldglass Cont. Wrkf. Mgmt.,1,Spend,0.72,%,Year,1000000001,Infinite
+1338,8017668,"SAP Fieldglass Contingent Workforce Management, edition for SAP ERP",1,Spend,0.98,%,Year,15000000,100000000
+1339,8017668,"SAP Fieldglass Contingent Workforce Management, edition for SAP ERP",1,Spend,0.82,%,Year,100000001,250000000
+1340,8017668,"SAP Fieldglass Contingent Workforce Management, edition for SAP ERP",1,Spend,0.80,%,Year,250000001,500000000
+1341,8017668,"SAP Fieldglass Contingent Workforce Management, edition for SAP ERP",1,Spend,0.78,%,Year,500000001,750000000
+1342,8017668,"SAP Fieldglass Contingent Workforce Management, edition for SAP ERP",1,Spend,0.75,%,Year,750000001,1000000000
+1343,8017668,"SAP Fieldglass Contingent Workforce Management, edition for SAP ERP",1,Spend,0.72,%,Year,1000000001,Infinite
+1344,8017712,"SAP Fieldglass Services Procurement, partner edition",1,Spend,0.45,%,Year,15000000,100000000
+1345,8017712,"SAP Fieldglass Services Procurement, partner edition",1,Spend,0.39,%,Year,100000001,250000000
+1346,8017712,"SAP Fieldglass Services Procurement, partner edition",1,Spend,0.38,%,Year,250000001,500000000
+1347,8017712,"SAP Fieldglass Services Procurement, partner edition",1,Spend,0.38,%,Year,500000001,750000000
+1348,8017712,"SAP Fieldglass Services Procurement, partner edition",1,Spend,0.37,%,Year,750000001,1000000000
+1349,8017712,"SAP Fieldglass Services Procurement, partner edition",1,Spend,0.36,%,Year,1000000001,Infinite
+1350,8017723,"SAP Fieldglass Services Procurement, edition for SAP ERP",1,Spend,0.70,%,Year,15000000,100000000
+1351,8017723,"SAP Fieldglass Services Procurement, edition for SAP ERP",1,Spend,0.49,%,Year,100000001,250000000
+1352,8017723,"SAP Fieldglass Services Procurement, edition for SAP ERP",1,Spend,0.48,%,Year,250000001,500000000
+1353,8017723,"SAP Fieldglass Services Procurement, edition for SAP ERP",1,Spend,0.47,%,Year,500000001,750000000
+1354,8017723,"SAP Fieldglass Services Procurement, edition for SAP ERP",1,Spend,0.46,%,Year,750000001,1000000000
+1355,8017723,"SAP Fieldglass Services Procurement, edition for SAP ERP",1,Spend,0.45,%,Year,1000000001,Infinite
+1356,8017731,SAP Fieldglass Services Procurement,1,Spend,0.70,%,Year,15000000,100000000
+1357,8017731,SAP Fieldglass Services Procurement,1,Spend,0.49,%,Year,100000001,250000000
+1358,8017731,SAP Fieldglass Services Procurement,1,Spend,0.48,%,Year,250000001,500000000
+1359,8017731,SAP Fieldglass Services Procurement,1,Spend,0.47,%,Year,500000001,750000000
+1360,8017731,SAP Fieldglass Services Procurement,1,Spend,0.46,%,Year,750000001,1000000000
+1361,8017731,SAP Fieldglass Services Procurement,1,Spend,0.45,%,Year,1000000001,Infinite
+1362,8017751,"SAP Fieldglass Contingent Workforce Management, partner edition",1,Spend,0.68,%,Year,15000000,100000000
+1363,8017751,"SAP Fieldglass Contingent Workforce Management, partner edition",1,Spend,0.66,%,Year,100000001,250000000
+1364,8017751,"SAP Fieldglass Contingent Workforce Management, partner edition",1,Spend,0.64,%,Year,250000001,500000000
+1365,8017751,"SAP Fieldglass Contingent Workforce Management, partner edition",1,Spend,0.62,%,Year,500000001,750000000
+1366,8017751,"SAP Fieldglass Contingent Workforce Management, partner edition",1,Spend,0.60,%,Year,750000001,1000000000
+1367,8017751,"SAP Fieldglass Contingent Workforce Management, partner edition",1,Spend,0.58,%,Year,1000000001,Infinite
+1368,8018169,SAP Spend Control Tower,10000000,Spend,1358.00,USD,Year,1,99
+1369,8018169,SAP Spend Control Tower,10000000,Spend,956.00,USD,Year,100,199
+1370,8018169,SAP Spend Control Tower,10000000,Spend,652.00,USD,Year,200,299
+1371,8018169,SAP Spend Control Tower,10000000,Spend,473.00,USD,Year,300,499
+1372,8018169,SAP Spend Control Tower,10000000,Spend,390.00,USD,Year,500,699
+1373,8018169,SAP Spend Control Tower,10000000,Spend,374.00,USD,Year,700,999
+1374,8018169,SAP Spend Control Tower,10000000,Spend,338.00,USD,Year,1000,Infinite
+1375,8018231,"SAP Business Network Supply Chain Collaboration, foundation option",125000000,Spend,187500.00,USD,Year,1,1
+1376,8018231,"SAP Business Network Supply Chain Collaboration, foundation option",125000000,Spend,114750.00,USD,Year,2,Infinite
+1377,8018548,analytics add-on for pay-as-you-go SAP Fieldglass Services Procurement,1,Flat Fee,3760.00,USD,Month,1,Infinite
+1378,8018575,SAP Ariba Central Invoice Management,1000,Document,1372.00,USD,Year,1,100
+1379,8018575,SAP Ariba Central Invoice Management,1000,Document,1110.00,USD,Year,101,500
+1380,8018575,SAP Ariba Central Invoice Management,1000,Document,686.00,USD,Year,501,2000
+1381,8018575,SAP Ariba Central Invoice Management,1000,Document,503.00,USD,Year,2001,Infinite
+1382,8018607,analytics add-on for pay-as-you-go SAP Fieldglass Contingent Workforce Management,1,Flat Fee,3760.00,USD,Month,1,Infinite
+1383,8018611,analytics add-on for SAP Fieldglass solutions,1,% of Net Recurring Fee,15.00,%,Year,1,Infinite
+1384,8018721,"sandbox environment for SAP Fieldglass solutions, base edition",1,Tenant,2083.00,USD,Month,1,Infinite
+1385,**,Cloud - Industry Solutions,0,,0.00,,,,
+1386,***,Cloud - Automotive,0,,0.00,,,,
+1387,8014153,SAP Self-Billing Cockpit,12000,Document,114.00,USD,Month,1,50
+1388,8014153,SAP Self-Billing Cockpit,12000,Document,75.00,USD,Month,51,100
+1389,8014153,SAP Self-Billing Cockpit,12000,Document,67.00,USD,Month,101,150
+1390,8014153,SAP Self-Billing Cockpit,12000,Document,55.00,USD,Month,151,200
+1391,8014153,SAP Self-Billing Cockpit,12000,Document,49.00,USD,Month,201,Infinite
+1392,8015801,SAP Returnable Packaging Management,10000,Record,266.00,USD,Month,1,10
+1393,8015801,SAP Returnable Packaging Management,10000,Record,183.00,USD,Month,11,100
+1394,8015801,SAP Returnable Packaging Management,10000,Record,80.00,USD,Month,101,500
+1395,8015801,SAP Returnable Packaging Management,10000,Record,39.00,USD,Month,501,1500
+1396,8015801,SAP Returnable Packaging Management,10000,Record,17.00,USD,Month,1501,Infinite
+1397,8018711,RISE with SAP add-on package for automotive,1,Entitlements Package,5386.00,USD,Month,1,Infinite
+1398,8018751,SAP Complaint Handling,1000,Record,1498.00,USD,Month,1,100
+1399,8018751,SAP Complaint Handling,1000,Record,742.00,USD,Month,101,1000
+1400,8018751,SAP Complaint Handling,1000,Record,443.00,USD,Month,1001,5000
+1401,8018751,SAP Complaint Handling,1000,Record,221.00,USD,Month,5001,50000
+1402,8018751,SAP Complaint Handling,1000,Record,85.00,USD,Month,50001,Infinite
+1403,***,Cloud - Retail,0,,0.00,,,,
+1404,8011328,"SAP Customer Activity Repository Cloud, additional non-productive tier, private edition (XXS)",1,Tenant,13740.00,USD,Month,1,Infinite
+1405,8011329,"SAP Customer Activity Repository Cloud, additional non-productive tier, private edition (XS)",1,Tenant,17713.00,USD,Month,1,Infinite
+1406,8011330,"SAP Customer Activity Repository Cloud, additional non-productive tier, private edition (S)",1,Tenant,20054.00,USD,Month,1,Infinite
+1407,8011331,"SAP Customer Activity Repository Cloud, additional non-productive tier, private edition (M)",1,Tenant,27532.00,USD,Month,1,Infinite
+1408,8011332,"SAP Customer Activity Repository Cloud, additional non-productive tier, private edition (L)",1,Tenant,41042.00,USD,Month,1,Infinite
+1409,8011342,"SAP Customer Activity Repository Cloud, private edition",10000,Transaction,32.00,USD,Month,1,5000
+1410,8011342,"SAP Customer Activity Repository Cloud, private edition",10000,Transaction,18.00,USD,Month,5001,10000
+1411,8011342,"SAP Customer Activity Repository Cloud, private edition",10000,Transaction,12.00,USD,Month,10001,20000
+1412,8011342,"SAP Customer Activity Repository Cloud, private edition",10000,Transaction,10.00,USD,Month,20001,40000
+1413,8011342,"SAP Customer Activity Repository Cloud, private edition",10000,Transaction,8.59,USD,Month,40001,60000
+1414,8011342,"SAP Customer Activity Repository Cloud, private edition",10000,Transaction,7.21,USD,Month,60001,Infinite
+1415,8011431,"SAP Promotion Management for SAP Customer Activity Repository Cloud, private edition",1,Active User,1182.00,USD,Month,1,25
+1416,8011431,"SAP Promotion Management for SAP Customer Activity Repository Cloud, private edition",1,Active User,932.00,USD,Month,26,50
+1417,8011431,"SAP Promotion Management for SAP Customer Activity Repository Cloud, private edition",1,Active User,777.00,USD,Month,51,100
+1418,8011431,"SAP Promotion Management for SAP Customer Activity Repository Cloud, private edition",1,Active User,631.00,USD,Month,101,Infinite
+1419,8011432,"SAP Assortment Planning for SAP Customer Activity Repository Cloud, private edition",1,Active User,1089.00,USD,Month,1,25
+1420,8011432,"SAP Assortment Planning for SAP Customer Activity Repository Cloud, private edition",1,Active User,803.00,USD,Month,26,50
+1421,8011432,"SAP Assortment Planning for SAP Customer Activity Repository Cloud, private edition",1,Active User,631.00,USD,Month,51,100
+1422,8011432,"SAP Assortment Planning for SAP Customer Activity Repository Cloud, private edition",1,Active User,481.00,USD,Month,101,Infinite
+1423,8011433,"SAP Merchandise Planning for SAP Customer Activity Repository Cloud, private edition",1,User,777.00,USD,Month,1,25
+1424,8011433,"SAP Merchandise Planning for SAP Customer Activity Repository Cloud, private edition",1,User,467.00,USD,Month,26,50
+1425,8011433,"SAP Merchandise Planning for SAP Customer Activity Repository Cloud, private edition",1,User,401.00,USD,Month,51,100
+1426,8011433,"SAP Merchandise Planning for SAP Customer Activity Repository Cloud, private edition",1,User,316.00,USD,Month,101,Infinite
+1427,8011496,SAP Order Management foundation,10000,Transaction,230.00,USD,Month,1,10
+1428,8011496,SAP Order Management foundation,10000,Transaction,164.00,USD,Month,11,20
+1429,8011496,SAP Order Management foundation,10000,Transaction,121.00,USD,Month,21,50
+1430,8011496,SAP Order Management foundation,10000,Transaction,86.00,USD,Month,51,100
+1431,8011496,SAP Order Management foundation,10000,Transaction,69.00,USD,Month,101,200
+1432,8011496,SAP Order Management foundation,10000,Transaction,58.00,USD,Month,201,Infinite
+1433,8012195,"SAP Customer Activity Repository Cloud, additional productive tier, private edition (XXS)",1,Tenant,27300.00,USD,Month,1,Infinite
+1434,8012196,"SAP Customer Activity Repository Cloud, additional productive tier, private edition (XS)",1,Tenant,39030.00,USD,Month,1,Infinite
+1435,8012197,"SAP Customer Activity Repository Cloud, additional productive tier, private edition (S)",1,Tenant,45024.00,USD,Month,1,Infinite
+1436,8012655,SAP Order Management for sourcing and availability,12000,Transaction,632.00,USD,Month,1,10
+1437,8012655,SAP Order Management for sourcing and availability,12000,Transaction,333.00,USD,Month,11,20
+1438,8012655,SAP Order Management for sourcing and availability,12000,Transaction,227.00,USD,Month,21,50
+1439,8012655,SAP Order Management for sourcing and availability,12000,Transaction,155.00,USD,Month,51,100
+1440,8012655,SAP Order Management for sourcing and availability,12000,Transaction,116.00,USD,Month,101,200
+1441,8012655,SAP Order Management for sourcing and availability,12000,Transaction,72.00,USD,Month,201,Infinite
+1442,8013551,"SAP Customer Activity Repository Cloud, omnichannel price and promotion service, private edition",1000,Object,3322.00,USD,Month,1,15
+1443,8013551,"SAP Customer Activity Repository Cloud, omnichannel price and promotion service, private edition",1000,Object,1776.00,USD,Month,16,30
+1444,8013551,"SAP Customer Activity Repository Cloud, omnichannel price and promotion service, private edition",1000,Object,1261.00,USD,Month,31,60
+1445,8013551,"SAP Customer Activity Repository Cloud, omnichannel price and promotion service, private edition",1000,Object,883.00,USD,Month,61,120
+1446,8013551,"SAP Customer Activity Repository Cloud, omnichannel price and promotion service, private edition",1000,Object,608.00,USD,Month,121,240
+1447,8013551,"SAP Customer Activity Repository Cloud, omnichannel price and promotion service, private edition",1000,Object,504.00,USD,Month,241,Infinite
+1448,8013680,"SAP Replenishment Planning for SAP Customer Activity Repository Cloud, private edition",1000,Object,7.76,USD,Month,1,6000
+1449,8013680,"SAP Replenishment Planning for SAP Customer Activity Repository Cloud, private edition",1000,Object,6.65,USD,Month,6001,12000
+1450,8013680,"SAP Replenishment Planning for SAP Customer Activity Repository Cloud, private edition",1000,Object,5.54,USD,Month,12001,24000
+1451,8013680,"SAP Replenishment Planning for SAP Customer Activity Repository Cloud, private edition",1000,Object,4.99,USD,Month,24001,48000
+1452,8013680,"SAP Replenishment Planning for SAP Customer Activity Repository Cloud, private edition",1000,Object,4.16,USD,Month,48001,72000
+1453,8013680,"SAP Replenishment Planning for SAP Customer Activity Repository Cloud, private edition",1000,Object,3.88,USD,Month,72001,Infinite
+1454,8013717,"SAP Allocation Management for SAP Customer Activity Repository Cloud, private edition",1000,Object,8.04,USD,Month,1,6000
+1455,8013717,"SAP Allocation Management for SAP Customer Activity Repository Cloud, private edition",1000,Object,6.93,USD,Month,6001,12000
+1456,8013717,"SAP Allocation Management for SAP Customer Activity Repository Cloud, private edition",1000,Object,5.73,USD,Month,12001,24000
+1457,8013717,"SAP Allocation Management for SAP Customer Activity Repository Cloud, private edition",1000,Object,5.18,USD,Month,24001,48000
+1458,8013717,"SAP Allocation Management for SAP Customer Activity Repository Cloud, private edition",1000,Object,4.35,USD,Month,48001,72000
+1459,8013717,"SAP Allocation Management for SAP Customer Activity Repository Cloud, private edition",1000,Object,4.07,USD,Month,72001,Infinite
+1460,8014286,SAP Omnichannel Promotion Pricing,1000000,API Call,438.00,USD,Month,1,150
+1461,8014286,SAP Omnichannel Promotion Pricing,1000000,API Call,315.00,USD,Month,151,400
+1462,8014286,SAP Omnichannel Promotion Pricing,1000000,API Call,281.00,USD,Month,401,Infinite
+1463,8018129,SAP Order and Delivery Scheduling,1200,Record,164.00,USD,Month,1,125
+1464,8018129,SAP Order and Delivery Scheduling,1200,Record,136.00,USD,Month,126,250
+1465,8018129,SAP Order and Delivery Scheduling,1200,Record,119.00,USD,Month,251,450
+1466,8018129,SAP Order and Delivery Scheduling,1200,Record,103.00,USD,Month,451,600
+1467,8018129,SAP Order and Delivery Scheduling,1200,Record,92.00,USD,Month,601,750
+1468,8018129,SAP Order and Delivery Scheduling,1200,Record,83.00,USD,Month,751,Infinite
+1469,8018722,RISE with SAP add-on package for retail,1,Entitlements Package,91468.00,USD,Month,1,Infinite
+1470,***,Cloud - Sports and Entertainment,0,,0.00,,,,
+1471,8008225,"SAP Sports One, gold edition",1,Flat Fee,4510.00,USD,Month,1,Infinite
+1472,8013524,SAP Event Ticketing,1,Object,0.48,USD,Year,1,Infinite
+1473,***,Cloud - Utilities,0,,0.00,,,,
+1474,8008912,"SAP Waste and Recycling, automated route planning option by PROLOGA",1000,Document,2101.00,USD,Month,1,10
+1475,8008912,"SAP Waste and Recycling, automated route planning option by PROLOGA",1000,Document,1838.00,USD,Month,11,25
+1476,8008912,"SAP Waste and Recycling, automated route planning option by PROLOGA",1000,Document,1575.00,USD,Month,26,100
+1477,8008912,"SAP Waste and Recycling, automated route planning option by PROLOGA",1000,Document,1459.00,USD,Month,101,250
+1478,8008912,"SAP Waste and Recycling, automated route planning option by PROLOGA",1000,Document,1314.00,USD,Month,251,Infinite
+1479,8015731,"SAP Market Communication for Utilities, AS4 Edition",500000,Transaction,2495.00,USD,Month,1,Infinite
+1480,8018100,"SAP Utilities Core for Germany, private edition",1000,Point of Delivery,369.00,USD,Month,1,100
+1481,8018100,"SAP Utilities Core for Germany, private edition",1000,Point of Delivery,305.00,USD,Month,101,400
+1482,8018100,"SAP Utilities Core for Germany, private edition",1000,Point of Delivery,213.00,USD,Month,401,1000
+1483,8018100,"SAP Utilities Core for Germany, private edition",1000,Point of Delivery,185.00,USD,Month,1001,5000
+1484,8018100,"SAP Utilities Core for Germany, private edition",1000,Point of Delivery,162.00,USD,Month,5001,Infinite
+1485,8018117,"SAP Utilities Core, private edition",1000,Point of Delivery,144.00,USD,Month,1,100
+1486,8018117,"SAP Utilities Core, private edition",1000,Point of Delivery,116.00,USD,Month,101,400
+1487,8018117,"SAP Utilities Core, private edition",1000,Point of Delivery,93.00,USD,Month,401,1000
+1488,8018117,"SAP Utilities Core, private edition",1000,Point of Delivery,57.00,USD,Month,1001,5000
+1489,8018117,"SAP Utilities Core, private edition",1000,Point of Delivery,47.00,USD,Month,5001,Infinite
+1490,8018133,"SAP Utilities Core, enhanced, private edition",1000,Point of Delivery,425.00,USD,Month,1,100
+1491,8018133,"SAP Utilities Core, enhanced, private edition",1000,Point of Delivery,277.00,USD,Month,101,400
+1492,8018133,"SAP Utilities Core, enhanced, private edition",1000,Point of Delivery,240.00,USD,Month,401,1000
+1493,8018133,"SAP Utilities Core, enhanced, private edition",1000,Point of Delivery,185.00,USD,Month,1001,5000
+1494,8018133,"SAP Utilities Core, enhanced, private edition",1000,Point of Delivery,148.00,USD,Month,5001,Infinite
+1495,8018162,SAP Cloud for Utilities foundation,1000,Object,35.00,USD,Month,1,100
+1496,8018162,SAP Cloud for Utilities foundation,1000,Object,21.00,USD,Month,101,400
+1497,8018162,SAP Cloud for Utilities foundation,1000,Object,19.00,USD,Month,401,1000
+1498,8018162,SAP Cloud for Utilities foundation,1000,Object,16.00,USD,Month,1001,5000
+1499,8018162,SAP Cloud for Utilities foundation,1000,Object,10.00,USD,Month,5001,Infinite
+1500,***,Cloud - Banking,0,,0.00,,,,
+1501,8013525,"SAP Multi-Bank Connectivity, corporate advanced connection package",1,Flat Fee,3114.00,USD,Month,1,Infinite
+1502,8013543,"SAP Multi-Bank Connectivity, transactions",1000,Transaction,217.00,USD,Month,1,10
+1503,8013543,"SAP Multi-Bank Connectivity, transactions",1000,Transaction,124.00,USD,Month,11,50
+1504,8013543,"SAP Multi-Bank Connectivity, transactions",1000,Transaction,58.00,USD,Month,51,200
+1505,8013543,"SAP Multi-Bank Connectivity, transactions",1000,Transaction,27.00,USD,Month,201,600
+1506,8013543,"SAP Multi-Bank Connectivity, transactions",1000,Transaction,16.00,USD,Month,601,1200
+1507,8013543,"SAP Multi-Bank Connectivity, transactions",1000,Transaction,10.00,USD,Month,1201,Infinite
+1508,8015741,"SAP Multi-Bank Connectivity, corporate base connection package",1,Flat Fee,3618.00,USD,Month,1,Infinite
+1509,8018092,digital banking package,1,Entitlements Package,4158.00,USD,Month,1,Infinite
+1510,***,Cloud - Consumer Products,0,,0.00,,,,
+1511,8011274,SAP Channel Program Management by Vistex,11087000,Spend,1663.00,USD,Month,1,10
+1512,8011274,SAP Channel Program Management by Vistex,11087000,Spend,1478.00,USD,Month,11,30
+1513,8011274,SAP Channel Program Management by Vistex,11087000,Spend,1294.00,USD,Month,31,60
+1514,8011274,SAP Channel Program Management by Vistex,11087000,Spend,1109.00,USD,Month,61,100
+1515,8011274,SAP Channel Program Management by Vistex,11087000,Spend,924.00,USD,Month,101,200
+1516,8011274,SAP Channel Program Management by Vistex,11087000,Spend,740.00,USD,Month,201,Infinite
+1517,8011275,SAP Vendor Program Management by Vistex,11087000,Revenue,1663.00,USD,Month,1,10
+1518,8011275,SAP Vendor Program Management by Vistex,11087000,Revenue,1478.00,USD,Month,11,30
+1519,8011275,SAP Vendor Program Management by Vistex,11087000,Revenue,1294.00,USD,Month,31,60
+1520,8011275,SAP Vendor Program Management by Vistex,11087000,Revenue,1109.00,USD,Month,61,100
+1521,8011275,SAP Vendor Program Management by Vistex,11087000,Revenue,924.00,USD,Month,101,200
+1522,8011275,SAP Vendor Program Management by Vistex,11087000,Revenue,740.00,USD,Month,201,Infinite
+1523,8011276,SAP Extended Price Management by Vistex,55435000,Revenue,1247.00,USD,Month,1,10
+1524,8011276,SAP Extended Price Management by Vistex,55435000,Revenue,1109.00,USD,Month,11,30
+1525,8011276,SAP Extended Price Management by Vistex,55435000,Revenue,924.00,USD,Month,31,60
+1526,8011276,SAP Extended Price Management by Vistex,55435000,Revenue,785.00,USD,Month,61,100
+1527,8011276,SAP Extended Price Management by Vistex,55435000,Revenue,693.00,USD,Month,101,200
+1528,8011276,SAP Extended Price Management by Vistex,55435000,Revenue,601.00,USD,Month,201,Infinite
+1529,8012345,SAP Intelligent Agriculture,1000,Transaction,110.00,USD,Month,1,100
+1530,8012345,SAP Intelligent Agriculture,1000,Transaction,73.00,USD,Month,101,300
+1531,8012345,SAP Intelligent Agriculture,1000,Transaction,58.00,USD,Month,301,900
+1532,8012345,SAP Intelligent Agriculture,1000,Transaction,49.00,USD,Month,901,1800
+1533,8012345,SAP Intelligent Agriculture,1000,Transaction,44.00,USD,Month,1801,Infinite
+1534,8018139,SAP Price Staging Hub by Vistex,55435000,Revenue,1109.00,USD,Month,1,10
+1535,8018139,SAP Price Staging Hub by Vistex,55435000,Revenue,1017.00,USD,Month,11,30
+1536,8018139,SAP Price Staging Hub by Vistex,55435000,Revenue,832.00,USD,Month,31,60
+1537,8018139,SAP Price Staging Hub by Vistex,55435000,Revenue,740.00,USD,Month,61,100
+1538,8018139,SAP Price Staging Hub by Vistex,55435000,Revenue,646.00,USD,Month,101,200
+1539,8018139,SAP Price Staging Hub by Vistex,55435000,Revenue,554.00,USD,Month,201,Infinite
+1540,***,Cloud - Life Sciences,0,,0.00,,,,
+1541,8005675,SAP Information Collaboration Hub for Life Sciences,1,Contact,10865.00,USD,Month,1,Infinite
+1542,8005676,"SAP Information Collaboration Hub for Life Sciences, option for supply chain partner collaboration",1,Contact,715.00,USD,Month,1,Infinite
+1543,8006012,"SAP Information Collaboration Hub for Life Sciences, option for regulatory reporting",1,Contact,7251.00,USD,Month,1,Infinite
+1544,8007123,"SAP Information Collaboration Hub for Life Sciences, option for US supply chain",1000000,Record,604.00,USD,Month,1,25
+1545,8007123,"SAP Information Collaboration Hub for Life Sciences, option for US supply chain",1000000,Record,333.00,USD,Month,26,75
+1546,8007123,"SAP Information Collaboration Hub for Life Sciences, option for US supply chain",1000000,Record,222.00,USD,Month,76,200
+1547,8007123,"SAP Information Collaboration Hub for Life Sciences, option for US supply chain",1000000,Record,155.00,USD,Month,201,400
+1548,8007123,"SAP Information Collaboration Hub for Life Sciences, option for US supply chain",1000000,Record,122.00,USD,Month,401,Infinite
+1549,8012522,SAP Intelligent Clinical Supply Management,1,Record,1253.00,USD,Month,1,50
+1550,8012522,SAP Intelligent Clinical Supply Management,1,Record,1065.00,USD,Month,51,250
+1551,8012522,SAP Intelligent Clinical Supply Management,1,Record,902.00,USD,Month,251,500
+1552,8012522,SAP Intelligent Clinical Supply Management,1,Record,839.00,USD,Month,501,Infinite
+1553,8014247,"SAP Information Collaboration Hub for Life Science, option for regulatory collaboration",100,Contact,2291.00,USD,Month,1,5
+1554,8014247,"SAP Information Collaboration Hub for Life Science, option for regulatory collaboration",100,Contact,1585.00,USD,Month,6,10
+1555,8014247,"SAP Information Collaboration Hub for Life Science, option for regulatory collaboration",100,Contact,1002.00,USD,Month,11,30
+1556,8014247,"SAP Information Collaboration Hub for Life Science, option for regulatory collaboration",100,Contact,507.00,USD,Month,31,150
+1557,8014247,"SAP Information Collaboration Hub for Life Science, option for regulatory collaboration",100,Contact,243.00,USD,Month,151,500
+1558,8014247,"SAP Information Collaboration Hub for Life Science, option for regulatory collaboration",100,Contact,129.00,USD,Month,501,Infinite
+1559,8014264,"SAP Batch Release Hub for Life Sciences, additional nonproduction tenant",1,Tenant,8315.00,USD,Month,1,Infinite
+1560,8015942,SAP Cell and Gene Therapy Orchestration,12,Document,1848.00,USD,Month,1,25
+1561,8015942,SAP Cell and Gene Therapy Orchestration,12,Document,980.00,USD,Month,26,150
+1562,8015942,SAP Cell and Gene Therapy Orchestration,12,Document,379.00,USD,Month,151,400
+1563,8015942,SAP Cell and Gene Therapy Orchestration,12,Document,324.00,USD,Month,401,800
+1564,8015942,SAP Cell and Gene Therapy Orchestration,12,Document,259.00,USD,Month,801,Infinite
+1565,8015991,SAP Quality Requirements Schedule,1,% of Net Recurring Fee,20.00,%,Month,1,Infinite
+1566,8017064,SAP Batch Release Hub for Life Sciences,1500,Document,4158.00,USD,Month,1,20
+1567,8017064,SAP Batch Release Hub for Life Sciences,1500,Document,2772.00,USD,Month,21,40
+1568,8017064,SAP Batch Release Hub for Life Sciences,1500,Document,2306.00,USD,Month,41,80
+1569,8017064,SAP Batch Release Hub for Life Sciences,1500,Document,1752.00,USD,Month,81,140
+1570,8017064,SAP Batch Release Hub for Life Sciences,1500,Document,1386.00,USD,Month,141,Infinite
+1571,***,Cloud - Media,0,,0.00,,,,
+1572,8011264,"SAP Rights and Royalty Management by Vistex, cloud edition",110870000,Revenue and Expense,9313.00,USD,Month,1,5
+1573,8011264,"SAP Rights and Royalty Management by Vistex, cloud edition",110870000,Revenue and Expense,8870.00,USD,Month,6,10
+1574,8011264,"SAP Rights and Royalty Management by Vistex, cloud edition",110870000,Revenue and Expense,8426.00,USD,Month,11,20
+1575,8011264,"SAP Rights and Royalty Management by Vistex, cloud edition",110870000,Revenue and Expense,7428.00,USD,Month,21,60
+1576,8011264,"SAP Rights and Royalty Management by Vistex, cloud edition",110870000,Revenue and Expense,6874.00,USD,Month,61,120
+1577,8011264,"SAP Rights and Royalty Management by Vistex, cloud edition",110870000,Revenue and Expense,6320.00,USD,Month,121,Infinite
+1578,**,Cloud - Education,0,,0.00,,,,
+1579,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.67,USD,Month,1,250
+1580,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.58,USD,Month,251,750
+1581,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.48,USD,Month,751,1250
+1582,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.39,USD,Month,1251,3500
+1583,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.29,USD,Month,3501,4000
+1584,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.20,USD,Month,4001,6000
+1585,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.10,USD,Month,6001,8000
+1586,8002535,SAP Assessment Mgmt by Questionmark,1,User,2.01,USD,Month,8001,10000
+1587,8002535,SAP Assessment Mgmt by Questionmark,1,User,1.91,USD,Month,10001,15000
+1588,8002535,SAP Assessment Mgmt by Questionmark,1,User,1.52,USD,Month,15001,25000
+1589,8002535,SAP Assessment Mgmt by Questionmark,1,User,1.44,USD,Month,25001,Infinite
+1590,8006100,"SAP Enable Now, cloud edition",1,User,18.00,USD,Month,1,500
+1591,8006100,"SAP Enable Now, cloud edition",1,User,7.95,USD,Month,501,2000
+1592,8006100,"SAP Enable Now, cloud edition",1,User,5.45,USD,Month,2001,5000
+1593,8006100,"SAP Enable Now, cloud edition",1,User,3.35,USD,Month,5001,10000
+1594,8006100,"SAP Enable Now, cloud edition",1,User,2.17,USD,Month,10001,20000
+1595,8006100,"SAP Enable Now, cloud edition",1,User,1.69,USD,Month,20001,50000
+1596,8006100,"SAP Enable Now, cloud edition",1,User,1.26,USD,Month,50001,100000
+1597,8006100,"SAP Enable Now, cloud edition",1,User,0.84,USD,Month,100001,200000
+1598,8006100,"SAP Enable Now, cloud edition",1,User,0.67,USD,Month,200001,500000
+1599,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,13.00,USD,Month,1,500
+1600,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,9.86,USD,Month,501,1000
+1601,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,8.60,USD,Month,1001,2000
+1602,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,7.50,USD,Month,2001,4000
+1603,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,6.69,USD,Month,4001,8000
+1604,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,5.87,USD,Month,8001,16000
+1605,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,5.04,USD,Month,16001,32000
+1606,8015521,"SAP User Experience Management by Knoa, cloud edition",1,Resource,4.16,USD,Month,32001,999999999
+1607,8015962,"SAP Enable Now, cloud edition, test tenant",1,Tenant,621.00,USD,Month,1,Infinite
+1608,8016701,SAP Learning Hub,1,User,116.00,USD,Month,1,299
+1609,8016701,SAP Learning Hub,1,User,78.00,USD,Month,300,499
+1610,8016701,SAP Learning Hub,1,User,55.00,USD,Month,500,799
+1611,8016701,SAP Learning Hub,1,User,44.00,USD,Month,800,Infinite
+1612,8017591,"SAP Enable Now, consumption option for external workers",1,Connection,4.25,USD,Month,1,200
+1613,8017591,"SAP Enable Now, consumption option for external workers",1,Connection,2.68,USD,Month,201,1000
+1614,8017591,"SAP Enable Now, consumption option for external workers",1,Connection,0.88,USD,Month,1001,5000
+1615,8017591,"SAP Enable Now, consumption option for external workers",1,Connection,0.43,USD,Month,5001,Infinite
+1616,**,Cloud - Other,0,,0.00,,,,
+1617,8015252,"sovereign cloud bundle for US, public edition",1,% of Net Recurring Fee,15.00,%,Year,1,Infinite
+1618,8015261,"sovereign cloud bundle for US, private edition",1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1619,*,Cloud - Digital Enterprise Platform,0,,0.00,,,,
+1620,**,Cloud ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? Integration and Extension,0,,0.00,,,,
+1621,8008183,SAP Business Application Studio,1,User,31.00,USD,Month,1,Infinite
+1622,8008410,"SAP Integration Suite, basic edition",1,Tenant,906.00,USD,Month,1,Infinite
+1623,8008411,"SAP Integration Suite, standard edition",1,Tenant,5139.00,USD,Month,1,Infinite
+1624,8008412,"SAP Integration Suite, premium edition",1,Entitlements Package,28239.00,USD,Month,1,Infinite
+1625,8008413,"SAP Integration Suite, premium edition, additional instance",1,Tenant,8421.00,USD,Month,1,Infinite
+1626,8008466,"SAP Build Work Zone, standard edition",1,Active User,1.39,USD,Month,1,500
+1627,8008466,"SAP Build Work Zone, standard edition",1,Active User,1.28,USD,Month,501,1000
+1628,8008466,"SAP Build Work Zone, standard edition",1,Active User,1.16,USD,Month,1001,5000
+1629,8008466,"SAP Build Work Zone, standard edition",1,Active User,1.05,USD,Month,5001,20000
+1630,8008466,"SAP Build Work Zone, standard edition",1,Active User,0.83,USD,Month,20001,50000
+1631,8008466,"SAP Build Work Zone, standard edition",1,Active User,0.67,USD,Month,50001,100000
+1632,8008466,"SAP Build Work Zone, standard edition",1,Active User,0.55,USD,Month,100001,Infinite
+1633,8008837,"SAP Business Technology Platform, Cloud Foundry runtime",1,Gigabyte,94.00,USD,Month,1,Infinite
+1634,8011306,"SAP IQ cold store Cloud, private edition (XS, 512 GB)",1,Tenant,11453.00,USD,Month,1,Infinite
+1635,8011307,"SAP IQ cold store Cloud, private edition (S, 1TB)",1,Tenant,13908.00,USD,Month,1,Infinite
+1636,8011308,"SAP IQ cold store Cloud, private edition (M, 3 TB)",1,Tenant,21760.00,USD,Month,1,Infinite
+1637,8011309,"SAP IQ cold store Cloud, private edition (L, 5 TB)",1,Tenant,31210.00,USD,Month,1,Infinite
+1638,8011367,"SAP Additional Database Storage, private cloud edition",128,Gigabyte,784.00,USD,Month,1,Infinite
+1639,8011542,SAP Mobile Services,1,Resource,3.97,USD,Month,1,500
+1640,8011542,SAP Mobile Services,1,Resource,3.60,USD,Month,501,1000
+1641,8011542,SAP Mobile Services,1,Resource,2.99,USD,Month,1001,3000
+1642,8011542,SAP Mobile Services,1,Resource,2.78,USD,Month,3001,5000
+1643,8011542,SAP Mobile Services,1,Resource,2.68,USD,Month,5001,10000
+1644,8011542,SAP Mobile Services,1,Resource,2.03,USD,Month,10001,50000
+1645,8011542,SAP Mobile Services,1,Resource,1.53,USD,Month,50001,Infinite
+1646,8012231,SAP HANA Cloud,1,Capacity Unit,0.79,USD,Month,1,Infinite
+1647,8012251,"SAP Build Process Automation, unattended automations",1,Connection,554.00,USD,Month,1,5
+1648,8012251,"SAP Build Process Automation, unattended automations",1,Connection,333.00,USD,Month,6,30
+1649,8012251,"SAP Build Process Automation, unattended automations",1,Connection,222.00,USD,Month,31,100
+1650,8012251,"SAP Build Process Automation, unattended automations",1,Connection,139.00,USD,Month,101,Infinite
+1651,8012252,"SAP Build Process Automation, attended automations",10,Connection,554.00,USD,Month,1,5
+1652,8012252,"SAP Build Process Automation, attended automations",10,Connection,333.00,USD,Month,6,30
+1653,8012252,"SAP Build Process Automation, attended automations",10,Connection,222.00,USD,Month,31,100
+1654,8012252,"SAP Build Process Automation, attended automations",10,Connection,139.00,USD,Month,101,Infinite
+1655,8012264,"SAP Build Process Automation, standard",1,Active User,2.08,USD,Month,1,500
+1656,8012264,"SAP Build Process Automation, standard",1,Active User,1.79,USD,Month,501,1000
+1657,8012264,"SAP Build Process Automation, standard",1,Active User,1.53,USD,Month,1001,5000
+1658,8012264,"SAP Build Process Automation, standard",1,Active User,1.22,USD,Month,5001,20000
+1659,8012264,"SAP Build Process Automation, standard",1,Active User,0.89,USD,Month,20001,50000
+1660,8012264,"SAP Build Process Automation, standard",1,Active User,0.75,USD,Month,50001,100000
+1661,8012264,"SAP Build Process Automation, standard",1,Active User,0.61,USD,Month,100001,Infinite
+1662,8012265,"SAP Build Process Automation, advanced",1,Active User,16.00,USD,Month,1,Infinite
+1663,8013624,"SAP Integration Suite, additional messages",10000,Transaction,6.74,USD,Month,1,50
+1664,8013624,"SAP Integration Suite, additional messages",10000,Transaction,4.07,USD,Month,51,250
+1665,8013624,"SAP Integration Suite, additional messages",10000,Transaction,3.05,USD,Month,251,1000
+1666,8013624,"SAP Integration Suite, additional messages",10000,Transaction,1.90,USD,Month,1001,5000
+1667,8013624,"SAP Integration Suite, additional messages",10000,Transaction,1.36,USD,Month,5001,25000
+1668,8013624,"SAP Integration Suite, additional messages",10000,Transaction,0.99,USD,Month,25001,Infinite
+1669,8013660,"SAP Build Apps, enterprise edition, base package",1,Entitlements Package,1109.00,USD,Month,1,Infinite
+1670,8013754,"SAP Build Apps, enterprise edition, advanced user",1,Active User,12.00,USD,Month,1,500
+1671,8013754,"SAP Build Apps, enterprise edition, advanced user",1,Active User,10.00,USD,Month,501,1000
+1672,8013754,"SAP Build Apps, enterprise edition, advanced user",1,Active User,8.87,USD,Month,1001,5000
+1673,8013754,"SAP Build Apps, enterprise edition, advanced user",1,Active User,7.76,USD,Month,5001,20000
+1674,8013754,"SAP Build Apps, enterprise edition, advanced user",1,Active User,6.82,USD,Month,20001,50000
+1675,8013754,"SAP Build Apps, enterprise edition, advanced user",1,Active User,6.00,USD,Month,50001,100000
+1676,8013754,"SAP Build Apps, enterprise edition, advanced user",1,Active User,5.40,USD,Month,100001,Infinite
+1677,8013766,SAP Datasphere,1,Capacity Unit,1.11,USD,Month,1,Infinite
+1678,8013773,"SAP Build Apps, enterprise edition, additional capacity unit",1,Capacity Unit,1.11,USD,Month,1,Infinite
+1679,8014417,"SAP IQ cold store Cloud, additional non-productive tier, private edition (S, 1 TB)",1,Tenant,5011.00,USD,Month,1,Infinite
+1680,8014445,"SAP IQ cold store Cloud, additional non-productive tier, private edition (XS, 512 GB)",1,Tenant,3890.00,USD,Month,1,Infinite
+1681,8014813,"SAP Build Work Zone, standard edition, external access option",100,Connection,14.00,USD,Month,1,50
+1682,8014813,"SAP Build Work Zone, standard edition, external access option",100,Connection,13.00,USD,Month,51,100
+1683,8014813,"SAP Build Work Zone, standard edition, external access option",100,Connection,12.00,USD,Month,101,500
+1684,8014813,"SAP Build Work Zone, standard edition, external access option",100,Connection,11.00,USD,Month,501,2000
+1685,8014813,"SAP Build Work Zone, standard edition, external access option",100,Connection,8.32,USD,Month,2001,5000
+1686,8014813,"SAP Build Work Zone, standard edition, external access option",100,Connection,6.65,USD,Month,5001,10000
+1687,8014813,"SAP Build Work Zone, standard edition, external access option",100,Connection,5.54,USD,Month,10001,Infinite
+1688,8015456,"SAP Build Process Automation, additional storage",1,Gigabyte,2.77,USD,Month,1,Infinite
+1689,8015466,"SAP Build Process Automation, additional API",10000,API Call,5.54,USD,Month,1,Infinite
+1690,8016044,SAP BTP Enterprise Agreement,1,Cloud Credit,100.00,%,Year,11087,66521
+1691,8016044,SAP BTP Enterprise Agreement,1,Cloud Credit,100.00,%,Year,66522,133043
+1692,8016044,SAP BTP Enterprise Agreement,1,Cloud Credit,100.00,%,Year,133044,Infinite
+1693,8016532,SAP AI Unit,100,Capacity Unit,760.00,USD,Year,1,Infinite
+1694,8017178,SAP Joule embedded entitlement,1,Transaction,0.00,USD,Year,1,Infinite
+1695,8017214,"SAP Integration Suite, edge integration cell, additional tenant",1,Tenant,3326.00,USD,Month,1,Infinite
+1696,8017473,"SAP HANA, EE Cloud, base package, private edition",1,Tenant,57624.00,USD,Month,1,Infinite
+1697,8017482,"SAP HANA, EE Cloud, non-prod tier, base package, private edition",1,Tenant,13460.00,USD,Month,1,Infinite
+1698,8017496,"SAP HANA, EE Cloud, upgrade, private edition",256,Gigabyte,24402.00,USD,Month,1,2
+1699,8017496,"SAP HANA, EE Cloud, upgrade, private edition",256,Gigabyte,17748.00,USD,Month,3,6
+1700,8017496,"SAP HANA, EE Cloud, upgrade, private edition",256,Gigabyte,13310.00,USD,Month,7,15
+1701,8017496,"SAP HANA, EE Cloud, upgrade, private edition",256,Gigabyte,9984.00,USD,Month,16,31
+1702,8017496,"SAP HANA, EE Cloud, upgrade, private edition",256,Gigabyte,5178.00,USD,Month,32,Infinite
+1703,8017570,"SAP Integration Suite, advanced event mesh, 100",1,Tenant,2440.00,USD,Month,1,Infinite
+1704,8017586,"SAP Integration Suite, advanced event mesh, 100K",1,Tenant,28865.00,USD,Month,1,Infinite
+1705,8017602,"SAP Integration Suite, advanced event mesh, 50K",1,Tenant,23670.00,USD,Month,1,Infinite
+1706,8017606,SAP BTP Enterprise Agreement for partners,1,Cloud Credit,100.00,%,Year,11087,Infinite
+1707,8017637,"SAP Integration Suite, advanced event mesh, spooling add-on",500,Gigabyte,1000.00,USD,Month,1,Infinite
+1708,8017664,"SAP Integration Suite, advanced event mesh, 250",1,Tenant,4914.00,USD,Month,1,Infinite
+1709,8017665,"SAP Integration Suite, advanced event mesh, 10K",1,Tenant,15889.00,USD,Month,1,Infinite
+1710,8017673,"SAP Integration Suite, advanced event mesh, 1K",1,Tenant,9510.00,USD,Month,1,Infinite
+1711,8017682,"SAP Integration Suite, advanced event mesh, 5K",1,Tenant,13184.00,USD,Month,1,Infinite
+1712,8017771,SAP Build Code,1,Capacity Unit,1.11,USD,Month,1,Infinite
+1713,8018243,"SAP Build Apps, enterprise edition, standard user",1,Active User,2.77,USD,Month,1,500
+1714,8018243,"SAP Build Apps, enterprise edition, standard user",1,Active User,2.35,USD,Month,501,1000
+1715,8018243,"SAP Build Apps, enterprise edition, standard user",1,Active User,2.17,USD,Month,1001,5000
+1716,8018243,"SAP Build Apps, enterprise edition, standard user",1,Active User,1.92,USD,Month,5001,20000
+1717,8018243,"SAP Build Apps, enterprise edition, standard user",1,Active User,1.70,USD,Month,20001,50000
+1718,8018243,"SAP Build Apps, enterprise edition, standard user",1,Active User,1.54,USD,Month,50001,100000
+1719,8018243,"SAP Build Apps, enterprise edition, standard user",1,Active User,1.43,USD,Month,100001,Infinite
+1720,8018804,"SAP Build Process Automation, document understanding and task mining add-on by UiPath",60000,Capacity Unit,12900.00,USD,Year,1,Infinite
+1721,8018835,"SAP Build Process Automation, developer add-on by UiPath",1,User,385.00,USD,Month,1,Infinite
+1722,8018902,"SAP Build Process Automation, unattended automations add-on by UiPath",1,Connection,1500.00,USD,Month,1,Infinite
+1723,8018904,"SAP Build Process Automation, foundation add-on by UiPath",1,Tenant,3100.00,USD,Month,1,Infinite
+1724,8018911,"SAP Integration Suite, starter edition",1,Tenant,1663.00,USD,Month,1,Infinite
+1725,**,Cloud - Analytics & Insight,0,,0.00,,,,
+1726,8006115,"SAP Analytics Cloud for planning, standard edition, public system option",1,User,100.00,USD,Month,1,200
+1727,8006115,"SAP Analytics Cloud for planning, standard edition, public system option",1,User,83.00,USD,Month,201,500
+1728,8006115,"SAP Analytics Cloud for planning, standard edition, public system option",1,User,68.00,USD,Month,501,1000
+1729,8006115,"SAP Analytics Cloud for planning, standard edition, public system option",1,User,60.00,USD,Month,1001,Infinite
+1730,8006116,"SAP Analytics Cloud for planning, professional edition, public system option",1,User,1175.00,USD,Month,1,Infinite
+1731,8006118,"SAP Analytics Cloud for planning, standard edition, dedicated system option",1,User,233.00,USD,Month,1,200
+1732,8006118,"SAP Analytics Cloud for planning, standard edition, dedicated system option",1,User,211.00,USD,Month,201,500
+1733,8006118,"SAP Analytics Cloud for planning, standard edition, dedicated system option",1,User,200.00,USD,Month,501,1000
+1734,8006118,"SAP Analytics Cloud for planning, standard edition, dedicated system option",1,User,177.00,USD,Month,1001,3000
+1735,8006118,"SAP Analytics Cloud for planning, standard edition, dedicated system option",1,User,155.00,USD,Month,3001,5000
+1736,8006118,"SAP Analytics Cloud for planning, standard edition, dedicated system option",1,User,133.00,USD,Month,5001,Infinite
+1737,8006119,"SAP Analytics Cloud for planning, professional edition, dedicated system option",1,User,2217.00,USD,Month,1,Infinite
+1738,8006125,"SAP Analytics Cloud, SAP HANA upgrade, dedicated system option (up to 256 GB)",128,Gigabyte,1846.00,USD,Month,1,Infinite
+1739,8006126,"SAP Analytics Cloud, SAP HANA upgrade, dedicated system option (up to 512 GB)",256,Gigabyte,3698.00,USD,Month,1,Infinite
+1740,8006127,"SAP Analytics Cloud, SAP HANA upgrade, dedicated system option (up to 1024 GB)",512,Gigabyte,4623.00,USD,Month,1,Infinite
+1741,8008395,"SAP Analytics Cloud, test tenant, public system option",1,User,55.00,USD,Month,1,Infinite
+1742,8008396,"SAP Analytics Cloud, test tenant, dedicated system option",1,User,68.00,USD,Month,1,Infinite
+1743,8008735,"SAP BW/4HANA Cloud, base package, private edition",1,Tenant,50446.00,USD,Month,1,Infinite
+1744,8008836,"SAP Analytics Cloud, SAP HANA upgrade, dedicated system option (up to 2048 GB)",1024,Gigabyte,7766.00,USD,Month,1,Infinite
+1745,8008941,"SAP Analytics Cloud for business intelligence, public system option",1,User,27.00,USD,Month,1,200
+1746,8008941,"SAP Analytics Cloud for business intelligence, public system option",1,User,22.00,USD,Month,201,500
+1747,8008941,"SAP Analytics Cloud for business intelligence, public system option",1,User,18.00,USD,Month,501,1000
+1748,8008941,"SAP Analytics Cloud for business intelligence, public system option",1,User,17.00,USD,Month,1001,3000
+1749,8008941,"SAP Analytics Cloud for business intelligence, public system option",1,User,13.00,USD,Month,3001,5000
+1750,8008941,"SAP Analytics Cloud for business intelligence, public system option",1,User,11.00,USD,Month,5001,Infinite
+1751,8008942,"SAP Analytics Cloud for business intelligence, dedicated system option",1,User,67.00,USD,Month,1,500
+1752,8008942,"SAP Analytics Cloud for business intelligence, dedicated system option",1,User,60.00,USD,Month,501,1000
+1753,8008942,"SAP Analytics Cloud for business intelligence, dedicated system option",1,User,53.00,USD,Month,1001,3000
+1754,8008942,"SAP Analytics Cloud for business intelligence, dedicated system option",1,User,47.00,USD,Month,3001,5000
+1755,8008942,"SAP Analytics Cloud for business intelligence, dedicated system option",1,User,40.00,USD,Month,5001,10000
+1756,8008942,"SAP Analytics Cloud for business intelligence, dedicated system option",1,User,33.00,USD,Month,10001,Infinite
+1757,8008980,"SAP BW/4HANA Cloud, additional non-productive, base package, private edition",256,Gigabyte,12362.00,USD,Month,1,Infinite
+1758,8010936,"SAP BW NetWeaver Cloud, base package, private edition",1,Tenant,50446.00,USD,Month,1,Infinite
+1759,8010941,"SAP BW NetWeaver Cloud, additional non-productive, base package, private edition",256,Gigabyte,12362.00,USD,Month,1,Infinite
+1760,8011030,"SAP BusinessObjects Business Intelligence, additional non-productive, private cloud edition (S)",1,Tenant,10865.00,USD,Month,1,Infinite
+1761,8011031,"SAP BusinessObjects Business Intelligence, additional non-productive, private cloud edition (M)",1,Tenant,13783.00,USD,Month,1,Infinite
+1762,8011032,"SAP BusinessObjects Business Intelligence, additional non-productive, private cloud edition (L)",1,Tenant,17301.00,USD,Month,1,Infinite
+1763,8011033,"SAP BusinessObjects Business Intelligence, additional non-productive, private cloud edition (XL)",1,Tenant,28789.00,USD,Month,1,Infinite
+1764,8011039,"SAP BI Java Server Cloud, private edition (8 cores)",1,Tenant,10366.00,USD,Month,1,Infinite
+1765,8011040,"SAP BI Java Server Cloud, private edition (16 cores)",1,Tenant,16348.00,USD,Month,1,Infinite
+1766,8011041,"SAP BI Java Server Cloud, private edition (24 cores)",1,Tenant,22656.00,USD,Month,1,Infinite
+1767,8011119,SAP Profitability and Performance Management Cloud,1,Capacity Unit,2.22,USD,Month,1,Infinite
+1768,8011261,"SAP BI Java Server Cloud, additional non-productive, private edition (8 cores)",32,Gigabyte,3831.00,USD,Month,1,Infinite
+1769,8011262,"SAP BI Java Server Cloud, additional non-productive, private edition (16 cores)",64,Gigabyte,5423.00,USD,Month,1,Infinite
+1770,8011263,"SAP BI Java Server Cloud, additional non-productive, private edition (24 cores)",96,Gigabyte,7132.00,USD,Month,1,Infinite
+1771,8012208,"SAP App Server Windows Cloud, private edition",64,Gigabyte,3171.00,USD,Month,1,Infinite
+1772,8016017,"SAP BusinessObjects Business Intelligence, private cloud edition, connection",1,Connection,741.00,USD,Month,1,180
+1773,8016017,"SAP BusinessObjects Business Intelligence, private cloud edition, connection",1,Connection,482.00,USD,Month,181,350
+1774,8016017,"SAP BusinessObjects Business Intelligence, private cloud edition, connection",1,Connection,302.00,USD,Month,351,1050
+1775,8016017,"SAP BusinessObjects Business Intelligence, private cloud edition, connection",1,Connection,145.00,USD,Month,1051,Infinite
+1776,8016043,"SAP BusinessObjects Business Intelligence, private cloud edition, standard user",1,User,294.00,USD,Month,1,500
+1777,8016043,"SAP BusinessObjects Business Intelligence, private cloud edition, standard user",1,User,172.00,USD,Month,501,1000
+1778,8016043,"SAP BusinessObjects Business Intelligence, private cloud edition, standard user",1,User,109.00,USD,Month,1001,3000
+1779,8016043,"SAP BusinessObjects Business Intelligence, private cloud edition, standard user",1,User,53.00,USD,Month,3001,Infinite
+1780,8017070,SAP Sustainability Control Tower,100000,Record,172.00,USD,Month,1,50
+1781,8017070,SAP Sustainability Control Tower,100000,Record,150.00,USD,Month,51,150
+1782,8017070,SAP Sustainability Control Tower,100000,Record,128.00,USD,Month,151,Infinite
+1783,8017261,"SAP Analytics Cloud, enterprise edition, dedicated system option",1,User,19.00,USD,Month,1,25000
+1784,8017261,"SAP Analytics Cloud, enterprise edition, dedicated system option",1,User,14.00,USD,Month,25001,50000
+1785,8017261,"SAP Analytics Cloud, enterprise edition, dedicated system option",1,User,12.00,USD,Month,50001,75000
+1786,8017261,"SAP Analytics Cloud, enterprise edition, dedicated system option",1,User,11.00,USD,Month,75001,100000
+1787,8017261,"SAP Analytics Cloud, enterprise edition, dedicated system option",1,User,9.98,USD,Month,100001,Infinite
+1788,8018109,"SAP Analytics Cloud, test tenant, SAP HANA upgrade, dedicated system option (up to 512 GB)",256,Gigabyte,3698.00,USD,Month,1,Infinite
+1789,8018190,"SAP Analytics Cloud, test tenant, SAP HANA upgrade, dedicated system option (up to 1024 GB)",512,Gigabyte,4623.00,USD,Month,1,Infinite
+1790,8018195,"SAP Analytics Cloud, test tenant, SAP HANA upgrade, dedicated system option (up to 256 GB)",128,Gigabyte,1846.00,USD,Month,1,Infinite
+1791,8018201,"SAP Analytics Cloud, test tenant, SAP HANA upgrade, dedicated system option (up to 2048 GB)",1024,Gigabyte,7766.00,USD,Month,1,Infinite
+1792,**,Cloud - Enterprise Information Management,0,,0.00,,,,
+1793,8005972,"SAP Archiving and Document Access Core by OpenText, additional storage",500,Gigabyte,554.00,USD,Month,1,Infinite
+1794,8008266,"SAP Document Presentment by OpenText, cloud edition",100000,Document,1109.00,USD,Month,1,50
+1795,8008266,"SAP Document Presentment by OpenText, cloud edition",100000,Document,1017.00,USD,Month,51,100
+1796,8008266,"SAP Document Presentment by OpenText, cloud edition",100000,Document,924.00,USD,Month,101,200
+1797,8008266,"SAP Document Presentment by OpenText, cloud edition",100000,Document,832.00,USD,Month,201,350
+1798,8008266,"SAP Document Presentment by OpenText, cloud edition",100000,Document,740.00,USD,Month,351,Infinite
+1799,8008267,SAP Information Capture Core by OpenText,1000,Document,43.00,USD,Month,1,100
+1800,8008267,SAP Information Capture Core by OpenText,1000,Document,40.00,USD,Month,101,200
+1801,8008267,SAP Information Capture Core by OpenText,1000,Document,38.00,USD,Month,201,500
+1802,8008267,SAP Information Capture Core by OpenText,1000,Document,36.00,USD,Month,501,1000
+1803,8008267,SAP Information Capture Core by OpenText,1000,Document,33.00,USD,Month,1001,Infinite
+1804,8008426,SAP Archiving and Document Access Core by OpenText,1,Gigabyte,1031.00,USD,Month,1,20
+1805,8008426,SAP Archiving and Document Access Core by OpenText,1,Gigabyte,887.00,USD,Month,21,60
+1806,8008426,SAP Archiving and Document Access Core by OpenText,1,Gigabyte,776.00,USD,Month,61,120
+1807,8008426,SAP Archiving and Document Access Core by OpenText,1,Gigabyte,665.00,USD,Month,121,200
+1808,8008426,SAP Archiving and Document Access Core by OpenText,1,Gigabyte,554.00,USD,Month,201,Infinite
+1809,8011182,"SAP Master Data Governance, cloud edition",5000,Object,89.00,USD,Month,1,50
+1810,8011182,"SAP Master Data Governance, cloud edition",5000,Object,67.00,USD,Month,51,250
+1811,8011182,"SAP Master Data Governance, cloud edition",5000,Object,50.00,USD,Month,251,1000
+1812,8011182,"SAP Master Data Governance, cloud edition",5000,Object,47.00,USD,Month,1001,Infinite
+1813,8014246,"SAP Advanced Data Migration and Management by Syniti, database storage option",1000,Gigabyte,21204.00,USD,Month,1,1
+1814,8014246,"SAP Advanced Data Migration and Management by Syniti, database storage option",1000,Gigabyte,11752.00,USD,Month,2,5
+1815,8014246,"SAP Advanced Data Migration and Management by Syniti, database storage option",1000,Gigabyte,8204.00,USD,Month,6,10
+1816,8014246,"SAP Advanced Data Migration and Management by Syniti, database storage option",1000,Gigabyte,6985.00,USD,Month,11,Infinite
+1817,8014313,SAP Advanced Data Migration and Management by Syniti,1000,Gigabyte,27407.00,USD,Month,1,1
+1818,8014313,SAP Advanced Data Migration and Management by Syniti,1000,Gigabyte,22174.00,USD,Month,2,5
+1819,8014313,SAP Advanced Data Migration and Management by Syniti,1000,Gigabyte,19957.00,USD,Month,6,10
+1820,8014313,SAP Advanced Data Migration and Management by Syniti,1000,Gigabyte,17739.00,USD,Month,11,Infinite
+1821,8018082,"SAP Extended Enterprise Content Management by OpenText, cloud add-on for capital projects and operations",50,User,4435.00,USD,Month,1,5
+1822,8018082,"SAP Extended Enterprise Content Management by OpenText, cloud add-on for capital projects and operations",50,User,3049.00,USD,Month,6,10
+1823,8018082,"SAP Extended Enterprise Content Management by OpenText, cloud add-on for capital projects and operations",50,User,2561.00,USD,Month,11,40
+1824,8018082,"SAP Extended Enterprise Content Management by OpenText, cloud add-on for capital projects and operations",50,User,1330.00,USD,Month,41,100
+1825,8018082,"SAP Extended Enterprise Content Management by OpenText, cloud add-on for capital projects and operations",50,User,898.00,USD,Month,101,150
+1826,8018082,"SAP Extended Enterprise Content Management by OpenText, cloud add-on for capital projects and operations",50,User,743.00,USD,Month,151,300
+1827,8018082,"SAP Extended Enterprise Content Management by OpenText, cloud add-on for capital projects and operations",50,User,554.00,USD,Month,301,1000
+1828,8018106,"SAP Extended Enterprise Content Management by OpenText, cloud edition, additional storage",100,Gigabyte,216.00,USD,Month,1,Infinite
+1829,8018118,"SAP Extended Enterprise Content Management by OpenText, cloud edition, enterprise user option",50,User,9701.00,USD,Month,1,5
+1830,8018118,"SAP Extended Enterprise Content Management by OpenText, cloud edition, enterprise user option",50,User,6652.00,USD,Month,6,10
+1831,8018118,"SAP Extended Enterprise Content Management by OpenText, cloud edition, enterprise user option",50,User,4551.00,USD,Month,11,40
+1832,8018118,"SAP Extended Enterprise Content Management by OpenText, cloud edition, enterprise user option",50,User,2938.00,USD,Month,41,100
+1833,8018118,"SAP Extended Enterprise Content Management by OpenText, cloud edition, enterprise user option",50,User,1497.00,USD,Month,101,150
+1834,8018118,"SAP Extended Enterprise Content Management by OpenText, cloud edition, enterprise user option",50,User,1441.00,USD,Month,151,300
+1835,8018118,"SAP Extended Enterprise Content Management by OpenText, cloud edition, enterprise user option",50,User,1220.00,USD,Month,301,1000
+1836,8018124,"SAP Extended Enterprise Content Management by OpenText, cloud edition, external access",100000,Transaction,463.00,USD,Month,1,Infinite
+1837,8018181,"SAP Extended Enterprise Content Management by OpenText, cloud edition, base access option",50,User,7761.00,USD,Month,1,5
+1838,8018181,"SAP Extended Enterprise Content Management by OpenText, cloud edition, base access option",50,User,5322.00,USD,Month,6,10
+1839,8018181,"SAP Extended Enterprise Content Management by OpenText, cloud edition, base access option",50,User,3659.00,USD,Month,11,40
+1840,8018181,"SAP Extended Enterprise Content Management by OpenText, cloud edition, base access option",50,User,2384.00,USD,Month,41,100
+1841,8018181,"SAP Extended Enterprise Content Management by OpenText, cloud edition, base access option",50,User,1220.00,USD,Month,101,150
+1842,8018181,"SAP Extended Enterprise Content Management by OpenText, cloud edition, base access option",50,User,1164.00,USD,Month,151,300
+1843,8018181,"SAP Extended Enterprise Content Management by OpenText, cloud edition, base access option",50,User,998.00,USD,Month,301,1000
+1844,8018182,"SAP Extended Enterprise Content Management by OpenText, cloud edition, additional nonproduction tenant",1,Tenant,9219.00,USD,Month,1,Infinite
+1845,**,Cloud - Middleware,0,,0.00,,,,
+1846,8013631,SAP Enterprise Continuous Testing by Tricentis,1,Connection,2012.00,USD,Month,1,25
+1847,8013631,SAP Enterprise Continuous Testing by Tricentis,1,Connection,1802.00,USD,Month,26,50
+1848,8013631,SAP Enterprise Continuous Testing by Tricentis,1,Connection,1597.00,USD,Month,51,100
+1849,8013631,SAP Enterprise Continuous Testing by Tricentis,1,Connection,1386.00,USD,Month,101,Infinite
+1850,8015512,SAP Enterprise Performance Testing by Tricentis,100,Object,1996.00,USD,Month,1,9
+1851,8015512,SAP Enterprise Performance Testing by Tricentis,100,Object,1386.00,USD,Month,10,24
+1852,8015512,SAP Enterprise Performance Testing by Tricentis,100,Object,1247.00,USD,Month,25,49
+1853,8015512,SAP Enterprise Performance Testing by Tricentis,100,Object,1109.00,USD,Month,50,Infinite
+1854,8016682,SAP Test Automation by Tricentis,1,Connection,2090.00,USD,Month,1,25
+1855,8016682,SAP Test Automation by Tricentis,1,Connection,1885.00,USD,Month,26,50
+1856,8016682,SAP Test Automation by Tricentis,1,Connection,1691.00,USD,Month,51,100
+1857,8016682,SAP Test Automation by Tricentis,1,Connection,1497.00,USD,Month,101,Infinite
+1858,8017951,SAP Enterprise Data Integrity Testing by Tricentis,1,Connection,3991.00,USD,Month,1,5
+1859,8017951,SAP Enterprise Data Integrity Testing by Tricentis,1,Connection,3215.00,USD,Month,6,10
+1860,8017951,SAP Enterprise Data Integrity Testing by Tricentis,1,Connection,2772.00,USD,Month,11,20
+1861,8017951,SAP Enterprise Data Integrity Testing by Tricentis,1,Connection,2439.00,USD,Month,21,Infinite
+1862,8017961,SAP Change Impact Analysis by Tricentis,1,Gigabyte,20.00,USD,Month,1,1000
+1863,8017961,SAP Change Impact Analysis by Tricentis,1,Gigabyte,18.00,USD,Month,1001,3000
+1864,8017961,SAP Change Impact Analysis by Tricentis,1,Gigabyte,11.00,USD,Month,3001,6000
+1865,8017961,SAP Change Impact Analysis by Tricentis,1,Gigabyte,7.76,USD,Month,6001,10000
+1866,*,Cloud - Support,0,,0.00,,,,
+1867,8017514,SAP Preferred Success for SAP Sales Cloud and SAP Service Cloud,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1868,8017526,SAP Preferred Success for HCM solutions from SAP,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1869,8017534,SAP Preferred Success for SAP Digital Supply Chain,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1870,8017536,"SAP Preferred Success for SAP Commerce Cloud, expanded edition",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1871,8017543,SAP Preferred Success for SAP Fieldglass solutions,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1872,8017553,SAP Preferred Success for SAP Commerce Cloud,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1873,8017555,"SAP Preferred Success for HCM solutions from SAP, expanded edition",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1874,8017563,SAP Preferred Success for SAP Business Technology Platform,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1875,8017575,"SAP Preferred Success for SAP Ariba solutions, expanded edition",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1876,8017576,"SAP Preferred Success for SAP Sales Cloud and SAP Service Cloud, expanded edition",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1877,8017583,"SAP Preferred Success for SAP Business Technology Platform, expanded edition",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1878,8017593,SAP Preferred Success for SAP Ariba solutions,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1879,8017601,SAP Preferred Success for SAP Customer Data Cloud,1,% of Net Recurring Fee,20.00,%,Year,1,Infinite
+1880,8018206,"SAP Preferred Success for SAP IBP for Supply Chain, expanded edition",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1881,8018252,"SAP Preferred Success for SAP Fieldglass solutions, expanded edition",1,% of Net Recurring Fee,30.00,%,Year,1,Infinite
+1882,8018603,"SAP Cloud ALM, tenant extension",1,Tenant,2217.00,USD,Month,1,Infinite
+1883,*,Small and Midsize Enterprises (SME),0,,0.00,,,,
+1884,**,SAP Business ByDesign,0,,0.00,,,,
+1885,8000275,"SAP Business ByDesign, additional productive tenant",1,Tenant,1391.00,USD,Month,1,Infinite
+1886,8002712,"SAP Business ByDesign, localization fee",1,Entitlements Package,947.00,USD,Month,1,Infinite
+1887,8002713,"SAP Business ByDesign, test tenant",1,Tenant,1243.00,USD,Month,1,Infinite
+1888,8007643,"SAP Business ByDesign, advanced user",1,User,212.00,USD,Month,1,Infinite
+1889,8007644,"SAP Business ByDesign, core user",1,User,116.00,USD,Month,1,Infinite
+1890,8007645,"SAP Business ByDesign, self-service user",1,User,22.00,USD,Month,1,Infinite
+1891,8008018,"SAP Business ByDesign, public edition",1,Entitlements Package,1775.00,USD,Month,1,Infinite
+1892,8014401,"SAP Business ByDesign, enterprise private edition",1,Entitlements Package,33261.00,USD,Month,1,Infinite
+1893,8018108,"SAP Business ByDesign, private edition, archive option (L)?",1,Entitlements Package,80935.00,USD,Month,1,Infinite
+1894,8018130,"SAP Business ByDesign, private edition, archive option ? (S)?",1,Entitlements Package,20511.00,USD,Month,1,Infinite
+1895,8018136,"SAP Business ByDesign, private edition, archive option? (M)?",1,Entitlements Package,41576.00,USD,Month,1,Infinite
+1896,8018159,"SAP Business ByDesign, public edition, archive tenant",16,Gigabyte,443.00,USD,Month,1,6
+1897,8018159,"SAP Business ByDesign, public edition, archive tenant",16,Gigabyte,333.00,USD,Month,7,30
+1898,8018159,"SAP Business ByDesign, public edition, archive tenant",16,Gigabyte,277.00,USD,Month,31,60
+1899,8018159,"SAP Business ByDesign, public edition, archive tenant",16,Gigabyte,249.00,USD,Month,61,180
+1900,8018159,"SAP Business ByDesign, public edition, archive tenant",16,Gigabyte,205.00,USD,Month,181,Infinite
+1901,**,SAP Business One Cloud,0,,0.00,,,,
+1902,***,SAP Business One Cloud - Partner Hosted Options,0,,0.00,,,,
+1903,8005859,"SAP Business One Cloud Starter Package, partner-hosted",1,User,45.00,USD,Month,1,Infinite
+1904,8005860,"SAP Business One Cloud Professional, partner-hosted",1,User,108.00,USD,Month,1,20
+1905,8005860,"SAP Business One Cloud Professional, partner-hosted",1,User,87.00,USD,Month,21,50
+1906,8005860,"SAP Business One Cloud Professional, partner-hosted",1,User,76.00,USD,Month,51,Infinite
+1907,8005861,"SAP Business One Cloud Limited, partner-hosted",1,User,56.00,USD,Month,1,Infinite
+1908,8005862,"SAP Business One Cloud Mobile App, partner-hosted",1,User,18.00,USD,Month,1,Infinite
+1909,8005863,"SAP Business One Cloud Indirect Access, user-based, partner-hosted option",1,User,9.52,USD,Month,1,Infinite
+1910,8008002,"SAP Business One Cloud Indirect access by non-employees, partner-hosted option",1,Connection,60.00,USD,Month,1,Infinite
+1911,8013627,"SAP Business One Cloud Customer Checkout, partner-hosted option",1,Object,39.00,USD,Month,1,
+1912,*,Extras,0,,0.00,,,,
+1913,8008471,"SAP Cloud Platform Document Management, repository option",100,Gigabyte,142.07,USD,Month,1,Infinite
+1914,8008376,"SAP Cloud Platform Document Management, application option",50000,API Call,144.30,USD,Month,1,4
+1915,8008376,"SAP Cloud Platform Document Management, application option",50000,API Call,144.30,USD,Month,5,Infinite
+1916,8008414,"SAP Cloud Platform Document Management, integration option",50000,API Call,106.00,USD,Month,1,4
+1917,8008414,"SAP Cloud Platform Document Management, integration option",50000,API Call,27.00,USD,Month,5,Infinite
+1918,XXXXX02,SAP Forms Service by Adobe,1000,API Call,18.20,USD,Month,1,10
+1919,XXXXX02,SAP Forms Service by Adobe,1000,API Call,15.60,USD,Month,11,50
+1920,XXXXX02,SAP Forms Service by Adobe,1000,API Call,13.69,USD,Month,51,100
+1921,XXXXX02,SAP Forms Service by Adobe,1000,API Call,11.70,USD,Month,100,Infinite
+1922,XXXXX03,SAP BTP ABAP environment,730,Hours of Runtime Memory in 16 GB Blocks,2.11,USD,Month,1,Infinite

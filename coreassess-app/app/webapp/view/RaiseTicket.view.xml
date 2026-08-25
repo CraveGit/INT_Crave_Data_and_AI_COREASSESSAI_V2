@@ -1,0 +1,71 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.RaiseTicket"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout.form"
+    height="100%"
+    id="raiseTicketPage"
+>
+    <f:DynamicPage id="ticketDynPage" headerExpanded="true" toggleHeaderOnTitleClick="false" fitContent="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <VBox class="craHeroBlock">
+                        <Title text="Raise Ticket" level="H2" class="craHeroTitle" />
+                    </VBox>
+                </f:heading>
+                <f:expandedContent>
+                    <Text text="Report an issue or request; track its status below" />
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Text text="Report an issue or request; track its status below" />
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <VBox width="100%" class="sapUiSmallMarginTop">
+                <!-- Raise form -->
+                <Panel class="craTicketForm sapUiMediumMarginBottom">
+                    <VBox class="craTicketFields sapUiSmallMargin" alignItems="Start">
+                        <Label text="Title" required="true" class="sapUiTinyMarginBottom"/>
+                        <Input value="{ticketModel>/title}" maxLength="200" width="32rem"
+                            placeholder="Short summary of the issue" class="sapUiSmallMarginBottom"/>
+                        <Label text="Description" class="sapUiTinyMarginBottom"/>
+                        <TextArea value="{ticketModel>/description}" rows="4" width="32rem" growing="true"
+                            placeholder="Describe the problem or request in detail..."/>
+                        <Button text="Submit Ticket" icon="sap-icon://add" type="Emphasized" press="onSubmitTicket"
+                            class="sapUiSmallMarginTop"/>
+                    </VBox>
+                </Panel>
+
+                <!-- My tickets -->
+                <Table id="myTicketsTable" items="{ticketModel>/tickets}" growing="true" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="{= 'My Tickets (' + (${ticketModel>/tickets}.length || 0) + ')' }" level="H3"/>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshTickets" type="Transparent"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column><Text text="Title"/></Column>
+                        <Column><Text text="Description"/></Column>
+                        <Column width="9rem"><Text text="Status"/></Column>
+                        <Column><Text text="Resolution"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{ticketModel>TITLE}"/>
+                                <Text text="{ticketModel>DESCRIPTION}"/>
+                                <ObjectStatus text="{ticketModel>STATUS}" state="{path:'ticketModel>STATUS',formatter:'.formatTicketState'}"/>
+                                <Text text="{= ${ticketModel>CLOSE_COMMENT} || '' }"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

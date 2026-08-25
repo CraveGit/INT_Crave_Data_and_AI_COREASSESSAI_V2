@@ -1,0 +1,6 @@
+{
+  "name": "coreassess-approuter",
+  "version": "2.0.0",
+  "dependencies": { "@sap/approuter": "^16" },
+  "scripts": { "start": "node node_modules/@sap/approuter/approuter.js" }
+}

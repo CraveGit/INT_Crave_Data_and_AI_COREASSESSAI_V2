@@ -1,0 +1,47 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog id="uploadProgressDialog" title="Analysing objects" contentWidth="34rem"
+        resizable="false" draggable="true">
+        <VBox class="sapUiSmallMargin">
+            <ProgressIndicator
+                percentValue="{foldersModel>/progressPercent}"
+                displayValue="{foldersModel>/progressText}"
+                showValue="true"
+                state="Information"
+                class="sapUiMediumMarginBottom sapUiSmallMarginTop" />
+            <!-- craGridTable caps the height (~26rem) and scrolls; sticky headers
+                 keep the columns visible while scrolling a long object list. -->
+            <Table items="{foldersModel>/folderArray}" class="craGridTable craUploadTable" sticky="ColumnHeaders" growing="true" growingThreshold="50">
+                <columns>
+                    <Column><Text text="Object"/></Column>
+                    <Column width="8rem" hAlign="End"><Text text="Status"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{foldersModel>webkitRelativePath}" text="{foldersModel>statusNote}"/>
+                            <ObjectStatus
+                                text="{foldersModel>status}"
+                                state="{path:'foldersModel>status', formatter:'.formatUploadStatusState'}"
+                                icon="{path:'foldersModel>status', formatter:'.formatUploadStatusIcon'}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+        <buttons>
+            <!-- Minimize: keep analysing in the background and let the user leave
+                 this page; the header "Analysis jobs" notification takes over. -->
+            <Button text="Minimize" icon="sap-icon://minimize" press="onMinimizeUpload"
+                visible="{= ${foldersModel>/uploadDone} !== true }"/>
+            <!-- Stop starting new analyses to save tokens; only while running. -->
+            <Button text="Cancel analysis" type="Reject" icon="sap-icon://cancel"
+                press="onCancelUpload"
+                visible="{= ${foldersModel>/uploadDone} !== true &amp;&amp; ${foldersModel>/cancelled} !== true &amp;&amp; ${foldersModel>/pendingCount} &gt; 0 }"/>
+            <Button text="Close" type="Emphasized" press="onCloseUploadProgress"
+                enabled="{= ${foldersModel>/uploadDone} === true }"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

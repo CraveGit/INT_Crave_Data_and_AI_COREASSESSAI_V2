@@ -1,0 +1,347 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.ROIInput"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    height="100%"
+    id="ROIInputPage"
+    xmlns:ux="sap.uxap"
+>
+    <Page
+        id="ROIInput"
+        title="{i18n>title}"
+        showHeader="false"
+        class="sapUiSizeCompact"
+    >
+        <content>
+          
+           
+                <VBox
+                    width="100%"
+                    class="sapUiTinyMarginEnd sapUiTinyMarginTop">
+                    	<ux:ObjectPageLayout id="ObjectPageLayout"
+		upperCaseAnchorBar="false">
+
+        
+        <ux:sections>
+       <ux:ObjectPageSection titleUppercase="false" title="Company Details Form">
+				<ux:subSections>
+					<ux:ObjectPageSubSection titleUppercase="false">
+						<ux:blocks>
+                          <VBox>
+								<VBox class="sapUiSmallMargin">
+		<f:Form id="FormChange480_12120"
+			editable="true">
+			<f:layout>
+					<f:ResponsiveGridLayout
+					labelSpanXL="4"
+					labelSpanL="4"
+					labelSpanM="12"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="0"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="2"
+					columnsM="2"
+					singleContainerFullSize="false" />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer >
+					<f:formElements>
+						<f:FormElement label="Select Company">
+							<f:fields>
+								 <ComboBox
+                                    id="ROIInputPageSelectCompany"
+                                   
+                                    class="sapUiSmallMarginEnd"
+                                    change="onCompanyChange"
+                                    items="{
+                path: 'ROIInputCompanyModel>/companyArray'}"
+                                >
+                                    <core:Item
+                                        key="{ROIInputCompanyModel>ID}"
+                                        text="{ROIInputCompanyModel>COMPANY_NAME}"
+                                    />
+                                </ComboBox>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Select Projects">
+							<f:fields>
+							 <ComboBox
+                                    id="ROIInputPageSelectProject"
+                                    change="onProjectChange"
+                                    class="sapUiSmallMarginEnd"
+                                    items="{
+                path: 'ROIInputProjectModel>/projectArray'}"
+                                >
+                                    <core:Item
+                                        key="{ROIInputProjectModel>ID}"
+                                        text="{ROIInputProjectModel>PROJECT_NAME}"
+                                    />
+                                </ComboBox>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Revenue ($)">
+							<f:fields>
+								<Input
+                                    id="inputRevenue"
+                                    type="Number"
+                                />
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+				<f:FormContainer >
+					<f:formElements>
+						<f:FormElement label="Operating Income ($)">
+							<f:fields>
+								 <Input
+                                    id="inputOperatingIncome"
+                                    type="Number"
+                                />
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Annual SAP ERP Maintenance Cost ($)">
+							<f:fields>
+								 <Input
+                                    id="inputSapERPMaintenanceCost"
+                                    type="Number"
+                                />
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Number of Employees">
+							<f:fields>
+								 <Input
+                                    id="inputNumEmployees"
+                                    type="Number"
+                                />
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+        </VBox>
+    
+         <ScrollContainer>
+                                <t:Table
+                                    id="costTable"
+                                    visibleRowCount="6"
+                                    selectionMode="None"
+                                    editable="true"
+                                    class="sapUiResponsiveMargin"
+                                    rows="{costModel>/rows}"
+                                >
+                                    <!-- Description Column -->
+                                    <t:Column>
+                                        <Label text="Description" />
+                                        <t:template>
+                                            <Text text="{costModel>desc}" />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <!-- Initial Investment Column -->
+                                    <t:Column>
+                                        <Label text="Initial Investment ($)" />
+                                        <t:template>
+                                            <Input
+                                                value="{costModel>year0}"
+                                                editable="{costModel>editable}"
+                                                change="onInputChange"
+                                             
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <!-- Year 1 Column -->
+                                    <t:Column>
+                                        <Label text="Year 1 ($)" />
+                                        <t:template>
+                                            <Input
+                                                value="{costModel>year1}"
+                                                editable="{costModel>editable}"
+                                                change="onInputChange"
+                                              
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <!-- Year 2 Column -->
+                                    <t:Column>
+                                        <Label text="Year 2 ($)" />
+                                        <t:template>
+                                            <Input
+                                                value="{costModel>year2}"
+                                                editable="{costModel>editable}"
+                                                change="onInputChange"
+                                              
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <!-- Year 3 Column -->
+                                    <t:Column>
+                                        <Label text="Year 3 ($)" />
+                                        <t:template>
+                                            <Input
+                                                value="{costModel>year3}"
+                                                editable="{costModel>editable}"
+                                                change="onInputChange"
+                                             
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <!-- Year 4 Column -->
+                                    <t:Column>
+                                        <Label text="Year 4 ($)" />
+                                        <t:template>
+                                            <Input
+                                                value="{costModel>year4}"
+                                                editable="{costModel>editable}"
+                                                change="onInputChange"
+                                              
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <!-- Year 5 Column -->
+                                    <t:Column>
+                                        <Label text="Year 5 ($)" />
+                                        <t:template>
+                                            <Input
+                                                value="{costModel>year5}"
+                                                editable="{costModel>editable}"
+                                                change="onInputChange"
+                                             
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:Table>
+                            </ScrollContainer>
+                            
+
+   </VBox >
+    
+
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+            <ux:ObjectPageSection titleUppercase="false" title="IT Cost Optimization Metrics">
+				<ux:subSections>
+					<ux:ObjectPageSubSection titleUppercase="false">
+						<ux:blocks>
+                         <ScrollContainer>
+							<t:TreeTable
+                    id="TreeTable"
+                    rows="{path:'alTreeModel>/treeItems', parameters: {arrayNames:['categories']}}"
+                    selectionMode="None"
+                    enableSelectAll="false"
+                    ariaLabelledBy="title" fixedColumnCount="1">
+                     <t:columns>
+                    <t:Column width="30rem">
+                        <Label text="Category"/>
+                        <t:template>
+                            <Label design="{alTreeModel>CatagoryLabel}" text="{alTreeModel>cat_desc}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="30rem">
+                        <Label text="Description"/>
+                        <t:template>
+                            <Text text="{alTreeModel>Desc}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="15rem">
+                        <Label text="Editable Field"/>
+                        <t:template>
+                            <Input value="{alTreeModel>Edit_Field}"  visible="{alTreeModel>Edit_Field_Visiblity}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="15rem">
+                        <Label text="Dropdown Options"/>
+                        <t:template>
+                             <ComboBox  visible="{alTreeModel>Dropdown_Visiblity}" selectedKey="{alTreeModel>DropdownKey}"
+                                    class="sapUiSmallMarginEnd"
+                                >
+                                    <core:Item
+                                        key="MB"
+                                        text="Mega Byte"
+                                    />
+                                     <core:Item
+                                        key="MB"
+                                        text="Mega Byte"
+                                    />
+                                     <core:Item
+                                        key="GB"
+                                        text="Giga Byte"
+                                    />
+                                     <core:Item
+                                        key="TB"
+                                        text="Tera Byte"
+                                    />
+
+                                     <core:Item
+                                        key="PB"
+                                        text="Peta Byte"
+                                    />
+                                     <core:Item
+                                        key="EB"
+                                        text="Exa Byte"
+                                    />
+                                     <core:Item
+                                        key="ZB"
+                                        text="Zetta Byte"
+                                    />
+
+                                    <core:Item
+                                        key="YB"
+                                        text="Yotta Byte"
+                                    />
+                                </ComboBox>
+                            
+                                                    </t:template>
+                    </t:Column>
+                        <t:Column width="10rem">
+                        <Label />
+                        <t:template>
+                           <Text ></Text>
+                        </t:template>
+                    </t:Column>
+                    </t:columns>
+                    	</t:TreeTable>
+                         </ScrollContainer>
+						</ux:blocks>
+					</ux:ObjectPageSubSection>
+				</ux:subSections>
+			</ux:ObjectPageSection>
+        </ux:sections>
+
+
+
+        </ux:ObjectPageLayout>
+ 
+                </VBox>
+
+        </content>
+        <footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button
+                                    text="Submit"
+                                    type="Emphasized"
+                                    press="onSubmitForm"
+                                />
+			</OverflowToolbar>
+		</footer>
+    </Page>
+</mvc:View>

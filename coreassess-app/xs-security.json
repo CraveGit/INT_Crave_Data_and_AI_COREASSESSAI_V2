@@ -1,0 +1,17 @@
+{
+  "xsappname": "coreassess-v2",
+  "tenant-mode": "dedicated",
+  "description": "CoreAssess v2 security profile",
+  "scopes": [],
+  "attributes": [],
+  "role-templates": [],
+  "oauth2-configuration": {
+    "token-validity": 3600,
+    "refresh-token-validity": 43200,
+    "redirect-uris": [
+      "https://*.cfapps.us10-001.hana.ondemand.com/**",
+      "https://*.hana.ondemand.com/**",
+      "http://localhost:5000/**"
+    ]
+  }
+}

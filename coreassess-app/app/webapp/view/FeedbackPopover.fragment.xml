@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Popover id="feedbackPopover" title="{feedbackModel>/title}" placement="Bottom" contentWidth="22rem" class="sapUiContentPadding">
+        <VBox>
+            <Label text="Add an optional comment" class="sapUiTinyMarginBottom"/>
+            <TextArea value="{feedbackModel>/comment}" rows="3" width="100%" growing="true" placeholder="What worked, what didn't..."/>
+            <HBox justifyContent="End" class="sapUiSmallMarginTop">
+                <Button text="Cancel" press="onCancelFeedback" class="sapUiTinyMarginEnd"/>
+                <Button text="Submit" type="Emphasized" press="onSubmitFeedback"/>
+            </HBox>
+        </VBox>
+    </Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+    xmlns= "sap.m"
+	xmlns:valuehelpdialog="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core" >
+  
+  
+    <valuehelpdialog:ValueHelpDialog 
+   
+		title="Efforts"
+		ok=".onSingleConditionValueHelpOkPress"
+		cancel=".onSingleConditionCancelPress"
+		key="Efforts"
+		descriptionKey="Name"
+		afterClose=".onSingleConditionAfterClose"
+		supportRanges="true"
+		supportRangesOnly="true"
+		maxIncludeRanges="1"
+		maxExcludeRanges="0"
+		maxConditions="1"/>
+
+
+</core:FragmentDefinition>

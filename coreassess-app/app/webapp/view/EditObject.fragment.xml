@@ -1,0 +1,916 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:m="sap.m"
+    xmlns:tnt="sap.tnt"
+>
+    <Dialog
+        id="editObjectFrag"
+        resizable="true"
+        draggable="true"
+        title="Selected Object"
+        contentWidth="1800px"
+        contentHeight="500px"
+        titleAlignment="Center"
+    >
+        <MessageStrip
+            text="Object in Edit Mode"
+            type="Information"
+            showIcon="true"
+        />
+        <Panel
+            visible="true"
+            expanded="true"
+            class="sapUiTinyMarginTop panelColor"
+        >
+            <content>
+                <VBox>
+                    <HBox class="sapUiSmallMarginBottom">
+                        <tnt:InfoLabel
+                            colorScheme="4"
+                            text="OVERVIEW"
+                        />
+                    </HBox>
+                    <HBox
+                        justifyContent="SpaceBetween"
+                        class="sapUiMediumMarginBottom"
+                    >
+                        <VBox
+                            class="sapUiTinyMarginEnd"
+                            width="25%"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Object Name"
+                            />
+                            <Text text="{editselectObjectModel>/OBJECT_NAME}" />
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMarginEnd"
+                            width="25%"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="SAP Module Name"
+                            />
+                            <Input
+                                value="{editselectObjectModel>/SAP_MODULE_NAME}"
+                            />
+                        </VBox>
+                        <!-- <VBox width="50%">
+                                        <tnt:InfoLabel
+                                            colorScheme="6"
+                                            text="Functional Analysis"
+                                        />
+                                        <Text
+                                            text="{editselectObjectModel>/FUNCTIONAL_ANALYSIS}"
+                                        />
+                                    </VBox> -->
+                        <VBox
+                            class="sapUiTinyMarginEnd"
+                            width="25%"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Sub Module"
+                            />
+                            <Input
+                                value="{editselectObjectModel>/SAP_SUB_MODULE}"
+                            />
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMarginEnd"
+                            width="25%"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Clean Core Adherence"
+                            />
+                            <Input value="{editselectObjectModel>/ADHERENCE}" />
+                        </VBox>
+                    </HBox>
+                    <HBox
+                        justifyContent="SpaceBetween"
+                        class="sapUiMediumMarginBottom"
+                    >
+                        <!-- <VBox
+                                        class="sapUiTinyMarginEnd"
+                                        width="25%"
+                                    >
+                                        <tnt:InfoLabel
+                                            colorScheme="6"
+                                            text="Sub Module"
+                                        />
+                                        <Text
+                                            text="{editselectObjectModel>/SAP_SUB_MODULE}"
+                                        />
+                                    </VBox> -->
+                        <VBox
+                            class="sapUiTinyMarginEnd"
+                            width="25%"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Code Complexity"
+                            />
+                            <Input
+                                value="{editselectObjectModel>/CODE_COMPLEXITY}"
+                            />
+                        </VBox>
+                    </HBox>
+                    <HBox
+                        justifyContent="SpaceBetween"
+                        class="sapUiMediumMarginBottom"
+                    >
+                        <!-- <VBox
+                                        class="sapUiTinyMarginEnd"
+                                        width="25%"
+                                    >
+                                        <tnt:InfoLabel
+                                            colorScheme="6"
+                                            text="Clean Core Adherence"
+                                        />
+                                        <Text
+                                            text="{editselectObjectModel>/ADHERENCE}"
+                                        />
+                                    </VBox> -->
+                        <VBox width="25%">
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="TShirt Size"
+                            />
+                            <Input value="{editselectObjectModel>/TSHIRT}" />
+                        </VBox>
+                        <VBox width="25%">
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Efforts (hrs)"
+                            />
+                            <Input value="{editselectObjectModel>/EFFORTS}" />
+                        </VBox>
+                        <VBox width="25%">
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Priority"
+                            />
+                            <Input value="{editselectObjectModel>/PRIORITY}" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox
+                        justifyContent="SpaceBetween"
+                        class="sapUiMediumMarginBottom"
+                    >
+                        <!-- <VBox
+                                        class="sapUiTinyMarginEnd"
+                                        width="25%"
+                                    >
+                                        <tnt:InfoLabel
+                                            colorScheme="6"
+                                            text="Screens Utilized "
+                                        />
+                                        <Text
+                                            text="{editselectObjectModel>/SCREENS_USED}"
+                                        />
+                                    </VBox> -->
+                        <!-- <VBox width="25%">
+                                        <tnt:InfoLabel
+                                            colorScheme="6"
+                                            text="Token Size "
+                                        />
+                                        <Text
+                                            text="{editselectObjectModel>/TOKEN_SIZE}"
+                                        />
+                                    </VBox> -->
+                        <VBox
+                            width="50%"
+                            class="sapUiTinyMarginRight"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Functional Analysis"
+                            />
+                            <TextArea
+                                value="{editselectObjectModel>/FUNCTIONAL_ANALYSIS}"
+                                growing="true"
+                                width="100%"
+                            />
+                        </VBox>
+                        <VBox width="50%">
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Clean Core Analysis"
+                            />
+                            <List
+                                items="{editselectObjectModel>/CLEAN_CORE_ANALYSIS}"
+                                showNoData="true"
+                                noDataText="None"
+                            >
+                                <CustomListItem
+                                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                >
+                                    <TextArea
+                                        value="{editselectObjectModel>TITLE}: {editselectObjectModel>DESCRIPTION}"
+                                        class="sapUiTinyMarginEnd"
+                                        growing="true"
+                                        width="100%"
+                                    />
+                                </CustomListItem>
+                            </List>
+                        </VBox>
+                    </HBox>
+                    <HBox
+                        justifyContent="SpaceBetween"
+                        class="sapUiMediumMarginBottom"
+                    >
+                        <VBox
+                            class="sapUiTinyMarginEnd"
+                            width="25%"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="UI Integration"
+                            />
+                            <Input
+                                value="{editselectObjectModel>/UI_INTEGRATION}"
+                            />
+                        </VBox>
+                        <VBox width="25%">
+                            <tnt:InfoLabel
+                                colorScheme="6"
+                                text="Third Party Integration"
+                            />
+                            <Input
+                                value="{editselectObjectModel>/THIRD_PARTY_INTEGRATION}"
+                            />
+                        </VBox>
+                    </HBox>
+                    <VBox justifyContent="Start">
+                        <HBox class="sapUiMediumMarginBottom">
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                justifyContent="SpaceBetween"
+                                width="50%"
+                            >
+                                <VBox>
+                                    <tnt:InfoLabel
+                                        colorScheme="6"
+                                        text="WRICEF Object Type"
+                                    />
+                                    <List
+                                        items="{editselectObjectModel>/WRICEF_OBJECT_TYPE}"
+                                        showNoData="true"
+                                        noDataText="None"
+                                    >
+                                        <CustomListItem
+                                            class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                        >
+                                            <Input
+                                                value="{editselectObjectModel>WRICEF_OBJECT_TYPE}"
+                                                class="sapUiTinyMarginEnd"
+                                            />
+                                        </CustomListItem>
+                                    </List>
+                                </VBox>
+                                <VBox>
+                                    <tnt:InfoLabel
+                                        colorScheme="6"
+                                        text="SAP BTP Services"
+                                    />
+                                    <List
+                                        items="{editselectObjectModel>/BTP_SERVICES}"
+                                        showNoData="true"
+                                        noDataText="None"
+                                    >
+                                        <CustomListItem
+                                            class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                        >
+                                            <Input
+                                                value="{editselectObjectModel>SERVICE_NAME} ({editselectObjectModel>BLOCKS_REQUIRED},{editselectObjectModel>METRIC})"
+                                                class="sapUiTinyMarginEnd"
+                                            />
+                                        </CustomListItem>
+                                    </List>
+                                </VBox>
+                                <VBox>
+                                    <tnt:InfoLabel
+                                        colorScheme="6"
+                                        text="CRUD Operations"
+                                    />
+                                    <List
+                                        items="{editselectObjectModel>/READ_CRUD}"
+                                        showNoData="true"
+                                        noDataText="None"
+                                    >
+                                        <CustomListItem
+                                            class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                        >
+                                            <Input
+                                                value="{editselectObjectModel>READ_CRUD}"
+                                                class="sapUiTinyMarginEnd"
+                                            />
+                                        </CustomListItem>
+                                    </List>
+                                </VBox>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="High Level Recommendations"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/HIGH_LVL_RECOMMENDATIONS}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <TextArea
+                                            value="{editselectObjectModel>TITLE}: {editselectObjectModel>DESCRIPTION}"
+                                            class="sapUiTinyMarginEnd"
+                                            growing="true"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                        </HBox>
+                        <HBox class="sapUiMediumMarginBottom">
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Integration Analysis"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/INTEGERATION_RESULT}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <HBox>
+                                            <core:Icon
+                                                src="sap-icon://bo-strategy-management"
+                                                class="sapUiTinyMarginEnd"
+                                            />
+                                            <TextArea
+                                                value="{editselectObjectModel>TITLE}: {editselectObjectModel>DESCRIPTION}"
+                                                class="sapUiTinyMarginEnd"
+                                                growing="true"
+                                                width="100%"
+                                            />
+                                        </HBox>
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            />
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            id="interfaceFieldGrpEdit"
+                            visible="false"
+                        >
+                            <tnt:InfoLabel
+                                colorScheme="4"
+                                text="INTERFACE"
+                            />
+                        </HBox>
+
+                        <HBox
+                            class="sapUiMediumMarginBottom"
+                            id="interfaceFieldGrpEdit1"
+                            visible="false"
+                        >
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="IDocs Utilized"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/INTERFACE_IDOCS}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>IDOCS}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Standard APIs Replacements"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/INTERFACE_STANDARD_API}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>STANDARD_API}"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                        </HBox>
+
+                        <!-- <HBox
+                            class="sapUiMediumMarginBottom"
+                            id="interfaceFieldGrpEdit23"
+                            visible="false"
+                        >
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Integration Modernization Brief"
+                                />
+                                <TextArea
+                                    value="{editselectObjectModel>/INTEGRATION_MODERNIZATION}"
+                                    class="sapUiTinyMarginEnd"
+                                    growing="true"
+                                    width="100%"
+                                />
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <HBox justifyContent="SpaceBetween">
+                                    <HBox width="50%">
+                                        <VBox>
+                                            <tnt:InfoLabel
+                                                colorScheme="6"
+                                                text="Events"
+                                            />
+                                            <List
+                                                items="{editselectObjectModel>/EVENTS}"
+                                                showNoData="true"
+                                                noDataText="None"
+                                            >
+                                                <CustomListItem
+                                                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                                >
+                                                    <Input
+                                                        value="{editselectObjectModel>EVENTS}"
+                                                        width="100%"
+                                                        class="sapUiTinyMarginEnd"
+                                                    />
+                                                </CustomListItem>
+                                            </List>
+                                        </VBox>
+                                    </HBox>
+                                    <HBox width="50%">
+                                        <VBox>
+                                            <tnt:InfoLabel
+                                                colorScheme="6"
+                                                text="Standard Events"
+                                            />
+                                            <List
+                                                items="{editselectObjectModel>/STANDARD_EVENTS}"
+                                                showNoData="true"
+                                                noDataText="None"
+                                            >
+                                                <CustomListItem
+                                                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                                >
+                                                    <Input
+                                                        value="{editselectObjectModel>STANDARD_EVENTS}"
+                                                        width="100%"
+                                                        class="sapUiTinyMarginEnd"
+                                                    />
+                                                </CustomListItem>
+                                            </List>
+                                        </VBox>
+                                    </HBox>
+                                </HBox>
+                            </VBox>
+                        </HBox> -->
+                        <!-- hgjh -->
+                        <HBox
+                            class="sapUiMediumMarginBottom"
+                            id="interfaceFieldGrpEdit2"
+                            visible="false"
+                        >
+                            <VBox width="100%">
+                                <VBox
+                                    class="sapUiMediumMarginBottom"
+                                    width="100%"
+                                >
+                                    <tnt:InfoLabel
+                                        colorScheme="6"
+                                        text="Integration Modernization Brief"
+                                    />
+                                    <TextArea
+                                        value="{editselectObjectModel>/INTEGRATION_MODERNIZATION}"
+                                        class="sapUiTinyMarginEnd"
+                                        width="100%"
+                                        growing="true"
+                                    />
+                                </VBox>
+                                <VBox
+                                    class="sapUiMediumMarginBottom"
+                                    width="100%"
+                                >
+                                    <HBox justifyContent="SpaceBetween">
+                                        <HBox width="50%">
+                                            <VBox width="100%">
+                                                <tnt:InfoLabel
+                                                    colorScheme="6"
+                                                    text="BOR Events"
+                                                />
+                                                <List
+                                                    items="{editselectObjectModel>/EVENTS}"
+                                                    showNoData="true"
+                                                    noDataText="None"
+                                                >
+                                                    <CustomListItem
+                                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                                    >
+                                                        <Input
+                                                            value="{editselectObjectModel>EVENTS}"
+                                                            class="sapUiTinyMarginEnd"
+                                                        />
+                                                    </CustomListItem>
+                                                </List>
+                                            </VBox>
+                                        </HBox>
+                                        <HBox width="50%">
+                                            <VBox width="100%">
+                                                <tnt:InfoLabel
+                                                    colorScheme="6"
+                                                    text="Standard Events"
+                                                />
+                                                <List
+                                                    items="{editselectObjectModel>/STANDARD_EVENTS}"
+                                                    showNoData="true"
+                                                    noDataText="None"
+                                                >
+                                                    <CustomListItem
+                                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                                    >
+                                                        <Input
+                                                            value="{editselectObjectModel>STANDARD_EVENTS}"
+                                                            class="sapUiTinyMarginEnd"
+                                                        />
+                                                    </CustomListItem>
+                                                </List>
+                                            </VBox>
+                                        </HBox>
+                                    </HBox>
+                                </VBox>
+
+                                <VBox
+                                    class="sapUiMediumMarginBottom"
+                                    width="100%"
+                                >
+                                    <HBox justifyContent="SpaceBetween">
+                                        <HBox width="50%">
+                                            <VBox width="100%">
+                                                <tnt:InfoLabel
+                                                    colorScheme="6"
+                                                    text="Topics"
+                                                />
+                                                <List
+                                                    items="{editselectObjectModel>/TOPICS}"
+                                                    showNoData="true"
+                                                    noDataText="None"
+                                                >
+                                                    <CustomListItem
+                                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                                    >
+                                                        <Input
+                                                            value="{editselectObjectModel>TOPICS}"
+                                                            class="sapUiTinyMarginEnd"
+                                                        />
+                                                    </CustomListItem>
+                                                </List>
+                                            </VBox>
+                                        </HBox>
+                                        <HBox width="50%">
+                                            <VBox width="100%" />
+                                        </HBox>
+                                    </HBox>
+                                </VBox>
+                            </VBox>
+                        </HBox>
+
+                        <!-- hjh -->
+                        <HBox class="sapUiSmallMarginBottom">
+                            <tnt:InfoLabel
+                                colorScheme="4"
+                                text="SQL Analysis"
+                            />
+                        </HBox>
+                        <HBox class="sapUiMediumMarginBottom">
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="SQL Recommendation"
+                                />
+                                <TextArea
+                                    value="{editselectObjectModel>/SQL_RECOMMENDATION}"
+                                    growing="true"
+                                    width="100%"
+                                />
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Tables Accessed Directly"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/SQL_ANALYSIS_TABLES_DIRECT}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>TABLE_NAME}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                        </HBox>
+                        <HBox class="sapUiMediumMarginBottom">
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Tables Accessed via APIs"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/SQL_ANALYSIS_TABLES_API}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>SQL_ANALYSIS_TABLES_API}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Tables Accessed via CDS Views"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/SQL_ANALYSIS_TABLES_CDS}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>SQL_ANALYSIS_TABLES_CDS}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                        </HBox>
+
+                        <HBox class="sapUiMediumMarginBottom">
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Custom Tables Utilized"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/CUSTOM_TABLES}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>TABLE_NAME}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Standard Tables Utilized"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/STANDARD_TABLES}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>TABLE_NAME}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                        </HBox>
+                        <HBox class="sapUiMediumMarginBottom">
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="BAPIs Utilized"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/BAPIS}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>BAPIS}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Standard S4 Replacements"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/NEW_S4_TABLES}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>S4_TABLES}"
+                                            class="sapUiTinyMarginEnd"
+                                            width="100%"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                        </HBox>
+
+                        <HBox class="sapUiMediumMarginBottom">
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    colorScheme="6"
+                                    text="Function Modules Utilized"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/FUNCTION_MODULES}"
+                                    showNoData="true"
+                                    noDataText="None"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>FUNCTION_MODULES}"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            />
+                        </HBox>
+
+                        <HBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    text="Use Case Area"
+                                    colorScheme="6"
+                                />
+                                <List
+                                    items="{editselectObjectModel>/USE_CASE_AREA}"
+                                >
+                                    <CustomListItem
+                                        class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                    >
+                                        <Input
+                                            value="{editselectObjectModel>USE_CASE_AREA}"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                    </CustomListItem>
+                                </List>
+                            </VBox>
+                            <VBox
+                                class="sapUiSmallMarginBottom"
+                                width="50%"
+                            >
+                                <tnt:InfoLabel
+                                    text="Use Case Brief"
+                                    colorScheme="6"
+                                />
+                                <TextArea
+                                    value="{editselectObjectModel>/USE_CASE_AREA_EXPLANATION}"
+                                    class="sapUiTinyMarginEnd"
+                                    growing="true"
+                                    width="100%"
+                                />
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </content>
+        </Panel>
+        <footer>
+            <m:OverflowToolbar>
+                <m:ToolbarSpacer />
+                <Button
+                    press="onUpdateObject"
+                    type="Accept"
+                    text="Apply Changes"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Button
+                    press="editFragClose"
+                    text="Close"
+                />
+            </m:OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,1 @@
+INDEX "idx_note_parent" ON CRA_ASSESSMENT_NOTE (ASSESSMENT_ID)

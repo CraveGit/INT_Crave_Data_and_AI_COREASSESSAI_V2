@@ -1,0 +1,64 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <!-- Profile settings, opened from the header avatar. The display name saves
+         on focus-out (see onDisplayNameChange); success flashes the input green
+         rather than showing a standing note. Input sits beside the avatar so the
+         popover stays one compact row instead of a stacked form. -->
+    <ResponsivePopover
+        id="profilePopover"
+        showHeader="false"
+        placement="Bottom"
+        contentWidth="19rem"
+        class="craProfilePopover"
+    >
+        <HBox alignItems="Center" class="craProfileBody">
+            <Avatar
+                initials="{userModel>/initials}"
+                fallbackIcon="sap-icon://person-placeholder"
+                displaySize="S"
+                class="sapUiTinyMarginEnd"
+            />
+            <VBox justifyContent="Center" class="craProfileIdentity">
+                <Input
+                    id="displayNameInput"
+                    value="{userModel>/displayName}"
+                    placeholder="Your name"
+                    maxLength="60"
+                    change=".onDisplayNameChange"
+                    width="100%"
+                />
+                <!-- Login identity (the email once authenticated). Read-only:
+                     it comes from the IdP, not from profile settings. -->
+                <Text
+                    text="{userModel>/email}"
+                    maxLines="1"
+                    tooltip="{userModel>/email}"
+                    class="craProfileEmail"
+                />
+                <Text text="{visibleModel>/role}" maxLines="1" class="craProfileRole" />
+            </VBox>
+        </HBox>
+
+        <footer>
+            <OverflowToolbar>
+                <!-- Close is essential on phones, where the ResponsivePopover
+                     becomes a full-screen dialog with no outside-click dismiss. -->
+                <Button
+                    text="Close"
+                    icon="sap-icon://decline"
+                    type="Transparent"
+                    press=".onCloseProfile"
+                />
+                <ToolbarSpacer />
+                <Button
+                    text="Log out"
+                    icon="sap-icon://log"
+                    type="Transparent"
+                    press=".onLogout"
+                />
+            </OverflowToolbar>
+        </footer>
+    </ResponsivePopover>
+</core:FragmentDefinition>

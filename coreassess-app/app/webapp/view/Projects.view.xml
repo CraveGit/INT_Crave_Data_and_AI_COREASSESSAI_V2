@@ -1,0 +1,133 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.Projects"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    height="100%"
+    id="projectPage"
+>
+    <!-- Same rework as Company: real sap.m.Table columns instead of stacked
+         percentage-width HBoxes that never lined up. -->
+    <f:DynamicPage
+        id="page4"
+        headerExpanded="true"
+        toggleHeaderOnTitleClick="false"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Projects" level="H2" class="craHeroTitle" />
+                </f:heading>
+                <f:expandedContent>
+                    <Text text="Open a project to review its assessed objects." />
+                </f:expandedContent>
+                <f:actions>
+                    <Button
+                        text="Create Project"
+                        icon="sap-icon://add"
+                        type="Emphasized"
+                        visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER' }"
+                        press="createProjFrag"
+                    />
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:content>
+            <Table
+                id="projectList"
+                items="{projectObjectsModel>/projectArray}"
+                growing="true"
+                growingThreshold="20"
+                sticky="ColumnHeaders,HeaderToolbar"
+                class="craBorderedTable"
+                width="auto"
+                mode="None"
+                showSeparators="All"
+                noDataText="No projects in this company yet"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            text="{= 'Project (' + ${projectObjectsModel>/projectArray}.length + ')' }"
+                            level="H3"
+                        />
+                        <ToolbarSpacer />
+                        <SearchField
+                            placeholder="Search projects"
+                            width="18rem"
+                            liveChange="onSearchProject"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column width="4rem" hAlign="Center">
+                        <Text text="" />
+                    </Column>
+                    <Column>
+                        <Text text="Project" />
+                    </Column>
+                    <Column
+                        width="7rem"
+                        hAlign="End"
+                        visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER' }"
+                    >
+                        <Text text="Actions" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press="navigateToReport"
+                        vAlign="Middle"
+                        highlight="{= ${projectObjectsModel>ARCHIVED_AT} ? 'Warning' : 'None' }"
+                    >
+                        <customData>
+                            <core:CustomData key="archived" writeToDom="true"
+                                value="{= ${projectObjectsModel>ARCHIVED_AT} ? 'true' : 'false' }"/>
+                        </customData>
+                        <cells>
+                            <!-- Initials avatar, matching the Company table. The
+                                 formatter strips non-letters so names like
+                                 "S/4 Migration" render "SM" instead of the
+                                 fallback icon. -->
+                            <Avatar
+                                initials="{ path: 'projectObjectsModel>PROJECT_NAME', formatter: '.formatInitials' }"
+                                fallbackIcon="sap-icon://project-definition-triangle-2"
+                                displaySize="XS"
+                                displayShape="Square"
+                            />
+                            <HBox alignItems="Center">
+                                <ObjectIdentifier title="{projectObjectsModel>PROJECT_NAME}" />
+                                <ObjectStatus text="Inactive" state="Warning" class="sapUiTinyMarginBegin"
+                                    visible="{= !!${projectObjectsModel>ARCHIVED_AT} }"/>
+                            </HBox>
+                            <HBox justifyContent="End">
+                                <!-- Active: edit + archive. -->
+                                <Button icon="sap-icon://edit" type="Transparent" tooltip="Edit project"
+                                    press="onEditProject"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER') &amp;&amp; !${projectObjectsModel>ARCHIVED_AT} }"/>
+                                <Button icon="sap-icon://delete" type="Transparent" tooltip="Archive project"
+                                    press="onDeleteProject"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER') &amp;&amp; !${projectObjectsModel>ARCHIVED_AT} }"/>
+                                <!-- Archived: restore + permanent delete. -->
+                                <Button icon="sap-icon://restart" type="Transparent" tooltip="Restore project"
+                                    press="onRestoreProject"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER') &amp;&amp; !!${projectObjectsModel>ARCHIVED_AT} }"/>
+                                <Button icon="sap-icon://delete" type="Reject" tooltip="Delete permanently"
+                                    press="onPermaDeleteProject"
+                                    visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER') &amp;&amp; !!${projectObjectsModel>ARCHIVED_AT} }"/>
+                            </HBox>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

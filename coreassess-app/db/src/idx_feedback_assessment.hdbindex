@@ -1,0 +1,1 @@
+INDEX "idx_feedback_assessment" ON CRA_FEEDBACK ("SOURCE", ASSESSMENT_ID, "USER")

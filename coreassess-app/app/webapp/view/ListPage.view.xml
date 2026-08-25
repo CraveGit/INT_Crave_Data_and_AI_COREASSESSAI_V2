@@ -1,0 +1,215 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.ListPage"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:comm="sap.suite.ui.commons"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data"
+    height="100%"
+    id="ListPage"
+>
+    <!-- DynamicPage: title stays visible while the content scrolls, which is the
+         standard Fiori floorplan for an action page. Replaces a Page + Panel that
+         had no separation between the filter row and the drop zone. -->
+    <f:DynamicPage
+        id="page"
+        headerExpanded="true"
+        toggleHeaderOnTitleClick="false"
+        fitContent="false"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <VBox class="craHeroBlock">
+                        <Title text="Upload Objects" level="H2" class="craHeroTitle" />
+                    </VBox>
+                </f:heading>
+                <f:snappedContent>
+                    <Text text="Select a company and project, then add the ABAP customization to analyse." />
+                </f:snappedContent>
+                <f:expandedContent>
+                    <Text text="Select a company and project, then add the ABAP customization to analyse." />
+                </f:expandedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:content>
+            <l:VerticalLayout width="100%" class="sapUiContentPadding">
+
+                <!-- Step 1: scope. Company + Project selectors, stacked; Project is
+                     disabled until a Company is chosen. -->
+                <f:Card class="craScopeCard">
+                    <f:content>
+                        <l:VerticalLayout width="100%" class="sapUiSmallMargin">
+                            <!-- Same custom header pattern as the Objects card:
+                                 title + subtitle laid out in content, no card:Header. -->
+                            <HBox
+                                justifyContent="SpaceBetween"
+                                alignItems="Center"
+                                class="craObjectsHeaderRow"
+                            >
+                                <VBox>
+                                    <Title text="Scope" level="H3" />
+                                    <Text
+                                        text="Where the analysed objects are filed"
+                                        class="craObjectsHeaderSubtitle"
+                                    />
+                                </VBox>
+                            </HBox>
+
+                        <form:SimpleForm
+                            editable="true"
+                            layout="ResponsiveGridLayout"
+                            labelSpanXL="12"
+                            labelSpanL="12"
+                            labelSpanM="12"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="0"
+                            emptySpanL="0"
+                            emptySpanM="0"
+                            emptySpanS="0"
+                            columnsXL="2"
+                            columnsL="2"
+                            columnsM="1"
+                            singleContainerFullSize="false"
+                            class="sapUiNoContentPadding craScopeForm"
+                        >
+                            <form:content>
+                                <Label text="Company" required="true" />
+                                <ComboBox
+                                    id="listPageSelectProject1"
+                                    width="100%"
+                                    placeholder="Select a company"
+                                    change="onCompanyChange"
+                                    items="{ path: 'listPageCompanyModel>/companyArray' }"
+                                >
+                                    <core:Item
+                                        key="{listPageCompanyModel>ID}"
+                                        text="{listPageCompanyModel>COMPANY_NAME}"
+                                    />
+                                </ComboBox>
+
+                                <Label text="Project" required="true" />
+                                <ComboBox
+                                    id="listPageSelectProject"
+                                    width="100%"
+                                    enabled="false"
+                                    placeholder="Select a company first"
+                                    items="{ path: 'listPageProjectModel>/projectArray' }"
+                                >
+                                    <core:Item
+                                        key="{listPageProjectModel>ID}"
+                                        text="{listPageProjectModel>PROJECT_NAME}"
+                                    />
+                                </ComboBox>
+                            </form:content>
+                        </form:SimpleForm>
+                        </l:VerticalLayout>
+                    </f:content>
+                </f:Card>
+
+                <!-- Step 2: the drop zone and the queue live together, so the user
+                     sees what was picked up immediately below the picker. -->
+                <f:Card class="craUploadCard">
+                    <f:content>
+                        <l:VerticalLayout width="100%" class="sapUiSmallMargin">
+                            <!-- Custom header row: sap.f.cards.Header takes no action
+                                 button, so the title/subtitle and the primary action
+                                 are laid out here instead, button pinned right like the
+                                 Create buttons on the list pages. -->
+                            <HBox
+                                justifyContent="SpaceBetween"
+                                alignItems="Center"
+                                class="craObjectsHeaderRow"
+                            >
+                                <VBox>
+                                    <Title text="Objects" level="H3" />
+                                    <Text
+                                        text="Folders containing the ABAP source to assess"
+                                        class="craObjectsHeaderSubtitle"
+                                    />
+                                </VBox>
+                                <Button
+                                    id="Button"
+                                    text="Analyse Objects"
+                                    icon="sap-icon://play"
+                                    press="handleUploadPress1"
+                                    type="Emphasized"
+                                    enabled="{= ${foldersModel>/running} !== true }"
+                                />
+                            </HBox>
+
+                            <!-- Drop zone. The native dragover/drop events are wired
+                                 in the controller's onAfterRendering; the FileUploader
+                                 below stays as the click-to-browse path, since a
+                                 folder picker cannot be opened programmatically. -->
+                            <VBox
+                                id="dropZone"
+                                class="craDropZone"
+                                alignItems="Center"
+                                justifyContent="Center"
+                            >
+                                <core:Icon
+                                    src="sap-icon://upload-to-cloud"
+                                    size="2rem"
+                                    class="craDropZoneIcon"
+                                />
+                                <Text
+                                    text="Drag folders here"
+                                    class="craDropZoneTitle"
+                                />
+                                <Text
+                                    text="or use Browse below"
+                                    class="craDropZoneHint"
+                                />
+                            </VBox>
+
+                            <u:FileUploader
+                                width="100%"
+                                id="fileUploader2"
+                                directory="true"
+                                change="onFileChange1"
+                                multiple="true"
+                                placeholder="Browse or drop folders here"
+                                tooltip="Upload your folders"
+                                uploadComplete="handleUploadComplete"
+                                class="sapUiSmallMarginBottom"
+                            />
+
+                            <List
+                                id="list"
+                                class="craObjectList"
+                                mode="Delete"
+                                delete="handleDelete"
+                                showNoData="true"
+                                noDataText="No objects added yet"
+                                headerText="{= 'Selected objects (' + ${foldersModel>/folderArray}.length + ')' }"
+                                growing="true"
+                                growingThreshold="8"
+                                items="{ path: 'foldersModel>/folderArray' }"
+                            >
+                                <StandardListItem
+                                    title="{foldersModel>webkitRelativePath}"
+                                    icon="sap-icon://document-text"
+                                    iconDensityAware="false"
+                                    iconInset="false"
+                                />
+                            </List>
+                        </l:VerticalLayout>
+                    </f:content>
+                </f:Card>
+
+            </l:VerticalLayout>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

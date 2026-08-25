@@ -1,0 +1,1 @@
+INDEX "idx_assessment_name_project" ON CRA_ASSESSMENT (OBJECT_NAME, PROJECT_ID)

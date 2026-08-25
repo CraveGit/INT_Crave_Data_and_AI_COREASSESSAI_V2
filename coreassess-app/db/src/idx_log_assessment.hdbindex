@@ -1,0 +1,1 @@
+INDEX "idx_log_assessment" ON CRA_APP_LOG (ASSESSMENT_ID)

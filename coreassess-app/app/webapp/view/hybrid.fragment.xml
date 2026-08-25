@@ -1,0 +1,648 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:m="sap.m"
+    xmlns:tnt="sap.tnt"
+>
+    <VBox class="sapUiSmallMargin">
+        <l:VerticalLayout width="100%">
+            <l:BlockLayout background="Transparent">
+                <l:BlockLayoutRow accentCells="Accent1">
+                    <l:BlockLayoutCell width="2">
+                        <HBox class="sapUiSmallMarginBottom" alignItems="Center">
+                            <core:Icon src="sap-icon://detail-view" class="craSectionIcon"/><Title text="Overview" level="H3" class="craSectionTitle"/>
+                        </HBox>
+                        <HBox class="sapUiSmallMarginBottom craFilesRow" alignItems="Start" visible="{= !!${selectedObjectModel>/SOURCE_FILES} }">
+                        	<items>
+                        		<VBox width="100%">
+                        			<tnt:InfoLabel colorScheme="6" text="Analyzed files" class="sapUiTinyMarginBottom"/>
+                        			<Text text="{selectedObjectModel>/SOURCE_FILES}"/>
+                        		</VBox>
+                        	</items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="Object Name" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/OBJECT_NAME}"/>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="SAP Module Name" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/SAP_MODULE_NAME}"/>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="SAP Sub Module" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/SAP_SUB_MODULE}"/>
+							
+                                </VBox>
+                                <VBox width="25%" />
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="WRICEF Object Type" class="sapUiTinyMarginBottom"/>
+								<List items="{selectedObjectModel>/WRICEF_OBJECT_TYPE}" showNoData="true" noDataText="None">
+									<CustomListItem class="borderremove">
+										<Text text="{selectedObjectModel>WRICEF_OBJECT_TYPE}" class="sapUiTinyMarginEnd"/>
+									</CustomListItem>
+								</List>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Clean Core Adherence"/>
+								<Text text="{selectedObjectModel>/ADHERENCE}"/>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="Code Complexity" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/CODE_COMPLEXITY}"/>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="Code Length" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/CODELENGTH}" wrapping="true"/>
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="CRUD Operations" class="sapUiTinyMarginBottom"/>
+								<List showSeparators="None" items="{selectedObjectModel>/READ_CRUD}" showNoData="true" noDataText="None">
+									<CustomListItem >
+										<Text text="{selectedObjectModel>READ_CRUD}" class="sapUiTinyMarginEnd"/>
+									</CustomListItem>
+								</List>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="TShirt Size" class="sapUiTinyMarginBottom"/>
+								<Text text="{= ${selectedObjectModel>/TSHIRT} ? ${selectedObjectModel>/TSHIRT} : 'Not Applicable' }"/>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="Priority" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/PRIORITY}"/>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="Efforts" class="sapUiTinyMarginBottom"/>
+								<Text text="{path:'selectedObjectModel>/EFFORTS',formatter:'.formatEffortPD'}" />
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" text="Functional Analysis" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/FUNCTIONAL_ANALYSIS}"/>
+							
+                                </VBox>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Clean Core Analysis"/>
+								<List showSeparators="None" items="{selectedObjectModel>/CLEAN_CORE_ANALYSIS}" showNoData="true" noDataText="None">
+									<CustomListItem>
+										<FormattedText htmlText="{parts:[{path:'selectedObjectModel>TITLE'},{path:'selectedObjectModel>DESCRIPTION'}],formatter:'.formatBulletHtml'}" class="craBulletFT" />
+									</CustomListItem>
+								</List>
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+                        <HBox class="sapUiSmallMarginBottom" alignItems="Start" justifyContent="SpaceBetween" width="100%">
+                        	<items>
+                        <VBox width="50%">
+                        	<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Current Clean Core Tier"/>
+                        	<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                        		<tnt:InfoLabel renderMode="Narrow" text="{= ${selectedObjectModel>/CLEANCORE_TIER} ? 'Tier ' + ${selectedObjectModel>/CLEANCORE_TIER} : '—' }" colorScheme="{path:'selectedObjectModel>/CLEANCORE_TIER',formatter:'.formatTierScheme'}"/>
+                        	</HBox>
+                        	<Text text="{selectedObjectModel>/CLEANCORE_TIER_REASON}"/>
+                        </VBox>
+                        <VBox width="50%">
+                        	<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Target Clean Core Tier"/>
+                        	<HBox alignItems="Center" class="sapUiTinyMarginBottom">
+                        		<tnt:InfoLabel renderMode="Narrow" text="{= ${selectedObjectModel>/CLEANCORE_TARGET_TIER} ? 'Tier ' + ${selectedObjectModel>/CLEANCORE_TARGET_TIER} : '—' }" colorScheme="{path:'selectedObjectModel>/CLEANCORE_TARGET_TIER',formatter:'.formatTierScheme'}"/>
+                        	</HBox>
+                        	<Text text="{selectedObjectModel>/CLEANCORE_TARGET_TIER_REASON}"/>
+                        </VBox>
+                        	</items>
+                        </HBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </l:VerticalLayout>
+        <l:VerticalLayout width="100%">
+            <l:BlockLayout background="Transparent">
+                <l:BlockLayoutRow accentCells="Accent1">
+                    <l:BlockLayoutCell width="2">
+                        <HBox class="sapUiSmallMarginBottom" alignItems="Center">
+                            <core:Icon src="sap-icon://cloud" class="craSectionIcon craAprHybrid"/><Title text="Hybrid" level="H3" class="craSectionTitle craAprHybrid"/>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+                                    <tnt:InfoLabel
+                                        colorScheme="6"
+                                        text="High Level S/4 Analysis"
+                                        class="sapUiTinyMarginBottom"
+                                    />
+                                    <List
+                                        showSeparators="None"
+                                        items="{selectedObjectModel>/HIGH_LVL_RECOMMENDATIONS}"
+                                        showNoData="true"
+                                        noDataText="None"
+                                    >
+                                        <CustomListItem>
+                                            <FormattedText htmlText="{parts:[{path:'selectedObjectModel>TITLE'},{path:'selectedObjectModel>DESCRIPTION'}],formatter:'.formatBulletHtml'}" class="craBulletFT" />
+                                        </CustomListItem>
+                                    </List>
+                                
+                                </VBox>
+                                <VBox width="50%">
+                                    <tnt:InfoLabel
+
+                                        colorScheme="6"
+                                        text="Recommended SAP Standard API"
+                                        class="sapUiTinyMarginBottom"
+                                    />
+                                    <Table
+                                        items="{selectedObjectModel>/SAP_STANDARD_API}"
+                                        class="sapUiLargeMarginBottom"
+                                    >
+                                        <columns>
+                                            <Column>
+                                                <Text text="API" />
+                                            </Column>
+                                            <Column>
+                                                <Text text="Description" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem
+                                                vAlign="Middle"
+                                                class="bordertableremove"
+                                            >
+                                                <cells>
+                                                    <Text
+                                                        text="{path:'selectedObjectModel>SAP_STANDARD_API',formatter:'.formatFirstColumn'}"
+                                                     class="craMono"/>
+                                                    <Text
+                                                        text="{path:'selectedObjectModel>SAP_STANDARD_API',formatter:'.formatSecondColumn'}"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                    <tnt:InfoLabel
+                                        colorScheme="6"
+                                        text="Recommended SAP Standard Fiori Apps"
+                                        class="sapUiTinyMarginBottom"
+                                    />
+                                    <Table
+                                        items="{selectedObjectModel>/SAP_STANDARD_FIORI_APP}"
+                                    >
+                                        <columns>
+                                            <Column>
+                                                <Text text="Fiori App ID" />
+                                            </Column>
+                                            <Column>
+                                                <Text text="Description" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem vAlign="Middle">
+                                                <cells>
+                                                    <Text
+                                                        text="{path:'selectedObjectModel>SAP_STANDARD_FIORI_APP',formatter:'.formatFirstColumn'}"
+                                                     class="craMono"/>
+                                                    <Text
+                                                        text="{path:'selectedObjectModel>SAP_STANDARD_FIORI_APP',formatter:'.formatSecondColumn'}"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                
+                                </VBox>
+                            </items>
+                        </HBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </l:VerticalLayout>
+        <l:VerticalLayout width="100%">
+            <l:BlockLayout background="Transparent">
+                <l:BlockLayoutRow accentCells="Accent1">
+                    <l:BlockLayoutCell width="2">
+                        <HBox class="sapUiSmallMarginBottom" alignItems="Center">
+                            <core:Icon src="sap-icon://database" class="craSectionIcon"/><Title text="SQL Analysis" level="H3" class="craSectionTitle"/>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="100%">
+								<tnt:InfoLabel class="sapUiTinyMarginBottom" colorScheme="6" text="SQL Recommendation"/>
+								<Text text="{selectedObjectModel>/SQL_RECOMMENDATION}"/>
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" text="Standard Tables Utilized" class="sapUiTinyMarginBottom"/>
+								<Table items="{selectedObjectModel>/STANDARD_TABLES}">
+									<columns>
+										<Column>
+											<Text text="Table name"/>
+										</Column>
+										<Column>
+											<Text text="Description"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>TABLE_NAME',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{path:'selectedObjectModel>TABLE_NAME',formatter:'.formatSecondColumn'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom sapUiSmallMarginTop" text="Custom Tables Utilized"/>
+								<Table items="{selectedObjectModel>/CUSTOM_TABLES}">
+									<columns>
+										<Column>
+											<Text text="Table name"/>
+										</Column>
+										<Column>
+											<Text text="Description"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>TABLE_NAME',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{path:'selectedObjectModel>TABLE_NAME',formatter:'.formatSecondColumn'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" text="Recommended Standard S4 Replacements" class="sapUiTinyMarginBottom"/>
+								<Table items="{selectedObjectModel>/NEW_S4_TABLES}">
+									<columns>
+                                            <Column><Text text="Table Name" /></Column>
+                                            <Column><Text text="CDS View" /></Column>
+                                            <Column><Text text="Description" /></Column>
+                                        </columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+                                                    <Text text="{selectedObjectModel>S4_TABLES}" class="craMono"/>
+                                                    <Text text="{selectedObjectModel>MAPPING}" class="craMono"/>
+                                                    <Text text="{selectedObjectModel>DESCRIPTION}"/>
+                                                </cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+<HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Function Modules Utilized"/>
+								<Table items="{selectedObjectModel>/FUNCTION_MODULES}">
+									<columns>
+										<Column>
+											<Text text="Function Module"/>
+										</Column>
+										<Column>
+											<Text text="Description"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>FUNCTION_MODULES',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{path:'selectedObjectModel>FUNCTION_MODULES',formatter:'.formatSecondColumn'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                                <VBox width="50%" />
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="CDS Views Utilized"/>
+								<Table items="{selectedObjectModel>/SQL_ANALYSIS_TABLES_CDS}">
+									<columns>
+										<Column>
+											<Text text="CDS View"/>
+										</Column>
+										<Column>
+											<Text text="Description"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>SQL_ANALYSIS_TABLES_CDS',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{path:'selectedObjectModel>SQL_ANALYSIS_TABLES_CDS',formatter:'.formatSecondColumn'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                                <VBox width="50%" />
+                            </items>
+                        </HBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </l:VerticalLayout>
+        <!-- Integration Analysis: shown for hybrid (which carries the side-by-side
+             integration concern), hidden for pure on-stack. An on-stack object with
+             external integration would be reclassified side-by-side/hybrid, so an
+             on-stack integration section would contradict the approach. -->
+        <l:VerticalLayout
+            width="100%"
+        >
+            <l:BlockLayout background="Transparent">
+                <l:BlockLayoutRow accentCells="Accent1">
+                    <l:BlockLayoutCell width="2">
+                        <HBox class="sapUiSmallMarginBottom" alignItems="Center">
+                            <core:Icon src="sap-icon://disconnected" class="craSectionIcon"/><Title text="Integration Analysis" level="H3" class="craSectionTitle"/>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="25%">
+                                    <tnt:InfoLabel colorScheme="6" text="Inter-module Integration" class="sapUiTinyMarginBottom"/>
+                                    <Text text="{selectedObjectModel>/INTER_MODULE_INTEGRATION}"/>
+                                
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="Third-Party Integration" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/THIRD_PARTY_INTEGRATION}"/>
+							
+                                </VBox>
+                                <VBox width="25%">
+								<tnt:InfoLabel colorScheme="6" text="UI Integration" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/UI_INTEGRATION}"/>
+							
+                                </VBox>
+                                <VBox width="25%" />
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" text="Integration Specific Utillization" class="sapUiTinyMarginBottom"/>
+								<!-- <Text text="{selectedObjectModel>/FUNCTIONAL_ANALYSIS}"/> -->
+								<List items="{selectedObjectModel>/INTEGERATION_RESULT}" showNoData="true" noDataText="None">
+									<CustomListItem class="borderremove">
+										<FormattedText htmlText="{parts:[{path:'selectedObjectModel>TITLE'},{path:'selectedObjectModel>DESCRIPTION'}],formatter:'.formatBulletHtml'}" class="craBulletFT" />
+									</CustomListItem>
+								</List>
+							
+                                </VBox>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Integration Modernization"/>
+								<Text text="{= ${selectedObjectModel>/INTEGRATION_MODERNIZATION} || 'None' }" class="sapUiTinyMarginEnd"/>
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" text="BAPIs Utillized" class="sapUiTinyMarginBottom"/>
+								<Table items="{selectedObjectModel>/BAPIS}">
+									<columns>
+										<Column>
+											<Text text="BAPI name"/>
+										</Column>
+										<Column>
+											<Text text="Description"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>BAPIS',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{path:'selectedObjectModel>BAPIS',formatter:'.formatSecondColumn'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                                <VBox width="50%" visible="{= (${selectedObjectModel>/SAP_STANDARD_API} || []).length > 0 }">
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Recommended SAP Standard APIs"/>
+								<Table items="{selectedObjectModel>/SAP_STANDARD_API}">
+									<columns>
+                                            <Column><Text text="BAPI" /></Column>
+                                            <Column><Text text="API" /></Column>
+                                            <Column><Text text="Description" /></Column>
+                                        </columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+                                                    <Text text="{selectedObjectModel>MAPPING}" class="craMono"/>
+                                                    <Text text="{selectedObjectModel>SAP_STANDARD_API}" class="craMono"/>
+                                                    <Text text="{selectedObjectModel>DESCRIPTION}"/>
+                                                </cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" text="SAP APIs Utillized" class="sapUiTinyMarginBottom"/>
+								<Table items="{selectedObjectModel>/SQL_ANALYSIS_TABLES_API}">
+									<columns>
+										<Column>
+											<Text text="API name"/>
+										</Column>
+										<Column>
+											<Text text="Description"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>SQL_ANALYSIS_TABLES_API',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{path:'selectedObjectModel>SQL_ANALYSIS_TABLES_API',formatter:'.formatSecondColumn'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                                <VBox width="50%">
+                                  
+                                </VBox>
+                            </items>
+                        </HBox>
+							<HBox class="sapUiSmallMarginBottom" alignItems="Start" justifyContent="SpaceBetween" width="100%">
+						<items>
+							<VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" text="IDocs Utilized" class="sapUiTinyMarginBottom"/>
+								<Table items="{selectedObjectModel>/INTERFACE_IDOCS}">
+									<columns>
+										<Column>
+											<Text text="IDoc name"/>
+										</Column>
+										<Column>
+											<Text text="Description"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>IDOCS',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{path:'selectedObjectModel>IDOCS',formatter:'.formatSecondColumn'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+							<VBox width="50%">
+								
+							</VBox>
+						</items>
+					</HBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </l:VerticalLayout>
+
+        <l:VerticalLayout width="100%">
+            <l:BlockLayout background="Transparent">
+                <l:BlockLayoutRow accentCells="Accent1">
+                    <l:BlockLayoutCell width="2">
+                        <HBox class="sapUiSmallMarginBottom" alignItems="Center">
+                            <core:Icon src="sap-icon://two-keys" class="craSectionIcon"/><Title text="Security and Governance" level="H3" class="craSectionTitle"/>
+                        </HBox>
+                        <HBox
+                            class="sapUiSmallMarginBottom"
+                            alignItems="Start"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <items>
+                                <VBox width="100%">
+								<tnt:InfoLabel colorScheme="6" text="Authorization Information" class="sapUiTinyMarginBottom"/>
+								<Table items="{selectedObjectModel>/AUTHORIZATION_CHECK}">
+									<columns>
+										<Column><Text text="Authorization Object"/></Column>
+										<Column><Text text="Field"/></Column>
+										<Column><Text text="Check Type"/></Column>
+										<Column><Text text="Code Reference"/></Column>
+									</columns>
+									<items>
+										<ColumnListItem vAlign="Middle" class="bordertableremove">
+											<cells>
+												<Text text="{path:'selectedObjectModel>AUTHOBJECT',formatter:'.formatFirstColumn'}" class="craMono"/>
+												<Text text="{selectedObjectModel>FIELDSCHECKED}"/>
+												<Text text="{selectedObjectModel>CHECKTYPE}"/>
+												<Text text="{selectedObjectModel>CODEREFERENCE}" class="craMono"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							
+                                </VBox>
+                            </items>
+                        </HBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </l:VerticalLayout>
+    </VBox>
+</core:FragmentDefinition>

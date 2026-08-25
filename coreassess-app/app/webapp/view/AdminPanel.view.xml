@@ -1,0 +1,284 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.AdminPanel"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    height="100%"
+    id="adminPanelPage"
+>
+    <f:DynamicPage id="adminPage" headerExpanded="true" toggleHeaderOnTitleClick="false" fitContent="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <VBox class="craHeroBlock">
+                        <Title text="Admin Panel" level="H2" class="craHeroTitle" />
+                    </VBox>
+                </f:heading>
+                <f:expandedContent>
+                    <Text text="Administration settings and user setup" />
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Text text="Administration settings and user setup" />
+                </f:snappedContent>
+                <!-- Global search: filters the Users, Access Requests and Project
+                     Stats tables at once. -->
+                <f:actions>
+                    <SearchField width="20rem" placeholder="Search all tables..."
+                        search="onGlobalSearch" liveChange="onGlobalSearch"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <VBox width="100%" class="sapUiTinyMarginTop">
+
+                <!-- ============ USERS ============ -->
+                <VBox class="sapUiLargeMarginBottom">
+                    <Table id="usersTable" items="{usersModel>/users}" growing="true" growingThreshold="20" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="{= 'Users (' + (${usersModel>/users}.length || 0) + ')' }" level="H3"/>
+                                <ToolbarSpacer/>
+                                <Button text="Add User" icon="sap-icon://add" type="Emphasized" press="onOpenAddUser"
+                                    visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }"/>
+                                <Button text="Request User" icon="sap-icon://email" type="Emphasized" press="onOpenAddUser"
+                                    visible="{= ${visibleModel>/role} === 'SUPERUSER' }"/>
+                                <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshUsers" type="Transparent"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="Display Name"/></Column>
+                            <Column><Text text="Email"/></Column>
+                            <Column width="9rem"><Text text="Role"/></Column>
+                            <Column width="8rem" hAlign="End"><Text text="Allowed"/></Column>
+                            <Column width="8rem" hAlign="End"><Text text="Consumed"/></Column>
+                            <Column width="18rem"><Text text="Company / Projects"/></Column>
+                            <Column width="9rem" hAlign="Center"
+                                visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }">
+                                <Text text="Actions"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <ObjectIdentifier title="{= ${usersModel>DISPLAY_NAME} || '-' }" text="{path:'usersModel>ID',formatter:'.formatUserCode'}"/>
+                                    <Text text="{usersModel>EMAIL}"/>
+                                    <ObjectStatus text="{usersModel>ROLE}" state="{path:'usersModel>ROLE',formatter:'.formatRoleState'}"/>
+                                    <Text text="{usersModel>ALLOWEDOBJECTS}"/>
+                                    <Text text="{usersModel>UPLOADEDOBJECTS}"/>
+                                    <!-- 1-to-N: one block per mapped company, with its projects. -->
+                                    <VBox items="{usersModel>MAPPINGS}">
+                                        <VBox class="craUserMapRow">
+                                            <Text text="{usersModel>COMPANY_NAME}" class="craUserMapCompany"/>
+                                            <Text text="{= ${usersModel>PROJECTS} || 'No projects' }" class="craUserMapProjects"/>
+                                        </VBox>
+                                    </VBox>
+                                    <HBox justifyContent="Center"
+                                        visible="{= (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER') &amp;&amp; ${usersModel>ROLE} !== 'OWNER' }">
+                                        <Button icon="sap-icon://edit" type="Transparent" tooltip="Edit user" press="onEditUser"/>
+                                        <Button icon="sap-icon://delete" type="Transparent" tooltip="Remove user" press="onRemoveUser"/>
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+                <!-- ============ ACCESS REQUESTS ============ -->
+                <VBox class="sapUiLargeMarginBottom"
+                    visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }">
+                    <Table id="requestsTable" items="{requestsModel>/requests}" growing="true" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="{= 'Access Requests' + (${requestsModel>/pendingCount} ? ' (' + ${requestsModel>/pendingCount} + ' pending)' : '') }" level="H3"/>
+                                <ToolbarSpacer/>
+                                <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshRequests" type="Transparent"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="Display Name"/></Column>
+                            <Column width="8rem"><Text text="Role"/></Column>
+                            <Column width="9rem" hAlign="End"><Text text="Allowed Uploads"/></Column>
+                            <Column><Text text="Requested By"/></Column>
+                            <Column width="8rem"><Text text="Status"/></Column>
+                            <Column width="12rem" hAlign="Center"><Text text="Action"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{= ${requestsModel>DISPLAY_NAME} || ${requestsModel>EMAIL} }"/>
+                                    <Text text="{requestsModel>ROLE}"/>
+                                    <Text text="{requestsModel>ALLOWEDOBJECTS}"/>
+                                    <Text text="{requestsModel>REQUESTED_BY}"/>
+                                    <ObjectStatus text="{requestsModel>STATUS}" state="{path:'requestsModel>STATUS',formatter:'.formatStatusState'}"/>
+                                    <HBox justifyContent="Center" visible="{= ${requestsModel>STATUS} === 'PENDING' }">
+                                        <Button icon="sap-icon://accept" text="Approve" type="Accept" press="onApproveRequest" class="sapUiTinyMarginEnd"/>
+                                        <Button icon="sap-icon://decline" text="Reject" type="Reject" press="onRejectRequest"/>
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+                <!-- ============ PROJECT STATS ============ -->
+                <VBox class="sapUiLargeMarginBottom">
+                    <Table id="statsTable" items="{statsModel>/stats}" growing="true" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="Project-wise cost" level="H3"/>
+                                <ToolbarSpacer/>
+                                <Button text="Export to Excel" icon="sap-icon://excel-attachment" type="Transparent" press="onExportStats"/>
+                                <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshStats" type="Transparent"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="Company"/></Column>
+                            <Column><Text text="Project"/></Column>
+                            <Column width="6rem"><Text text="Status"/></Column>
+                            <Column width="11rem" hAlign="End"><Text text="Assessment Total"/></Column>
+                            <Column width="10rem" hAlign="End"><Text text="Docgen Total"/></Column>
+                            <Column width="10rem" hAlign="End"><Text text="Project Total"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <ObjectIdentifier title="{statsModel>COMPANY_NAME}" text="{path:'statsModel>COMPANY_ID',formatter:'.formatCompanyCode'}"/>
+                                    <ObjectIdentifier title="{statsModel>PROJECT_NAME}" text="{path:'statsModel>PROJECT_ID',formatter:'.formatProjectCode'}"/>
+                                    <ObjectStatus text="{statsModel>STATUS}"
+                                        state="{= ${statsModel>STATUS} === 'Inactive' ? 'Warning' : 'Success' }"/>
+                                    <Text text="{path:'statsModel>ASSESSMENT_TOTAL',formatter:'.formatUsd'}"/>
+                                    <Text text="{path:'statsModel>DOCGEN_TOTAL',formatter:'.formatUsd'}"/>
+                                    <ObjectNumber number="{path:'statsModel>PROJECT_TOTAL',formatter:'.formatUsd'}" emphasized="true"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+                <!-- ============ PRICING HISTORY (deleted objects) ============ -->
+                <!-- Retained cost of DELETED objects/projects/companies. Admin/owner
+                     only: a superuser cannot hide spend by deleting; it is audited
+                     here with when/who deleted it. -->
+                <VBox class="sapUiLargeMarginBottom"
+                    visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }">
+                    <Table id="costLedgerTable" items="{costLedgerModel>/rows}" growing="true" growingThreshold="20" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="Pricing history (deleted)" level="H3"/>
+                                <ToolbarSpacer/>
+                                <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshCostLedger" type="Transparent"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="Object"/></Column>
+                            <Column><Text text="Project"/></Column>
+                            <Column><Text text="Company"/></Column>
+                            <Column width="7rem"><Text text="Source"/></Column>
+                            <Column width="9rem" hAlign="End"><Text text="Tokens"/></Column>
+                            <Column width="8rem" hAlign="End"><Text text="Cost"/></Column>
+                            <Column><Text text="Incurred by"/></Column>
+                            <Column><Text text="Deleted"/></Column>
+                            <Column><Text text="Deleted by"/></Column>
+                            <Column width="5rem" hAlign="Center"><Text text="Actions"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{costLedgerModel>OBJECT_NAME}"/>
+                                    <Text text="{costLedgerModel>PROJECT_NAME}"/>
+                                    <Text text="{costLedgerModel>COMPANY_NAME}"/>
+                                    <Text text="{costLedgerModel>SOURCE}"/>
+                                    <Text text="{costLedgerModel>TOTAL_TOKENS}"/>
+                                    <ObjectNumber number="{path:'costLedgerModel>COST_USD',formatter:'.formatUsd'}" emphasized="true"/>
+                                    <Text text="{costLedgerModel>INCURRED_BY}"/>
+                                    <ObjectStatus text="{costLedgerModel>STATUS}" state="Error" icon="sap-icon://delete"/>
+                                    <Text text="{costLedgerModel>DELETED_BY}"/>
+                                    <!-- Cross (decline), not the bin: permanently remove this ledger row. -->
+                                    <Button icon="sap-icon://decline" type="Transparent" tooltip="Delete pricing record"
+                                        press="onDeleteCostLedger"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+                <!-- ============ TICKET ACTIONS ============ -->
+                <VBox class="sapUiLargeMarginBottom">
+                    <Table id="ticketsTable" items="{adminTicketsModel>/tickets}" growing="true" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="{= 'Ticket Actions' + (${adminTicketsModel>/openCount} ? ' (' + ${adminTicketsModel>/openCount} + ' open)' : '') }" level="H3"/>
+                                <ToolbarSpacer/>
+                                <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshAdminTickets" type="Transparent"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="Title"/></Column>
+                            <Column><Text text="Description"/></Column>
+                            <Column><Text text="Raised By"/></Column>
+                            <Column width="8rem"><Text text="Status"/></Column>
+                            <Column><Text text="Close Comment"/></Column>
+                            <Column width="14rem" hAlign="Center"><Text text="Action"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{adminTicketsModel>TITLE}"/>
+                                    <Text text="{adminTicketsModel>DESCRIPTION}"/>
+                                    <Text text="{adminTicketsModel>RAISED_BY}"/>
+                                    <ObjectStatus text="{adminTicketsModel>STATUS}" state="{path:'adminTicketsModel>STATUS',formatter:'.formatTicketState'}"/>
+                                    <Text text="{= ${adminTicketsModel>CLOSE_COMMENT} || '' }"/>
+                                    <HBox justifyContent="Center" alignItems="Center">
+                                        <Button icon="sap-icon://accept" text="Acknowledge" type="Transparent" press="onAcknowledgeTicket"
+                                            visible="{= ${adminTicketsModel>STATUS} === 'OPEN' }" class="sapUiTinyMarginEnd"/>
+                                        <Button icon="sap-icon://complete" text="Close" type="Accept" press="onCloseTicket"
+                                            visible="{= ${adminTicketsModel>STATUS} !== 'CLOSED' }"/>
+                                        <!-- Resolved tickets: a remove (cross) icon to delete them. -->
+                                        <Button icon="sap-icon://decline" type="Transparent" tooltip="Delete resolved ticket"
+                                            press="onDeleteTicket" class="sapUiTinyMarginBegin"
+                                            visible="{= ${adminTicketsModel>STATUS} === 'CLOSED' }"/>
+                                    </HBox>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+                <!-- ============ UPLOAD LIMITS ============ -->
+                <VBox class="sapUiLargeMarginBottom">
+                    <Table id="limitsTable" items="{limitsModel>/rows}" growing="true" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <Title text="Upload Limits" level="H3"/>
+                                <ToolbarSpacer/>
+                                <Text text="Blank = unlimited" class="sapUiTinyMarginEnd"/>
+                                <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshLimits" type="Transparent"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column><Text text="Company"/></Column>
+                            <Column><Text text="Project"/></Column>
+                            <Column width="7rem" hAlign="End"><Text text="Used"/></Column>
+                            <Column width="9rem" hAlign="End"><Text text="Object Limit"/></Column>
+                            <Column width="6rem" hAlign="Center"><Text text="Actions"/></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{limitsModel>company}"/>
+                                    <Text text="{limitsModel>project}"/>
+                                    <Text text="{limitsModel>used}"/>
+                                    <Text text="{= ${limitsModel>limit} === null || ${limitsModel>limit} === undefined ? 'Unlimited' : ${limitsModel>limit} }"/>
+                                    <Button icon="sap-icon://edit" type="Transparent" tooltip="Edit limit" press="onEditLimit"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

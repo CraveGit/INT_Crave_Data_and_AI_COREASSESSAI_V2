@@ -1,0 +1,28 @@
+fastapi
+uvicorn[standard]
+gunicorn
+python-multipart
+python-dotenv
+# imported directly (decisions.py models, health MCP probe), not only via fastapi.
+# Do NOT pin pydantic: sap-ai-sdk-gen 6.x+ requires >=2.13, the old
+# generative-ai-hub-sdk 4.x pinned 2.10.6. Let the SDK resolve it.
+pydantic>=2.13
+anyio
+hdbcli
+pandas
+sqlalchemy
+sqlalchemy-hana
+rapidfuzz
+# >=6.7 required: older generative-ai-hub-sdk 4.x has no Claude 4.x in its
+# langchain catalog and fails with "Model ... is not available!"
+sap-ai-sdk-gen[all]>=7.2.0
+fastmcp==3.2.4
+markdown
+python-docx
+docxtpl
+markdownify
+bs4
+# SVG flow diagrams -> PNG for docx (pure wheels; no system Cairo needed)
+svglib
+reportlab
+rlPyCairo

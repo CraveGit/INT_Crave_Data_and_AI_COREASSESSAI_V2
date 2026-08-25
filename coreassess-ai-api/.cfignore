@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.llmtest/
+*.log
+Run.log
+content/
+.venv/
+venv/

@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:m="sap.m"
+    xmlns:tnt="sap.tnt"
+>
+    <Dialog
+        id="createCompanyFrag"
+        title="Create Company"
+        contentWidth="auto"
+        contentHeight="auto"
+        titleAlignment="Center"
+    >
+    	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormChange354"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="Name of Company" />
+				<Input id="companyName" value="{SupplierName}" />
+				
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+        <footer>
+            <m:OverflowToolbar>
+                <m:ToolbarSpacer />
+                <Button
+                    press="createComp"
+                    type="Accept"
+                    text="Create"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Button
+                    press="createCompFragClose"
+                    text="Close"
+                />
+            </m:OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

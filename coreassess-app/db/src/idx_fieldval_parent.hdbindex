@@ -1,0 +1,1 @@
+INDEX "idx_fieldval_parent" ON CRA_FIELD_VALUES (ASSESSMENT_ID)

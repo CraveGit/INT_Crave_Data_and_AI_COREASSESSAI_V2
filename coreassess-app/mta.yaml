@@ -1,0 +1,145 @@
+_schema-version: 3.3.0
+ID: coreassess
+description: CoreAssess v2 full-stack (CAP srv + UI + approuter).
+version: 2.0.0
+
+modules:
+  - name: coreassess-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: coreassess-auth
+      - name: coreassess-db
+      - name: coreassess-destination
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    properties:
+      # Comma-separated logins treated as ADMIN even with an empty DB, so a
+      # freshly-deployed environment is usable. Update with `cf set-env
+      # coreassess-srv ADMIN_USERS "a@x.com,b@x.com"` (then restart) as needed.
+      ADMIN_USERS: rohan.chavan@craveinfotech.com
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 512M
+      memory: 512M
+      readiness-health-check-http-endpoint: /health
+      readiness-health-check-type: http
+    build-parameters:
+      builder: npm
+
+  - name: coreassess-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: coreassess-db
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 512M
+      memory: 512M
+
+  - name: coreassess-ui
+    type: html5
+    path: app
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        # No npm install: app/node_modules is already present. Reinstalling on the
+        # slow drive exceeded mbt's 10-minute timeout. build:cf uses local ui5.
+        - npm run build:cf
+      supported-platforms: []
+
+  - name: coreassess-ui-deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: coreassess-html5-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: coreassess-ui
+          # Relative to that module's build-result (app/dist), NOT to app/. With
+          # "dist/..." MBT resolved app/dist/dist/... , found nothing, and silently
+          # packaged an empty UI while still logging a successful copy.
+          artifacts:
+            - comcravecoreassessv2.zip
+          target-path: resources/
+
+  - name: coreassess-approuter
+    type: approuter.nodejs
+    path: approuter
+    requires:
+      - name: coreassess-auth
+      - name: coreassess-html5-runtime
+      - name: coreassess-destination
+      - name: srv-api
+        group: destinations
+        properties:
+          name: COREASSESS_V2_SRV       # UI xs-app.json routes /v2/* to this destination
+          url: ~{srv-url}
+          forwardAuthToken: true
+          timeout: 600000              # 10 min: object analysis is long-running (avoids 30s 504)
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 512M
+      # 256M/1-instance choked while proxying multi-minute docgen calls, starving
+      # concurrent static-asset requests (fonts 503'd). More memory + a second
+      # instance keeps assets served while one instance holds a long proxy.
+      memory: 512M
+      instances: 2
+      # Short custom host instead of the long auto-generated org-space name.
+      routes:
+        - route: coreassess.cfapps.us10-001.hana.ondemand.com
+
+resources:
+  - name: coreassess-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: coreassess-${space}
+        tenant-mode: dedicated
+  - name: coreassess-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  # Destination service: define destination "coreassess-api" -> CoreAssess API base URL
+  - name: coreassess-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+  - name: coreassess-html5-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: coreassess-html5-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        # gen/ must not carry stale hdbtable artefacts from an earlier schema.
+        # Do NOT clean resources/ here: MBT copies the UI artifact into it as part
+        # of the ui-deployer build, and deleting the folder in before-all races
+        # that copy, shipping an empty UI.
+        # Direct Node delete, not "npx rimraf": npx hung in the non-interactive
+        # build shell (package resolution/prompt), consuming the whole timeout.
+        - node -e "require('fs').rmSync('gen',{recursive:true,force:true})"
+        # No npm install here: node_modules is already present, and reinstalling on
+        # this slow (W:) drive blew past mbt's 10-minute before-all timeout. Run
+        # `npm install` manually beforehand only when dependencies change.
+        # --no-install: use the local cds, never pause to download/prompt.
+        - npx --no-install cds build --production

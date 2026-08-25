@@ -1,0 +1,39 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.Innovate"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    height="100%"
+    id="innovatePage"
+>
+    <f:DynamicPage id="innovateDynPage" headerExpanded="true" toggleHeaderOnTitleClick="false" fitContent="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <VBox class="craHeroBlock">
+                        <Title text="Innovate" level="H2" class="craHeroTitle" />
+                    </VBox>
+                </f:heading>
+                <f:expandedContent>
+                    <Text text="AI-driven idea to application accelerators" />
+                </f:expandedContent>
+                <f:snappedContent>
+                    <Text text="AI-driven idea to application accelerators" />
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <!-- Centered "coming soon" state. IllustratedMessage ships an SAP
+                 illustration + title + description, matching the reference layout. -->
+            <VBox height="100%" width="100%" justifyContent="Center" alignItems="Center" class="craComingSoonBox">
+                <VBox class="craComingSoonCard" alignItems="Center">
+                    <IllustratedMessage
+                        illustrationType="sapIllus-Tent"
+                        illustrationSize="Spot"
+                        title="Coming soon"
+                        description="We're building something exciting here. Convert your ideas to application with clean core practices." />
+                </VBox>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

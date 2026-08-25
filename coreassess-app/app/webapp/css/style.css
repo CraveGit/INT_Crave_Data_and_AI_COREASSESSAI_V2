@@ -1,0 +1,1647 @@
+/* Feedback thumbs sit tight together (the OverflowToolbar spaces its own items,
+   so grouping them in an HBox and pulling the second button in gives a compact
+   pair). */
+.craFbThumbs .sapMBtn {
+    margin: 0;
+}
+.craFbThumbs .sapMBtn + .sapMBtn {
+    margin-left: -0.25rem;
+}
+
+/* Coming-soon empty state fills the page content so the illustration + text sit
+   centred both ways, like a placeholder landing screen. */
+.craComingSoonBox {
+    min-height: 60vh;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* Bordered card wrapping the coming-soon message, matching the first-page cards.
+   Nudged 20px left and up from the centre for a slightly higher, offset resting
+   position. */
+.craComingSoonCard {
+    border: 2px solid #bcc5d0;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    background: var(--sapBaseColor, #fff);
+    padding: 2.5rem 3rem;
+    max-width: 34rem;
+    box-sizing: border-box;
+    margin-left: -20px;
+    margin-top: -20px;
+}
+
+/* Document generation: a full-height editable document canvas with a collapsible
+   AI assistant panel docked on the right. */
+.craDocGenBody {
+    height: 100%;
+    box-sizing: border-box;
+    /* Vertical breathing room only; no horizontal padding so the editor + assistant
+       span the full page width. */
+    padding: 0.5rem 0 1.5rem 0;
+}
+/* Fixed viewport height so the editor and assistant fill the page instead of
+   collapsing to the editor's small default (which left it cropped). Bottom margin
+   keeps both cards clear of the page bottom line. */
+.craDocGenSplit {
+    height: 74vh;
+    min-height: 420px;
+    margin-bottom: 1rem;
+}
+.craDocCanvas {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+    border: 2px solid #bcc5d0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--sapBaseColor, #fff);
+}
+/* The RTE renders its own iframe; make it fill the canvas card. */
+.craDocCanvas .sapUiRte,
+.craDocCanvas .sapUiRteEditor,
+.craDocCanvas iframe {
+    height: 100% !important;
+}
+.craAssistantPanel {
+    width: 22rem;
+    flex: 0 0 22rem;
+    height: 100%;
+    margin-left: 1rem;
+    border: 2px solid #bcc5d0;
+    border-radius: 12px;
+    background: var(--sapBaseColor, #fff);
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Raise Ticket form: give the Panel the same card frame as the other cards
+   (sap.m.Panel is borderless by default). */
+.craTicketForm {
+    border: 2px solid #bcc5d0;
+    border-radius: 12px;
+    background: var(--sapBaseColor, #fff);
+    box-sizing: border-box;
+}
+
+/* Card hover: darken the 2px border (the previous hover cue was lost when the
+   borders were unified). Smooth transition; scoped to the framed card classes. */
+.craComingSoonCard,
+.craDocCanvas,
+.craAssistantPanel,
+.craMsgAi,
+.sapFCard,
+.craGridTable,
+.craTicketForm,
+.craDetailPanel .sapUiBlockLayout {
+    transition: border-color 0.15s ease-in-out;
+}
+.craComingSoonCard:hover,
+.craDocCanvas:hover,
+.craAssistantPanel:hover,
+.craMsgAi:hover,
+.sapFCard:hover,
+.craGridTable:hover,
+.craTicketForm:hover,
+.craDetailPanel .sapUiBlockLayout:hover {
+    border-color: #8b97a8 !important;
+}
+.craAssistantHeader {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--sapList_BorderColor, #e3e7ed);
+}
+.craAssistantMsgs {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0.5rem 0.75rem;
+}
+.craAssistantInput {
+    padding: 0.75rem;
+    border-top: 1px solid var(--sapList_BorderColor, #e3e7ed);
+    gap: 0.5rem;
+    box-sizing: border-box;
+}
+/* Input grows to fill the row; only the send button keeps its intrinsic width.
+   sap.m.TextArea renders <div.sapMTextArea><textarea>; force the flex item to
+   grow and its inner textarea to 100% or the field collapses to a couple chars. */
+.craAssistantInput {
+    display: flex !important;
+    width: 100%;
+    align-items: flex-end;
+}
+.craAssistantInput .sapMTextArea {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+}
+.craAssistantInput .sapMTextArea > textarea {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+.craAssistantInput > .sapMBtn {
+    flex: 0 0 auto;
+}
+
+/* Chat bubbles: user right (filled blue), AI left (light grey). Both carry a
+   background; spacing between turns comes from the list-item padding. Padding on
+   the message container keeps bubbles off the panel edges. */
+.craAssistantMsgs {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    box-sizing: border-box;
+}
+.craMsgList .sapMLIB,
+.craMsgItem.sapMLIB {
+    padding: 0.45rem 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+.craMsgRow { width: 100%; }
+.craMsg {
+    padding: 0.6rem 0.85rem;
+    border-radius: 12px;
+    max-width: 85%;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+/* User bubble */
+.craMsgUser {
+    background: var(--sapButton_Emphasized_Background, #0070f2);
+    border-bottom-right-radius: 3px;
+}
+.craMsgUser,
+.craMsgUser .sapMFT, .craMsgUser .sapMText,
+.craMsgUser .sapMFT * {
+    color: #fff !important;
+}
+/* AI bubble */
+.craMsgAi {
+    background: var(--sapList_Background, #f4f5f7);
+    border: 2px solid #bcc5d0;
+    border-bottom-left-radius: 3px;
+    color: var(--sapTextColor, #223);
+}
+
+/* ---------------------------------------------------------------------------
+   Typography
+   All faces are self-hosted under webapp/fonts -- no request to
+   fonts.googleapis.com or cdn.fontshare.com, so nothing breaks behind a proxy
+   that blocks them and no third-party host sees the user's IP.
+   font-display:swap renders in the fallback immediately and swaps on load, so
+   text is never invisible while the font downloads.
+
+   Roles: Clash Display = headings, General Sans = body/UI, Fragment Mono = code.
+--------------------------------------------------------------------------- */
+@font-face {
+    font-family: "Clash Display";
+    src: url("../fonts/clash-display-500.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Clash Display";
+    src: url("../fonts/clash-display-600.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Clash Display";
+    src: url("../fonts/clash-display-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "General Sans";
+    src: url("../fonts/general-sans-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "General Sans";
+    src: url("../fonts/general-sans-500.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "General Sans";
+    src: url("../fonts/general-sans-600.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "General Sans";
+    src: url("../fonts/general-sans-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Fragment Mono";
+    src: url("../fonts/fragment-mono-latin.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Instrument Sans";
+    src: url("../fonts/instrument-sans-latin.woff2") format("woff2");
+    font-weight: 400 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Clash Display and Fragment Mono are embedded and available via
+   --craFontDisplayAlt / --craFontMono, but nothing is styled with them by
+   default -- apply the class where you want them. */
+:root,
+.sapUiBody {
+    --sapFontFamily: "Instrument Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --sapFontHeaderFamily: var(--sapFontFamily);
+    --sapFontLightFamily: var(--sapFontFamily);
+    --sapFontBoldFamily: var(--sapFontFamily);
+    --sapFontSemiboldDuplexFamily: var(--sapFontFamily);
+    --craFontDisplay: "General Sans", "Segoe UI", Arial, sans-serif;
+    --craFontDisplayAlt: "Clash Display", "General Sans", "Segoe UI", Arial, sans-serif;
+    --craFontMono: "Fragment Mono", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+/* The theme sets font-family on many specific control classes, so a short
+   selector list leaves pockets of the old face behind -- that is why some
+   subtitles kept rendering in 72black. The wildcard catches every sap* control
+   and inherits into their children; icons are pinned back below. */
+body.sapUiBody,
+[class^="sap"], [class*=" sap"] {
+    font-family: var(--sapFontFamily);
+}
+
+body.sapUiBody {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings: General Sans 600 with -0.2px tracking. Covers card headers,
+   table/panel headers and dialog titles. !important is required -- the theme
+   sets font-family on .sapMTitle at equal-or-higher specificity, so without it
+   these silently keep the body font. */
+.sapMTitle,
+.sapMTitle .sapUiSelectable,
+.sapMDialogTitle,
+.sapFCardHeader .sapMTitle,
+.sapFCardHeader .sapMTitle .sapUiSelectable,
+.sapMPanelHdr,
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--craFontDisplay) !important;
+    letter-spacing: -0.2px;
+    font-weight: 600;
+}
+
+/* The page header (hero) uses Clash Display and is the largest heading. The
+   title text lives in an inner span (sapUiSelectable), so the font-family is set
+   on both the container and that span. The DynamicPage ancestor raises
+   specificity above the theme's own title rule, which was out-specifying the
+   earlier flat selector -- the real reason the font never changed. */
+.craHeroTitle,
+.craHeroTitle.sapMTitle,
+.craHeroTitle .sapUiSelectable,
+.sapFDynamicPageTitleMainHeading .craHeroTitle,
+.sapFDynamicPageTitleMainHeading .craHeroTitle .sapUiSelectable {
+    font-family: var(--craFontDisplayAlt) !important;
+    font-size: 2.25rem !important;
+    line-height: 1.2;
+    font-weight: 600 !important;
+    letter-spacing: -0.2px;
+}
+
+/* Column headers repeat down every row, so they stay in the body font rather
+   than taking the display face. */
+.sapMListTblHeaderCell .sapMLabel,
+.sapMColumnHeader .sapMLabel {
+    font-family: var(--sapFontFamily);
+    letter-spacing: normal;
+    font-weight: 600;
+}
+
+/* Welcome line sits above the hero title: secondary to it, so it stays in the
+   body face and takes the muted treatment. */
+.craHeroWelcome {
+    font-family: var(--sapFontFamily);
+    opacity: 0.6;
+    font-size: 0.875rem;
+    letter-spacing: normal;
+    padding-bottom: 0.375rem;
+}
+
+
+/* Object name appended to the "Analysis" title in a lighter weight. */
+.craSelNameInline,
+.craSelNameInline.sapMTitle,
+.craSelNameInline .sapUiSelectable {
+    font-weight: 300 !important;
+    opacity: 0.85;
+}
+
+.craHeroBlock {
+    padding: 0.25rem 0;
+}
+
+/* Code, object names and other fixed-width content. */
+.craMono,
+.craMono .sapMText,
+.craMono.sapMText,
+code, pre, samp, kbd {
+    font-family: var(--craFontMono) !important;
+    letter-spacing: normal;
+}
+
+/* sap-icon glyphs are a font, not images. A blanket font-family override
+   turns every icon into a tofu box, so pin them back. */
+/* Only icons WITHOUT an inline font-family get pinned to SAP-icons. Icons from
+   the TNT / Business Suite sets carry their family in a style attribute, which
+   already beats any stylesheet rule -- excluding them here leaves that inline
+   value intact instead of overriding it with the wrong icon font. */
+.sapUiIcon:not([style*="font-family"]),
+[class^="sapMBtnIcon"]:not([style*="font-family"]),
+.sapMBtnIcon:not([style*="font-family"]) {
+    font-family: "SAP-icons" !important;
+}
+
+.sapUiIcon,
+.sapMBtnIcon {
+    letter-spacing: normal !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Floating sidebar
+   ToolPage lays the side nav flush against the header and content with a hard
+   border. Detaching it -- inset margins, radius, soft shadow, no border -- makes
+   it read as a panel resting on the page instead of a wall welded to it.
+   The transition matches the width animation of the expand/collapse toggle so
+   the float moves with it rather than snapping.
+--------------------------------------------------------------------------- */
+.sapTntToolPageAsideContent {
+    background: transparent !important;
+    border: none !important;
+    padding: 0.75rem 0.75rem 0.75rem 0.75rem;
+    box-sizing: border-box;
+}
+
+/* craSideNavPanel is a custom class set on the SideNavigation control itself
+   (App.view.xml), so it lands on the panel's ROOT DOM node regardless of which
+   internal sapTnt* class the current UI5 version uses. This is what guarantees
+   the border actually applies. */
+.craSideNavPanel,
+.sapTntToolPageAsideContent .sapTntSideNavigation {
+    /* Match the scope/upload cards: a visible 1px border, since the soft shadow
+       alone barely reads against the page background. */
+    border: 2px solid #bcc5d0 !important;
+    border-radius: 14px;
+    background: var(--sapList_Background, #fff);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 6px 20px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    height: 100%;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.sapTntToolPageAsideContent .sapTntSideNavigation:hover {
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 10px 28px rgba(15, 23, 42, 0.12);
+}
+
+/* Nav rows inside the floating panel, inset so they never touch its edge.
+   sapTntNLI is the row element the NavigationListItem renderer emits. */
+.sapTntSideNavigation .sapTntNLI {
+    border-radius: 10px;
+    margin: 2px 8px;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.sapTntSideNavigation .sapTntNLI.sapTntNLISelected {
+    border-radius: 10px;
+}
+
+/* Narrower expanded panel -- just the SideNavigation's own width (theme default
+   15rem), which drives the aside in push mode. NOT the aside element: that is
+   position:absolute in the small-layout overlay, so sizing it there put the
+   panel on top of the content. Scoped to the expanded state (:not collapsed);
+   the collapsed rail keeps its own sapTntSideNavigationNotExpandedWidth, and the
+   small-layout width:100% !important still wins for the overlay. */
+.sapTntSideNavigation:not(.sapTntSideNavigationNotExpanded) {
+    width: 13rem;
+    min-width: 13rem;
+}
+
+/* Main tabs (first level) medium; sub tabs (second level) light. */
+.sapTntSideNavigation .sapTntNLIFirstLevel .sapTntNLIText {
+    font-weight: 500;
+}
+
+.sapTntSideNavigation .sapTntNLISecondLevel .sapTntNLIText {
+    font-weight: 300;
+}
+
+/* Group header (e.g. "Extras") is a MAIN row: weight 500, normal size/case, so
+   it reads like the top-level tabs rather than a faint theme group caption. */
+.sapTntSideNavigation .sapTntNLGroupText {
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    opacity: 1 !important;
+    color: var(--sapList_TextColor, inherit) !important;
+}
+
+/* A group's child items (e.g. "SAC Report") are SECONDARY: weight 300. They
+   render first-level style inside the group, so this must beat the 500 rule
+   above -- the container scope gives it the win and covers real second-level
+   items too. */
+.sapTntSideNavigation .sapTntNLIItemsContainer .sapTntNLIText {
+    font-weight: 300 !important;
+    color: var(--sapContent_LabelColor, #6a6d70) !important;
+}
+
+/* Match the icon to the grayer secondary text. */
+.sapTntSideNavigation .sapTntNLIItemsContainer .sapUiIcon {
+    color: var(--sapContent_LabelColor, #6a6d70) !important;
+}
+
+/* Remove the divider the theme draws between a group's text and its expander
+   arrow (e.g. "Extras"). The theme puts it as a left border / pseudo on the
+   expander area of an item that has sub-items (sapTntNLIWithExpander). */
+.sapTntSideNavigation .sapTntNLIWithExpander .sapUiIcon,
+.sapTntSideNavigation .sapTntNLIWithExpander > a > .sapUiIcon,
+.sapTntSideNavigation .sapTntNLIWithExpander .sapTntNLIExpandIcon {
+    border: none !important;
+    border-inline-start: none !important;
+}
+
+.sapTntSideNavigation .sapTntNLIWithExpander .sapUiIcon::before,
+.sapTntSideNavigation .sapTntNLIWithExpander .sapUiIcon::after {
+    border: none !important;
+}
+
+/* No padding here: it inset the scroll container, so the page scrollbar sat
+   away from the viewport edge and ran the full height including behind the
+   sticky page header. Each page supplies its own inner padding instead. */
+.sapTntToolPageMainContent {
+    padding: 0;
+    box-sizing: border-box;
+    background: #fff;
+    overflow: hidden; /* confines scrolling to the DynamicPage's own container */
+}
+
+/* ---------------------------------------------------------------------------
+   Header (logo bar)
+--------------------------------------------------------------------------- */
+.sapTntToolHeader {
+    padding: 0 1.25rem;
+    box-sizing: border-box;
+    min-height: 3.75rem;
+    height: 3.75rem;
+    overflow: hidden; /* nothing in the header may widen the page */
+}
+
+/* The toolbar's inner row has its own height cap, so raising only the header
+   leaves the content vertically pinned to the old line. */
+.sapTntToolHeader .sapMTB,
+.sapTntToolHeader .sapMTBInner {
+    min-height: 3.75rem;
+}
+
+.craHeaderCraveLogo {
+    margin-right: 0.5rem;
+}
+
+.craHeaderMainLogo {
+    margin: 0 0.5rem;
+}
+
+/* On narrow viewports the CoreAssess product logo becomes the brand mark: the
+   Crave logo is hidden and the product logo is shrunk (42px -> 26px) so its wide
+   777x175 ratio fits without forcing a horizontal scrollbar. Width media queries
+   react to resize AND refresh, unlike the user-agent device model. */
+@media (max-width: 600px) {
+    .craHeaderCraveLogo {
+        display: none !important;
+    }
+    .craHeaderMainLogo {
+        height: 26px !important;
+    }
+}
+
+/* The page fills the wrapper and scrolls internally. Inner spacing lives on the
+   title and content nodes; no vertical offset is used to dodge the header --
+   DynamicPage already keeps its title sticky above the scrolling content. */
+.sapTntToolPageMainContent .sapFDynamicPage {
+    height: 100%;
+}
+
+.sapTntToolPageMainContent .sapFDynamicPageTitle {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+/* No divider under the page title. DynamicPage draws it two ways -- a
+   border-bottom on the title and a box-shadow that appears once the content
+   scrolls under the sticky title (theme CSS puts it on the title/header
+   wrappers and on the snapped-title state) -- so all of them are cleared. */
+.sapFDynamicPageTitle,
+.sapFDynamicPageTitleWrapper,
+.sapFDynamicPageTitleSnapped,
+.sapFDynamicPageHeaderWrapper,
+.sapFDynamicPage .sapFDynamicPageTitle {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+/* Soft white fade below the sticky title: a white-to-transparent gradient that
+   overlays whatever scrolls beneath, so content appears to dissolve into the
+   header rather than sliding under a hard edge. Anchored to the title (made
+   relative + overflow visible so the strip can hang below it). */
+.sapTntToolPageMainContent .sapFDynamicPageTitle {
+    position: relative;
+    overflow: visible;
+    z-index: 3;
+}
+
+.sapTntToolPageMainContent .sapFDynamicPageTitle::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0.6) 45%, rgba(255, 255, 255, 0) 100%);
+    /* Frost the content passing under the header; the mask fades the blur out
+       toward the bottom so it blends instead of ending on a hard line. */
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.4) 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.4) 55%, transparent 100%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+
+.sapTntToolPageMainContent .sapFDynamicPageContent {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-bottom: 1.25rem;
+    box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------------------
+   Bordered table (Company / Projects)
+   A framed look with row separators and roomier rows, instead of the theme's
+   borderless default. The outer border wraps the list; row borders come from
+   showSeparators="All", restated here so the earlier global border reset (if
+   present) does not flatten them.
+--------------------------------------------------------------------------- */
+/* No outer frame: a border-radius clips badly against the sticky header, and an
+   internal-scroll frame (max-height) adds an unwanted scrollbar on these pages.
+   Row separators alone give the structure. */
+
+.craBorderedTable .sapMLIB {
+    border-bottom: 1px solid var(--sapList_BorderColor, #e3e7ed) !important;
+}
+
+/* Roomier rows and cells for legible spacing. */
+.craBorderedTable .sapMListTblCell,
+.craBorderedTable .sapMListTblHeaderCell {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+}
+
+.craBorderedTable .sapMListTblRow {
+    min-height: 3rem;
+}
+
+/* Header row sits inside the frame with a slightly stronger divider. */
+.craBorderedTable .sapMListTblHeader {
+    background: var(--sapList_HeaderBackground, #f7f8fa);
+    border-bottom: 1px solid var(--sapList_BorderColor, #d0d7e0) !important;
+}
+
+/* Grid table look for a responsive sap.m.Table, matching the analysis/assessment
+   grid: dense type, a shaded header, and vertical column separators so it reads
+   as a grid rather than a plain list. Used on the admin-panel tables. */
+/* Single outer frame on the SCROLL CONTAINER, rounded, with the inner content
+   clipped to the radius. Putting the border here (not on .sapMListTbl) avoids the
+   stacked/double border where the 2px frame met the header/last-row 1px lines. */
+.craGridTable {
+    max-height: 26rem;
+    overflow: auto;                 /* clips inner corners to the radius */
+    border: 2px solid #bcc5d0;
+    border-radius: 10px;
+}
+/* The inner table draws NO frame of its own -- only its cell/row separators. */
+.craGridTable .sapMListTbl {
+    border: none;
+}
+.craGridTable .sapMListTblRow {
+    min-height: 2.25rem;
+}
+.craGridTable .sapMListTblCell,
+.craGridTable .sapMListTblHeaderCell {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    border-right: 1px solid var(--sapList_BorderColor, #e3e7ed);
+}
+/* Smaller, uniform 12px on EVERY cell entry. Rather than enumerate each control's
+   text class (ObjectStatus is .sapMObjStatusText, ObjectNumber is
+   .sapMObjectNumberText, buttons are .sapMBtnContent -- easy to miss one), target
+   every text-bearing span in a cell and exclude only the icon glyph spans so
+   button/status icons keep their size. */
+.craGridTable .sapMListTblCell,
+.craGridTable .sapMListTblCell span:not(.sapUiIcon):not([class*="Icon"]),
+.craGridTable .sapMListTblCell bdi {
+    font-size: 0.75rem !important;
+}
+.craGridTable .sapMListTblCell:last-child,
+.craGridTable .sapMListTblHeaderCell:last-child {
+    border-right: none;
+}
+.craGridTable .sapMLIB {
+    border-bottom: 1px solid var(--sapList_BorderColor, #e3e7ed) !important;
+}
+/* Last row draws no separator -- the rounded container frame is the bottom edge. */
+.craGridTable .sapMListItems .sapMLIB:last-child {
+    border-bottom: none !important;
+}
+.craGridTable .sapMListTblHeader {
+    background: var(--sapList_HeaderBackground, #f7f8fa);
+    border-bottom: 1px solid var(--sapList_BorderColor, #d0d7e0) !important;
+}
+.craGridTable .sapMListTblHeaderCell .sapMLabel {
+    font-size: 0.6875rem;
+    font-weight: 600;
+}
+
+/* User -> company/project mapping cell: one block per company, company name in a
+   slightly stronger weight with its projects muted beneath. */
+.craUserMapRow {
+    padding: 0.125rem 0;
+}
+.craUserMapCompany .sapMText,
+.craUserMapCompany {
+    font-weight: 600;
+}
+.craUserMapProjects .sapMText,
+.craUserMapProjects {
+    color: var(--sapContent_LabelColor, #6a6d70);
+}
+
+/* The -Std-Tablet density variant adds its own left and top padding at higher
+   specificity than the rule above, so the content sat inset from the page title
+   and left a large gap below the header. Both cleared here. */
+.sapFDynamicPage-Std-Tablet .sapFDynamicPageContent,
+.sapFDynamicPage-Std-Tablet .sapFDynamicPageContentFitContainer {
+    padding-left: 0 !important;
+    padding-top: 0.25rem !important;
+}
+
+/* The grey canvas is painted by several nested wrappers, not just the page --
+   DynamicPage puts it on its own content node and on the scroll container, so
+   missing one leaves a grey band behind the white cards. */
+.sapTntToolPage,
+.sapTntToolPageMainContent .sapFDynamicPage,
+.sapTntToolPageMainContent .sapMPage,
+.sapTntToolPageMainContent .sapFDynamicPageContent,
+.sapTntToolPageMainContent .sapFDynamicPageContentWrapper,
+.sapTntToolPageMainContent .sapFDynamicPageContentFitContainer,
+.sapTntToolPageMainContent .sapMPageBody,
+.sapFDynamicPage,
+.sapFDynamicPageContent,
+.sapFDynamicPageContentWrapper,
+.sapFDynamicPageTitle,
+.sapFDynamicPageHeader,
+.sapUiResponsiveContentPadding {
+    background: #fff !important;
+}
+
+/* Collapse toggle sits in the SideNavigation fixedItem area, docked to the
+   bottom of the panel it controls. The renderer already emits its own
+   separator div above this block, so only spacing is needed here. */
+.sapTntSideNavigation .sapTntSideNavigationFixed {
+    padding-bottom: 0.25rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Collapsed sidebar
+   UI5 keeps the item text in the DOM when collapsed and relies on width
+   clipping, so the label bleeds out half-cropped. Hiding the span outright
+   leaves the icon alone; each item carries an explicit tooltip attribute
+   (the renderer writes it to title=) so hovering names the item instead.
+   Class is sapTntNLIText -- the NavigationListItem renderer's own name.
+--------------------------------------------------------------------------- */
+.sapTntSideNavigationNotExpanded .sapTntNLIText,
+.sapTntSideNavigationNotExpanded .sapTntNLGroupText,
+.sapTntSideNavigationNotExpanded .sapTntNLITagContainer,
+.sapTntSideNavigationNotExpanded .sapTntNLINotExpandedTriangle {
+    display: none !important;
+}
+
+/* The Extras group's label also bleeds out of the collapsed rail on hover
+   (it is a NavigationListGroup, whose header text is sapTntNLGroupText, and its
+   items sit in a container that must not widen the rail). Clip both so it
+   behaves like the plain tabs: icon in the rail, text only via tooltip. */
+.sapTntSideNavigationNotExpanded .sapTntNLGroup,
+.sapTntSideNavigationNotExpanded .sapTntNLIItemsContainer {
+    overflow: hidden !important;
+}
+
+
+/* Hide the group's separator line in the collapsed rail -- it reads as a stray
+   floating line there. The divider is only meaningful in the expanded panel. */
+.sapTntSideNavigationNotExpanded .sapTntNLSeparator {
+    display: none !important;
+}
+
+/* In the collapsed rail the group header row itself has no icon (only its child
+   does), so hide the empty header row and let the child icon stand alone. */
+.sapTntSideNavigationNotExpanded .sapTntNLGroup {
+    display: none !important;
+}
+
+/* Centre the icon in the collapsed rail once the label is gone. */
+.sapTntSideNavigationNotExpanded .sapTntNLI {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sapTntSideNavigationNotExpanded {
+    overflow-x: hidden;
+}
+
+/* ---------------------------------------------------------------------------
+   Cards
+   Definition comes from a hairline border, not a drop shadow. The previous
+   6px/12px shadow at 0.2 alpha made every card look like it was hovering.
+--------------------------------------------------------------------------- */
+/* Tight gap between the Scope card and the Objects card below it. */
+.craScopeCard {
+    margin-bottom: 0.5rem;
+}
+
+/* Drop the card's own horizontal content padding on the Scope + Upload cards so
+   the content spans full width (the inner layout still carries a ~1rem inset, so
+   the result matches the ticket screen's single-inset look instead of doubling). */
+.craScopeCard .sapFCardContent,
+.craUploadCard .sapFCardContent {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Objects card header row: title/subtitle left, Analyse button right. */
+.craObjectsHeaderRow {
+    width: 100%;
+    padding-bottom: 0.75rem;
+}
+
+.craObjectsHeaderSubtitle {
+    color: var(--sapContent_LabelColor, #6a6d70);
+    font-size: 0.8125rem;
+}
+
+.sapFCard {
+    border: 2px solid #bcc5d0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.sapFCard:hover {
+    border-color: var(--sapContent_Selected_BorderColor, #b6c2d1) !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.07) !important;
+}
+
+/* Card headers need a divider or the title collides with the content below.
+   Bottom padding kept to a minimum so the header sits close to the content. */
+.sapFCard .sapFCardHeader {
+    border-bottom: 1px solid var(--sapList_BorderColor, #e3e7ed);
+    padding-bottom: 0.125rem;
+}
+
+/* No press handler is attached to these headers, so the focus outline and
+   pointer cursor advertise an interaction that does not exist. tabindex is
+   cleared in the controller; this removes the visual affordances. */
+.sapFCard .sapFCardHeader,
+.sapFCard .sapFCardHeader:hover,
+.sapFCard .sapFCardHeader:focus,
+.sapFCard .sapFCardHeader.sapFCardHeaderInteractive {
+    cursor: default;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.sapFCard .sapFCardHeader:focus::after,
+.sapFCard .sapFCardHeader::after {
+    display: none !important;
+}
+
+/* The focus outline on click actually renders on the inner main part, not the
+   header element, so it survived the rules above. Clear it there too. */
+.sapFCardHeader .sapFCardHeaderMainPart.sapFCardHeaderLastPart,
+.sapFCardHeader .sapFCardHeaderMainPart.sapFCardHeaderLastPart:focus,
+.sapFCardHeader .sapFCardHeaderMainPart.sapFCardHeaderLastPart:focus-within,
+.sapFCardHeader .sapFCardHeaderMainPart.sapFCardHeaderLastPart:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.sapFCardHeader .sapFCardHeaderMainPart.sapFCardHeaderLastPart:focus::after,
+.sapFCardHeader .sapFCardHeaderMainPart.sapFCardHeaderLastPart::after {
+    display: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Profile popover
+--------------------------------------------------------------------------- */
+.craProfilePopover .sapMPopoverCont {
+    border-radius: 12px;
+}
+
+.craProfileBody {
+    padding: 0.875rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* min-width:0 lets the input shrink inside the flex row instead of forcing the
+   popover wider; flex:1 gives it the space left beside the avatar. */
+.craProfileIdentity {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Login email: read-only identity under the name input. Truncates rather than
+   widening the popover, since addresses can be long. */
+.craProfileEmail .sapMText,
+.craProfileEmail {
+    font-size: 0.75rem;
+    opacity: 0.75;
+    letter-spacing: normal;
+    padding-top: 0.375rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Role is secondary metadata: left-aligned under the input, small and dim. */
+.craProfileRole .sapMText,
+.craProfileRole {
+    font-size: 0.75rem;
+    opacity: 0.55;
+    text-align: left;
+    letter-spacing: normal;
+    padding-top: 0.25rem;
+}
+
+/* Save confirmation: the field flashes green instead of a permanent note.
+   Overrides the themed inner border, which otherwise wins on specificity. */
+.craSaveFlash .sapMInputBaseInner,
+.craSaveFlash.sapMInputBase .sapMInputBaseInner {
+    border-color: var(--sapPositiveColor, #107e3e) !important;
+    box-shadow: 0 0 0 2px rgba(16, 126, 62, 0.18);
+    transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+/* ---------------------------------------------------------------------------
+   Drop zone
+--------------------------------------------------------------------------- */
+.craDropZone {
+    border: 1.5px dashed var(--sapField_BorderColor, #b6c2d1);
+    border-radius: 12px;
+    padding: 1.75rem 1rem;
+    margin-bottom: 0.75rem;
+    background: var(--sapBackgroundColor, #f7f8fa);
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+/* Applied on dragenter/dragover so the target is obviously live. */
+.craDropZoneActive {
+    border-color: var(--sapSelectedColor, #0070f2);
+    border-style: solid;
+    background: rgba(0, 112, 242, 0.06);
+}
+
+.craDropZoneBusy {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.craDropZoneIcon {
+    color: var(--sapContent_IconColor, #0070f2);
+    opacity: 0.75;
+    padding-bottom: 0.5rem;
+}
+
+.craDropZoneTitle {
+    font-weight: 600;
+}
+
+.craDropZoneHint {
+    font-size: 0.8125rem;
+    opacity: 0.6;
+    padding-top: 0.125rem;
+}
+
+/* Long object names must truncate, not push the row wider than the viewport.
+   min-width:0 is required: a flex item defaults to min-width:auto, which
+   refuses to shrink below its text and is what actually causes the overflow --
+   text-overflow alone cannot fix it. */
+.craObjectList .sapMSLIDiv,
+.craObjectList .sapMSLITitleOnly,
+.craObjectList .sapMSLITitle {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Mobile: stop the whole page overflowing horizontally. The Objects header row
+   (title + Analyse button) and the card were not shrinking to the viewport, so
+   the card's right edge, the button and the Browse input were clipped. */
+@media (max-width: 600px) {
+    /* Card fills the width and never forces a wider min. */
+    .sapFCard {
+        min-width: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Header row wraps: the Analyse button drops under the title instead of
+       pushing the card wider than the screen. */
+    .craObjectsHeaderRow {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+
+    .craObjectsHeaderRow > .sapMVBox,
+    .craObjectsHeaderRow > .sapMFlexItem {
+        min-width: 0;
+        flex: 1 1 100%;
+    }
+
+    /* Subtitle truncates rather than widening the row. */
+    .craObjectsHeaderSubtitle {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+
+    /* FileUploader and its inner input must not keep an intrinsic min width. */
+    .sapUiFup,
+    .sapUiFup .sapMInputBase,
+    .sapUiFup .sapMInputBaseInner {
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+    }
+
+    /* Tighter page gutters so content has more room on a narrow screen. */
+    .sapTntToolPageMainContent .sapFDynamicPageContent,
+    .sapTntToolPageMainContent .sapFDynamicPageTitle {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+
+    /* Crop object names at ~18 characters (the length of ZRFI_VENDOR_AGEING);
+       anything longer ellipses. ch is the width of a "0" glyph, so 18ch tracks
+       the character count rather than a device-relative percentage. */
+    .craObjectList .sapMSLITitleOnly,
+    .craObjectList .sapMSLITitle {
+        display: inline-block;
+        max-width: 18ch !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+}
+
+/* Scope form: labels sit above their fields and the whole grid stays flush
+   left instead of being centred by an empty span. */
+.craScopeForm .sapUiFormResGrid {
+    padding-left: 0;
+}
+
+/* No top padding on the grid's inner container so the first input sits directly
+   under the Scope header row instead of leaving a gap. */
+.craScopeForm .sapUiFormResGrid > div {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Outer frame + rounded corners on the analysis table, matching the admin
+   .craGridTable look. The custom class lands on the sapUiTable root, so the border
+   and radius go here; overflow:hidden clips the inner corners to the radius. */
+.craAnalysisTable.sapUiTable {
+    /* Frame as an OUTSET box-shadow ring, not a border: sap.ui.table's inner
+       header (top) and scrollbar/content (bottom) divs have their own backgrounds
+       positioned to the edges and paint OVER a root border, so top/bottom borders
+       vanished. An outset shadow is drawn outside the border-box and children can't
+       cover it, so all four sides show. */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px #bcc5d0;
+}
+
+/* Analysis grid table: smaller, denser type so more columns fit and the tags /
+   criticality badges read as compact chips rather than full-size text. */
+.craAnalysisTable .sapUiTableCell,
+.craAnalysisTable .sapUiTableCell .sapMText,
+.craAnalysisTable .sapUiTableCell .sapMObjectStatusText,
+.craAnalysisTable .sapUiTableColemnHeader .sapMLabel,
+.craAnalysisTable .sapUiTableColHdrTxt {
+    font-size: 0.8125rem;
+}
+
+.craAnalysisTable .sapUiTableColHdrCnt .sapMLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Compact tag/badge sizing in cells. */
+.craAnalysisTable .sapMObjectStatus,
+.craAnalysisTable .sapTntInfoLabel {
+    font-size: 0.75rem;
+}
+
+/* Ellipsis in the colour of the text it truncates.
+   The black ellipsis came from the CELL's line box (dark cell colour) doing the
+   clipping. So: the cell clips with NO ellipsis, and the ellipsis is generated
+   instead by the badge's own text span, which carries the real colour (white in
+   an inverted ObjectStatus, dark-green in an InfoLabel) -- so it always matches.
+   The badge is a flex box that may shrink (min-width:0), letting its inner span
+   overflow and ellipse. */
+.craAnalysisTable .sapUiTableCell,
+.craAnalysisTable .sapUiTableCellInner {
+    text-overflow: clip !important;
+}
+
+.craAnalysisTable .sapUiTableCellInner {
+    min-width: 0;
+}
+
+.craAnalysisTable .sapMObjectStatus,
+.craAnalysisTable .sapTntInfoLabel {
+    display: inline-flex !important;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.craAnalysisTable .sapMObjectStatusText,
+.craAnalysisTable .sapTntInfoLabelText {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Plain dark-text cells (Object, Module) keep an ellipsis -- their text is the
+   default dark colour, so it already matches. */
+.craAnalysisTable .sapUiTableCellInner > .sapMText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* Breathing room: a touch more horizontal padding in cells and header, and
+   vertically centre the tag/badge content so rows read cleanly. */
+.craAnalysisTable .sapUiTableCell,
+.craAnalysisTable .sapUiTableHeaderCell {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.craAnalysisTable .sapUiTableCellInner {
+    display: flex;
+    align-items: center;
+}
+
+/* Criticality badges (ObjectStatus) sat a touch low vs the InfoLabel tags.
+   Centre them and normalise line-height so both read on the same line. */
+.craAnalysisTable .sapMObjectStatus {
+    align-items: center;
+    align-self: center;
+    line-height: normal;
+}
+
+.craAnalysisTable .sapMObjectStatusText {
+    line-height: 1.4;
+    padding: 0;
+}
+
+/* Clear separation above the Customization detail panel. */
+.craDetailPanel {
+    margin-top: 2rem !important;
+}
+
+/* Detail sections are flat, full-width bands -- not separate cards. Strip the
+   BlockLayout's card background/shadow/padding so each section just flows. */
+.craDetailPanel .sapUiBlockLayout,
+.craDetailPanel .sapUiBlockLayoutRow {
+    margin: 0 !important;
+    width: 100% !important;
+    background: transparent !important;
+}
+
+.craDetailPanel .sapUiBlockCell,
+.craDetailPanel .sapUiBlockCellContent {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Bullet every array item rendered as a CustomListItem in the detail sections. */
+.craDetailPanel .sapMCLI {
+    position: relative;
+    padding-left: 1rem;
+    border-bottom: none !important;
+}
+
+.craDetailPanel .sapMCLI::before {
+    content: "\2022";
+    position: absolute;
+    left: 0.125rem;
+    /* Align the bullet to the top of the first text line (the title), not the
+       vertical centre of a multi-line wrapped entry. */
+    top: 0.15rem;
+    line-height: 1;
+    color: var(--sapContent_LabelColor, #6a6d70);
+}
+
+/* Bold-title bullet line (Clean core / recommendations / integration).
+   Rendered as a single FormattedText so "<b>Title</b>: description" flows
+   inline on one wrapping paragraph instead of title/description stacking. */
+.craDetailPanel .craBulletFT,
+.craDetailPanel .craBulletFT .sapMFT {
+    display: block;
+    padding: 0.0625rem 0;
+    line-height: 1.35;
+}
+
+.craDetailPanel .craBulletFT strong {
+    font-weight: 700;
+}
+
+/* Main section headers (Overview / approach / SQL / Integration / Security):
+   bigger plain heading with a leading icon -- no InfoLabel pill styling. */
+.craSectionTitle,
+.craSectionTitle .sapMTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    align-self: center;
+}
+
+.craSectionIcon {
+    font-size: 1.0625rem;
+    color: var(--sapContent_IconColor, #0070f2);
+    margin-right: 0.5rem;
+    align-self: center;
+}
+
+/* Development-approach colour codes -- applied to the analysis-table Approach
+   cell and to the matching detail section header (icon + title).
+   retire=orange, on-stack=green, side-by-side=blue, hybrid=purple. */
+.craAprRetire, .craAprRetire .sapMText, .craAprRetire .sapMTitleInner, .craAprRetire.sapUiIcon { color: #e76500 !important; }
+.craAprOnStack, .craAprOnStack .sapMText, .craAprOnStack .sapMTitleInner, .craAprOnStack.sapUiIcon { color: #256f3a !important; }
+.craAprSbs, .craAprSbs .sapMText, .craAprSbs .sapMTitleInner, .craAprSbs.sapUiIcon { color: #0070f2 !important; }
+.craAprHybrid, .craAprHybrid .sapMText, .craAprHybrid .sapMTitleInner, .craAprHybrid.sapUiIcon { color: #7858ff !important; }
+
+/* Approach colour in the analysis table cell (rendered via CustomData
+   writeToDom -> data-craapr attribute, reliable inside sap.ui.table). */
+.craAnalysisTable [data-craapr="retire"]  { color: #e76500 !important; }
+.craAnalysisTable [data-craapr="onstack"] { color: #256f3a !important; }
+.craAnalysisTable [data-craapr="sbs"]     { color: #0070f2 !important; }
+.craAnalysisTable [data-craapr="hybrid"]  { color: #7858ff !important; }
+
+/* Data-driven approach section header (onStack fragment serves on-stack + hybrid). */
+.craSectionTitle[data-craapr="retire"],  .craSectionIcon[data-craapr="retire"]  { color: #e76500 !important; }
+.craSectionTitle[data-craapr="onstack"], .craSectionIcon[data-craapr="onstack"] { color: #256f3a !important; }
+.craSectionTitle[data-craapr="sbs"],     .craSectionIcon[data-craapr="sbs"]     { color: #0070f2 !important; }
+.craSectionTitle[data-craapr="hybrid"],  .craSectionIcon[data-craapr="hybrid"]  { color: #7858ff !important; }
+
+/* Detail sub-section grid -- replicates the old app layout: fields sit 4-up
+   (the old width="25%") and any box containing a table spans two columns
+   (the old width="50%"). One grid per section. */
+.craSecGrid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem 1.75rem;
+    align-items: start;
+    width: 100% !important;
+    margin-bottom: 1.75rem;
+}
+
+.craSecGrid > .sapMVBox {
+    min-width: 0;
+}
+
+/* Table / analysis boxes were the wider 50% cells in the old app. */
+.craSecGrid > .sapMVBox:has(table) {
+    grid-column: span 2;
+}
+
+@media (max-width: 1200px) {
+    .craSecGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+    .craSecGrid { grid-template-columns: 1fr; }
+    .craSecGrid > .sapMVBox:has(table) { grid-column: auto; }
+}
+
+/* Technical entities (tables, views, APIs, BAPIs, function modules, IDocs, auth
+   objects) are the first column of the detail tables -- render them monospaced. */
+.craDetailPanel .sapMListTblCell:first-child,
+.craDetailPanel .sapMListTblCell:first-child .sapMText {
+    font-family: var(--craFontMono) !important;
+}
+
+/* Uniform grid for each subsection: give every field box a consistent gutter so
+   columns no longer touch. box-sizing keeps the % widths intact. */
+/* Tighter vertical rhythm, wider horizontal gutter between the field/table
+   columns of a subsection row. */
+.craDetailPanel .sapMHBox > .sapMVBox {
+    box-sizing: border-box;
+    padding-right: 2rem;
+    padding-bottom: 0.75rem;
+}
+
+/* Each section is a bordered card, matching the Scope / Objects cards on the
+   first page (.sapFCard). */
+.craDetailPanel .sapUiBlockLayout {
+    border: 2px solid #bcc5d0;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    background: var(--sapBaseColor, #fff);
+    padding: 1.25rem 1.5rem 0.75rem;
+    margin-bottom: 1.25rem !important;
+    box-sizing: border-box;
+}
+
+.craDetailPanel .sapUiBlockCell,
+.craDetailPanel .sapUiBlockCellContent {
+    padding: 0 !important;
+}
+
+/* No inner rules/borders on the analysis tables -- the section card is the only
+   frame. */
+.craDetailPanel .sapMListTbl,
+.craDetailPanel .sapMListTblRow,
+.craDetailPanel .sapMListTblCell,
+.craDetailPanel .sapMListTblHeader,
+.craDetailPanel .sapMListTblHeaderCell,
+.craDetailPanel .sapMLIB,
+.craDetailPanel .sapMList .sapMLIB {
+    border: none !important;
+}
+
+.craDetailPanel .sapMListTblHeader,
+.craDetailPanel .sapMListTblHeaderCell {
+    background: transparent !important;
+}
+
+/* Details header: no bottom rule under the panel header toolbar. */
+.craDetailPanel .sapMPanelHdrToolbar,
+.craDetailPanel .sapMPanelWrappingDivTb,
+.craDetailPanel > .sapMPanelHdrToolbar {
+    border-bottom: none !important;
+}
+
+/* AI disclaimer: a tiny muted line with a warning icon, not a callout. */
+.craAiNoteBox {
+    padding: 0.125rem 0 0.5rem;
+    margin-top: -5px;
+    align-items: center;
+    filter: saturate(0);
+    margin-bottom: 1rem;
+}
+
+.craAiNote {
+    display: block;
+    color: var(--sapContent_LabelColor, #6a6d70);
+    font-size: 0.75rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.craAiNoteIcon {
+    color: var(--sapWarningColor, #e76500);
+    font-size: 0.875rem;
+    margin-right: 0.375rem;
+}
+
+/* Slightly quieter column headers. */
+.craAnalysisTable .sapUiTableColHdr .sapMLabel {
+    color: var(--sapContent_LabelColor, #6a6d70);
+}
+
+/* Analysis grid table on mobile: truncate long cell values with an ellipsis so
+   they do not overflow the narrow viewport. The object-name column is wide
+   enough that its values (e.g. ZRFI_GST_REGISTER) still show in full. */
+@media (max-width: 600px) {
+    /* Only plain text cells ellipse; badges are excluded (see above). */
+    .craAnalysisTable .sapUiTableCell .sapMText,
+    .craAnalysisTable .sapUiTableCell > .sapMLabel {
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        max-width: 100%;
+    }
+}
+
+/* The file drop zone reads as an interactive target, not an input box. */
+.sapUiFup .sapMInputBaseInner,
+.fullWidthUploader .sapMInputBaseInner {
+    border-radius: 10px;
+}
+
+/* Enter your custom styles here */
+html, body, .sapUiBody, #ListPage {
+    height: 100% !important;
+    overflow: hidden;
+}
+
+#ListPage {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#ListPage .sapMPage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.borderremove.sapMLIB{
+    border-bottom: 0px solid #e5e5e5;
+}
+.bordertableremove.sapMLIBShowSeparator>td{
+    border-top: 0px solid
+}
+
+
+
+.fullWidthUploader {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.centerContent {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.customHBoxShadow {
+    margin-bottom: 18px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #bcc5d0;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    background-color: var(--sapList_Background, #fff);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.customHBoxShadow:hover {
+    border-color: var(--sapContent_Selected_BorderColor, #b6c2d1);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.07);
+}
+
+
+.fullHeightPage {
+    height: 100vh; /* Ensures the page takes up the full viewport height */
+}
+
+.fullHeightHBox {
+    height: 100%; /* Allows HBox to take the full height of the parent Page */
+}
+
+
+.tableHeaderToolbar {
+    z-index: 10; /* Lower than the sticky header */
+}
+
+.fullHeightPage {
+    height: 100%; /* Ensures the page container takes full height */
+}
+.stickySideNav {
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Optional: keeps the side navigation above other content */
+}
+
+
+.tileColor{
+    background-color: aliceblue !important;
+}
+
+/* new 08-01-25 */
+ .stickyHeader {
+    position: sticky; 
+    top: 0;          
+    z-index: 1000;   
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/*.mainContainer {
+    display: flex;
+    height: calc(100vh - var(7.65));
+    overflow: hidden; 
+}
+
+.stickySideNav {
+    flex-shrink: 0; 
+    background-color: white;
+    border-right: 1px solid #ddd;
+    overflow-y: auto; 
+} */
+
+
+.responsiveHBox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping when space is limited */
+    gap: 5px; /* Add spacing between VBox elements */
+  }
+  
+  .responsiveVBox {
+    flex: 1; /* Allow elements to grow/shrink as needed */
+  }
+/* Single-line filter bar: tight gaps between the compact MultiComboBoxes. */
+/* Single-line filter bar: fields flex to fill the full width equally, shrink on
+   smaller screens, then overflow into the toolbar menu. */
+.craFilterBar {
+    width: 100%;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+/* Small gap between the fixed-width filter fields. Fixed widths (set in the view)
+   let OverflowToolbar measure children reliably, so items overflow into the menu
+   on small screens and return to the bar when it grows again. */
+.craFilterBar .sapMMultiComboBox {
+    margin-right: 0.5rem;
+}
+
+/* Archived (soft-deleted) company/project rows: greyed and de-emphasised, but
+   their action buttons (restore / delete permanently) stay fully interactive. */
+.sapMListTblRow[data-archived="true"] .sapMObjectIdentifier,
+.sapMListTblRow[data-archived="true"] .sapMObjIStatusText,
+.sapMListTblRow[data-archived="true"] .sapMAvatar {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+/* Compact text in the analysis progress dialog and the header "Analysis jobs"
+   popover -- the default object-name / status size was too large. */
+.craUploadTable .sapMObjectIdentifierTitle,
+.craUploadTable .sapMObjectIdentifierText,
+.craUploadTable .sapMObjStatusText,
+.craUploadTable bdi,
+.craUploadJobList .sapMSLITitleOnly,
+.craUploadJobList .sapMSLITitle,
+.craUploadJobList .sapMSLIInfo {
+    font-size: 0.875rem !important;   /* 14px, matching the analysis table entries */
+    line-height: 1.3 !important;
+}
+.craUploadTable .sapUiIcon,
+.craUploadJobList .sapMSLIImg,
+.craUploadJobList .sapUiIcon {
+    font-size: 0.9rem !important;
+}
+
+/* Analysis detail card tables: distinguish headers (bold + grey) and add light
+   borders so the columns read as a real table. */
+.craDetailPanel .sapMListTblHeader {
+    background: var(--sapList_HeaderBackground, #f4f5f7);
+}
+.craDetailPanel .sapMListTblHeaderCell,
+.craDetailPanel .sapMListTblHeaderCell .sapMLabel,
+.craDetailPanel .sapMListTblHeaderCell .sapMText {
+    font-weight: 700 !important;
+    color: var(--sapContent_LabelColor, #475569) !important;
+}
+.craDetailPanel .sapMListTbl {
+    border: 2px solid #bcc5d0 !important;
+    /* Real <table>: collapse merges the 2px frame with the 1px cell borders so the
+       edges are a single line, not stacked. Radius + clip rounds the corners. */
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+/* Cell borders on every td/th. !important overrides the "bordertableremove"
+   class the recommendation tables carry, which stripped the row separators. */
+.craDetailPanel .sapMListTbl td,
+.craDetailPanel .sapMListTbl th,
+.craDetailPanel .bordertableremove.sapMLIBShowSeparator > td {
+    border-top: 1px solid var(--sapList_BorderColor, #eef1f5) !important;
+    border-right: 1px solid var(--sapList_BorderColor, #eef1f5) !important;
+}
+
+/* Analysis progress dialog (craUploadTable): shorter rows + object name capped
+   with an ellipsis so long names don't force horizontal scroll. */
+.craUploadTable .sapMListTblRow > .sapMListTblCell {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+}
+.craUploadTable .sapMListTblCell .sapMObjectIdentifier,
+.craUploadTable .sapMListTblCell .sapMObjectIdentifierText,
+.craUploadTable .sapMListTblCell .sapMObjectIdentifierTitle,
+.craUploadTable .sapMListTblCell bdi {
+    max-width: 15rem;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+/* Upload section "Selected objects" list AND the "Analysing objects" job
+   popover: compact rows. Both are StandardListItem lists that render OUTSIDE a
+   compact-density container (a card / a popover), so the default ~3rem row
+   height applies -- the popover in particular never got a height rule, which is
+   why its rows looked huge. Force the row height AND the inner content wrapper
+   down; the wrapper's own min-height is what actually keeps the row tall. */
+.craObjectList .sapMLIB,
+.craObjectList .sapMSLI,
+.craUploadJobList .sapMLIB,
+.craUploadJobList .sapMSLI {
+    min-height: 2rem !important;
+    padding-top: 0.15rem !important;
+    padding-bottom: 0.15rem !important;
+}
+.craObjectList .sapMSLIDiv,
+.craUploadJobList .sapMSLIDiv {
+    min-height: 1.5rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+/* Cap the object-name width so long names (e.g. ZHR_RPCIP_DOCUMENT_ANALYSE_AHC)
+   ellipse instead of stretching the row. 18ch tracks the character count. */
+.craObjectList .sapMSLITitleOnly,
+.craObjectList .sapMSLITitle,
+.craUploadJobList .sapMSLITitleOnly,
+.craUploadJobList .sapMSLITitle {
+    font-size: 0.875rem !important;   /* 14px, matching the table entries */
+    max-width: 18ch !important;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+/* Analysis detail content should span the full panel width -- same as the
+   expandable panel's header toolbar (.sapMPanelHeaderTB). sap.ui.layout.BlockLayout
+   otherwise caps its content to a narrower responsive container. */
+.craDetailPanel .sapMPanelContent {
+    width: 100% !important;
+    box-sizing: border-box;
+    /* The BlockLayout child is width:100%, but that is 100% of the panel's
+       PADDED content box -- so it renders narrower than the panel by the side
+       padding. Zero the horizontal padding so the child and the panel content
+       are the same width edge-to-edge. */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.craDetailPanel .sapUiBlockLayout {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.craDetailPanel .sapUiBlockCell,
+.craDetailPanel .sapUiBlockCellContent {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-basis: auto !important;
+}

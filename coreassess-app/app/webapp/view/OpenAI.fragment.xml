@@ -1,0 +1,92 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+    xmlns:tnt="sap.tnt"
+	xmlns:core="sap.ui.core">
+     <Dialog
+        title="Gen AI Document Suite"
+        contentWidth="auto"
+        contentHeight="auto"
+        titleAlignment="Center">
+	<VBox class="sapUiSmallMargin" >
+		<f:Form 
+			editable="true">
+			<f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="12"
+					labelSpanL="12"
+					labelSpanM="12"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="4"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="1"
+					columnsL="1"
+					columnsM="1"
+                    
+					singleContainerFullSize="false" />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement >
+                            <f:label>
+                            <Label text="Select type of development to estimate"></Label>
+                             <!-- <tnt:InfoLabel text="Select type of development to estimate"   colorScheme="7"/> -->
+                            </f:label>
+							<f:fields>
+								<ComboBox  selectedKey="{aiALModel>/estimate}"
+                showSelectAll="false" selectionChange="onSelectAIEstimate"
+                 
+            >
+                <core:Item
+                    key="BBD"
+                    text="Business Blueprint Document"
+                />
+                <core:Item
+                    key="FSD"
+                    text="Functional Specification Document"
+                />
+                <core:Item
+                    key="TSD"
+                    text="Technical Specification Document"
+                />
+            </ComboBox>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement>
+						  <f:label>
+                            <Label text="Keep Gen AI Aligned –  Update Requirements as Needed"></Label>
+                             <!-- <tnt:InfoLabel text="Select type of development to estimate"   colorScheme="7"/> -->
+                            </f:label>
+							<f:fields>
+							<TextArea growing="true"  value="{aiALModel>/searchValue}"  enabled="{=${aiALModel>/estimate}==='FSD' ? true : false}" cols="50" rows="20"></TextArea>
+							</f:fields>
+						</f:FormElement>
+
+						
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+	</VBox>
+	 <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    press="DownloadDoc"
+                    type="Accept"
+                    text="Submit"
+                    class="sapUiTinyMarginEnd"
+                />
+                <Button
+                    press="CloseAIDialog"
+                    text="Close"
+                />
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

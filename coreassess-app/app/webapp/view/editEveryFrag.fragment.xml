@@ -1,0 +1,82 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:m="sap.m"
+    xmlns:tnt="sap.tnt"
+>
+    <Dialog
+        id="editEveryFrag"
+        contentWidth="auto"
+        contentHeight="auto"
+        titleAlignment="Center" title="Edit" 
+    >
+        <VBox class="sapUiTinyMargin">
+            <f:SimpleForm
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false" 
+            >
+                <f:content>
+                <!-- Company -->
+                    <Label text="Company Name" id="companyFieldGrp1" />
+                    <Input value="{editModel>/oData/COMPANY_NAME}" id="companyFieldGrp2"/>
+                    <!-- Project -->
+                    <Label
+                        text="Company Name"
+                        id="projectFieldGrp1"
+                    />
+                    <Input
+                        value="{editModel>/oData/COMPANY}"
+                        id="projectFieldGrp2" editable="false"
+                    />
+                    <Label
+                        text="Project Name"
+                        id="projectFieldGrp3"
+                    />
+                    <Input
+                        value="{editModel>/oData/PROJECT_NAME}" id="projectFieldGrp4"
+                    /> 
+                     <Label
+                        text="Skill Set"
+                        id="projectFieldGrp5"
+                    />
+                    <ComboBox
+				items="{skillSetModel>/skillsetarray}" selectedKey="{editModel>/oData/SkillSet_ID}" id="projectFieldGrp6"> 
+                <!-- text="{editModel>/oData}" -->
+				<core:Item key="{skillSetModel>ID}" text="{skillSetModel>Name}"/>
+			</ComboBox>
+
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+        <footer>
+            <m:OverflowToolbar>
+                <m:ToolbarSpacer />
+                <Button
+                    press="onEditEvery"
+                    type="Accept"
+                    text="Update"
+                  
+                />
+                <Button
+                    press="onEditEveryClose"
+                    text="Close"
+                />
+            </m:OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

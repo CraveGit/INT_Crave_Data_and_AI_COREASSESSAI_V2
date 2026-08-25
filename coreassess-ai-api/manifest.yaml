@@ -1,0 +1,14 @@
+---
+applications:
+  - name: coreassess-ai
+    path: ./
+    memory: 1G
+    disk_quota: 2G
+    instances: 2
+    buildpacks:
+      - python_buildpack
+    # Stable hostname: the CAP destination "coreassess-api" points here, so it must
+    # not change between deploys (random-route would break it on every push).
+    routes:
+      - route: coreassess-ai-api-v2.cfapps.us10-001.hana.ondemand.com
+    command: gunicorn -w 3 -k uvicorn.workers.UvicornWorker -t 900 --graceful-timeout 60 main:app

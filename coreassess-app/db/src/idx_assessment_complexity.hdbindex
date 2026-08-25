@@ -1,0 +1,1 @@
+INDEX "idx_assessment_complexity" ON CRA_ASSESSMENT (CODE_COMPLEXITY)

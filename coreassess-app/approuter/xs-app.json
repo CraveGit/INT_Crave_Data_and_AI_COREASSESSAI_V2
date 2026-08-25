@@ -1,0 +1,13 @@
+{
+  "welcomeFile": "/comcravecoreassessv2/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout",
+    "logoutPage": "/logoutpage/logout.html"
+  },
+  "routes": [
+    { "source": "^/logoutpage/(.*)$", "target": "$1", "localDir": "logout-resources", "authenticationType": "none" },
+    { "source": "^/v2/(.*)$", "target": "/v2/$1", "destination": "COREASSESS_V2_SRV", "authenticationType": "xsuaa", "csrfProtection": false },
+    { "source": "^(.*)$", "target": "$1", "service": "html5-apps-repo-rt", "authenticationType": "xsuaa" }
+  ]
+}

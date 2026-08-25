@@ -1,0 +1,134 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:tnt="sap.tnt" xmlns:t="sap.ui.table" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:sapf="sap.f"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" controllerName="com.crave.coreassessv2.controller.Objects" height="100%" id="object">
+	<!-- DynamicPage so the analysis screen gets the same sticky title header
+	     (title + project name) as the other pages. -->
+	<sapf:DynamicPage id="page2" headerExpanded="true" toggleHeaderOnTitleClick="false" fitContent="false">
+		<sapf:title>
+			<sapf:DynamicPageTitle>
+				<sapf:heading>
+					<VBox class="craHeroBlock">
+						<Text text="{dataModel>/projectData/PROJECT_NAME}" class="craHeroWelcome" />
+						<Title text="Analysis" level="H2" class="craHeroTitle" />
+					</VBox>
+				</sapf:heading>
+			</sapf:DynamicPageTitle>
+		</sapf:title>
+		<sapf:content>
+			<!-- DynamicPage content is a single-control aggregation, so everything
+			     is wrapped in one VBox (the old Page allowed multiple children). -->
+			<VBox width="100%">
+			<VBox width="100%" class="sapUiTinyMarginEnd sapUiTinyMarginTop">
+				<OverflowToolbar class="craFilterBar sapUiTinyMarginBottom">
+						<MultiComboBox id="SAP_MODULES" width="12rem" placeholder="Module" items="{ path: 'filterObjectModel>/filterList/0/SAP_MODULES' }"><core:Item key="{filterObjectModel>NAME}" text="{filterObjectModel>NAME}"/></MultiComboBox>
+						<MultiComboBox id="APPROACH" width="10rem" placeholder="Approach" items="{ path: 'filterObjectModel>/filterList/0/APPROACH' }"><core:Item key="{filterObjectModel>NAME}" text="{filterObjectModel>NAME}"/></MultiComboBox>
+						<MultiComboBox id="ADHERENCE" width="10rem" placeholder="Adherence" selectionFinish="handleSelectionFinish" items="{ path: 'filterObjectModel>/filterList/0/ADHERENCE' }"><core:Item key="{filterObjectModel>NAME}" text="{filterObjectModel>NAME}"/></MultiComboBox>
+						<MultiComboBox id="CODE_COMPLEXITY" width="10rem" placeholder="Complexity" items="{ path: 'filterObjectModel>/filterList/0/CODE_COMPLEXITY' }"><core:Item key="{filterObjectModel>NAME}" text="{filterObjectModel>NAME}"/></MultiComboBox>
+						<MultiComboBox id="TSHIRT" width="8rem" placeholder="Size" items="{ path: 'filterObjectModel>/filterList/0/TSHIRT' }"><core:Item key="{filterObjectModel>NAME}" text="{filterObjectModel>NAME}"/></MultiComboBox>
+						<ToolbarSpacer/>
+							<OverflowToolbarButton text="Apply" icon="sap-icon://filter" type="Emphasized" press="applyFilter"/>
+						<OverflowToolbarButton text="Reset" icon="sap-icon://clear-filter" tooltip="Reset filters" press="resetFilter"/>
+					</OverflowToolbar>
+						<t:Table id="abapObjectTable" rows="{listObjectsModel>/objectList}" selectionMode="Multi" visibleRowCount="{ path: 'listObjectsModel>/objectList', formatter: '.formatVisibleRows' }" enableColumnFreeze="false"
+							rowSelectionChange="showData1" ariaLabelledBy="title" enableSelectAll="true" enableGrouping="false" fixedColumnCount="0" width="100%"
+							class="sapUiSmallMarginTop craAnalysisTable">
+							<t:extension>
+								<OverflowToolbar style="Clear">
+									<Title id="title" text="{= 'Customizations (' + ${listObjectsModel>/objectList}.length + ')'}"/>
+										<ToolbarSpacer/>
+									<SearchField placeholder="Search..." liveChange="onSearchObjects" width="200px"/>
+									<Button id="editObjectBtn" text="{= ${device>/system/phone} ? 'Edit' : '' }" icon="sap-icon://edit" tooltip="Edit selected object" press="onPressEditObject" type="Transparent"/>
+										<Button id="deleteObjectBtn" text="{= ${device>/system/phone} ? 'Delete' : '' }" icon="sap-icon://delete" tooltip="Delete selected object(s)" press="onPressDeleteObject" type="Transparent" visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }"/>
+										<Button id="exportObjects" text="{= ${device>/system/phone} ? 'Export' : '' }" icon="sap-icon://excel-attachment" tooltip="Export to Excel" press="onExportPress" type="Transparent"/>
+									<Button id="unSelectItems" text="{= ${device>/system/phone} ? 'Clear' : '' }" icon="sap-icon://clear-all" tooltip="Clear selection" press="unSelectTable" type="Transparent"/>
+									<Button id="refreshObjectTable" text="{= ${device>/system/phone} ? 'Refresh' : '' }" icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshTable" type="Transparent"/>
+								</OverflowToolbar>
+							</t:extension>
+							<t:columns>
+								<t:Column width="auto" minWidth="220" sortProperty="OBJECT_NAME">
+									<Label text="Object"/>
+									<t:template>
+										<Text text="{listObjectsModel>OBJECT_NAME}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="13rem" sortProperty="SAP_MODULE_NAME">
+									<Label text="Module"/>
+									<t:template>
+										<Text text="{listObjectsModel>SAP_MODULE_NAME}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="8rem">
+									<Label text="Approach"/>
+									<t:template>
+										<Text text="{listObjectsModel>APPROACH}" wrapping="false">
+											<customData>
+												<core:CustomData key="craapr" writeToDom="true" value="{= ${listObjectsModel>APPROACH} ? ( ${listObjectsModel>APPROACH}.toLowerCase().indexOf('retire') > -1 ? 'retire' : ${listObjectsModel>APPROACH}.toLowerCase().indexOf('side') > -1 ? 'sbs' : ${listObjectsModel>APPROACH}.toLowerCase().indexOf('hybrid') > -1 ? 'hybrid' : ${listObjectsModel>APPROACH}.toLowerCase().indexOf('stack') > -1 ? 'onstack' : '' ) : '' }"/>
+											</customData>
+										</Text>
+									</t:template>
+								</t:Column>
+								<t:Column width="auto" hAlign="Center" visible="false">
+									<Label text="Use Case Area" wrapping="true" textAlign="Center"/>
+									<t:template>
+										<Text
+											text="{parts:[{path:'listObjectsModel>USE_CASE_AREA/0/USE_CASE_AREA'},{path:'listObjectsModel>USE_CASE_AREA/1/USE_CASE_AREA'}],formatter:'.UseCaseAreCheck'}"
+											wrapping="true"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="8rem">
+									<Label text="Adherence"/>
+									<t:template>
+										<ObjectStatus text="{listObjectsModel>ADHERENCE}" state="{path:'listObjectsModel>ADHERENCE',formatter:'.formatAdherenceState'}" icon="{path:'listObjectsModel>ADHERENCE',formatter:'.formatAdherenceIcon'}"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="6rem" hAlign="Center">
+									<Label text="Clean Core"/>
+									<t:template>
+										<tnt:InfoLabel text="{= ${listObjectsModel>CLEANCORE_TIER} ? 'Tier ' + ${listObjectsModel>CLEANCORE_TIER} : '' }" colorScheme="{path:'listObjectsModel>CLEANCORE_TIER',formatter:'.formatTierScheme'}" renderMode="Narrow"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="8rem">
+									<Label text="Complexity"/>
+									<t:template>
+										<Text text="{listObjectsModel>CODE_COMPLEXITY}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="7rem">
+										<Label text="Coupling"/>
+										<t:template>
+											<Text text="{listObjectsModel>COUPLING}" wrapping="false"/>
+										</t:template>
+									</t:Column>
+									<t:Column width="5rem" hAlign="Center">
+									<Label text="Size"/>
+									<t:template>
+										<tnt:InfoLabel text="{listObjectsModel>TSHIRT}" colorScheme="{path:'listObjectsModel>TSHIRT',formatter:'.formatTshirtScheme'}" renderMode="Narrow"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="9rem" hAlign="Center">
+									<Label text="Effort"/>
+									<t:template>
+										<Text text="{path:'listObjectsModel>EFFORTS',formatter:'.formatEffortPD'}" wrapping="false"/>
+									</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+			</VBox>
+			<Panel width="100%" visible="{= !!${selModel>/name} }" id="selectionPanel" expandable="true" class="craDetailPanel">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="Customization detail" level="H3"/>
+						<ToolbarSpacer/>
+						<!-- Was this analysis helpful? Thumbs open a popover for an optional comment before submitting. -->
+							<HBox class="craFbThumbs" alignItems="Center"><Button id="fbUpBtn" icon="sap-icon://thumb-up" tooltip="Helpful" press="onFeedbackThumb" type="{= ${selectedObjectModel>/FB_VOTE} === 'up' ? 'Emphasized' : 'Transparent' }"/><Button id="fbDownBtn" icon="sap-icon://thumb-down" tooltip="Not helpful" press="onFeedbackThumb" type="{= ${selectedObjectModel>/FB_VOTE} === 'down' ? 'Emphasized' : 'Transparent' }"/></HBox>
+							<!-- Estimate only makes sense for side-by-side objects. -->
+						<Button id="estimateBtn" text="Estimate" tooltip="Estimate this object" press="onPressEstimate" type="Emphasized" visible="{= ${selectedObjectModel>/APPROACH} === 'side-by-side' }"/>
+						<!-- Opens the in-app Document Generation page for this object; the doc type (FSD/TSD/BBP) is chosen there via tabs. -->
+							<Button id="docsGenBtn" text="Generate Document" icon="sap-icon://document-text" tooltip="Generate a document for this object" press="onGenerateDoc" type="Default"/>
+					</OverflowToolbar>
+				</headerToolbar>
+			</Panel>
+			</VBox>
+		</sapf:content>
+	</sapf:DynamicPage>
+</mvc:View>

@@ -1,0 +1,105 @@
+{
+  "name": "coreassess",
+  "version": "2.0.0",
+  "description": "CoreAssess v2 CAP service.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/hana": "^1",
+    "@sap/cds": "^8",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
+    "@sap/xssec": "^4",
+    "@sap-cloud-sdk/connectivity": "^3",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.6",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "@sap/ui5-builder-webide-extension": "^1.1.9",
+    "@sap/ux-ui5-tooling": "^1.17.1",
+    "@ui5/cli": "^4.0.14",
+    "mbt": "^1.2.29",
+    "rimraf": "^5.0.5",
+    "ui5-task-zipper": "^3.4.1"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch --open webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy coreassess --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana-cloud",
+        "[development]": {
+          "kind": "sqlite",
+          "credentials": {
+            "url": ":memory:"
+          }
+        }
+      },
+      "auth": {
+        "[production]": {
+          "kind": "xsuaa"
+        },
+        "kind": "mocked",
+        "users": {
+          "admin": {
+            "password": "admin",
+            "roles": [
+              "ADMIN",
+              "authenticated-user"
+            ]
+          },
+          "user": {
+            "password": "user",
+            "roles": [
+              "USER",
+              "authenticated-user"
+            ]
+          },
+          "tejashri2901@gmail.com": {
+            "password": "user",
+            "roles": [
+              "USER",
+              "authenticated-user"
+            ]
+          },
+          "rohan.chavan@craveinfotech.com": {
+            "password": "user",
+            "roles": [
+              "ADMIN",
+              "authenticated-user"
+            ]
+          },
+          "superuser": {
+            "password": "user",
+            "roles": [
+              "USER",
+              "authenticated-user"
+            ]
+          }
+        }
+      }
+    },
+    "sql": {
+      "native_hana_associations": false
+    },
+    "devFallbackUser": "admin",
+    "server": {
+      "body_parser": {
+        "limit": "50mb"
+      }
+    }
+  },
+  "sapux": [
+    "app"
+  ]
+}

@@ -1,0 +1,1472 @@
+<mvc:View
+    controllerName="com.crave.coreassessv2.controller.Configuration"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    height="100%"
+    id="configPage"
+>
+    <Page
+        id="Config"
+        title="{i18n>title}"
+        showHeader="false"
+    >
+        <content>
+          
+           
+                <VBox
+                    width="100%"
+                    class="sapUiTinyMarginEnd sapUiTinyMarginTop"
+                >
+                    <Panel
+                        width="100%"
+                        expandable="false"
+                        expanded="true"
+                        headerText="Configuration Tables"
+                    >
+                        <content>
+                            <t:Table
+                                id="tables"
+                                rows="{configAttributeModel>/config/Tables}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="4"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Tables" />
+                                        <ToolbarSpacer />
+
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized"
+                                            press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/Tables"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="Table"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                id="idComboBoxInformation"
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>EFFORTS}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="bapiFunctionalModule"
+                                rows="{configAttributeModel>/config/BAPI + Function Modules}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="4"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title
+                                            text="BAPI and Functional Modules"
+                                        />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/BAPI + Function Modules"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="BAPI and Functional Modules"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>EFFORTS}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="crud"
+                                rows="{configAttributeModel>/config/CRUD}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="4"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="CRUD" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/CRUD"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="CRUD"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>EFFORTS}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="screens"
+                                rows="{configAttributeModel>/config/Screens}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="4"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Screens" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/Screens"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="Screens"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>EFFORTS}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="forms"
+                                rows="{configAttributeModel>/config/Forms}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="4"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Forms" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/Forms"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="Forms"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>EFFORTS}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="BDCSize"
+                                rows="{configAttributeModel>/config/BDC}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="4"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="BDC" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/BDC"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="BDC"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                value="{configAttributeModel>EFFORTS}"
+                                                textAlign="Center"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="CodeSize"
+                                rows="{configAttributeModel>/config/Code Size}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="4"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Code Size (in lines)" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/Code Size"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="Code Size"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                value="{configAttributeModel>EFFORTS}"
+                                                textAlign="Center"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="logicValidation"
+                                rows="{configAttributeModel>/config/Logic Validation}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="2"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Logic Validation" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/Logic Validation"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="Logic Validation"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                value="{configAttributeModel>EFFORTS}"
+                                                textAlign="Center"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="ui5Integration"
+                                rows="{configAttributeModel>/config/UI5 Integration}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="2"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="UI5 Integration" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/UI5 Integration"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="UI5 Integration"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                value="{configAttributeModel>EFFORTS}"
+                                                textAlign="Center"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="3rdpartyIntegration"
+                                rows="{configAttributeModel>/config/3rd Party Integration}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="2"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Third Party Integration" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/3rd Party Integration"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="Third Party Integration"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                value="{configAttributeModel>EFFORTS}"
+                                                textAlign="Center"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+
+                            <t:Table
+                                id="workflows"
+                                rows="{configAttributeModel>/config/Workflows}"
+                                class="sapUiSmallMarginBottom"
+                                visibleRowCount="2"
+                                enableColumnFreeze="true"
+                                rowSelectionChange="showData"
+                                ariaLabelledBy="title"
+                                enableSelectAll="false"
+                                selectionMode="None"
+                            >
+                                <t:extension>
+                                    <OverflowToolbar style="Clear">
+                                        <Title text="Workflows" />
+                                        <ToolbarSpacer />
+                                        <!-- <Button
+                                            icon="sap-icon://sys-add"
+                                            type="Emphasized" press="onAddBlankRow"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="path"
+                                                    value="/config/Workflows"
+                                                    
+                                                />
+                                            </customData>
+                                        </Button> -->
+                                        <Button
+                                            text="Save"
+                                            type="Accept"
+                                        />
+                                    </OverflowToolbar>
+                                </t:extension>
+                                <t:columns>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="Workflows"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="15rem">
+                                        <Label
+                                            text="Sub Field"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Text
+                                                text="{configAttributeModel>SUBFIELD}"
+                                                wrapping="false"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count From"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_FROM}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="7rem">
+                                        <Label
+                                            text="Count To"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                textAlign="Center"
+                                                value="{configAttributeModel>COUNT_TO}"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column width="8rem">
+                                        <Label
+                                            text="Complexity"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <ComboBox
+                                                valueState="{
+                                                    path: 'configAttributeModel>COMPLEXITY',
+                                                    formatter: '.formatComplexityValueState'
+                                                }"
+                                                value="{configAttributeModel>COMPLEXITY}"
+                                                showValueStateMessage="false"
+                                            >
+                                                <core:ListItem
+                                                    key="Low"
+                                                    text="Low"
+                                                />
+                                                <core:ListItem
+                                                    key="Medium"
+                                                    text="Medium"
+                                                />
+                                                <core:ListItem
+                                                    key="High"
+                                                    text="High"
+                                                />
+                                            </ComboBox>
+                                        </t:template>
+                                    </t:Column>
+                                    <t:Column
+                                        width="7rem"
+                                        hAlign="Center"
+                                    >
+                                        <Label
+                                            text="Efforts (Hrs)"
+                                            textAlign="Center"
+                                        />
+                                        <t:template>
+                                            <Input
+                                                value="{configAttributeModel>EFFORTS}"
+                                                textAlign="Center"
+                                            />
+                                        </t:template>
+                                    </t:Column>
+                                </t:columns>
+                            </t:Table>
+                        </content>
+                    </Panel>
+                </VBox>
+        
+        </content>
+    </Page>
+</mvc:View>

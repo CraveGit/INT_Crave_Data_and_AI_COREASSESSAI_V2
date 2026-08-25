@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signed out — CoreAssess</title>
+    <style>
+        /* Match the app's typography: same self-hosted Instrument Sans + font vars. */
+        @font-face {
+            font-family: "Instrument Sans";
+            src: url("instrument-sans-latin.woff2") format("woff2");
+            font-weight: 400 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        :root, .sapUiBody {
+            --sapFontFamily: "Instrument Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+            --sapFontHeaderFamily: var(--sapFontFamily);
+        }
+        html, body, #content { height: 100%; margin: 0; }
+
+        /* Centered bordered card, matching the Innovate page. */
+        .craLogoutCard {
+            max-width: 34rem;
+            margin: 0 auto;
+            border: 1px solid #e3e7ed;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.10);
+        }
+        .craLogoutCard .sapMPanelContent { padding: 3rem 3.5rem; }
+        /* Breathing room between the illustration/text and the sign-in button. */
+        .craLogoutCard .sapMIllustratedMessage { padding: 0.5rem 0; }
+        .craSignInBtn { margin-top: 1.5rem; }
+    </style>
+    <script
+        id="sap-ui-bootstrap"
+        src="https://ui5.sap.com/resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_horizon"
+        data-sap-ui-libs="sap.m"
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-async="true">
+    </script>
+    <script>
+        sap.ui.getCore().attachInit(function () {
+            sap.ui.require(["sap/m/App", "sap/m/Page", "sap/m/FlexBox", "sap/m/Panel",
+                "sap/m/IllustratedMessage", "sap/m/Button"],
+            function (App, Page, FlexBox, Panel, IllustratedMessage, Button) {
+                var oMsg = new IllustratedMessage({
+                    illustrationType: "sapIllus-SuccessScreen",
+                    illustrationSize: "Spot",
+                    title: "You've been signed out",
+                    description: "Your CoreAssess session has ended. Sign in again to continue where you left off.",
+                    additionalContent: [
+                        new Button({
+                            text: "Sign in again",
+                            type: "Emphasized",
+                            press: function () { window.location.href = "/"; }
+                        }).addStyleClass("craSignInBtn")
+                    ]
+                });
+                var oCard = new Panel({ content: [oMsg] }).addStyleClass("craLogoutCard");
+                var oPage = new Page({
+                    showHeader: false,
+                    content: [
+                        new FlexBox({
+                            height: "100%", width: "100%",
+                            justifyContent: "Center", alignItems: "Center",
+                            items: [oCard]
+                        }).addStyleClass("sapUiContentPadding")
+                    ]
+                });
+                new App({ pages: [oPage] }).placeAt("content");
+            });
+        });
+    </script>
+</head>
+<body class="sapUiBody" id="content"></body>
+</html>

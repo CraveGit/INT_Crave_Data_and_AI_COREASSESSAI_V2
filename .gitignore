@@ -1,0 +1,33 @@
+# Secrets. setenv-* scripts hold real AI Core / HANA credentials once filled in.
+.env
+.env.*
+!.env.example
+docs/setenv-*.ps1
+docs/setenv-*.sh
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.llmtest/
+
+# Node / CAP
+node_modules/
+gen/
+default-env.json
+*-service-key.json
+
+# Build + run artefacts
+*.log
+Run.log
+content/
+sample-docs/
+mta_archives/
+resources/
+dist/
+
+# Stale pre-MCP Fiori reference data (~6MB each). Fiori grounding is MCP-only now
+# and REF_FIORIAPPS is no longer read; kept locally but excluded from the repo.
+coreassess-ai-api/referencedata/fioriapps.csv
+coreassess-app/db/data/CRA-REF_FIORIAPPS.csv

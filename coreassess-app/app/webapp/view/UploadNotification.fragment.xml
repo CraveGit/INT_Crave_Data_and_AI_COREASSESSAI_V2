@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Popover id="uploadJobPopover" title="Analysing objects" placement="Bottom"
+        contentWidth="26rem" class="craUploadJobPopover">
+        <VBox class="sapUiSmallMargin">
+            <!-- Warn while running: this analysis lives in the browser tab. -->
+            <MessageStrip
+                text="Analysis runs in the background here. Reloading or closing the tab will stop it."
+                type="Warning" showIcon="true"
+                visible="{= ${foldersModel>/running} === true }"
+                class="sapUiTinyMarginBottom"/>
+            <ProgressIndicator
+                percentValue="{foldersModel>/progressPercent}"
+                displayValue="{foldersModel>/progressText}"
+                showValue="true"
+                state="Information"
+                class="sapUiSmallMarginBottom sapUiTinyMarginTop"/>
+            <List items="{foldersModel>/folderArray}" showSeparators="Inner"
+                class="craUploadJobList" noDataText="No objects">
+                <StandardListItem
+                    title="{foldersModel>webkitRelativePath}"
+                    info="{foldersModel>status}"
+                    infoState="{path:'foldersModel>status', formatter:'.formatUploadStatusState'}"
+                    icon="{path:'foldersModel>status', formatter:'.formatUploadStatusIcon'}"
+                    iconInset="false"/>
+            </List>
+        </VBox>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Cancel analysis" type="Reject" icon="sap-icon://cancel"
+                    press="onCancelUploadJobs"
+                    visible="{= ${foldersModel>/running} === true &amp;&amp; ${foldersModel>/cancelled} !== true &amp;&amp; ${foldersModel>/pendingCount} &gt; 0 }"/>
+                <Button text="Dismiss" type="Emphasized" press="onCloseUploadJobs"
+                    visible="{= ${foldersModel>/running} !== true }"/>
+            </OverflowToolbar>
+        </footer>
+    </Popover>
+</core:FragmentDefinition>

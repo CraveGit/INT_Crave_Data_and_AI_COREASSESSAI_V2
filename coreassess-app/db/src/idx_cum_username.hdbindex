@@ -1,0 +1,1 @@
+INDEX "idx_cum_username" ON CRA_COMPANY_USER_MAP (USERNAME)
