@@ -66,7 +66,9 @@ class CleanCoreFacts(BaseModel):
     native_sql: bool = False               # EXEC SQL / ADBC -> not ABAP Cloud
     dynamic_core_access: bool = False      # dynamic calls into SAP objects
     exposed_remotely: bool = False         # object itself is an inbound RFC endpoint
-    external_integration: bool = False     # reaches a third-party system
+    external_integration: bool = False     # reaches another system (SAP or non-SAP)
+    third_party_integration: bool = False  # outbound HTTP/REST to a (non-SAP) endpoint
+    integration_mechanisms: int = 0        # distinct code integration mechanisms (HTTP/RFC/IDoc/proxy)
     custom_ui: bool = False                # Dynpro/Web Dynpro/BSP owned by the object
     uses_classic_bapi: bool = False        # consumes classic BAPIs (Level-B interface)
     standard_coverage: float = 0.0         # 0..1 of functionality covered by standard
@@ -87,12 +89,12 @@ class CleanCoreFacts(BaseModel):
     def restricted(self) -> bool:
         return any(v.severity is Severity.RESTRICTED for v in self.violations)
 
-    # Custom UI alone never justifies BTP; external reach, remote exposure or an
-    # interface contract does. Interface objects were the strongest predictor of
-    # side-by-side in the legacy decisions (55% of them, vs 3% of on-stack) and were
-    # previously ignored here.
+    # Anything external still calls/depends on this object -> it cannot simply retire.
+    # NOTE: this is a RETIRE blocker, NOT a BTP trigger. Plain external reach stays
+    # on-stack via released APIs / ABAP Cloud communication scenarios; BTP is chosen
+    # only for genuine decoupling (see ApproachRules.decide).
     @property
-    def needs_btp(self) -> bool:
+    def has_external_consumer(self) -> bool:
         return self.external_integration or self.exposed_remotely or self.is_interface
 
 
@@ -120,6 +122,13 @@ _PATTERNS: dict[str, re.Pattern] = {
     "dynamic_call": re.compile(r"CALL\s+FUNCTION\s+\w*\(|CALL\s+METHOD\s+\(|\bPERFORM\s+\(", re.I),
     "rfc_inbound": re.compile(r"REMOTE-ENABLED|RFC-ENABLED", re.I),
     "custom_ui": re.compile(r"\bCALL\s+SCREEN\b|\bMODULE\s+\w+\s+OUTPUT\b|WDY_|\bBSP\b", re.I),
+    # Integration mechanisms in the CODE (deterministic), counted to distinguish a
+    # single released integration (stays on-stack) from multi-system orchestration
+    # (a BTP decoupling driver). HTTP client = outbound to a (usually non-SAP) endpoint.
+    "http_client": re.compile(r"CL_HTTP_CLIENT|IF_HTTP_CLIENT|CL_REST_HTTP_CLIENT|CL_WEB_HTTP_CLIENT|CREATE_BY_(?:URL|DESTINATION)", re.I),
+    "rfc_dest": re.compile(r"\bDESTINATION\s+['\"]", re.I),
+    "idoc_out": re.compile(r"MASTER_IDOC_DISTRIBUTE|EDI_DOCUMENT_OPEN_FOR_CREATE|IDOC_OUTPUT", re.I),
+    "proxy": re.compile(r"CO_PROXY|CL_PROXY_|CALL\s+METHOD\s+\w*PROXY", re.I),
 }
 
 # SAP function modules that are not released for ABAP Cloud (C1) consumption.
@@ -248,6 +257,16 @@ class FactExtractor:
         wricef = [str(w).lower() for w in _asList(self.basic.get("WRICEFObjectType"))]
         usecase = [str(u).lower() for u in _asList(self.basic.get("UseCaseArea"))]
 
+        # Integration mechanisms in the code (deterministic). HTTP client => outbound
+        # to a (usually non-SAP) endpoint; count distinct mechanisms for multi-system.
+        code = self.code
+        _http = bool(_PATTERNS["http_client"].search(code))
+        _rfc = bool(_PATTERNS["rfc_dest"].search(code))
+        _idoc = bool(_PATTERNS["idoc_out"].search(code))
+        _proxy = bool(_PATTERNS["proxy"].search(code))
+        _mechs = sum([_http, _rfc, _idoc, _proxy])
+        _llm_tp = _asFlag(self.integration.get("ThirdPartyIntegration"))
+
         return CleanCoreFacts(
             modifies_standard_data="STD_TABLE_WRITE" in codes,
             uses_bdc="BDC" in codes or _asFlag(self.basic.get("BDCUsed")),
@@ -257,7 +276,9 @@ class FactExtractor:
             native_sql="NATIVE_SQL" in codes,
             dynamic_core_access="DYNAMIC_CALL" in codes,
             exposed_remotely=bool(_PATTERNS["rfc_inbound"].search(self.code)),
-            external_integration=_asFlag(self.integration.get("ThirdPartyIntegration")),
+            external_integration=_llm_tp or _mechs > 0,
+            third_party_integration=_http or _llm_tp,
+            integration_mechanisms=_mechs,
             custom_ui=_asFlag(self.integration.get("UIIntegration")) or bool(_PATTERNS["custom_ui"].search(self.code)),
             uses_classic_bapi=bool(_asList(self.basic.get("BAPIs"))),
             standard_coverage=self._standardCoverage(),
@@ -278,47 +299,57 @@ class ApproachRules:
     RETIRE_MIN_FUNCS = 3     # ...measured over enough functionality to be credible
     HYBRID_MIN_APIS = 2      # hybrid needs real reusable surface, not one API
 
-    # Order matters and encodes precedence:
-    #   1. retire  - only when nothing external depends on the object
-    #   2. BTP     - an interface/external contract cannot be served from the core
-    #   3. on-stack - everything else, including core-breaking remediation
+    # Clean-core precedence (location is secondary to using released contracts):
+    #   1. retire   - standard covers it and nothing external depends on it
+    #   2. BTP       - ONLY for genuine decoupling (multi-system orchestration,
+    #                  third-party/non-SAP integration, core-breaking with no released
+    #                  on-stack path, or heavy custom UX for SAP Build/BTP)
+    #   3. on-stack  - the DEFAULT target (ABAP Cloud + released APIs), regardless of
+    #                  size and even with plain external reach (single RFC/IDoc/interface)
     def decide(self, facts: CleanCoreFacts) -> tuple[Approach, str]:
-        # Retire is gated on having no external consumer: a third party still calling
-        # this object needs *something* to serve that contract, however well standard
-        # covers the functionality. Also requires enough functionalities to trust the
-        # coverage ratio -- a 2-item map hitting 0.85 is noise, not evidence.
+        # Retire needs standard coverage AND no external consumer (something still
+        # calling it must be served). Enough functionalities to trust the ratio.
         if (facts.standard_coverage >= self.RETIRE_COVERAGE
-                and not facts.needs_btp
+                and not facts.has_external_consumer
                 and facts.functionality_count >= self.RETIRE_MIN_FUNCS):
             return Approach.RETIRE, (f"Standard covers {facts.standard_coverage:.0%} of "
                                      f"{facts.functionality_count} functionalities and nothing "
                                      f"external depends on it -> retire and adopt standard apps")
 
-        if facts.needs_btp:
-            reach = ("Interface contract" if facts.is_interface
-                     else "Remote exposure" if facts.exposed_remotely
-                     else "External integration")
-            # Core-breaking constructs still have to be remediated even when the
-            # target is BTP; say so rather than dropping the cost silently.
-            debt = (" Core-breaking constructs must also be remediated."
-                    if facts.breaks_core else "")
+        # BTP is warranted only by genuine decoupling drivers. Plain external reach is
+        # NOT one of them -- released APIs / ABAP Cloud communication scenarios serve
+        # RFC/IDoc/HTTP/interface contracts on the stack.
+        reasons = []
+        if facts.integration_mechanisms >= 2:
+            reasons.append("multi-system orchestration across several integration mechanisms")
+        if facts.third_party_integration:
+            reasons.append("third-party / non-SAP integration to decouple from the core")
+        if facts.breaks_core and facts.released_api_count == 0:
+            reasons.append("core-breaking constructs with no released on-stack replacement")
+        heavy_ux = facts.custom_ui and not facts.is_report and not facts.is_analytical
+        if heavy_ux:
+            reasons.append("heavy custom UX suited to SAP Build / Fiori on BTP")
+        if reasons:
+            why = "; ".join(reasons)
             if facts.released_api_count >= self.HYBRID_MIN_APIS:
-                return Approach.HYBRID, (
-                    f"{reach} plus {facts.released_api_count} released APIs to reuse -> consume "
-                    f"standard S/4 from the stack, keep custom logic and UI on BTP.{debt}")
-            return Approach.SIDE_BY_SIDE, (
-                f"{reach} with {facts.released_api_count} reusable released API(s) "
-                f"-> build fully on BTP.{debt}")
+                return Approach.HYBRID, (f"BTP warranted ({why}); with {facts.released_api_count} "
+                    f"released S/4 API(s) to consume from the stack, keep custom logic/UI on BTP (hybrid).")
+            return Approach.SIDE_BY_SIDE, (f"BTP warranted ({why}); no reusable released S/4 API surface "
+                f"-> build fully on SAP BTP (side-by-side).")
 
+        # On-stack is the default clean-core target -- ABAP Cloud + released contracts.
         if facts.breaks_core:
-            return Approach.ON_STACK, ("Core-breaking constructs must be rewritten with clean-core "
-                                       "extensibility (RAP/released BAdI) on the stack")
+            return Approach.ON_STACK, ("Core-breaking constructs, but a released on-stack replacement exists "
+                                       "-> rebuild with clean-core extensibility (RAP / released BAdIs / released APIs) on the stack")
         if facts.is_analytical:
-            return Approach.ON_STACK, "Analytical object -> embedded analytics (CDS + Fiori) / SAC"
+            return Approach.ON_STACK, "Analytical object -> embedded analytics (CDS + Fiori) / SAC on the stack"
         if facts.is_report:
             return Approach.ON_STACK, "Reporting object -> CDS view with Fiori list report on the stack"
         if facts.is_enhancement or facts.is_automation:
             return Approach.ON_STACK, "Extension of standard behaviour -> released BAdI / RAP on the stack"
+        if facts.has_external_consumer:
+            return Approach.ON_STACK, ("External reach served via released APIs / ABAP Cloud communication "
+                                       "scenarios -> stays on the stack (no decoupling driver for BTP)")
         return Approach.ON_STACK, "Self-contained custom application -> rebuild on the stack with ABAP Cloud"
 
 
@@ -343,7 +374,7 @@ class TierRules:
     # reader always sees what the level MEANS before the object-specific evidence.
     _DEF = {
         Tier.A: "Level A (Cloud-native, cleanest): extensions use only released C1 APIs, "
-                "released CDS views and ABAP Cloud / SAP BTP. 100% upgrade-safe.",
+                "released CDS views and the ABAP Cloud extensibility model. 100% upgrade-safe.",
         Tier.B: "Level B (Compliant classic): clean, but relies on SAP-approved CLASSIC "
                 "frameworks (classic BAPIs, classic BAdIs, IDocs, ALV/Dynpro) where no "
                 "released cloud API exists. Supported and stable, but a modernization candidate.",

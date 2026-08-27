@@ -807,7 +807,7 @@ def checkRetire(filename: str, code_object: str, complete_analysis: dict, precom
     complete_analysis = addFioriAppId(complete_analysis)
 
     # Coverage evidence + retire narrative are published here; the retire THRESHOLD
-    # and gates (coverage / needs_btp / functionality_count) live in ApproachRules so
+    # and gates (coverage / external-consumer / functionality_count) live in ApproachRules so
     # a single rule engine owns the decision. addCoupling surfaces the narrative into
     # basic_analysis only if the engine actually picks retire.
     functionalities = parsed_functionality_replacements["Functionalities"]
