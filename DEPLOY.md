@@ -34,21 +34,53 @@ python -m py_compile main.py genai.py $(git ls-files 'modules/*.py' 'docsuite/*.
 cf push          # uses manifest.yaml (app name coreassess-ai, python_buildpack)
 ```
 
-Set config once (survives future pushes), then restart:
+Set config once (survives future pushes), then restart. **The real values live in the
+gitignored `docs/setenv-coreassess-ai.sh` — run that instead of typing these by hand:**
 ```bash
-cf set-env coreassess-ai AICORE_AUTH_URL       "<...>"
-cf set-env coreassess-ai AICORE_BASE_URL       "<...>"
-cf set-env coreassess-ai AICORE_CLIENT_ID      "<...>"
-cf set-env coreassess-ai AICORE_CLIENT_SECRET  "<...>"
+cf login                       # target the right org/space
+bash docs/setenv-coreassess-ai.sh   # sets everything below + restarts
+```
+
+The full set of variables (placeholder values — see `.env.example` for meaning):
+```bash
+# SAP AI Core (LLM)
+cf set-env coreassess-ai AICORE_AUTH_URL       "<auth-url>"
+cf set-env coreassess-ai AICORE_BASE_URL       "<base-url>"
+cf set-env coreassess-ai AICORE_CLIENT_ID      "<client-id>"
+cf set-env coreassess-ai AICORE_CLIENT_SECRET  "<client-secret>"
 cf set-env coreassess-ai AICORE_RESOURCE_GROUP "default"
-cf set-env coreassess-ai HANA_HOST "<...>"  ; cf set-env coreassess-ai HANA_PORT 443
-cf set-env coreassess-ai HANA_USER "<...>"  ; cf set-env coreassess-ai HANA_PASS "<...>"
-cf set-env coreassess-ai SCHEMA "<CRA schema>" ; cf set-env coreassess-ai TABLE_PREFIX "CRA_"
-cf set-env coreassess-ai AXIOM_MCP_URL "https://ai-sap-connectors.cfapps.us10-001.hana.ondemand.com/mcp"
-# optional docgen tuning
-cf set-env coreassess-ai DOC_SECTION_WORKERS 8
+# HANA
+cf set-env coreassess-ai HANA_HOST    "<hana-host>"
+cf set-env coreassess-ai HANA_PORT    "443"
+cf set-env coreassess-ai HANA_USER    "<hana-user>"
+cf set-env coreassess-ai HANA_PASS    "<hana-pass>"
+cf set-env coreassess-ai SCHEMA       "<schema>"
+cf set-env coreassess-ai TABLE_PREFIX "KCC_"
+# Models / analysis
+cf set-env coreassess-ai ANALYSIS_MODEL          "anthropic--claude-4.8-opus"
+cf set-env coreassess-ai MODEL_DOCSUITE          "gpt-4o"
+cf set-env coreassess-ai ANALYSIS_CONTEXT_WINDOW "200000"
+cf set-env coreassess-ai ANALYSIS_MAX_OUTPUT     "8192"
+cf set-env coreassess-ai ANALYSIS_MIN_OUTPUT     "2048"
+cf set-env coreassess-ai MAX_CONCURRENT_ANALYSIS "4"
+# Docgen
+cf set-env coreassess-ai DOC_SECTION_WORKERS    "8"
+cf set-env coreassess-ai DOC_SECTION_MAX_TOKENS "8000"
+# Effort / sizing
+cf set-env coreassess-ai HOURS_PER_PERSON_DAY "8"
+cf set-env coreassess-ai TSHIRT_BANDS         "1:40:XS,41:120:S,121:320:M,321:640:L,641:99999:XL"
+# MCP grounding
+cf set-env coreassess-ai AXIOM_MCP_ENABLED "true"
+cf set-env coreassess-ai AXIOM_MCP_URL     "https://ai-sap-connectors.cfapps.us10-001.hana.ondemand.com/mcp"
+cf set-env coreassess-ai AXIOM_MCP_TIMEOUT "30"
+# Logging / admin (protects /logs + /pricing/refresh)
+cf set-env coreassess-ai LOG_LEVEL       "WARNING"
+cf set-env coreassess-ai LOG_ADMIN_TOKEN "<admin-token>"
+
 cf restart coreassess-ai
 ```
+> **`TABLE_PREFIX`** selects the refdata table set — the live env uses `KCC_`. **`TSHIRT_BANDS`** overrides the HANA t-shirt table (set it or sizing uses whatever the DB holds). **`LOG_ADMIN_TOKEN`** is the `X-Log-Token` for `/logs` + `/pricing/refresh`.
+
 Verify: `GET https://<route>/health` → `hana`, `aicore`, `mcp`, `refdata` all up.
 Full env reference: `.env.example`.
 

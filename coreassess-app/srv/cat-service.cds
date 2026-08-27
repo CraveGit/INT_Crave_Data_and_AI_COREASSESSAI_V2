@@ -303,23 +303,14 @@ service AssessmentService {
 
 
     function GetObjectEstimate(companyID: Integer, projectID: Integer, assessmentID: Integer, objectName: String, type: String)                                   returns {
-        default     : many {
+        questions : many {
             questionId  : Integer;
             question    : String;
             answer      : String;
-            placeholder : String;
-        };
-        application : many {
-            questionId  : Integer;
-            question    : String;
-            answer      : String;
-            placeholder : String;
-        };
-        automation  : many {
-            questionId  : Integer;
-            question    : String;
-            answer      : String;
-            placeholder : String;
+            palceholder : String;
+            scope       : String;
+            serviceName : String;
+            metric      : String;
         };
     };
 

@@ -8,7 +8,7 @@ basic_structure = """
     "SAPSubModule": "<SUBMODULE_ID - SUBMODULE_NAME (e.g., MM-PUR - Purchasing)>",
     "UseCaseArea": ["<Use case area of the program/object (from list: Automation, Integration, Application Development, Data and Analytics.)>"],
     "UseCaseAreaExplanation": "<Detailed explanation why the object is recommended reimplementation in cloud environment for given usecase area of at least 100 words.>",
-    "FunctionalAnalysis": "<Concise single-paragraph functional analysis, 150-250 words. Cover all key points but do not pad: the object's business purpose, its role in the process, core processing logic, key integrations/dependencies, and notable limitations. Be specific and to the point - not an essay; do not enumerate individual UI/screen fields. No numeric bullet points.>",
+    "FunctionalAnalysis": "<Thorough functional analysis, 300-450 words, written as 2-3 flowing paragraphs (no bullet points, no numbered lists, no headings). Be genuinely explanatory: (1) the object's business purpose and the end-to-end business process it supports, and who uses it; (2) how it works - the main processing flow, key inputs/selection criteria, the core data it reads/writes and the principal tables/BAPIs/FMs it depends on, and any calculations, branching or scenario variants; (3) its integration and UX footprint (GUI/ALV, files, IDocs, RFC/HTTP, events) and notable functional limitations or risks relevant to an S/4HANA Clean Core migration. Be specific to THIS object with concrete names, not generic filler; do not enumerate individual UI/screen fields.>",
     "WRICEFObjectType": ["<From list: Workflow, Report, Interface, Conversion, Enhancement, Form.>"],
     "CRUD": ["<List of operations performed: Read, Create, Update, Delete.>"],
     "LogicComplexity": "<Complexity level of ABAP logic (Low, Medium, High) based on branching, loops, data manipulation, and volume of processing.>",
@@ -40,6 +40,7 @@ s4_structure = """
     "S4Analysis": "<Descriptive analysis in 100-200 words>",
     "S4Recommendations": [{"Title": "<Title>", "Description": "<Detailed description>"},...],
     "SAPStandardAPIs": ["<TECHNICAL_NAME (Description)>"],
+    "BAPIToAPIMapping": ["<CLASSIC_BAPI_NAME  ->  RELEASED_API_NAME (short purpose of the API)>", ...],
     "SAPStandardFioriApps": [<APPNAME>]
 }
 """
@@ -100,7 +101,7 @@ functionality_structure = """
 {
     "Functionalities": [{"Functionality":"<Functionality description>","StandardFioriApp":"<Fiori App name>","ReplacementCoverage":"level of functionality that can be replaced by Fiori app. <Full/Partial>. Leave blank if not applicable"},...],
     "Explanation": "<short paragraph explaining which functionality can be replaced by standard Fiori app and which cannot.>",
-    "Reimplementation":"<Step-by-step reimplementation guide as a SINGLE concise paragraph that uses flow arrows between steps (e.g. 'Activate standard app X -> configure scope item Y -> migrate master data via Z -> validate output'). Describe how to re-implement this customization using the standard SAP offering / standard Fiori apps.>"
+    "Reimplementation":"<Step-by-step reimplementation guide as a list of discrete steps, ONE STEP PER LINE separated by a newline (\\n). Each line is a single concise step starting with a short bold-able action label, then a colon, then the detail - e.g. 'Activate standard app: enable Manage Purchase Orders (scope item J45)\\nMigrate data: load open POs via the Purchase Order migration object\\nValidate: reconcile counts against the legacy report'. Do NOT number the steps and do NOT use arrows; use one line per step. Describe how to re-implement this customization using the standard SAP offering / standard Fiori apps.>"
 }
 """
 quality_scoring_structure = """
@@ -186,6 +187,7 @@ highlvl_s4_analysis = {
     APPROACH DIRECTIVE (important): if a migration approach is stated with the object (on-stack / retire / hybrid / side-by-side), tailor recommendations to it. For **on-stack** or **retire**, recommend ONLY on-stack techniques (ABAP Cloud/RAP, released BAdIs and enhancement spots, CDS views, embedded analytics/SAC) and do NOT include the "Extensibility and Customization Using SAP BTP" recommendation or any SAP BTP side-by-side service/extension. For **hybrid**, recommend consuming released standard S/4 (standard CDS views, released OData APIs, standard Fiori apps) from the stack AND building the custom business logic/UI on SAP BTP. For **side-by-side**, propose fully BTP-based extensibility (all custom on BTP).
 
     2. Give **Standard APIs by SAP** based on functional analysis of the program in `SAPStandardAPIs`. These MUST be released, publicly documented SAP S/4HANA API SERVICES from the SAP Business Accelerator Hub — OData or SOAP services (typically named like "API_...", e.g. API_JOURNALENTRYITEMBASIC_SRV, API_SUPPLIERINVOICE_PROCESS_SRV) or released RAP/OData services. STRICT EXCLUSIONS: do NOT list classic ABAP function modules or BAPIs here (e.g. names like CU_READ_RGDIR, PYXX_*, HR_*_*, *_READ_*, BAPI_*) — those are NOT APIs and belong in the code's function-module list, not here. Recommend only REAL services that belong to the object's actual functional domain/module (e.g. do not suggest a Sales Order API for an FI-AR aging report). Do not invent API names. If the object's domain has no released public API service (common for payroll cluster / classic HR reports), return an EMPTY array `[]` rather than listing function modules or BAPIs.
+    2b. `BAPIToAPIMapping`: for EACH classic BAPI the object actually CALLS that has a released S/4HANA API replacement, add one entry mapping the BAPI to that released API, format EXACTLY "CLASSIC_BAPI_NAME  ->  RELEASED_API_NAME (short purpose)" using "  ->  " as the separator (e.g. "BAPI_SALESORDER_CREATEFROMDAT2  ->  API_SALES_ORDER_SRV (Create/read sales orders)"). ONLY include a BAPI here if a genuine released API alternative EXISTS — omit BAPIs that have no released replacement. If none of the object's BAPIs have a released API replacement, return an EMPTY array `[]`. The released API on the right MUST satisfy the same rules as SAPStandardAPIs (real, released, domain-relevant, never a function module/BAPI).
     3. Fiori app suggestion:
     - Identify the most relevant and essential Standard SAP Fiori Apps that can fully or significantly replace the functionality of the given ABAP program. Suggest them by their official SAP Fiori app names (these are validated against the live SAP Fiori Apps Reference Library downstream, so give real, current app names and do not invent).
     - DOMAIN RELEVANCE (STRICT): every suggested app MUST belong to the object's own functional module/domain and business purpose. Do NOT suggest apps from an unrelated module just because a keyword matches — e.g. for a Bill of Material / routing / production (PP) or QM object, do NOT suggest inventory/stock, procurement or sales apps (e.g. "Manage Stock Reporting Procedures"); for an FI object, do not suggest logistics apps. If you are not confident an app both exists AND directly replaces this object's functionality in its own domain, omit it. Prefer returning FEWER, on-domain apps over more, loosely-related ones.
@@ -336,8 +338,8 @@ functionality_prompt = {
     - Do **not** invent or generalize app names (e.g., “Reusable Component for UOM” is invalid unless explicitly listed).
     - Avoid mapping multiple unrelated functionalities to the same app unless that app **explicitly supports** each distinct feature.
     - Be precise and concise while giving explanation.
-    - For reimplementation, give concise steps how the given functionalities can be implemented using corresponding standard fiori apps. Be precise, dont add unnecessary text.
-    - Do not use any markdown syntax or extra newlines.
+    - For reimplementation, give concise steps how the given functionalities can be implemented using corresponding standard fiori apps. Be precise, dont add unnecessary text. Put ONE step per line (separate steps with a newline \\n); do not number them and do not use arrows between steps.
+    - Do not use any markdown syntax. The ONLY field allowed to contain newlines is "Reimplementation" (one step per line); keep every other field on a single line.
 
     Your response should follow this structure:
 
@@ -346,6 +348,37 @@ functionality_prompt = {
     Ensure maximum accuracy in functional interpretation and Fiori app alignment by focusing solely on **functional outcomes** relevant to SAP users.
     """,
     "type": "RETIRE_CHECK"
+}
+#------------------------------------------- BTP sizing questions (context-aware, prebaked)
+estimate_questions_structure = """
+{
+    "EstimateQuestions": [
+        {"Scope":"<Application Development | Automation | Integration | Data and Analytics>","Question":"<one concrete sizing question with a NUMERIC answer>","Placeholder":"<e.g. 50>","ServiceName":"<canonical SAP BTP service this question sizes>","Metric":"<the service's unit, e.g. Active User / Resource / Connection / Tenant / Capacity Unit>","QuantityPerUnit":1}
+    ]
+}
+"""
+estimate_questions_prompt = {
+    "message": f"""
+    You are an SAP BTP sizing assistant. Given ONE custom SAP object's migration context (its use-case area(s), functional description and target development approach), produce a SHORT list of concrete sizing questions whose numeric answers let us quantify the SAP BTP services needed to build and run it on BTP. Do not use code blocks or backticks; return PLAIN JSON only.
+
+    Rules:
+    - Ask ONLY questions relevant to THIS object's Use Case Area(s) and target approach. 3 to 8 questions total. Fewer is fine.
+    - Every question MUST have a NUMERIC answer (a count/volume/number of users) and MUST map to exactly ONE BTP service it sizes, via ServiceName + Metric + QuantityPerUnit. Downstream: BlocksRequired = answer x QuantityPerUnit. Use QuantityPerUnit=1 unless one answered unit implies several service units.
+    - Use canonical SAP BTP service names. Prefer this catalog (ServiceName -> typical Metric):
+        Application Development: "SAP Build Work Zone, standard edition" -> Active User; "SAP Mobile Services" -> Resource; "SAP Build Apps" -> Active User; "SAP HANA Cloud" -> Capacity Unit; "SAP BTP, Cloud Foundry runtime" -> GB; "SAP Business Application Studio" -> User.
+        Automation: "SAP Build Process Automation, standard" -> Active User; "SAP Build Process Automation, attended automations" -> Connection; "SAP Build Process Automation, unattended automations" -> Connection; "SAP Build Process Automation, advanced" -> Active User.
+        Integration: "SAP Integration Suite" -> Tenant; "SAP Integration Suite, advanced event mesh" -> Connection.
+        Data and Analytics: "SAP Business Data Cloud" -> Capacity Unit.
+    - IMPORTANT for Data and Analytics: use "SAP Business Data Cloud" (BDC). Do NOT use SAP Analytics Cloud or SAP Datasphere.
+    - Do NOT duplicate questions that size the same ServiceName + Metric.
+    - NEVER mention price, cost, currency or licence fees anywhere.
+    - "Scope" MUST be one of the object's actual Use Case Areas.
+
+    Your response must follow this structure exactly:
+
+    {estimate_questions_structure}
+    """,
+    "type": "ESTIMATE_QUESTIONS"
 }
 #------------------------------------------- Code quality scoring
 quality_scoring_prompt = {

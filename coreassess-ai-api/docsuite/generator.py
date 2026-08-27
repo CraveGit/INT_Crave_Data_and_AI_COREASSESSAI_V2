@@ -51,6 +51,10 @@ FORMAT_RULES = (
     "Where a figure belongs, write a single italic caption line instead, e.g. "
     "'*Figure: end-to-end process flow (rendered in the downloaded Word document).*' "
     "and continue with prose -- do not attempt to depict it in characters.\n"
+    "- NEVER include pricing, cost, licence/subscription fees, unit prices or currency "
+    "figures for BTP services or anything else. Pricing is INTERNAL only and must not "
+    "appear in this document. List recommended services with their purpose and quantity/"
+    "metric, never a price.\n"
     "- This is a CLIENT deliverable, not a tool dump. NEVER expose the internal analysis "
     "schema: no JSON key / field names (e.g. IsAnalyticsReport, RecommendedApproach, "
     "CleanCoreTier, DecisionFacts, ManEfforts), no 'true/false' flag values, and no "
@@ -353,10 +357,16 @@ def _sanitize_btp(analysis):
     import copy
     a = _strip_verified(copy.deepcopy(analysis or {}))
     approach = str((a.get("basic_analysis") or {}).get("RecommendedApproach") or "").strip().lower()
-    if approach in _NON_BTP_APPROACHES:
-        tech = a.get("technical_analysis")
-        if isinstance(tech, dict):
+    tech = a.get("technical_analysis")
+    if isinstance(tech, dict):
+        if approach in _NON_BTP_APPROACHES:
             tech["BTPServices"] = []
+        # Pricing is internal only -- strip it so it can never reach the document.
+        elif isinstance(tech.get("BTPServices"), list):
+            for svc in tech["BTPServices"]:
+                if isinstance(svc, dict):
+                    for k in ("Price", "UnitPrice", "Currency", "ServiceID", "PRICE", "UNITPRICE", "CURRENCY"):
+                        svc.pop(k, None)
     return a
 
 

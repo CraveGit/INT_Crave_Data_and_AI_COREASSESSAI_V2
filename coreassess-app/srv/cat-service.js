@@ -1488,75 +1488,41 @@ module.exports = cds.service.impl(function () {
 
     this.on('GetObjectEstimate', async req => {
         try {
-            const { companyID, projectID, assessmentID, objectName, type } = req.data;
+            const { projectID, assessmentID } = req.data;
 
-            const response = {
-                default: [],
-                application: [],
-                automation: []
-            }
+            // Questions are prebaked per object by the AI during analysis and stored in
+            // RAW_ANALYSIS.basic_analysis.EstimateQuestions (each tagged with the BTP
+            // service it sizes). No master questionnaire. Merge any saved answers.
+            const row = await SELECT.one.from(ASSESSMENT).columns('RAW_ANALYSIS as analysis').where({ ID: assessmentID });
+            let estimateQuestions = [];
+            try {
+                const parsed = row && row.analysis ? JSON.parse(row.analysis) : {};
+                estimateQuestions = ((parsed.basic_analysis || {}).EstimateQuestions) || [];
+            } catch (e) { estimateQuestions = []; }
+
             const answers = await SELECT.from(OBJECT_ESTIMATE_ANSWER).where({
                 PROJECT_ID: projectID, ASSESSMENT_ID: assessmentID
-            })
-            console.log("Answers: ", answers);
+            });
+            const answerById = {};
+            for (const a of answers) { answerById[String(a.QUESTIONNAIRE_ID)] = a.ANSWER; }
 
-            const questions = await SELECT.from(MSTR_QUESTIONNAIRE);
-            for (const question of questions) {
-                let a = null;
-                for (const answer of answers) {
-                    if (question.ID === answer.QUESTIONNAIRE_ID) {
-                        a = answer.ANSWER;
-                        break;
-                    }
-                }
+            const questions = estimateQuestions.map((q, i) => {
+                const qid = q.ID != null ? q.ID : (i + 1);
+                return {
+                    questionId: qid,
+                    question: q.Question,
+                    answer: answerById[String(qid)] != null ? answerById[String(qid)] : null,
+                    palceholder: q.Placeholder || "",
+                    scope: q.Scope || "",
+                    serviceName: q.ServiceName || "",
+                    metric: q.Metric || ""
+                };
+            });
 
-                if (question.IDENTIFIER === 'DEFAULT') {
-                    response.default.push({
-                        questionId: question.ID,
-                        question: question.QUESTION,
-                        answer: a,
-                        palceholder: question.PLACEHOLDER
-                    })
-                } else if (question.IDENTIFIER === 'APPLICATION') {
-                    response.application.push({
-                        questionId: question.ID,
-                        question: question.QUESTION,
-                        answer: a,
-                        palceholder: question.PLACEHOLDER
-                    })
-                } else if (question.IDENTIFIER === 'AUTOMATION') {
-                    response.automation.push({
-                        questionId: question.ID,
-                        question: question.QUESTION,
-                        answer: a,
-                        palceholder: question.PLACEHOLDER
-                    })
-                }
-            }
-
-            // const res = {
-            //     default: response.default,
-            //     questions: []
-            // }
-
-            // for (const x of response.automation) {
-            //     res.questions.push(x)
-            // }
-
-            // if (type === 'web' || type === 'both') {
-            //     for (const x of response.web) {
-            //         res.questions.push(x)
-            //     }
-            // }
-            // if (type === 'mobile' || type === 'both') {
-            //     for (const x of response.mobileSrvcs) {
-            //         res.questions.push(x)
-            //     }
-            // }
-
-            return response;
+            return { questions };
         } catch (error) {
             console.log(error);
+            return { questions: [] };
         }
     })
 
@@ -1564,70 +1530,59 @@ module.exports = cds.service.impl(function () {
         try {
             const { assessmentID, projectID, companyID, data, model } = req.data;
 
-            const isUpdate = await SELECT.from(OBJECT_ESTIMATE_ANSWER).where({ ASSESSMENT_ID: assessmentID });
-            console.log(isUpdate);
-
-            if (isUpdate.length > 0) {
-                for (const answer of data) {
-                    await UPDATE(OBJECT_ESTIMATE_ANSWER).set({
-                        ANSWER: answer.answer
-                    }).where({
-                        ASSESSMENT_ID: assessmentID,
-                        QUESTIONNAIRE_ID: answer.questionID
-                    })
-                }
-                console.log("Update successfull!!");
-                return true;
-            } else {
-                const qnaArray = []
-                for (const answer of data) {
-                    qnaArray.push({
-                        questionID: answer.questionID,
-                        question: answer.question,
-                        answer: answer.answer
-                    })
-                }
-                const { analysis } = await SELECT.one.from(ASSESSMENT).columns('RAW_ANALYSIS as analysis').where({ ID: assessmentID })
-                console.log(qnaArray, analysis);
-
-                const estimateServices = await axios.post(`${await util.getApiBase()}/estimateservices`, {
-                    "qna": qnaArray,
-                    "analysis": JSON.parse(analysis),
-                    "model": model || DEFAULT_MODEL
-                })
-                console.log("Estimate response: ", estimateServices.data);
-
-                let { maxBTPSrvcsID } = await SELECT.one.from(BTP_SERVICES).columns('MAX(ID) as maxBTPSrvcsID');
-                if (maxBTPSrvcsID === NaN) {
-                    maxBTPSrvcsID = 1;
-                }
-                const btpServicesObj = [];
-                for (const btpObj in estimateServices.data) {
-                    const obj = {
-                        ID: maxBTPSrvcsID + 1,
-                        ASSESSMENT_ID_ID: assessmentID,
-                        SERVICE_NAME: estimateServices.data[btpObj].ServiceName,
-                        BLOCKS_REQUIRED: estimateServices.data[btpObj].BlocksRequired,
-                        METRIC: estimateServices.data[btpObj].Metric,
-                        PRICE: estimateServices.data[btpObj].Price,
-                        CURRENCY: estimateServices.data[btpObj].Currency,
-                    };
-                    maxBTPSrvcsID += 1;
-                    btpServicesObj.push(obj);
-                }
-                await INSERT.into(BTP_SERVICES).entries(btpServicesObj)
-                await UPDATE(ASSESSMENT).set({ IS_ESTIMATED: 1 }).where({ ID: assessmentID });
-                for (const answer of data) {
+            // 1) Upsert the answers (button is re-openable, so answers can change).
+            const existing = await SELECT.from(OBJECT_ESTIMATE_ANSWER).where({ ASSESSMENT_ID: assessmentID });
+            const seen = new Set(existing.map(r => String(r.QUESTIONNAIRE_ID)));
+            for (const answer of data) {
+                if (seen.has(String(answer.questionID))) {
+                    await UPDATE(OBJECT_ESTIMATE_ANSWER).set({ ANSWER: answer.answer })
+                        .where({ ASSESSMENT_ID: assessmentID, QUESTIONNAIRE_ID: answer.questionID });
+                } else {
                     await INSERT.into(OBJECT_ESTIMATE_ANSWER).entries({
-                        ASSESSMENT_ID: assessmentID,
-                        QUESTIONNAIRE_ID: answer.questionID,
-                        PROJECT_ID: projectID,
-                        PROJECT_COMPANY_ID: companyID,
-                        ANSWER: answer.answer
-                    })
+                        ASSESSMENT_ID: assessmentID, QUESTIONNAIRE_ID: answer.questionID,
+                        PROJECT_ID: projectID, PROJECT_COMPANY_ID: companyID, ANSWER: answer.answer
+                    });
                 }
-                return true;
             }
+
+            // 2) Recompute answer-derived services from the analysis' tagged questions.
+            const qnaArray = data.map(a => ({ questionID: a.questionID, question: a.question, answer: a.answer }));
+            const { analysis } = await SELECT.one.from(ASSESSMENT).columns('RAW_ANALYSIS as analysis').where({ ID: assessmentID });
+            const parsedAnalysis = analysis ? JSON.parse(analysis) : {};
+            const estimateServices = await axios.post(`${await util.getApiBase()}/estimateservices`, {
+                "qna": qnaArray,
+                "analysis": parsedAnalysis,
+                "model": model || DEFAULT_MODEL
+            });
+            const derived = estimateServices.data || [];
+
+            // 3) Reconcile: start from the baseline auto-services (from the analysis),
+            //    then OVERRIDE/ADD the answer-derived ones by ServiceName+Metric. Rebuilding
+            //    from baseline each time makes this idempotent and lets a removed answer
+            //    drop back to baseline (merge/reconcile, never blind append).
+            const baseline = ((parsedAnalysis.technical_analysis || {}).BTPServices) || [];
+            const keyOf = s => `${String(s.ServiceName || '').trim().toLowerCase()}|${String(s.Metric || '').trim().toLowerCase()}`;
+            const merged = new Map();
+            for (const s of baseline) merged.set(keyOf(s), s);
+            for (const s of derived) merged.set(keyOf(s), s);
+            const finalServices = [...merged.values()];
+
+            // 4) Replace this assessment's BTP services with the reconciled set.
+            await DELETE.from(BTP_SERVICES).where({ ASSESSMENT_ID_ID: assessmentID });
+            let { maxBTPSrvcsID } = await SELECT.one.from(BTP_SERVICES).columns('MAX(ID) as maxBTPSrvcsID');
+            if (!maxBTPSrvcsID || Number.isNaN(Number(maxBTPSrvcsID))) maxBTPSrvcsID = 0;
+            const rows = [];
+            for (const s of finalServices) {
+                maxBTPSrvcsID += 1;
+                rows.push({
+                    ID: maxBTPSrvcsID, ASSESSMENT_ID_ID: assessmentID,
+                    SERVICE_NAME: s.ServiceName, BLOCKS_REQUIRED: s.BlocksRequired, METRIC: s.Metric,
+                    PRICE: s.Price, CURRENCY: s.Currency, SERVICE_ID: s.ServiceID, UNITPRICE: s.UnitPrice
+                });
+            }
+            if (rows.length) await INSERT.into(BTP_SERVICES).entries(rows);
+            await UPDATE(ASSESSMENT).set({ IS_ESTIMATED: 1 }).where({ ID: assessmentID });
+            return true;
         } catch (error) {
             console.log(error);
             return false;
@@ -1962,8 +1917,13 @@ module.exports = cds.service.impl(function () {
             // Snapshot cost into the retained ledger BEFORE the usage/chat rows are
             // deleted, so spend survives the purge (best-effort; never blocks delete).
             try {
-                const a = await tx.run(SELECT.one.from(ASSESSMENT).columns('OBJECT_NAME', 'PROJECT_ID', 'PROJECT_COMPANY_ID', 'CREATEDBY').where({ ID }));
-                const nm = a ? await _resolveNames(tx, nameCache, a.PROJECT_ID, a.PROJECT_COMPANY_ID) : { projectName: null, companyName: null, companyId: null };
+                // Use VALID CDS elements only. PROJECT_COMPANY_ID / CREATEDBY are raw
+                // HANA columns, NOT model elements -- a CQL select on them throws and
+                // (being inside this try) silently skipped the whole snapshot. Company
+                // is derived from the project inside _resolveNames; createdBy is the
+                // managed element (aliased so INCURRED_BY below still reads a.CREATEDBY).
+                const a = await tx.run(SELECT.one.from(ASSESSMENT).columns('OBJECT_NAME', 'PROJECT.ID as PROJECT_ID', 'createdBy as CREATEDBY').where({ ID }));
+                const nm = a ? await _resolveNames(tx, nameCache, a.PROJECT_ID, null) : { projectName: null, companyName: null, companyId: null };
                 const base = {
                     ASSESSMENT_ID: ID, OBJECT_NAME: a && a.OBJECT_NAME,
                     PROJECT_ID: a && a.PROJECT_ID, PROJECT_NAME: nm.projectName,

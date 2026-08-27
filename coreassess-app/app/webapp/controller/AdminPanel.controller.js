@@ -342,6 +342,18 @@ sap.ui.define([
             return "$" + n.toFixed(4);
         },
 
+        // Compact token count: 29548 -> "29.5K", 1_200_000 -> "1.2M", 3e9 -> "3B".
+        formatTokens: function (v) {
+            var n = Number(v || 0);
+            if (!isFinite(n)) { return "0"; }
+            var abs = Math.abs(n);
+            var trim = function (s) { return s.replace(/\.0+$|(\.\d*?)0+$/, "$1"); };
+            if (abs >= 1e9) { return trim((n / 1e9).toFixed(2)) + "B"; }
+            if (abs >= 1e6) { return trim((n / 1e6).toFixed(2)) + "M"; }
+            if (abs >= 1e3) { return trim((n / 1e3).toFixed(1)) + "K"; }
+            return String(n);
+        },
+
         // -------- data loads --------
         onRefreshUsers: function () {
             var oModel = this.getOwnerComponent().getModel();
@@ -506,20 +518,59 @@ sap.ui.define([
 
         // -------- export --------
         onExportStats: function () {
+            var that = this;
             var aData = this.getView().getModel("statsModel").getProperty("/stats") || [];
             if (!aData.length) { MessageToast.show("Nothing to export"); return; }
+            // Export the display CODES (C002/P004), not raw ids, to match the table.
+            var aExport = aData.map(function (r) {
+                return Object.assign({}, r, {
+                    COMPANY_CODE: that._code("C", r.COMPANY_ID),
+                    PROJECT_CODE: that._code("P", r.PROJECT_ID)
+                });
+            });
             var oSettings = {
                 workbook: {
                     columns: [
-                        { label: "Project", property: "PROJECT_NAME" },
-                        { label: "Company ID", property: "COMPANY_ID" },
+                        { label: "Company", property: "COMPANY_CODE" },
+                        { label: "Company Name", property: "COMPANY_NAME" },
+                        { label: "Project", property: "PROJECT_CODE" },
+                        { label: "Project Name", property: "PROJECT_NAME" },
+                        { label: "Status", property: "STATUS" },
                         { label: "Assessment Total (USD)", property: "ASSESSMENT_TOTAL", type: "Number", scale: 4 },
                         { label: "Docgen Total (USD)", property: "DOCGEN_TOTAL", type: "Number", scale: 4 },
                         { label: "Project Total (USD)", property: "PROJECT_TOTAL", type: "Number", scale: 4 }
                     ]
                 },
-                dataSource: aData,
+                dataSource: aExport,
                 fileName: "project-cost-stats.xlsx"
+            };
+            new Spreadsheet(oSettings).build().finally(function () { MessageToast.show("Exported"); });
+        },
+
+        // Export the Pricing history (deleted) ledger. Tokens shown compact (K/M/B).
+        onExportCostLedger: function () {
+            var that = this;
+            var aData = this.getView().getModel("costLedgerModel").getProperty("/rows") || [];
+            if (!aData.length) { MessageToast.show("Nothing to export"); return; }
+            var aExport = aData.map(function (r) {
+                return Object.assign({}, r, { TOKENS_FMT: that.formatTokens(r.TOTAL_TOKENS) });
+            });
+            var oSettings = {
+                workbook: {
+                    columns: [
+                        { label: "Object", property: "OBJECT_NAME" },
+                        { label: "Project", property: "PROJECT_NAME" },
+                        { label: "Company", property: "COMPANY_NAME" },
+                        { label: "Source", property: "SOURCE" },
+                        { label: "Tokens", property: "TOKENS_FMT" },
+                        { label: "Cost (USD)", property: "COST_USD", type: "Number", scale: 4 },
+                        { label: "Incurred by", property: "INCURRED_BY" },
+                        { label: "Deleted", property: "STATUS" },
+                        { label: "Deleted by", property: "DELETED_BY" }
+                    ]
+                },
+                dataSource: aExport,
+                fileName: "pricing-history-deleted.xlsx"
             };
             new Spreadsheet(oSettings).build().finally(function () { MessageToast.show("Exported"); });
         }

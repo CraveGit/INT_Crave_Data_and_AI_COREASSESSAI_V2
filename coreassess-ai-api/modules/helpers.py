@@ -465,6 +465,26 @@ def addCoupling(complete_analysis: dict, code_object: str = ""):
     ba["CleanCoreTargetTierReason"] = verdict.target_tier_reason
     ba["DecisionFacts"] = verdict.facts
     ba["CleanCoreViolations"] = [v.model_dump() for v in verdict.violations]
+
+    # The engine is the SINGLE approach decider. checkRetire ran earlier and stashed
+    # the retire narrative + FunctionalitiesMap under highlvl_s4_analysis; surface it
+    # into basic_analysis ONLY when the engine actually chose retire, so approach and
+    # its retire fields never disagree. (Previously checkRetire flipped the approach
+    # itself, but it ran AFTER this engine call, so the engine never saw the map and
+    # its retire branch was unreachable.)
+    s4 = complete_analysis.get("highlvl_s4_analysis") or {}
+    if verdict.approach.value == "retire":
+        expl = (s4.get("RetireExplanation") or "").strip()
+        addon = "Hence, this specific program can be retired and reimplemented using suggested standard Fiori apps."
+        ba["RetireExplanation"] = (expl + " " + addon).strip() if expl else addon
+        ba["Reimplementation"] = s4.get("Reimplementation") or ""
+        ba["FunctionalitiesMap"] = s4.get("FunctionalitiesMap") or []
+        ba["UseCaseArea"] = []
+        ba["UseCaseAreaExplanation"] = ""
+    else:
+        ba["RetireExplanation"] = ""
+        ba["Reimplementation"] = ""
+        ba["FunctionalitiesMap"] = []
     return complete_analysis
 
 #------------------------------------------- Enhancement 2b: Ground API/Fiori recs vs live SAP catalogs (MCP)
@@ -596,9 +616,10 @@ from modules.service_estimators import getCustomServices
 
 def addCustomServicesPricing(complete_analysis: dict, qna: list):
     if(not complete_analysis): return complete_analysis
-    services = getCustomServices(qna)
+    # Pass the analysis so getCustomServices can use the prebaked question tags
+    # (ServiceName/Metric/QuantityPerUnit) for a deterministic answer->service map.
+    services = getCustomServices(qna, complete_analysis)
     services_pricing = estimateServicePricing(services)
-    # print(f'--- Added {len(complete_analysis["technical_analysis"]["BTPServices"])} additional BTP services with pricing')
     return services_pricing
 
 #------------------------------------------- Additional Enhancement 2: Custom BTP services and pricing
@@ -765,60 +786,75 @@ def relistTables(filename: str, code_object: str, complete_analysis: dict):
 from modules.prompts import functionality_prompt
 
 def checkRetire(filename: str, code_object: str, complete_analysis: dict, precomputed=None):
+    """Data-only retire step: run the functionality/Fiori-replacement check and
+    publish its evidence (FunctionalitiesMap, suggested Fiori apps, retire narrative)
+    under highlvl_s4_analysis. It does NOT decide the approach -- the clean-core
+    engine (addCoupling) owns that and reads FunctionalitiesMap. MUST run BEFORE
+    addCoupling so the engine's retire branch is reachable."""
     if(not complete_analysis): return complete_analysis
     functionality_replacements = precomputed if precomputed is not None else analyzeBatch(functionality_prompt, code_object, filename)
     parsed_functionality_replacements = parseResponse(functionality_replacements)
-    
-    if not successParsing(filename, parsed_functionality_replacements, "_RETIRE_CHECK"): 
-        # print(f'--x Failed to perform retire check')
-        return
+
+    if not successParsing(filename, parsed_functionality_replacements, "_RETIRE_CHECK"):
+        # Parse failed: leave an empty map so the engine sees "no coverage" and never
+        # retires, but keep the analysis intact (returning None nuked the pipeline).
+        complete_analysis.setdefault("highlvl_s4_analysis", {}).setdefault("FunctionalitiesMap", [])
+        return complete_analysis
 
     complete_analysis.setdefault("highlvl_s4_analysis", {}).setdefault("SAPStandardFioriApps", [])
     suggested_fiori_apps = list(set([f["StandardFioriApp"] for f in parsed_functionality_replacements["Functionalities"] if f["StandardFioriApp"]]))
     complete_analysis["highlvl_s4_analysis"]["SAPStandardFioriApps"] = suggested_fiori_apps
     complete_analysis = addFioriAppId(complete_analysis)
-    # complete_analysis["highlvl_s4_analysis"]["functionality_replacements"] = parsed_functionality_replacements["Functionalities"]
 
-    full_coverage = []
-    partial_coverage = []
-    no_coverage = []
-
-
-    for func in parsed_functionality_replacements["Functionalities"]:
-        coverage = func.get("ReplacementCoverage", "").strip().lower()
-        if coverage == "full": full_coverage.append(func["Functionality"])
-        elif coverage == "partial": partial_coverage.append(func["Functionality"])
-        else: no_coverage.append(func["Functionality"])
-
-    # Coverage evidence is published here; the retire threshold itself lives in
-    # ApproachRules so a single rule owns the decision.
+    # Coverage evidence + retire narrative are published here; the retire THRESHOLD
+    # and gates (coverage / needs_btp / functionality_count) live in ApproachRules so
+    # a single rule engine owns the decision. addCoupling surfaces the narrative into
+    # basic_analysis only if the engine actually picks retire.
     functionalities = parsed_functionality_replacements["Functionalities"]
     complete_analysis["highlvl_s4_analysis"]["FunctionalitiesMap"] = functionalities
-    total_coverage = len(functionalities)
-    if total_coverage == 0:
-        retire_flag = False
-    else:
-        coverage_score = (len(full_coverage) + 0.5 * len(partial_coverage)) / total_coverage
-        retire_flag = coverage_score >= ApproachRules.RETIRE_COVERAGE
+    complete_analysis["highlvl_s4_analysis"]["RetireExplanation"] = parsed_functionality_replacements.get("Explanation", "")
+    complete_analysis["highlvl_s4_analysis"]["Reimplementation"] = parsed_functionality_replacements.get("Reimplementation", "")
 
-    addon_explanation_text = ""
-    if(retire_flag):
-        addon_explanation_text = " Hence, this specific program can be retired and reimplemented using suggested standard Fiori apps."
-        complete_analysis["basic_analysis"]["Coupling"] = "retire"
-        complete_analysis["basic_analysis"]["RecommendedApproach"] = "retire"
-        complete_analysis["basic_analysis"]["FunctionalitiesMap"] = parsed_functionality_replacements["Functionalities"]
-        complete_analysis["basic_analysis"]["RetireExplanation"] = parsed_functionality_replacements["Explanation"] + addon_explanation_text
-        complete_analysis["basic_analysis"]["Reimplementation"] = parsed_functionality_replacements["Reimplementation"]
-        complete_analysis["basic_analysis"]["UseCaseArea"] = []
-        complete_analysis["basic_analysis"]["UseCaseAreaExplanation"] = ""
-    else:
-        complete_analysis["basic_analysis"]["FunctionalitiesMap"] = []
-        complete_analysis["basic_analysis"]["RetireExplanation"] = ""
-        complete_analysis["basic_analysis"]["Reimplementation"] = ""
-
-    # print(f'--- Retire check performed. Added {len(complete_analysis["highlvl_s4_analysis"]["SAPStandardFioriApps"])} Fiori applications.')
     return complete_analysis
     
+#------------------------------------------- Additional Enhancement 6b: BTP sizing questions
+from modules.prompts import estimate_questions_prompt
+
+def addEstimateQuestions(complete_analysis: dict):
+    """Prebake context-aware BTP sizing questions for side-by-side / hybrid objects
+    and store them (tagged with their target service) on basic_analysis so the
+    'BTP Services' popup renders instantly and answers map deterministically."""
+    if(not complete_analysis): return complete_analysis
+    ba = complete_analysis.get("basic_analysis") or {}
+    approach = str(ba.get("RecommendedApproach") or "").lower()
+    # Only side-by-side / hybrid objects get BTP build work, so only they need
+    # sizing questions. Everything else -> no questions (no wasted LLM call).
+    if approach not in ("side-by-side", "hybrid"):
+        ba["EstimateQuestions"] = []
+        return complete_analysis
+
+    areas = ba.get("UseCaseArea") or []
+    area_str = ", ".join(str(a) for a in areas) if isinstance(areas, list) else str(areas)
+    dev = (complete_analysis.get("technical_analysis") or {}).get("DevelopmentApproach") or ""
+    context = (
+        f"Object: {ba.get('ObjectName') or ''}\n"
+        f"Target approach: {approach}\n"
+        f"Use Case Area(s): {area_str}\n"
+        f"Development approach: {dev}\n"
+        f"Functional description: {ba.get('FunctionalAnalysis') or ''}\n"
+    )
+    try:
+        raw = analyzeBatch(estimate_questions_prompt, context, "", "", complete_analysis.get("TokenUsage"))
+        parsed = parseResponse(raw) or {}
+        questions = parsed.get("EstimateQuestions") or []
+        for i, q in enumerate(questions, start=1):
+            q["ID"] = i
+        ba["EstimateQuestions"] = questions
+    except Exception as e:
+        logger.error(f"e1eq1: estimate question generation failed: {e}")
+        ba["EstimateQuestions"] = []
+    return complete_analysis
+
 #------------------------------------------- Additional Enhancement 7: Code quality score
 from modules.prompts import quality_scoring_prompt
 import math
@@ -940,17 +976,20 @@ def enhanceAnalysis(filename: str, code_object: str, complete_analysis: dict, sk
     enhancement02 = addFioriAppId(enhancement01)
     enhancement03 = addCDSViews(filename, enhancement02, precomputed=_cds_raw)
     enhancement03g = groundRecommendations(enhancement03)
-    enhancement04 = addCoupling(enhancement03g, code_object)
+    # checkRetire is data-only and MUST run before addCoupling: it publishes the
+    # FunctionalitiesMap that the clean-core engine reads to decide retire. Running it
+    # after addCoupling (the old order) left the map empty at decision time, so the
+    # engine's retire branch was unreachable and only a legacy flip could retire.
+    enhancement03r = checkRetire(filename, code_object, enhancement03g, precomputed=_ret_raw)
+    enhancement04 = addCoupling(enhancement03r, code_object)
     enhancement05 = addPriority(enhancement04)
     enhancement06 = filterRecommendations(enhancement05)
     # enhancement07 = relistTables(filename, code_object, enhancement06)
-    # checkRetire can flip RecommendedApproach to "retire", so everything that reads
-    # the approach must run AFTER it. Previously services were derived first, so a
-    # retired object still carried a full BTP dev stack.
-    enhancement08 = checkRetire(filename, code_object, enhancement06, precomputed=_ret_raw)
-    enhancement09 = setQualityScore(filename, code_object, enhancement08, precomputed=_qual_raw)
+    enhancement09 = setQualityScore(filename, code_object, enhancement06, precomputed=_qual_raw)
     enhancement10 = addDevelopmentApproach(enhancement09, skillset)
-    enhancement11 = addBasicServices(enhancement10, skillset)
+    # Prebake BTP sizing questions (needs the final approach + development approach).
+    enhancement10q = addEstimateQuestions(enhancement10)
+    enhancement11 = addBasicServices(enhancement10q, skillset)
     enhancement12 = addBasicServicesPricing(enhancement11)
     # Effort runs last: it needs the FINAL approach, adherence and quality score.
     # Replaces the old addEfforts -> addMigrationEfforts -> addExtendedEfforts ->

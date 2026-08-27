@@ -202,7 +202,7 @@
                                 </VBox>
 							<VBox width="50%">
 								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Re Implementation"/>
-							<Text text="{selectedObjectModel>/REIMPLEMENTATION}"/>
+							<FormattedText htmlText="{path:'selectedObjectModel>/REIMPLEMENTATION',formatter:'.formatStepsHtml'}" class="craBulletFT"/>
 							
                                 </VBox>
 						</items>

@@ -122,7 +122,7 @@
 						<!-- Was this analysis helpful? Thumbs open a popover for an optional comment before submitting. -->
 							<HBox class="craFbThumbs" alignItems="Center"><Button id="fbUpBtn" icon="sap-icon://thumb-up" tooltip="Helpful" press="onFeedbackThumb" type="{= ${selectedObjectModel>/FB_VOTE} === 'up' ? 'Emphasized' : 'Transparent' }"/><Button id="fbDownBtn" icon="sap-icon://thumb-down" tooltip="Not helpful" press="onFeedbackThumb" type="{= ${selectedObjectModel>/FB_VOTE} === 'down' ? 'Emphasized' : 'Transparent' }"/></HBox>
 							<!-- Estimate only makes sense for side-by-side objects. -->
-						<Button id="estimateBtn" text="Estimate" tooltip="Estimate this object" press="onPressEstimate" type="Emphasized" visible="{= ${selectedObjectModel>/APPROACH} === 'side-by-side' }"/>
+						<Button id="estimateBtn" text="BTP Services" tooltip="Configure BTP services for this object" press="onPressEstimate" type="Emphasized" visible="{= ${selectedObjectModel>/APPROACH} === 'side-by-side' || ${selectedObjectModel>/APPROACH} === 'hybrid' }"/>
 						<!-- Opens the in-app Document Generation page for this object; the doc type (FSD/TSD/BBP) is chosen there via tabs. -->
 							<Button id="docsGenBtn" text="Generate Document" icon="sap-icon://document-text" tooltip="Generate a document for this object" press="onGenerateDoc" type="Default"/>
 					</OverflowToolbar>

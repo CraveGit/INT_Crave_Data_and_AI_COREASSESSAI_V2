@@ -143,15 +143,12 @@
 					<HBox class="sapUiSmallMarginBottom" alignItems="Start" justifyContent="SpaceBetween" width="100%">
 						<items>
 							<VBox width="50%">
-								<tnt:InfoLabel colorScheme="6" text="Use Case Area" class="sapUiTinyMarginBottom"/>
-								<List showSeparators="None" items="{selectedObjectModel>/USE_CASE_AREA}" showNoData="true" noDataText="None" class="sapUiLargeMarginBottom">
+								<tnt:InfoLabel colorScheme="6" text="High Level S/4 Analysis" class="sapUiTinyMarginBottom"/>
+								<List showSeparators="None" items="{selectedObjectModel>/HIGH_LVL_RECOMMENDATIONS}" showNoData="true" noDataText="None">
 									<CustomListItem >
-										<Text text="{selectedObjectModel>USE_CASE_AREA}" class="sapUiTinyMarginEnd"/>
+										<FormattedText htmlText="{parts:[{path:'selectedObjectModel>TITLE'},{path:'selectedObjectModel>DESCRIPTION'}],formatter:'.formatBulletHtml'}" class="craBulletFT" />
 									</CustomListItem>
 								</List>
-
-								<tnt:InfoLabel colorScheme="6" text="Use Case Description" class="sapUiTinyMarginBottom"/>
-								<Text text="{selectedObjectModel>/USE_CASE_AREA_EXPLANATION}" class="sapUiTinyMarginEnd"/>
 
 							
                                 </VBox>
@@ -184,17 +181,19 @@
 					<HBox class="sapUiSmallMarginBottom" alignItems="Start" justifyContent="SpaceBetween" width="100%">
 						<items>
 							<VBox width="50%">
-								<tnt:InfoLabel colorScheme="6" text="High Level S/4 Analysis" class="sapUiTinyMarginBottom"/>
-								<List showSeparators="None" items="{selectedObjectModel>/HIGH_LVL_RECOMMENDATIONS}" showNoData="true" noDataText="None">
+								<tnt:InfoLabel colorScheme="6" text="Use Case Area" class="sapUiTinyMarginBottom"/>
+								<List showSeparators="None" items="{selectedObjectModel>/USE_CASE_AREA}" showNoData="true" noDataText="None" class="sapUiSmallMarginBottom">
 									<CustomListItem >
-										<FormattedText htmlText="{parts:[{path:'selectedObjectModel>TITLE'},{path:'selectedObjectModel>DESCRIPTION'}],formatter:'.formatBulletHtml'}" class="craBulletFT" />
+										<Text text="{selectedObjectModel>USE_CASE_AREA}" class="sapUiTinyMarginEnd"/>
 									</CustomListItem>
 								</List>
-							
+								<tnt:InfoLabel colorScheme="6" text="Use Case Description" class="sapUiTinyMarginBottom"/>
+								<Text text="{selectedObjectModel>/USE_CASE_AREA_EXPLANATION}" class="sapUiTinyMarginEnd sapUiSmallMarginBottom"/>
+
                                 </VBox>
 							<VBox width="50%">
 								<tnt:InfoLabel colorScheme="6" text="Development Approach" class="sapUiTinyMarginBottom"/>
-								<Text text="{selectedObjectModel>/DEVELOPMENTAPPROACH}" class="sapUiLargeMarginBottom"/>
+								<Text text="{selectedObjectModel>/DEVELOPMENTAPPROACH}" class="sapUiSmallMarginBottom"/>
 								<tnt:InfoLabel colorScheme="6" text="Recommended BTP Services" class="sapUiTinyMarginBottom"/>
 								<Table items="{selectedObjectModel>/BTP_SERVICES}">
 									<columns>
@@ -372,17 +371,17 @@
 						<items>
 							<VBox width="25%">
                                     <tnt:InfoLabel colorScheme="6" text="Inter-module Integration" class="sapUiTinyMarginBottom"/>
-                                    <Text text="{selectedObjectModel>/INTER_MODULE_INTEGRATION}"/>
+                                    <Text text="{= ${selectedObjectModel>/INTER_MODULE_INTEGRATION} || 'None' }"/>
                                 
                                 </VBox>
 							<VBox width="25%">
 								<tnt:InfoLabel colorScheme="6" text="Third-Party Integration" class="sapUiTinyMarginBottom"/>
-								<Text text="{selectedObjectModel>/THIRD_PARTY_INTEGRATION}"/>
+								<Text text="{path:'selectedObjectModel>/THIRD_PARTY_INTEGRATION', formatter:'.formatYesNone'}"/>
 							
                                 </VBox>
 							<VBox width="25%">
 								<tnt:InfoLabel colorScheme="6" text="UI Integration" class="sapUiTinyMarginBottom"/>
-								<Text text="{selectedObjectModel>/UI_INTEGRATION}"/>
+								<Text text="{path:'selectedObjectModel>/UI_INTEGRATION', formatter:'.formatYesNone'}"/>
 							
                                 </VBox>
 							<VBox width="25%"></VBox>
@@ -431,9 +430,9 @@
 								</Table>
 							
                                 </VBox>
-							<VBox width="50%" visible="{= (${selectedObjectModel>/SAP_STANDARD_API} || []).length > 0 }">
-								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="Recommended SAP Standard APIs"/>
-								<Table items="{selectedObjectModel>/SAP_STANDARD_API}">
+							<VBox width="50%">
+								<tnt:InfoLabel colorScheme="6" class="sapUiTinyMarginBottom" text="BAPI to Standard API Replacements"/>
+								<Table items="{selectedObjectModel>/BAPI_API_RECOMMENDATIONS}" noDataText="No data">
 									<columns>
                                             <Column><Text text="BAPI" /></Column>
                                             <Column><Text text="API" /></Column>
@@ -443,13 +442,13 @@
 										<ColumnListItem vAlign="Middle" class="bordertableremove">
 											<cells>
                                                     <Text text="{selectedObjectModel>MAPPING}" class="craMono"/>
-                                                    <Text text="{selectedObjectModel>SAP_STANDARD_API}" class="craMono"/>
+                                                    <Text text="{selectedObjectModel>API}" class="craMono"/>
                                                     <Text text="{selectedObjectModel>DESCRIPTION}"/>
                                                 </cells>
 										</ColumnListItem>
 									</items>
 								</Table>
-							
+
                                 </VBox>
 						</items>
 					</HBox>

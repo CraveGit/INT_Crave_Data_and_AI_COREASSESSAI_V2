@@ -1,6 +1,47 @@
 from modules.data_initializers import pricelist
 from modules.helpers import extractEssentials, isReport, isInterface, isAutomation, isAppDev
 
+# ---------------------------------------------------------------------------
+# Service-quantity framework
+# Every BlocksRequired must trace to a DRIVER, never a magic constant:
+#   - footprint tier (S/M/L): overall build size  -> runtime / capacity / seats
+#   - storage  tier (S/M/L): data footprint        -> HANA CU, document API calls
+#   - volume proxies (forms count, file flag)      -> API-metered services
+#   - user answers (questionnaire)                 -> user/connection-metered services
+# Tier defaults are the ANALYSIS baseline; a questionnaire answer, when supplied,
+# OVERRIDES the default (see getCustomServices). All thresholds/quantities live in
+# SIZING so they are tunable without touching logic. See CoreAssess_Assessment_Logic.md #10.
+# ---------------------------------------------------------------------------
+SIZING = {
+    "hana_cu":    {"S": 3000, "M": 6000, "L": 12000},    # SAP HANA Cloud - Capacity Unit
+    "cf_gb":      {"S": 4,    "M": 10,   "L": 20},       # CF runtime - Gigabyte
+    "abap_hours": {"S": 730,  "M": 730,  "L": 1460},     # ABAP env - Hours (16GB blocks), ~monthly
+    "doc_calls":  {"S": 50000, "M": 150000, "L": 500000},# Document Mgmt - API Call
+    "wz_users":   {"S": 25,   "M": 50,   "L": 100},      # Work Zone - Active User (default; Q overrides)
+    "build_pkgs": {"S": 1,    "M": 2,    "L": 4},        # Build Apps - Entitlements Package
+    "sac_users":  {"S": 5,    "M": 10,   "L": 25},       # SAC - User (default; Q overrides)
+    "forms_calls_per_form": 1000,                        # Adobe Forms - API Call per form/month
+}
+
+
+def _footprint_tier(stats) -> str:
+    """Overall build size from the analysis facts. <8 = S, <20 = M, else L."""
+    score = (2 * (len(stats["custom_tables"]) + len(stats["standard_tables"]))
+             + 1.5 * (stats["screens_count"] or 0)
+             + len(stats["bapis"]) + len(stats["function_modules"])
+             + (stats["codelength"] or 0) / 500.0
+             + 2 * (len(stats["events"]) + len(stats["standard_events"])))
+    return "S" if score < 8 else ("M" if score < 20 else "L")
+
+
+def _storage_tier(stats) -> str:
+    """Data footprint. <=2 = S, <=6 = M, else L."""
+    score = (len(stats["custom_tables"])
+             + (2 if (stats["is_data_storage"] or stats["will_data_storage"]) else 0)
+             + (1 if stats["persistant_storage"] else 0))
+    return "S" if score <= 2 else ("M" if score <= 6 else "L")
+
+
 #------------------------------------------- Check if is a Build use case
 def checkBuildCondition(complete_analysis: dict) -> bool:
     if not complete_analysis: return False
@@ -46,18 +87,18 @@ def getBasicServices(complete_analysis: dict) -> list:
     file_storage_required = stats["is_file_storage"]
     file_storage_suggested = stats["will_file_storage"]
 
-    if forms_count: 
-        services.append({"ServiceName":"SAP Forms Service by Adobe","BlocksRequired":"1000","Metric":"API Call"})
+    if forms_count:
+        services.append({"ServiceName":"SAP Forms Service by Adobe","BlocksRequired":str(max(1, forms_count) * SIZING["forms_calls_per_form"]),"Metric":"API Call"})
     if(data_storage_required or data_storage_suggested or (custom_tables>0 and persistant_storage)): 
-        services.append({"ServiceName":"SAP HANA Cloud","BlocksRequired":"3000","Metric":"Capacity Unit"})
+        services.append({"ServiceName":"SAP HANA Cloud","BlocksRequired":str(SIZING["hana_cu"][_storage_tier(stats)]),"Metric":"Capacity Unit"})
     if isReport(__basic_analysis) and analytical_report: 
-        services.append({"ServiceName":"SAP Analytics Cloud for planning, standard edition, public system option","BlocksRequired":"1","Metric":"User"})
+        services.append({"ServiceName":"SAP Analytics Cloud for planning, standard edition, public system option","BlocksRequired":str(SIZING["sac_users"][_footprint_tier(stats)]),"Metric":"User"})
     if(thirdparty_intgr or isInterface(__basic_analysis)):
         services.append({"ServiceName":"SAP Integration Suite, basic edition","BlocksRequired":"1","Metric":"Tenant"})
     if(events_used + standard_events > 0):
         services.append({"ServiceName":"SAP Integration Suite, advanced event mesh, 250","BlocksRequired":"1","Metric":"Tenant"})
     if(file_storage_required or file_storage_suggested):
-        services.append({"ServiceName":"SAP Cloud Platform Document Management, integration option","BlocksRequired":"50000","Metric":"API Call"})
+        services.append({"ServiceName":"SAP Cloud Platform Document Management, integration option","BlocksRequired":str(SIZING["doc_calls"][_storage_tier(stats)]),"Metric":"API Call"})
     if(isAutomation(__basic_analysis)):
         services.extend([
             {"ServiceName": "SAP Build Process Automation, advanced", "BlocksRequired": "3", "Metric": "Active User"},
@@ -82,11 +123,11 @@ def getLowCodeEnv(complete_analysis:dict) -> list:
 
     if isAppDev(__basic_analysis):
         services.extend([
-            {"ServiceName":"SAP Build Work Zone, standard edition","BlocksRequired":"100","Metric":"Active User"},
-            {"ServiceName":"SAP Build Apps, enterprise edition, base package","BlocksRequired":"4","Metric":"Entitlements Package"}
+            {"ServiceName":"SAP Build Work Zone, standard edition","BlocksRequired":str(SIZING["wz_users"][_footprint_tier(stats)]),"Metric":"Active User"},
+            {"ServiceName":"SAP Build Apps, enterprise edition, base package","BlocksRequired":str(SIZING["build_pkgs"][_footprint_tier(stats)]),"Metric":"Entitlements Package"}
         ])
         if not(data_storage_required or data_storage_suggested or (custom_tables>0 and persistant_storage)): 
-            services.append({"ServiceName":"SAP HANA Cloud","BlocksRequired":"3000","Metric":"Capacity Unit"})
+            services.append({"ServiceName":"SAP HANA Cloud","BlocksRequired":str(SIZING["hana_cu"][_storage_tier(stats)]),"Metric":"Capacity Unit"})
     return services
 
 #------------------------------------------- Get RAP/CAP (Pro-code)
@@ -105,18 +146,18 @@ def getProCodeEnv(complete_analysis:dict, skillset:str) -> list:
         if(skillset.lower() == "abap"):
             # RAP
             services.extend([
-                {"ServiceName":"SAP BTP ABAP environment","BlocksRequired":"730","Metric":"Hours of Runtime Memory in 16 GB Blocks"}, 
-                {"ServiceName":"SAP Build Work Zone, standard edition","BlocksRequired":"100","Metric":"Active User"}
+                {"ServiceName":"SAP BTP ABAP environment","BlocksRequired":str(SIZING["abap_hours"][_footprint_tier(stats)]),"Metric":"Hours of Runtime Memory in 16 GB Blocks"},
+                {"ServiceName":"SAP Build Work Zone, standard edition","BlocksRequired":str(SIZING["wz_users"][_footprint_tier(stats)]),"Metric":"Active User"}
             ])
         else:
             # CAP
             services.extend([
-                {"ServiceName":"SAP Business Technology Platform, Cloud Foundry runtime","BlocksRequired":"10","Metric":"Gigabyte"}, 
-                {"ServiceName":"SAP Build Work Zone, standard edition","BlocksRequired":"100","Metric":"Active User"},
+                {"ServiceName":"SAP Business Technology Platform, Cloud Foundry runtime","BlocksRequired":str(SIZING["cf_gb"][_footprint_tier(stats)]),"Metric":"Gigabyte"},
+                {"ServiceName":"SAP Build Work Zone, standard edition","BlocksRequired":str(SIZING["wz_users"][_footprint_tier(stats)]),"Metric":"Active User"},
                 {"ServiceName":"SAP Business Application Studio","BlocksRequired":"4","Metric":"User"}
             ])
             if not(data_storage_required or data_storage_suggested or (custom_tables>0 and persistant_storage)): 
-                services.append({"ServiceName":"SAP HANA Cloud","BlocksRequired":"3000","Metric":"Capacity Unit"})
+                services.append({"ServiceName":"SAP HANA Cloud","BlocksRequired":str(SIZING["hana_cu"][_storage_tier(stats)]),"Metric":"Capacity Unit"})
     return services
 
 #------------------------------------------- Skillset applicability
@@ -168,7 +209,50 @@ def getAnswerValue(qna, question_name) -> str | int:
     if isinstance(answer, str) and answer.strip().isdigit(): return int(answer)    
     return answer or 0
 
-def getCustomServices(qna: list) -> list:
+def getCustomServices(qna: list, analysis: dict = None) -> list:
+    """Map answered sizing questions to BTP services.
+
+    Preferred path: the prebaked, AI-generated questions in
+    analysis.basic_analysis.EstimateQuestions carry their own service tag
+    (ServiceName + Metric + QuantityPerUnit), so mapping is deterministic and
+    needs no hardcoded question text. Falls back to the legacy fixed-question
+    mapping for analyses produced before question-tagging existed."""
+    if not qna: return []
+
+    questions = []
+    if analysis:
+        ba = analysis.get("basic_analysis") or {}
+        questions = ba.get("EstimateQuestions") or []
+
+    if questions:
+        by_text = {str(q.get("Question", "")).strip(): q for q in questions if q.get("Question")}
+        agg = {}  # (ServiceName, Metric) -> summed blocks
+        for item in qna:
+            q = by_text.get(str(item.get("question", "")).strip())
+            if not q:
+                continue
+            ans = item.get("answer", 0)
+            if isinstance(ans, str):
+                ans = int(ans) if ans.strip().isdigit() else 0
+            if not isinstance(ans, (int, float)) or ans <= 0:
+                continue
+            try:
+                blocks = int(round(float(ans) * float(q.get("QuantityPerUnit", 1) or 1)))
+            except (TypeError, ValueError):
+                continue
+            if blocks <= 0:
+                continue
+            svc = str(q.get("ServiceName", "")).strip()
+            if not svc:
+                continue
+            key = (svc, str(q.get("Metric", "")).strip())
+            agg[key] = agg.get(key, 0) + blocks
+        return [{"ServiceName": s, "BlocksRequired": f"{b}", "Metric": m} for (s, m), b in agg.items()]
+
+    return _legacyCustomServices(qna)
+
+
+def _legacyCustomServices(qna: list) -> list:
     services=[]
     if not qna: return services
 

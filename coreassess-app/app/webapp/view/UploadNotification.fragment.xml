@@ -17,15 +17,26 @@
                 showValue="true"
                 state="Information"
                 class="sapUiSmallMarginBottom sapUiTinyMarginTop"/>
-            <List items="{foldersModel>/folderArray}" showSeparators="Inner"
-                class="craUploadJobList" noDataText="No objects">
-                <StandardListItem
-                    title="{foldersModel>webkitRelativePath}"
-                    info="{foldersModel>status}"
-                    infoState="{path:'foldersModel>status', formatter:'.formatUploadStatusState'}"
-                    icon="{path:'foldersModel>status', formatter:'.formatUploadStatusIcon'}"
-                    iconInset="false"/>
-            </List>
+            <!-- Same compact table style as the "Analysing objects" dialog
+                 (UploadProgress.fragment) so the job-card rows aren't oversized. -->
+            <Table items="{foldersModel>/folderArray}" class="craGridTable craUploadTable"
+                sticky="ColumnHeaders" growing="true" growingThreshold="50" noDataText="No objects">
+                <columns>
+                    <Column><Text text="Object"/></Column>
+                    <Column width="7rem" hAlign="End"><Text text="Status"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier title="{foldersModel>webkitRelativePath}" text="{foldersModel>statusNote}"/>
+                            <ObjectStatus
+                                text="{foldersModel>status}"
+                                state="{path:'foldersModel>status', formatter:'.formatUploadStatusState'}"
+                                icon="{path:'foldersModel>status', formatter:'.formatUploadStatusIcon'}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
         </VBox>
         <footer>
             <OverflowToolbar>

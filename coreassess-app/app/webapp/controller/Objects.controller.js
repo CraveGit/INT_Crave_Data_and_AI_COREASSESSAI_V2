@@ -423,27 +423,27 @@ sap.ui.define([
                 var oModel = this.getOwnerComponent().getModel("listObjectsModel");
                 if (oModel) { oModel.refresh(true); }
             },
+            // "NAME (Description)" -> NAME. Name is everything before the FIRST
+            // "(" or "[", so a description that itself contains parentheses
+            // (e.g. "F7892 (Manage ... (Central Finance))") no longer leaks a stray
+            // ")" into the id column.
             formatFirstColumn: function (sText) {
-                if (sText && sText != null) {
-                    var newString = sText.replace(/\s*(?:\[[^\]]*\]|\([^)]*\))\s*/g, "")
-                    return newString;
-                } else {
-                    return "";
-                }
-
+                if (!sText) { return ""; }
+                var s = String(sText);
+                var idx = s.search(/[\(\[]/);
+                var name = (idx >= 0 ? s.slice(0, idx) : s);
+                return name.replace(/[\(\)\[\]]/g, "").trim();
             },
+            // "NAME (Description)" -> Description. Uses the FIRST "(" and the LAST
+            // ")" so nested parentheses inside the description are kept intact.
             formatSecondColumn: function (sText) {
-                if (sText && sText != null) {
-                    var result = sText.match(/\((.*)\)/);
-                    if (result != null) {
-                        return result[1];
-                    } else {
-                        return sText;
-                    }
-                } else {
-                    return "";
-                }
-
+                if (!sText) { return ""; }
+                var s = String(sText);
+                var open = s.indexOf("("), close = s.lastIndexOf(")");
+                if (open >= 0 && close > open) { return s.slice(open + 1, close).trim(); }
+                var ob = s.indexOf("["), cb = s.lastIndexOf("]");
+                if (ob >= 0 && cb > ob) { return s.slice(ob + 1, cb).trim(); }
+                return s.trim();
             },
             _getFormFragment: function (sFragmentName) {
                 var pFormFragment = this._formFragments[sFragmentName],
@@ -863,6 +863,40 @@ sap.ui.define([
                 return d ? ("<strong>" + t + "</strong>: " + d) : ("<strong>" + t + "</strong>");
             },
 
+            // Render a step-by-step string (e.g. Reimplementation) as a bulleted list,
+            // one step per line — same visual family as the Clean Core / S4 bullet lists.
+            // Backward compatible: new data is newline-separated; older data used " -> "
+            // arrows or a "1. .. 2. .." numbered paragraph, so we split on whichever we find.
+            formatStepsHtml: function (text) {
+                var raw = String(text == null ? "" : text).trim();
+                if (!raw) { return ""; }
+                var parts;
+                if (/\r|\n/.test(raw)) {
+                    parts = raw.split(/\r?\n+/);
+                } else if (/\s(?:->|→|=>)\s/.test(raw)) {
+                    parts = raw.split(/\s(?:->|→|=>)\s/);
+                } else if (/\d+[\.\)]\s/.test(raw)) {
+                    parts = raw.split(/\s*(?=\d+[\.\)]\s)/);
+                } else {
+                    parts = [raw];
+                }
+                var esc = function (s) {
+                    return String(s == null ? "" : s)
+                        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                };
+                var items = parts.map(function (p) {
+                    // strip any leading numbering / bullet markers left in the text
+                    var step = String(p).replace(/^\s*(?:\d+[\.\)]|[-•*])\s*/, "").trim();
+                    if (!step) { return ""; }
+                    // bold the "label:" prefix when present, mirroring the other bullets
+                    var m = step.match(/^([^:]{2,40}):\s*(.+)$/);
+                    return m
+                        ? "<li><strong>" + esc(m[1].trim()) + "</strong>: " + esc(m[2].trim()) + "</li>"
+                        : "<li>" + esc(step) + "</li>";
+                }).filter(Boolean);
+                return items.length ? ("<ul class=\"craStepsList\">" + items.join("") + "</ul>") : "";
+            },
+
             // "SOURCE -> TARGET" for the BAPI->API and Table->CDS mapping tables.
             // Falls back to whichever side is present when one is missing.
             formatMapping: function (source, target) {
@@ -870,6 +904,15 @@ sap.ui.define([
                 var t = target == null ? "" : String(target).trim();
                 if (s && t) { return s + " → " + t; }
                 return s || t;
+            },
+
+            // Integration flags: show "Yes" when set, "None" otherwise (source is an
+            // inconsistent mix of true/"true"/"True"/false/empty).
+            formatYesNone: function (v) {
+                if (v === true || v === "true" || v === "True" || v === "X" || v === "x" || v === 1 || v === "1") {
+                    return "Yes";
+                }
+                return "None";
             },
 
             // "20hrs/3PD" -- person-days are hours / HOURS_PER_DAY(8), ceiled.
@@ -893,28 +936,314 @@ sap.ui.define([
                 return map[s] || 9;
             },
 
-            onExportPress: async function () {
-                const that = this;
-                // if (typeof ExcelJS === "undefined") {
-                //     $.getScript("../lib/exceljs.min.js")
-                //         .done(function (e) {
-                //             that.onExportPressNew(); // Your custom method
-                //         })
-                //         .fail(function () {
-                //             sap.m.MessageToast.show("Failed to load ExcelJS.");
-                //         });
-                // } else {
-                //     this.onExportPressNew();
-                // }
-                if (typeof jQuery !== "undefined") {
-                    $.getScript("https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js", function () {
-                          that.onExportPressNew(); // Your custom method
+            onExportPress: function () {
+                // Preferred: a styled ExcelJS workbook built from the live analysis model
+                // (see createColumnConfig) — section-coloured header, frozen header row,
+                // auto-filter, borders and zebra striping. Falls back to the plain
+                // sap.ui.export sheet (onExportPress1) if ExcelJS can't be loaded (offline).
+                var that = this;
+                if (typeof ExcelJS !== "undefined") { this.onExportExcelJS(); return; }
+                this._loadExcelJS()
+                    .then(function () { that.onExportExcelJS(); })
+                    .catch(function () {
+                        MessageToast.show("Styled export unavailable — exporting a plain sheet.");
+                        that.onExportPress1();
                     });
-                } else {
-                    sap.m.MessageToast.show("Failed to load ExcelJS.");
-                }
-
             },
+            // Load ExcelJS (UMD) from CDN. UI5 exposes a global AMD `define`, so ExcelJS
+            // would register as an anonymous module and never set window.ExcelJS. Hide
+            // define.amd while the script evaluates so the UMD wrapper falls back to the
+            // browser-global branch, then restore it.
+            _loadExcelJS: function () {
+                return new Promise(function (resolve, reject) {
+                    if (typeof ExcelJS !== "undefined") { resolve(); return; }
+                    var oDefine = window.define;
+                    var oAmd = oDefine && oDefine.amd;
+                    if (oAmd) { oDefine.amd = undefined; }
+                    var fnRestore = function () { if (oAmd && oDefine) { oDefine.amd = oAmd; } };
+                    var oScript = document.createElement("script");
+                    oScript.src = "https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js";
+                    oScript.async = true;
+                    oScript.onload = function () {
+                        fnRestore();
+                        if (typeof ExcelJS !== "undefined") { resolve(); }
+                        else { reject(new Error("ExcelJS not defined after load")); }
+                    };
+                    oScript.onerror = function () {
+                        fnRestore();
+                        reject(new Error("ExcelJS failed to load"));
+                    };
+                    document.head.appendChild(oScript);
+                });
+            },
+            // Colour band per column section, keyed by the `section` in createColumnConfig.
+            // Approach-wise export layout: a merged, coloured banner groups columns into
+            // sections (Overview + SQL/Integration/Security are always shown; SIDE-BY-SIDE
+            // / ON-STACK / RETIRE columns are filled only for rows of that approach).
+            _exportSections: function () {
+                return [
+                    { key: "overview", title: "Overview", banner: "FFE29BDC", always: true, cols: [
+                        { label: "Object Name", property: "OBJECT_NAME", width: 24 },
+                        { label: "Approach", property: "APPROACH", width: 14 },
+                        { label: "SAP Module", property: "SAP_MODULE_NAME", width: 22 },
+                        { label: "SAP Sub Module", property: "SAP_SUB_MODULE", width: 22 },
+                        { label: "WRICEF Object Type", property: "WRICEF_OBJECT_TYPE", width: 20 },
+                        { label: "Clean Core Adherence", property: "ADHERENCE", width: 16 },
+                        { label: "Current Clean Core Tier", property: "CLEANCORE_TIER_DISPLAY", width: 14 },
+                        { label: "Current Tier Reason", property: "CLEANCORE_TIER_REASON", width: 60 },
+                        { label: "Target Clean Core Tier", property: "CLEANCORE_TARGET_TIER_DISPLAY", width: 14 },
+                        { label: "Target Tier Reason", property: "CLEANCORE_TARGET_TIER_REASON", width: 60 },
+                        { label: "Code Complexity", property: "CODE_COMPLEXITY", width: 14 },
+                        { label: "Coupling", property: "COUPLING", width: 12 },
+                        { label: "CRUD Operations", property: "READ_CRUD", width: 16 },
+                        { label: "Priority", property: "PRIORITY", width: 12 },
+                        { label: "T-Shirt Size", property: "TSHIRT", width: 12 },
+                        { label: "Effort", property: "EFFORT_DISPLAY", width: 14 },
+                        { label: "Code Length", property: "CODELENGTH", width: 12 },
+                        { label: "Code Quality Score", property: "CODEQUALITYSCORE", width: 14 },
+                        { label: "Functional Analysis", property: "FUNCTIONAL_ANALYSIS", width: 70 },
+                        { label: "Clean Core Analysis", property: "CLEAN_CORE_ANALYSIS", width: 70 }
+                    ]},
+                    { key: "sbs", title: "SIDE-BY-SIDE / HYBRID", banner: "FF6FA8DC", approaches: ["side-by-side", "hybrid"], cols: [
+                        { label: "Use Case Area", property: "USE_CASE_AREA", width: 40 },
+                        { label: "Use Case Description", property: "USE_CASE_AREA_EXPLANATION", width: 70 },
+                        { label: "Development Approach", property: "DEVELOPMENTAPPROACH", width: 40 },
+                        { label: "High Level S/4 Analysis", property: "HIGH_LVL_RECOMMENDATIONS", width: 70 },
+                        { label: "Recommended SAP Standard API", property: "SAP_STANDARD_API", width: 40 },
+                        { label: "Recommended BTP Services", property: "BTP_SERVICES", width: 70 }
+                    ]},
+                    { key: "onstack", title: "ON-STACK / HYBRID", banner: "FF93C47D", approaches: ["on-stack", "hybrid"], cols: [
+                        { label: "High Level S/4 Analysis", property: "HIGH_LVL_RECOMMENDATIONS", width: 70 },
+                        { label: "Recommended SAP Standard API", property: "SAP_STANDARD_API", width: 40 },
+                        { label: "Recommended Fiori Apps", property: "SAP_STANDARD_FIORI_APP", width: 40 }
+                    ]},
+                    { key: "retire", title: "RETIRE", banner: "FFD5A863", approaches: ["retire"], cols: [
+                        { label: "High Level S/4 Analysis", property: "HIGH_LVL_RECOMMENDATIONS", width: 70 },
+                        { label: "Retire Explanation", property: "RETIRE_EXPLAINATION", width: 70 },
+                        { label: "Re-Implementation", property: "REIMPLEMENTATION", width: 50 },
+                        { label: "Recommended SAP Standard API", property: "SAP_STANDARD_API", width: 40 },
+                        { label: "Recommended Fiori Apps", property: "SAP_STANDARD_FIORI_APP", width: 40 }
+                    ]},
+                    { key: "sql", title: "SQL Analysis", banner: "FFFFD54F", always: true, cols: [
+                        { label: "SQL Recommendation", property: "SQL_RECOMMENDATION", width: 70 },
+                        { label: "Standard Tables", property: "STANDARD_TABLES", width: 70 },
+                        { label: "Recommended S/4 Replacements", property: "NEW_S4_TABLES", width: 70 },
+                        { label: "Custom Tables", property: "CUSTOM_TABLES", width: 40 },
+                        { label: "Function Modules", property: "FUNCTION_MODULES", width: 70 },
+                        { label: "CDS Views", property: "SQL_ANALYSIS_TABLES_CDS", width: 40 }
+                    ]},
+                    { key: "integration", title: "Integration Analysis", banner: "FFB6DC7A", always: true, cols: [
+                        { label: "Inter-module Integration", property: "INTER_MODULE_INTEGRATION", width: 40 },
+                        { label: "Third-Party Integration", property: "THIRD_PARTY_INTEGRATION", width: 14 },
+                        { label: "UI Integration", property: "UI_INTEGRATION", width: 14 },
+                        { label: "Integration Specific", property: "INTEGERATION_RESULT", width: 70 },
+                        { label: "Integration Modernization", property: "INTEGRATION_MODERNIZATION", width: 70 },
+                        { label: "BAPIs Utilized", property: "BAPIS", width: 40 },
+                        { label: "BAPI to API Replacements", property: "BAPI_API_MAP", width: 50 },
+                        { label: "SAP APIs Utilized", property: "SQL_ANALYSIS_TABLES_API", width: 40 },
+                        { label: "IDocs Utilized", property: "INTERFACE_IDOCS", width: 40 },
+                        { label: "Standard Business Events", property: "STANDARD_EVENTS", width: 40 },
+                        { label: "Custom Events", property: "EVENTS", width: 40 },
+                        { label: "Event Topics", property: "TOPICS", width: 40 }
+                    ]},
+                    { key: "security", title: "Security & Governance", banner: "FF9FC5E8", always: true, cols: [
+                        { label: "Authorization Checks", property: "AUTHORIZATION_STR", width: 50 }
+                    ]}
+                ];
+            },
+            // Flatten one selected row's model object into export-ready scalar strings.
+            _buildExportRows: function (aSelectedIndices) {
+                var oTable = this._oTable;
+                return aSelectedIndices.map(function (iIndex) {
+                    var oRowData = JSON.parse(JSON.stringify(oTable.getContextByIndex(iIndex).getObject()));
+
+                    function concatenateListItems(list, properties) {
+                        return list && Array.isArray(list)
+                            ? list.map(function (item) {
+                                return properties.map(function (prop) { return item[prop] || ""; }).join(": ");
+                            }).join(", ")
+                            : "";
+                    }
+                    // No pricing (PRICE/CURRENCY stripped — internal-only, no grounded source).
+                    // Service fields joined by " · ", services separated by "  |  " so names
+                    // that contain commas stay readable.
+                    oRowData.BTP_SERVICES = Array.isArray(oRowData.BTP_SERVICES)
+                        ? oRowData.BTP_SERVICES.map(function (s) {
+                            return [s.SERVICE_NAME, s.BLOCKS_REQUIRED, s.METRIC]
+                                .filter(function (x) { return x != null && x !== ""; })
+                                .join(" · ");
+                        }).join("  |  ")
+                        : "";
+                    oRowData.WRICEF_OBJECT_TYPE = concatenateListItems(oRowData.WRICEF_OBJECT_TYPE, ["WRICEF_OBJECT_TYPE"]);
+                    oRowData.HIGH_LVL_RECOMMENDATIONS = concatenateListItems(oRowData.HIGH_LVL_RECOMMENDATIONS, ["TITLE", "DESCRIPTION"]);
+                    oRowData.READ_CRUD = concatenateListItems(oRowData.READ_CRUD, ["READ_CRUD"]);
+                    oRowData.CLEAN_CORE_ANALYSIS = concatenateListItems(oRowData.CLEAN_CORE_ANALYSIS, ["TITLE", "DESCRIPTION"]);
+                    oRowData.FUNCTION_MODULES = concatenateListItems(oRowData.FUNCTION_MODULES, ["FUNCTION_MODULES"]);
+                    oRowData.INTEGERATION_RESULT = concatenateListItems(oRowData.INTEGERATION_RESULT, ["TITLE", "DESCRIPTION"]);
+                    oRowData.BAPIS = concatenateListItems(oRowData.BAPIS, ["BAPIS"]);
+                    oRowData.SQL_ANALYSIS_TABLES_API = concatenateListItems(oRowData.SQL_ANALYSIS_TABLES_API, ["SQL_ANALYSIS_TABLES_API"]);
+                    oRowData.SQL_ANALYSIS_TABLES_CDS = concatenateListItems(oRowData.SQL_ANALYSIS_TABLES_CDS, ["SQL_ANALYSIS_TABLES_CDS"]);
+                    oRowData.NEW_S4_TABLES = concatenateListItems(oRowData.NEW_S4_TABLES, ["S4_TABLES"]);
+                    oRowData.CUSTOM_TABLES = concatenateListItems(oRowData.CUSTOM_TABLES, ["TABLE_NAME"]);
+                    oRowData.STANDARD_TABLES = concatenateListItems(oRowData.STANDARD_TABLES, ["TABLE_NAME"]);
+                    oRowData.INTERFACE_IDOCS = concatenateListItems(oRowData.INTERFACE_IDOCS, ["IDOCS"]);
+                    oRowData.USE_CASE_AREA = concatenateListItems(oRowData.USE_CASE_AREA, ["USE_CASE_AREA"]);
+                    oRowData.EVENTS = concatenateListItems(oRowData.EVENTS, ["EVENTS"]);
+                    oRowData.STANDARD_EVENTS = concatenateListItems(oRowData.STANDARD_EVENTS, ["STANDARD_EVENTS"]);
+                    oRowData.TOPICS = concatenateListItems(oRowData.TOPICS, ["TOPICS"]);
+                    oRowData.SAP_STANDARD_API = concatenateListItems(oRowData.SAP_STANDARD_API, ["SAP_STANDARD_API"]);
+                    oRowData.SAP_STANDARD_FIORI_APP = concatenateListItems(oRowData.SAP_STANDARD_FIORI_APP, ["SAP_STANDARD_FIORI_APP"]);
+                    // BAPI -> API replacements: "BAPI → API (desc)" per entry.
+                    oRowData.BAPI_API_MAP = Array.isArray(oRowData.BAPI_API_RECOMMENDATIONS)
+                        ? oRowData.BAPI_API_RECOMMENDATIONS.map(function (x) {
+                            var m = [x.MAPPING, x.API].filter(Boolean).join(" → ");
+                            return x.DESCRIPTION ? (m + " (" + x.DESCRIPTION + ")") : m;
+                        }).join("  |  ")
+                        : "";
+                    // Authorization checks flattened for the Security section.
+                    oRowData.AUTHORIZATION_STR = Array.isArray(oRowData.AUTHORIZATION_CHECK)
+                        ? oRowData.AUTHORIZATION_CHECK.map(function (a) {
+                            return [a.AUTHOBJECT, a.CHECKTYPE].filter(Boolean).join(" - ");
+                        }).filter(Boolean).join(", ")
+                        : "";
+
+                    // Clean Core tier (current + target) + Effort, as the analysis shows them
+                    oRowData.CLEANCORE_TIER_DISPLAY = oRowData.CLEANCORE_TIER ? ("Tier " + oRowData.CLEANCORE_TIER) : "";
+                    oRowData.CLEANCORE_TARGET_TIER_DISPLAY = oRowData.CLEANCORE_TARGET_TIER ? ("Tier " + oRowData.CLEANCORE_TARGET_TIER) : "";
+                    var _h = parseInt(oRowData.EFFORTS, 10);
+                    oRowData.EFFORT_DISPLAY = (!_h || _h < 0) ? "Not Applicable" : (_h + "hrs/" + Math.ceil(_h / 8) + "PD");
+
+                    // Integration flags -> Yes / None (source mixes true/True/false/empty)
+                    function _yesNone(v) {
+                        return (v === true || v === "true" || v === "True" || v === "X" || v === "x" || v === 1 || v === "1") ? "Yes" : "None";
+                    }
+                    oRowData.THIRD_PARTY_INTEGRATION = _yesNone(oRowData.THIRD_PARTY_INTEGRATION);
+                    oRowData.UI_INTEGRATION = _yesNone(oRowData.UI_INTEGRATION);
+
+                    return oRowData;
+                });
+            },
+            // Styled export via ExcelJS: section-coloured header, frozen header row,
+            // auto-filter, thin borders, zebra striping and per-column widths/wrapping.
+            onExportExcelJS: async function () {
+                if (!this._oTable) { this._oTable = this.byId('abapObjectTable'); }
+                var oTable = this._oTable;
+                var aSelectedIndices = oTable.getSelectedIndices();
+                if (!aSelectedIndices.length) { MessageToast.show("Select object(s) to export"); return; }
+
+                var sections = this._exportSections();
+                var aRows = this._buildExportRows(aSelectedIndices);
+
+                // Flatten sections -> ordered columns, each keeping a ref to its section.
+                var cols = [];
+                sections.forEach(function (s) {
+                    s.cols.forEach(function (c) { cols.push({ label: c.label, property: c.property, width: c.width, section: s }); });
+                });
+
+                function _scalar(v) {
+                    if (v == null) { return ""; }
+                    if (Array.isArray(v)) {
+                        return v.map(function (it) {
+                            return (it && typeof it === "object")
+                                ? Object.keys(it).map(function (k) { return it[k]; }).filter(Boolean).join(": ")
+                                : it;
+                        }).join(", ");
+                    }
+                    if (typeof v === "object") {
+                        return Object.keys(v).map(function (k) { return v[k]; }).filter(Boolean).join(": ");
+                    }
+                    return v;
+                }
+                var appliesTo = function (section, approach) {
+                    return section.always || (section.approaches && section.approaches.indexOf(approach) >= 0);
+                };
+                // Blend an ARGB colour toward white by `amt` (0..1) — used to tint the
+                // label row a lighter shade of its section banner.
+                var _lighten = function (argb, amt) {
+                    var hex = String(argb || "FFCCCCCC").slice(-6);
+                    var toHex = function (n) { return ("0" + Math.round(n).toString(16)).slice(-2).toUpperCase(); };
+                    var ch = function (i) {
+                        var v = parseInt(hex.substr(i, 2), 16);
+                        return toHex(v + (255 - v) * amt);
+                    };
+                    return "FF" + ch(0) + ch(2) + ch(4);
+                };
+
+                var wb = new ExcelJS.Workbook();
+                wb.creator = "CoreAssess.AI";
+                // Freeze both header rows (banner + labels) and the first column.
+                var ws = wb.addWorksheet("ABAP Objects", {
+                    views: [{ state: "frozen", xSplit: 1, ySplit: 2 }]
+                });
+
+                var thin = { style: "thin", color: { argb: "FFC9CDD6" } };
+                var border = { top: thin, left: thin, bottom: thin, right: thin };
+
+                // Column widths
+                cols.forEach(function (c, i) { ws.getColumn(i + 1).width = c.width || 20; });
+
+                // Row 1: merged, coloured section banners.
+                ws.getRow(1).height = 22;
+                var idx = 1;
+                sections.forEach(function (s) {
+                    var start = idx, end = idx + s.cols.length - 1;
+                    var top = ws.getCell(1, start);
+                    top.value = s.title;
+                    top.font = { bold: true, size: 11, color: { argb: "FF2A2A2A" } };
+                    top.alignment = { vertical: "middle", horizontal: "center" };
+                    if (end > start) { ws.mergeCells(1, start, 1, end); }
+                    for (var c = start; c <= end; c++) {
+                        var cell = ws.getCell(1, c);
+                        cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: s.banner } };
+                        cell.border = border;
+                    }
+                    idx = end + 1;
+                });
+
+                // Row 2: column labels.
+                ws.getRow(2).height = 30;
+                cols.forEach(function (c, i) {
+                    var cell = ws.getCell(2, i + 1);
+                    cell.value = c.label;
+                    // Lighter tint of the parent section's banner colour.
+                    cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: _lighten(c.section.banner, 0.55) } };
+                    cell.font = { bold: true, size: 10, color: { argb: "FF333333" } };
+                    cell.alignment = { vertical: "middle", horizontal: "left", wrapText: true };
+                    cell.border = border;
+                });
+
+                // Data rows (from row 3): fill common sections always; approach sections
+                // only for rows of that approach; zebra striping + borders + wrap.
+                aRows.forEach(function (row, r) {
+                    var approach = String(row.APPROACH || "").toLowerCase();
+                    var values = cols.map(function (c) {
+                        return appliesTo(c.section, approach) ? _scalar(row[c.property]) : "";
+                    });
+                    var xlRow = ws.addRow(values);
+                    var isAlt = (r % 2 === 1);
+                    xlRow.eachCell({ includeEmpty: true }, function (cell) {
+                        cell.alignment = { vertical: "top", horizontal: "left", wrapText: true };
+                        cell.border = border;
+                        if (isAlt) {
+                            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFF9FAFC" } };
+                        }
+                    });
+                });
+
+                ws.autoFilter = { from: { row: 2, column: 1 }, to: { row: 2, column: cols.length } };
+
+                var buffer = await wb.xlsx.writeBuffer();
+                var blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+                var link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "ABAP Objects.xlsx";
+                link.click();
+                URL.revokeObjectURL(link.href);
+            },
+            // DEPRECATED — old template-based export. Kept for reference only; not wired.
+            // It fetched a binary template.xlsx from a build-hash URL (breaks each deploy)
+            // and wrote fixed cells, so it could not carry the Clean Core Tier / Coupling
+            // columns. Use onExportExcelJS instead.
             onExportPressNew: async function () {
                 var aCols, oRowBinding, oSettings, oSheet, oTable, aSelectedIndices, aSelectedData;
                 var aCols, oRowBinding, oSettings, oSheet, oTable, aSelectedIndices, aSelectedData;
@@ -933,7 +1262,7 @@ sap.ui.define([
                             ? list.map(item => properties.map(prop => item[prop] || "").join(": ")).join(", ")
                             : "";
                     }
-                    oRowData.BTP_SERVICES = concatenateListItems(oRowData.BTP_SERVICES, ["SERVICE_NAME", "BLOCKS_REQUIRED", "METRIC", "PRICE", "CURRENCY"]);
+                    oRowData.BTP_SERVICES = concatenateListItems(oRowData.BTP_SERVICES, ["SERVICE_NAME", "BLOCKS_REQUIRED", "METRIC"]);
                     oRowData.WRICEF_OBJECT_TYPE = concatenateListItems(oRowData.WRICEF_OBJECT_TYPE, ["WRICEF_OBJECT_TYPE"]);
                     oRowData.HIGH_LVL_RECOMMENDATIONS = concatenateListItems(oRowData.HIGH_LVL_RECOMMENDATIONS, ["TITLE", "DESCRIPTION"]);
                     // oRowData.SQL_ANALYSIS = concatenateListItems(oRowData.SQL_ANALYSIS, "RECOMMENDATIONS");
@@ -1050,171 +1379,40 @@ sap.ui.define([
 
 
             },
+            // Offline fallback — plain sap.ui.export sheet (no colours). Same columns/data
+            // as the styled ExcelJS export; used only when ExcelJS can't be loaded.
             onExportPress1: function () {
-                var aCols, oRowBinding, oSettings, oSheet, oTable, aSelectedIndices, aSelectedData;
-                if (!this._oTable) {
-                    this._oTable = this.byId('abapObjectTable');
-                }
-                oTable = this._oTable;
-                oRowBinding = oTable.getBinding();
-                aSelectedIndices = oTable.getSelectedIndices();
-
-                aSelectedData = aSelectedIndices.map(function (iIndex) {
-                    var oRowData = JSON.parse(JSON.stringify(oTable.getContextByIndex(iIndex).getObject()));
-
-                    function concatenateListItems(list, properties) {
-                        return list && Array.isArray(list)
-                            ? list.map(item => properties.map(prop => item[prop] || "").join(": ")).join(", ")
-                            : "";
-                    }
-                    oRowData.BTP_SERVICES = concatenateListItems(oRowData.BTP_SERVICES, ["SERVICE_NAME", "BLOCKS_REQUIRED", "METRIC", "PRICE", "CURRENCY"]);
-                    oRowData.WRICEF_OBJECT_TYPE = concatenateListItems(oRowData.WRICEF_OBJECT_TYPE, ["WRICEF_OBJECT_TYPE"]);
-                    oRowData.HIGH_LVL_RECOMMENDATIONS = concatenateListItems(oRowData.HIGH_LVL_RECOMMENDATIONS, ["TITLE", "DESCRIPTION"]);
-                    // oRowData.SQL_ANALYSIS = concatenateListItems(oRowData.SQL_ANALYSIS, "RECOMMENDATIONS");
-
-                    oRowData.READ_CRUD = concatenateListItems(oRowData.READ_CRUD, ["READ_CRUD"]);
-                    oRowData.CLEAN_CORE_ANALYSIS = concatenateListItems(oRowData.CLEAN_CORE_ANALYSIS, ["TITLE", "DESCRIPTION"]);
-                    oRowData.SQL_ANALYSIS_TABLES_DIRECT = concatenateListItems(oRowData.SQL_ANALYSIS_TABLES_DIRECT, ["TABLE_NAME"]);
-                    oRowData.FUNCTION_MODULES = concatenateListItems(oRowData.FUNCTION_MODULES, ["FUNCTION_MODULES"]);
-                    oRowData.INTEGERATION_RESULT = concatenateListItems(oRowData.INTEGERATION_RESULT, ["TITLE", "DESCRIPTION"]);
-                    oRowData.BAPIS = concatenateListItems(oRowData.BAPIS, ["BAPIS"]);
-                    oRowData.SQL_ANALYSIS_TABLES_API = concatenateListItems(oRowData.SQL_ANALYSIS_TABLES_API, ["SQL_ANALYSIS_TABLES_API"]);
-                    oRowData.SQL_ANALYSIS_TABLES_CDS = concatenateListItems(oRowData.SQL_ANALYSIS_TABLES_CDS, ["SQL_ANALYSIS_TABLES_CDS"]);
-                    oRowData.NEW_S4_TABLES = concatenateListItems(oRowData.NEW_S4_TABLES, ["S4_TABLES"]);
-                    oRowData.CUSTOM_TABLES = concatenateListItems(oRowData.CUSTOM_TABLES, ["TABLE_NAME"]);
-                    oRowData.STANDARD_TABLES = concatenateListItems(oRowData.STANDARD_TABLES, ["TABLE_NAME"]);
-
-                    oRowData.INTERFACE_IDOCS = concatenateListItems(oRowData.INTERFACE_IDOCS, ["IDOCS"]);
-                    oRowData.INTERFACE_STANDARD_API = concatenateListItems(oRowData.INTERFACE_STANDARD_API, ["STANDARD_API"]);
-                    oRowData.USE_CASE_AREA = concatenateListItems(oRowData.USE_CASE_AREA, ["USE_CASE_AREA"]);
-                    oRowData.EVENTS = concatenateListItems(oRowData.EVENTS, ["EVENTS"]);
-                    oRowData.STANDARD_EVENTS = concatenateListItems(oRowData.STANDARD_EVENTS, ["STANDARD_EVENTS"]);
-                    oRowData.TOPICS = concatenateListItems(oRowData.TOPICS, ["TOPICS"]);
-
-
-                    return oRowData;
-                });
-                aCols = this.createColumnConfig();
-                oSettings = {
-                    workbook: {
-                        columns: aCols,
-                        hierarchyLevel: 'Level'
-                    },
+                if (!this._oTable) { this._oTable = this.byId('abapObjectTable'); }
+                var oTable = this._oTable;
+                var aSelectedIndices = oTable.getSelectedIndices();
+                if (!aSelectedIndices.length) { MessageToast.show("Select object(s) to export"); return; }
+                var aSelectedData = this._buildExportRows(aSelectedIndices);
+                var oSettings = {
+                    workbook: { columns: this.createColumnConfig() },
                     dataSource: aSelectedData,
                     fileName: 'ABAP Objects.xlsx',
                     worker: false
                 };
-                oSheet = new Spreadsheet(oSettings);
-                oSheet.build().finally(function () {
-                    oSheet.destroy();
-                });
+                var oSheet = new Spreadsheet(oSettings);
+                oSheet.build().finally(function () { oSheet.destroy(); });
             },
+            // Flat column list for the sap.ui.export FALLBACK only (no merged banners /
+            // approach-conditional data — that lives in onExportExcelJS). Derived from
+            // _exportSections so both paths stay in sync. Duplicate labels across approach
+            // sections are suffixed with the section title to keep them distinct.
             createColumnConfig: function () {
-                var aCols = [];
-                //=======================Overview Section==================================
-                aCols.push({
-                    label: 'Object Name',
-                    property: 'OBJECT_NAME',
-                    type: 'sap.ui.export.EdmType.String'
+                var S = 'sap.ui.export.EdmType.String';
+                var seen = {};
+                var out = [];
+                this._exportSections().forEach(function (s) {
+                    s.cols.forEach(function (c) {
+                        var prop = c.property;
+                        if (seen[prop]) { return; }   // fallback can't repeat a property key
+                        seen[prop] = true;
+                        out.push({ label: c.label, property: prop, type: S, width: c.width });
+                    });
                 });
-
-
-                aCols.push({
-                    label: 'Approach',
-                    property: 'APPROACH',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'SAP Module Name',
-                    property: 'SAP_MODULE_NAME',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'SAP Sub Module',
-                    property: 'SAP_SUB_MODULE',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'WRICEF Object Type',
-                    property: 'WRICEF_OBJECT_TYPE',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'Clean Core Adherence',
-                    property: 'ADHERENCE',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'Code Complexity',
-                    property: 'CODE_COMPLEXITY',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'CRUD Operations',
-                    property: 'READ_CRUD',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'Priority',
-                    property: 'PRIORITY',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'TShirt Size',
-                    property: 'TSHIRT',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'Efforts (Hrs)',
-                    property: 'EFFORTS',
-                    type: 'sap.ui.export.EdmType.Integer'
-                });
-
-                aCols.push({
-                    label: 'Functional Analysis',
-                    property: 'FUNCTIONAL_ANALYSIS',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-                aCols.push({
-                    label: 'Clean Core Analysis',
-                    property: 'CLEAN_CORE_ANALYSIS',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-                //====================SIDE-BY-SIDE ================================
-                aCols.push({
-                    label: 'Use Case Area',
-                    property: 'USE_CASE_AREA',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-                aCols.push({
-                    label: 'Use Case Description',
-                    property: 'USE_CASE_AREA_EXPLANATION',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-                aCols.push({
-                    label: 'High Level S/4 Analysis',
-                    property: 'HIGH_LVL_RECOMMENDATIONS',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-                aCols.push({
-                    label: 'Recommended SAP Standard API',
-                    property: 'SAP_STANDARD_API',
-                    type: 'sap.ui.export.EdmType.String'
-                });
-
-
-
-                return aCols;
+                return out;
             },
             // Delete the selected object assessment(s) from the analysis table,
             // including all child rows (items/notes/usage/etc.). Admin+/superuser.
@@ -1332,18 +1530,23 @@ sap.ui.define([
             },
 
             onPressEstimate: function (oEvent) {
-                // Estimate now lives in the toolbar (no row context), so resolve the
-                // selected object; fall back to a row context if present (legacy).
+                // Toolbar button: resolve the selected object (fall back to detail).
                 var oCtx = oEvent.getSource().getBindingContext("listObjectsModel");
                 var oObj = oCtx ? oCtx.getObject() : this._getDetailObject();
                 if (!oObj) { return; }
-                if (String(oObj.APPROACH || "").toLowerCase() !== "side-by-side") {
-                    MessageToast.show("Estimate applies to side-by-side objects only");
+                var _appr = String(oObj.APPROACH || "").toLowerCase();
+                if (_appr !== "side-by-side" && _appr !== "hybrid") {
+                    MessageToast.show("BTP Services apply to side-by-side and hybrid objects only");
                     return;
                 }
                 this.estimateObject = oObj;
-                var oView = this.getView()
+                var oView = this.getView();
                 var that = this;
+                var openAndLoad = function () {
+                    that.byId("estimateFrag").open();
+                    that.byId("estimateFrag").setTitle("BTP Services for: " + that.estimateObject.OBJECT_NAME);
+                    that._loadEstimateQuestions();
+                };
                 if (!this.byId("estimateFrag")) {
                     Fragment.load({
                         id: oView.getId(),
@@ -1351,209 +1554,68 @@ sap.ui.define([
                         controller: this
                     }).then(function (oDialog) {
                         oView.addDependent(oDialog);
-                        if (that.estimateObject.USE_CASE_AREA.length == 1) {
-                            if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Application Development") {
-                                that.byId("estimateCombo").setSelectedKeys(["application"]);
-                                that.byId("estimateCombo").fireSelectionChange();
-                                that.byId("estimateCombo").setVisible(false);
-                            }
-                            if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Automation") {
-                                that.byId("estimateCombo").setSelectedKeys(["automation"]);
-                                that.byId("estimateCombo").fireSelectionChange();
-                                that.byId("estimateCombo").setVisible(false);
-                            }
-                        }
-                        if (that.estimateObject.USE_CASE_AREA.length > 1) {
-                            if ((that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Application Development" && that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Automation") ||
-                                (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Automation" && that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Application Development")) {
-
-                            } else if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Application Development" || that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Application Development") {
-                                that.byId("estimateCombo").setSelectedKeys(["application"]);
-                                that.byId("estimateCombo").fireSelectionChange();
-                                that.byId("estimateCombo").setVisible(false);
-                            } else if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Automation" || that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Automation") {
-                                that.byId("estimateCombo").setSelectedKeys(["automation"]);
-                                that.byId("estimateCombo").fireSelectionChange();
-                                that.byId("estimateCombo").setVisible(false);
-                            }
-                        }
-                        oDialog.open();
-                        that.byId('estimateFrag').setTitle("Estimate for Object Name: " + that.estimateObject.OBJECT_NAME);
+                        openAndLoad();
                     });
                 } else {
-                    that.byId("estimateCombo").setVisible(true);
-                    that.byId("estimateFrag").open();
-                    that.byId('estimateFrag').setTitle("Estimate for Object Name: " + that.estimateObject.OBJECT_NAME);
-                    that.byId("estimateCombo").setValue("");
-                    if (that.estimateObject.USE_CASE_AREA.length == 1) {
-                        if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Application Development") {
-                            that.byId("estimateCombo").setSelectedKeys(["application"]);
-                            that.byId("estimateCombo").fireSelectionChange();
-                            that.byId("estimateCombo").setVisible(false);
-                        }
-                        if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Automation") {
-                            that.byId("estimateCombo").setSelectedKeys(["automation"]);
-                            that.byId("estimateCombo").fireSelectionChange();
-                            that.byId("estimateCombo").setVisible(false);
-                        }
-                    }
-                    if (that.estimateObject.USE_CASE_AREA.length > 1) {
-                        if ((that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Application Development" && that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Automation") ||
-                            (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Automation" && that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Application Development")) {
-
-                        } else if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Application Development" || that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Application Development") {
-                            that.byId("estimateCombo").setSelectedKeys(["application"]);
-                            that.byId("estimateCombo").fireSelectionChange();
-                            that.byId("estimateCombo").setVisible(false);
-                        }
-                        else if (that.estimateObject.USE_CASE_AREA[0].USE_CASE_AREA === "Automation" || that.estimateObject.USE_CASE_AREA[1].USE_CASE_AREA === "Automation") {
-                            that.byId("estimateCombo").setSelectedKeys(["automation"]);
-                            that.byId("estimateCombo").fireSelectionChange();
-                            that.byId("estimateCombo").setVisible(false);
-                        }
-                    }
-
-
-
-
-                    if (!that.getView().getModel("estimateQuestionModel")) {
-                    } else {
-                        that.getView().getModel("estimateQuestionModel").getData().questionArray = [];
-                        that.getView().getModel("estimateQuestionModel").refresh(true)
-                    }
+                    openAndLoad();
                 }
+            },
+            // Load the object's prebaked, AI-generated sizing questions (with any saved
+            // answers merged) into the popup model. Re-openable: reloads every time so
+            // the questions/answers always reflect the current analysis.
+            _loadEstimateQuestions: function () {
+                var that = this;
+                var o = this.estimateObject;
+                sap.ui.getCore().busyDialog = new sap.m.BusyDialog({ text: "Loading questions..." });
+                sap.ui.getCore().busyDialog.open();
+                this.getOwnerComponent().getModel().callFunction("/GetObjectEstimate", {
+                    urlParameters: {
+                        "companyID": parseInt(o.PROJECT_COMPANY_ID),
+                        "projectID": parseInt(o.PROJECT_ID),
+                        "assessmentID": parseInt(o.ID),
+                        "objectName": o.OBJECT_NAME,
+                        "type": "both"
+                    },
+                    success: function (r) {
+                        var res = (r && r.GetObjectEstimate) || r || {};
+                        var qs = res.questions;
+                        if (qs && qs.results) { qs = qs.results; }
+                        that.getView().setModel(new JSONModel({ questions: qs || [] }), "estimateQuestionModel");
+                        sap.ui.getCore().busyDialog.close();
+                    },
+                    error: function () {
+                        sap.ui.getCore().busyDialog.close();
+                        MessageToast.show("Could not load the sizing questions.");
+                    }
+                });
             },
             estimateFragClose: function () {
                 this.byId("estimateFrag").close();
-                this.byId("estimateCombo").setSelectedKeys("")
-                // this.byId("questionnaireIDinfo").setVisible(false);
-                // this.byId("defaultListID").setVisible(false);
-                this.byId("automationIDinfo").setVisible(false);
-                this.byId("automationID").setVisible(false);
-                this.byId("applicationIDinfo").setVisible(false);
-                this.byId("applicationID").setVisible(false);
-                // this.byId("mobileIDinfo").setVisible(false);
-                // this.byId("mobileID").setVisible(false);
-                // this.byId("webIDinfo").setVisible(false);
-                // this.byId("webID").setVisible(false);
-
-            },
-            onSelectEstimate: function (oEvent) {
-                var companyId, projectId, objectName, assessmentId, type;
-                companyId = this.estimateObject.PROJECT_COMPANY_ID;
-                projectId = this.estimateObject.PROJECT_ID;
-                assessmentId = this.estimateObject.ID;
-                objectName = this.estimateObject.OBJECT_NAME;
-                type = oEvent.getSource().getSelectedItems();
-                sap.ui.getCore().busyDialog = new sap.m.BusyDialog({
-                    text: "Please Wait..."
-                });
-                sap.ui.getCore().busyDialog.open();
-                var oDataModel = this.getOwnerComponent().getModel();
-                oDataModel.callFunction("/GetObjectEstimate", {
-                    urlParameters: {
-                        "companyID": parseInt(companyId),
-                        "projectID": parseInt(projectId),
-                        "assessmentID": parseInt(assessmentId),
-                        "objectName": objectName,
-                        "type": 'both'
-                    },
-                    success: function (response) {
-                        var estimateQuestion = new JSONModel({
-                            questionArray: response.GetObjectEstimate
-                        });
-                        this.getView().setModel(estimateQuestion, "estimateQuestionModel");
-                        sap.ui.getCore().busyDialog.close();
-
-
-                        type.forEach(item => {
-                            const key = item.getKey();
-
-                            if (key === "application") {
-                                this.byId("applicationIDinfo").setVisible(true);
-                                this.byId("applicationID").setVisible(true);
-
-                            } else if (key === "automation") {
-                                this.byId("automationIDinfo").setVisible(true);
-                                this.byId("automationID").setVisible(true);
-
-                            }
-                        });
-                        var changed = oEvent.getParameter("changedItem");
-                        var isSelected = oEvent.getParameter("selected");
-                        let key = changed.getKey();
-                        if (!isSelected) {
-                            if (key === "application") {
-                                this.byId("applicationIDinfo").setVisible(false);
-                                this.byId("applicationID").setVisible(false);
-
-                            } else if (key === "automation") {
-                                this.byId("automationIDinfo").setVisible(false);
-                                this.byId("automationID").setVisible(false);
-                            }
-                        }
-
-                    }.bind(this),
-                    error: function (error) {
-                        sap.ui.getCore().busyDialog.close();
-                    }
-                });
             },
             onEstimate: function () {
-                sap.ui.getCore().busyDialog = new sap.m.BusyDialog({
-                    text: "Calculating Estimate..."
-                });
+                sap.ui.getCore().busyDialog = new sap.m.BusyDialog({ text: "Saving & sizing services..." });
                 sap.ui.getCore().busyDialog.open();
 
-                var companyId, projectId, assessmentId, payload, data
-                companyId = this.estimateObject.PROJECT_COMPANY_ID;
-                projectId = this.estimateObject.PROJECT_ID;
-                assessmentId = this.estimateObject.ID;
-                var allQuestions = this.getView().getModel("estimateQuestionModel").getData().questionArray;
-                data = [];
-                for (var i in allQuestions.automation) {
-                    let object = {
-                        "questionID": allQuestions.automation[i].questionId,
-                        "answer": allQuestions.automation[i].answer ? allQuestions.automation[i].answer.toString() : "",
-                        "question": allQuestions.automation[i].question
-                    }
-                    data.push(object)
-                }
-                for (var i in allQuestions.default) {
-                    let object = {
-                        "questionID": allQuestions.default[i].questionId,
-                        "answer": allQuestions.default[i].answer ? allQuestions.default[i].answer.toString() : "",
-                        "question": allQuestions.default[i].question
-                    }
-                    data.push(object)
-                }
-                for (var i in allQuestions.application) {
-                    let object = {
-                        "questionID": allQuestions.application[i].questionId,
-                        "answer": allQuestions.application[i].answer ? allQuestions.application[i].answer.toString() : "",
-                        "question": allQuestions.application[i].question
-                    }
-                    data.push(object)
-                }
-                // for (var i in allQuestions.web) {
-                //     let object = {
-                //         "questionID": allQuestions.web[i].questionId,
-                //         "answer": allQuestions.web[i].answer ? allQuestions.web[i].answer.toString() : "",
-                //         "question": allQuestions.web[i].question
-                //     }
-                //     data.push(object)
-                // }
-                payload = {
-                    "assessmentID": parseInt(assessmentId),
-                    "projectID": parseInt(projectId),
-                    "companyID": parseInt(companyId),
+                var o = this.estimateObject;
+                var oModel = this.getView().getModel("estimateQuestionModel");
+                var qs = (oModel && oModel.getData().questions) || [];
+                var data = qs.map(function (q) {
+                    return {
+                        "questionID": q.questionId,
+                        "question": q.question,
+                        "answer": (q.answer != null ? String(q.answer) : "")
+                    };
+                });
+                var payload = {
+                    "assessmentID": parseInt(o.ID),
+                    "projectID": parseInt(o.PROJECT_ID),
+                    "companyID": parseInt(o.PROJECT_COMPANY_ID),
                     "data": data
-                }
-                var oDataModel = this.getOwnerComponent().getModel();
-                oDataModel.create("/AddEstimateAnswer", payload, {
+                };
+                this.getOwnerComponent().getModel().create("/AddEstimateAnswer", payload, {
                     success: function (response) {
                         if (response.AddEstimateAnswer === true) {
-                            MessageToast.show("Estimate Posted Successfully!");
+                            MessageToast.show("BTP services updated");
                             this.estimateFragClose();
                             this.onAfterRefreshObjectTable()
                                 .then(() => {
@@ -1561,22 +1623,19 @@ sap.ui.define([
                                     this.byId('abapObjectTable').setSelectedIndex();
                                     this.getOwnerComponent().getModel("listObjectsModel").refresh(true);
                                     sap.ui.getCore().busyDialog.close();
-                                    MessageToast.show("Estimate Calculated Successfully!!");
                                 })
                                 .catch((error) => {
                                     console.error("Error occurred during object table refresh:", error);
-                                    MessageToast.show("Failed to refresh the object table.");
                                     this.getOwnerComponent().getModel("listObjectsModel").refresh(true);
                                     sap.ui.getCore().busyDialog.close();
                                 });
-                        } else if (response.AddEstimateAnswer === false) {
-                            MessageToast.show("Analysis Failed");
+                        } else {
+                            MessageToast.show("Could not update services");
                             sap.ui.getCore().busyDialog.close();
                         }
-
                     }.bind(this),
                     error: function (error) {
-                        MessageToast.show("Error While Posting");
+                        MessageToast.show("Error while saving");
                         this.estimateFragClose();
                         sap.ui.getCore().busyDialog.close();
                     }.bind(this)

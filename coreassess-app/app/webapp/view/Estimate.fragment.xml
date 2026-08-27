@@ -11,220 +11,49 @@
         resizable="true"
         draggable="true"
         title=""
-        contentWidth="auto"
+        contentWidth="620px"
         contentHeight="auto"
         titleAlignment="Center"
     >
         <VBox class="sapUiResponsiveMargin">
-            <tnt:InfoLabel text="Select type of development to estimate"   colorScheme="7"/>
-            <MultiComboBox
-                showSelectAll="false" selectionChange="onSelectEstimate"
-                id="estimateCombo" width="500px"
-            >
-                <core:Item
-                    key="application"
-                    text="Application Development"
-                />
-                <core:Item
-                    key="automation"
-                    text="Automation"
-                />
-                
-            </MultiComboBox>
-
-           
             <tnt:InfoLabel
-                text="Automation" id="automationIDinfo" visible="false"
+                text="Answer these to size the BTP services for this object"
                 colorScheme="7"
-                class="sapUiTinyMarginTop sapUiTinyMarginBottom"
+                class="sapUiSmallMarginBottom"
             />
+            <!-- Questions are prebaked per object by the AI (context-aware, tagged with the
+                 BTP service each one sizes). No pricing is shown here. -->
             <List
-                items="{estimateQuestionModel>/questionArray/automation}" visible="false"
-                id="automationID"
+                items="{estimateQuestionModel>/questions}"
+                id="estimateQuestionsList"
                 showNoData="true"
-                noDataText="  "
+                noDataText="No sizing questions were generated for this object."
+                showSeparators="Inner"
             >
-                <CustomListItem
-                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
-                >
-                    <HBox justifyContent="SpaceBetween">
-                        <HBox class="sapUiSmallMarginEnd">
-                            <core:Icon
-                                src="sap-icon://sys-help"
-                                class="sapUiTinyMarginEnd"
+                <CustomListItem class="sapUiTinyMarginBottom sapUiTinyMarginTop">
+                    <HBox justifyContent="SpaceBetween" alignItems="Center" width="100%">
+                        <VBox class="sapUiSmallMarginEnd" width="100%">
+                            <tnt:InfoLabel
+                                text="{estimateQuestionModel>scope}"
+                                colorScheme="6"
+                                renderMode="Narrow"
+                                class="craScopeTag sapUiTinyMarginBottom"
+                                visible="{= !!${estimateQuestionModel>scope} }"
                             />
-                            <Text
-                                text="{estimateQuestionModel>question}"
-                                class="sapUiTinyMarginEnd" wrapping="true"
-                            />
-                        </HBox>
-                        <HBox>
-                            <Input
-                                value="{estimateQuestionModel>answer}"
-                                width="300px" 
-                                class="sapUiTinyMarginEnd" placeholder="{estimateQuestionModel>palceholder}"
-                            />
-                        </HBox>
+                            <HBox alignItems="Center">
+                                <core:Icon src="sap-icon://sys-help" class="sapUiTinyMarginEnd"/>
+                                <Text text="{estimateQuestionModel>question}" wrapping="true"/>
+                            </HBox>
+                        </VBox>
+                        <Input
+                            value="{estimateQuestionModel>answer}"
+                            type="Number"
+                            width="140px"
+                            placeholder="{estimateQuestionModel>palceholder}"
+                        />
                     </HBox>
                 </CustomListItem>
             </List>
-
-
-              <tnt:InfoLabel
-                text="Application Development" id="applicationIDinfo" visible="false"
-                colorScheme="7"
-                class="sapUiTinyMarginTop sapUiTinyMarginBottom"
-            />
-            <List
-                items="{estimateQuestionModel>/questionArray/application}" visible="false"
-                id="applicationID"
-                showNoData="true"
-                noDataText="  "
-            >
-                <CustomListItem
-                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
-                >
-                    <HBox justifyContent="SpaceBetween">
-                        <HBox class="sapUiSmallMarginEnd">
-                            <core:Icon
-                                src="sap-icon://sys-help"
-                                class="sapUiTinyMarginEnd"
-                            />
-                            <Text
-                                text="{estimateQuestionModel>question}"
-                                class="sapUiTinyMarginEnd" wrapping="true"
-                            />
-                        </HBox>
-                        <HBox>
-                            <Input
-                                value="{estimateQuestionModel>answer}"
-                                width="300px" 
-                                class="sapUiTinyMarginEnd" placeholder="{estimateQuestionModel>palceholder}"
-                            />
-                        </HBox>
-                    </HBox>
-                </CustomListItem>
-            </List>
-
-            <!-- <tnt:InfoLabel
-                text="Mobile Services"
-                id="mobileIDinfo"
-                visible="false"
-                colorScheme="7"
-                class="sapUiTinyMarginTop sapUiTinyMarginBottom"
-            />
-            <List
-                items="{estimateQuestionModel>/questionArray/mobileSrvcs}"
-                id="mobileID"
-                showNoData="true"
-                noDataText="  " visible="false"
-            >
-                <CustomListItem
-                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
-                >
-                    <HBox justifyContent="SpaceBetween">
-                        <HBox>
-                            <core:Icon
-                                src="sap-icon://sys-help"
-                                class="sapUiTinyMarginEnd"
-                            />
-                            <Text
-                                text="{estimateQuestionModel>question}"
-                                class="sapUiTinyMarginEnd"
-                            />
-                        </HBox>
-                        <HBox>
-                          
-                            <StepInput
-                                value="{estimateQuestionModel>answer}"
-                                class="sapUiTinyMarginEnd"
-                                width="300px"
-                                min="0"
-                                max="1000"
-                            />
-                        </HBox>
-                    </HBox>
-                </CustomListItem>
-            </List> -->
-
-            <!-- <tnt:InfoLabel
-                text="Web"
-                id="webIDinfo"
-                visible="false"
-                colorScheme="7"
-                class="sapUiTinyMarginTop sapUiTinyMarginBottom"
-            />
-            <List
-                items="{estimateQuestionModel>/questionArray/web}"
-                id="webID"
-                showNoData="true"
-                noDataText="  " visible="false"
-            >
-                <CustomListItem
-                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
-                >
-                    <HBox justifyContent="SpaceBetween">
-                        <HBox>
-                            <core:Icon
-                                src="sap-icon://sys-help"
-                                class="sapUiTinyMarginEnd"
-                            />
-                            <Text
-                                text="{estimateQuestionModel>question}"
-                                class="sapUiTinyMarginEnd"
-                            />
-                        </HBox>
-                        <HBox>
-                          
-                            <StepInput
-                                value="{estimateQuestionModel>answer}"
-                                class="sapUiTinyMarginEnd"
-                                width="300px"
-                                min="0"
-                                max="1000"
-                            />
-                        </HBox>
-                    </HBox>
-                </CustomListItem>
-            </List> -->
-
-             <!-- <tnt:InfoLabel
-                text="Questionnaire" id="questionnaireIDinfo"
-                colorScheme="7"
-                class="sapUiTinyMarginTop sapUiTinyMarginBottom" visible="false"
-            />
-
-            <List
-                items="{estimateQuestionModel>/questionArray/default}" visible="false"
-                showNoData="true"
-                noDataText="  "
-                id="defaultListID"
-            >
-                <CustomListItem
-                    class="sapUiTinyMarginBottom sapUiTinyMarginTop"
-                >
-                    <HBox justifyContent="SpaceBetween">
-                        <HBox>
-                            <core:Icon
-                                src="sap-icon://sys-help"
-                                class="sapUiTinyMarginEnd"
-                            />
-                            <Text
-                                text="{estimateQuestionModel>question}"
-                                class="sapUiTinyMarginEnd"
-                            />
-                        </HBox>
-                        <HBox>
-                            <Input
-                                value="{estimateQuestionModel>answer}"
-                                width="300px"
-                                class="sapUiTinyMarginEnd"
-                                placeholder="{estimateQuestionModel>palceholder}"
-                            />
-                        </HBox>
-                    </HBox>
-                </CustomListItem>
-            </List> -->
         </VBox>
         <footer>
             <m:OverflowToolbar>
@@ -232,7 +61,7 @@
                 <Button
                     press="onEstimate"
                     type="Accept"
-                    text="Estimate"
+                    text="Save"
                     class="sapUiTinyMarginEnd"
                 />
                 <Button

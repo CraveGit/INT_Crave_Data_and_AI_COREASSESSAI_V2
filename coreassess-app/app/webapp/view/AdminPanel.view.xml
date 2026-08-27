@@ -168,6 +168,7 @@
                             <OverflowToolbar>
                                 <Title text="Pricing history (deleted)" level="H3"/>
                                 <ToolbarSpacer/>
+                                <Button text="Export to Excel" icon="sap-icon://excel-attachment" type="Transparent" press="onExportCostLedger"/>
                                 <Button icon="sap-icon://refresh" tooltip="Refresh" press="onRefreshCostLedger" type="Transparent"/>
                             </OverflowToolbar>
                         </headerToolbar>
@@ -181,7 +182,6 @@
                             <Column><Text text="Incurred by"/></Column>
                             <Column><Text text="Deleted"/></Column>
                             <Column><Text text="Deleted by"/></Column>
-                            <Column width="5rem" hAlign="Center"><Text text="Actions"/></Column>
                         </columns>
                         <items>
                             <ColumnListItem>
@@ -190,14 +190,11 @@
                                     <Text text="{costLedgerModel>PROJECT_NAME}"/>
                                     <Text text="{costLedgerModel>COMPANY_NAME}"/>
                                     <Text text="{costLedgerModel>SOURCE}"/>
-                                    <Text text="{costLedgerModel>TOTAL_TOKENS}"/>
+                                    <Text text="{path:'costLedgerModel>TOTAL_TOKENS',formatter:'.formatTokens'}"/>
                                     <ObjectNumber number="{path:'costLedgerModel>COST_USD',formatter:'.formatUsd'}" emphasized="true"/>
                                     <Text text="{costLedgerModel>INCURRED_BY}"/>
-                                    <ObjectStatus text="{costLedgerModel>STATUS}" state="Error" icon="sap-icon://delete"/>
+                                    <ObjectStatus text="{costLedgerModel>STATUS}" state="Error"/>
                                     <Text text="{costLedgerModel>DELETED_BY}"/>
-                                    <!-- Cross (decline), not the bin: permanently remove this ledger row. -->
-                                    <Button icon="sap-icon://decline" type="Transparent" tooltip="Delete pricing record"
-                                        press="onDeleteCostLedger"/>
                                 </cells>
                             </ColumnListItem>
                         </items>

@@ -119,6 +119,9 @@ const buildItems = (assessmentID, r) => {
     list(ia.StandardEvents).forEach(v => push('STANDARD_EVENT', v));
     list(ia.Topics).forEach(v => push('TOPIC', v));
     list(s4.SAPStandardAPIs).forEach(v => push('STANDARD_API', v));
+    // BAPI -> released-API replacement mapping. Reuse parseS4 ("LEFT -> RIGHT (desc)"):
+    // left = BAPI, right = API, plus description. Stored as VALUE=API, MAPPING=BAPI.
+    list(s4.BAPIToAPIMapping).forEach(v => { const p = parseS4(v); if (p.cds) push('BAPI_API', p.cds, p.table, p.desc); });
     list(s4.SAPStandardFioriApps).forEach(v => push('FIORI_APP', v));
     return items;
 };
@@ -150,7 +153,7 @@ const bucketItems = rows => {
         NEW_S4_TABLES: [], SQL_ANALYSIS_TABLES_DIRECT: [], SQL_ANALYSIS_TABLES_API: [],
         SQL_ANALYSIS_TABLES_CDS: [], BAPIS: [], FUNCTION_MODULES: [], INTERFACE_IDOCS: [],
         INTERFACE_STANDARD_API: [], USE_CASE_AREA: [], EVENTS: [], STANDARD_EVENTS: [],
-        TOPICS: [], SAP_STANDARD_API: [], SAP_STANDARD_FIORI_APP: []
+        TOPICS: [], SAP_STANDARD_API: [], SAP_STANDARD_FIORI_APP: [], BAPI_API_RECOMMENDATIONS: []
     };
     const KIND_TO_FIELD = {
         WRICEF: ['WRICEF_OBJECT_TYPE', 'WRICEF_OBJECT_TYPE'], CRUD: ['READ_CRUD', 'READ_CRUD'],
@@ -161,7 +164,8 @@ const bucketItems = rows => {
         IDOC: ['INTERFACE_IDOCS', 'IDOCS'], INTERFACE_API: ['INTERFACE_STANDARD_API', 'STANDARD_API'],
         USE_CASE_AREA: ['USE_CASE_AREA', 'USE_CASE_AREA'], EVENT: ['EVENTS', 'EVENTS'],
         STANDARD_EVENT: ['STANDARD_EVENTS', 'STANDARD_EVENTS'], TOPIC: ['TOPICS', 'TOPICS'],
-        STANDARD_API: ['SAP_STANDARD_API', 'SAP_STANDARD_API'], FIORI_APP: ['SAP_STANDARD_FIORI_APP', 'SAP_STANDARD_FIORI_APP']
+        STANDARD_API: ['SAP_STANDARD_API', 'SAP_STANDARD_API'], FIORI_APP: ['SAP_STANDARD_FIORI_APP', 'SAP_STANDARD_FIORI_APP'],
+        BAPI_API: ['BAPI_API_RECOMMENDATIONS', 'API']
     };
     for (const row of rows) {
         const m = KIND_TO_FIELD[row.KIND]; if (!m) continue;

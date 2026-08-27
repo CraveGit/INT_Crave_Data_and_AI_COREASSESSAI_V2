@@ -1212,6 +1212,26 @@ code, pre, samp, kbd {
     font-weight: 700;
 }
 
+/* Step list (Reimplementation): one step per line as compact bullets.
+   Target the <ul> directly (FormattedText's sanitizer strips class attrs). */
+.craDetailPanel .craBulletFT ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+.craDetailPanel .craBulletFT ul li {
+    margin-bottom: 0.25rem;
+    line-height: 1.35;
+}
+
+/* BTP Services popup: small use-case-area tag shown above each question. */
+.craScopeTag,
+.craScopeTag .sapMText,
+.craScopeTag .sapTntInfoLabelInner,
+.craScopeTag span {
+    font-size: 0.65rem;
+    line-height: 1rem;
+}
+
 /* Main section headers (Overview / approach / SQL / Integration / Security):
    bigger plain heading with a leading icon -- no InfoLabel pill styling. */
 .craSectionTitle,
