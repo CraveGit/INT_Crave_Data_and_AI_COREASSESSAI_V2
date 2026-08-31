@@ -301,9 +301,9 @@ class ApproachRules:
 
     # Clean-core precedence (location is secondary to using released contracts):
     #   1. retire   - standard covers it and nothing external depends on it
-    #   2. BTP       - ONLY for genuine decoupling (multi-system orchestration,
-    #                  third-party/non-SAP integration, core-breaking with no released
-    #                  on-stack path, or heavy custom UX for SAP Build/BTP)
+    #   2. BTP       - genuine decoupling (multi-system orchestration, third-party/
+    #                  non-SAP integration, any core-breaking constructs, or custom UX
+    #                  incl. reports with a custom UI for SAP Build/BTP)
     #   3. on-stack  - the DEFAULT target (ABAP Cloud + released APIs), regardless of
     #                  size and even with plain external reach (single RFC/IDoc/interface)
     def decide(self, facts: CleanCoreFacts) -> tuple[Approach, str]:
@@ -324,9 +324,9 @@ class ApproachRules:
             reasons.append("multi-system orchestration across several integration mechanisms")
         if facts.third_party_integration:
             reasons.append("third-party / non-SAP integration to decouple from the core")
-        if facts.breaks_core and facts.released_api_count == 0:
-            reasons.append("core-breaking constructs with no released on-stack replacement")
-        heavy_ux = facts.custom_ui and not facts.is_report and not facts.is_analytical
+        if facts.breaks_core:
+            reasons.append("core-breaking constructs needing decoupled remediation")
+        heavy_ux = facts.custom_ui and not facts.is_analytical
         if heavy_ux:
             reasons.append("heavy custom UX suited to SAP Build / Fiori on BTP")
         if reasons:
@@ -338,9 +338,7 @@ class ApproachRules:
                 f"-> build fully on SAP BTP (side-by-side).")
 
         # On-stack is the default clean-core target -- ABAP Cloud + released contracts.
-        if facts.breaks_core:
-            return Approach.ON_STACK, ("Core-breaking constructs, but a released on-stack replacement exists "
-                                       "-> rebuild with clean-core extensibility (RAP / released BAdIs / released APIs) on the stack")
+        # (breaks_core no longer lands here: it always fires a BTP decoupling trigger above.)
         if facts.is_analytical:
             return Approach.ON_STACK, "Analytical object -> embedded analytics (CDS + Fiori) / SAC on the stack"
         if facts.is_report:
