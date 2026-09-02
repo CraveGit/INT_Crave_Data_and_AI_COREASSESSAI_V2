@@ -456,12 +456,12 @@
                 </l:BlockLayoutRow>
             </l:BlockLayout>
         </l:VerticalLayout>
-        <!-- Integration Analysis: shown for hybrid (which carries the side-by-side
-             integration concern), hidden for pure on-stack. An on-stack object with
-             external integration would be reclassified side-by-side/hybrid, so an
-             on-stack integration section would contradict the approach. -->
+        <!-- Integration Analysis: shown only when there is real integration signal
+             (Third-Party/UI flag set, or an "integration" use-case / "interface" WRICEF
+             type). Hidden otherwise, regardless of approach. -->
         <l:VerticalLayout
             width="100%"
+            visible="{parts:[{path:'selectedObjectModel>/USE_CASE_AREA'},{path:'selectedObjectModel>/WRICEF_OBJECT_TYPE'},{path:'selectedObjectModel>/THIRD_PARTY_INTEGRATION'},{path:'selectedObjectModel>/UI_INTEGRATION'}],formatter:'.showIntegrationSection'}"
         >
             <l:BlockLayout background="Transparent">
                 <l:BlockLayoutRow accentCells="Accent1">
@@ -476,11 +476,6 @@
                             width="100%"
                         >
                             <items>
-                                <VBox width="25%">
-                                    <tnt:InfoLabel colorScheme="6" text="Inter-module Integration" class="sapUiTinyMarginBottom"/>
-                                    <Text text="{= ${selectedObjectModel>/INTER_MODULE_INTEGRATION} || 'None' }"/>
-                                
-                                </VBox>
                                 <VBox width="25%">
 								<tnt:InfoLabel colorScheme="6" text="Third-Party Integration" class="sapUiTinyMarginBottom"/>
 								<Text text="{path:'selectedObjectModel>/THIRD_PARTY_INTEGRATION', formatter:'.formatYesNone'}"/>

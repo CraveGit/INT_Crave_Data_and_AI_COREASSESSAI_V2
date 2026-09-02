@@ -915,6 +915,25 @@ sap.ui.define([
                 return "None";
             },
 
+            // Show the Integration Analysis section only on real integration signal:
+            // a Third-Party or UI integration flag set, OR the object tagged with an
+            // "integration" use-case / "interface" WRICEF type. Inter-module is
+            // deliberately excluded (non-determinable from the analysis). Hidden otherwise.
+            showIntegrationSection: function (aUseCase, aWricef, vThirdParty, vUi) {
+                var truthy = function (v) {
+                    return v === true || v === "true" || v === "True" || v === "X" ||
+                        v === "x" || v === 1 || v === "1" || v === "Yes";
+                };
+                if (truthy(vThirdParty) || truthy(vUi)) { return true; }
+                var hasTag = function (aArr, sKey, sWant) {
+                    return Array.isArray(aArr) && aArr.some(function (o) {
+                        return o && String(o[sKey] || "").trim().toLowerCase() === sWant;
+                    });
+                };
+                return hasTag(aUseCase, "USE_CASE_AREA", "integration") ||
+                    hasTag(aWricef, "WRICEF_OBJECT_TYPE", "interface");
+            },
+
             // "20hrs/3PD" -- person-days are hours / HOURS_PER_DAY(8), ceiled.
             formatEffortPD: function (hrs) {
                 var h = parseInt(hrs, 10);
@@ -1033,7 +1052,6 @@ sap.ui.define([
                         { label: "CDS Views", property: "SQL_ANALYSIS_TABLES_CDS", width: 40 }
                     ]},
                     { key: "integration", title: "Integration Analysis", banner: "FFB6DC7A", always: true, cols: [
-                        { label: "Inter-module Integration", property: "INTER_MODULE_INTEGRATION", width: 40 },
                         { label: "Third-Party Integration", property: "THIRD_PARTY_INTEGRATION", width: 14 },
                         { label: "UI Integration", property: "UI_INTEGRATION", width: 14 },
                         { label: "Integration Specific", property: "INTEGERATION_RESULT", width: 70 },
