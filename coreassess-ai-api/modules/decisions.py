@@ -70,6 +70,7 @@ class CleanCoreFacts(BaseModel):
     third_party_integration: bool = False  # outbound HTTP/REST to a (non-SAP) endpoint
     integration_mechanisms: int = 0        # distinct code integration mechanisms (HTTP/RFC/IDoc/proxy)
     custom_ui: bool = False                # Dynpro/Web Dynpro/BSP owned by the object
+    owns_custom_screen: bool = False       # regex-verified real screen ownership (NOT the loose LLM UI flag); drives heavy-UX BTP trigger
     uses_classic_bapi: bool = False        # consumes classic BAPIs (Level-B interface)
     standard_coverage: float = 0.0         # 0..1 of functionality covered by standard
     functionality_count: int = 0           # how many functionalities that ratio spans
@@ -280,6 +281,7 @@ class FactExtractor:
             third_party_integration=_http or _llm_tp,
             integration_mechanisms=_mechs,
             custom_ui=_asFlag(self.integration.get("UIIntegration")) or bool(_PATTERNS["custom_ui"].search(self.code)),
+            owns_custom_screen=bool(_PATTERNS["custom_ui"].search(self.code)),
             uses_classic_bapi=bool(_asList(self.basic.get("BAPIs"))),
             standard_coverage=self._standardCoverage(),
             functionality_count=len(_asList(self.s4.get("FunctionalitiesMap"))),
@@ -326,7 +328,10 @@ class ApproachRules:
             reasons.append("third-party / non-SAP integration to decouple from the core")
         if facts.breaks_core:
             reasons.append("core-breaking constructs needing decoupled remediation")
-        heavy_ux = facts.custom_ui and not facts.is_analytical
+        # Heavy custom UX = object genuinely OWNS a Dynpro/WDY/BSP screen (regex-verified),
+        # NOT the loose LLM UIIntegration flag (which trips on classic ALV list output).
+        # So an ALV report stays on-stack; a real custom-screen object goes to BTP.
+        heavy_ux = facts.owns_custom_screen and not facts.is_analytical
         if heavy_ux:
             reasons.append("heavy custom UX suited to SAP Build / Fiori on BTP")
         if reasons:

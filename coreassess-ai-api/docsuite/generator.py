@@ -553,7 +553,16 @@ def answer_question(doc_type, analysis, chat_prompt, current_doc=None):
 def generate_doc_from_response(doc_type, object_name, company, project, analysis, last_response):
     analysis = _sanitize_btp(analysis)
     doc, _, filename = _shell(doc_type, object_name, company, project, analysis)
-    normalized = _html.unescape(last_response).encode().decode("unicode_escape")
+    # last_response may carry literal \uXXXX escapes (from JSON serialisation) that must
+    # become real characters. The old `.encode().decode("unicode_escape")` reread UTF-8
+    # bytes as latin-1 and CORRUPTED genuine non-ASCII (arrows/em-dash/smart quotes/bullets
+    # -> mojibake). Encoding latin-1 with backslashreplace first keeps real unicode intact
+    # while still decoding the literal escapes. Fall back to the raw text on any oddity.
+    _unescaped = _html.unescape(last_response)
+    try:
+        normalized = _unescaped.encode("latin-1", "backslashreplace").decode("unicode_escape")
+    except (UnicodeDecodeError, UnicodeEncodeError):
+        normalized = _unescaped
     md = (markdownify.markdownify(normalized, heading_style="ATX")
           .replace("`", "").replace("\\-", "-").replace("\\_", "_"))
     if not md.strip():
