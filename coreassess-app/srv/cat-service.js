@@ -1197,10 +1197,18 @@ module.exports = cds.service.impl(function () {
     this.on('GetAccessRequests', async req => {
         const user = currentUser(req);
         const role = await effectiveRoleOf(user);
-        if (roleRank(role) < ROLE_RANK.ADMIN) { return []; }
-        return await SELECT.from(ACCESS_REQUEST).columns(
+        if (roleRank(role) < ROLE_RANK.SUPERUSER) { return []; }
+        const rows = await SELECT.from(ACCESS_REQUEST).columns(
             'ID', 'DISPLAY_NAME', 'EMAIL', 'ROLE', 'ALLOWEDOBJECTS', 'STATUS', 'REQUESTED_BY', 'COMPANY_ID'
         ).orderBy('createdAt desc');
+        // Admins/owners see (and action) everything. A superuser sees, read-only,
+        // only requests scoped to a company they belong to -- e.g. one raised by
+        // another superuser in the same company. Approve/reject stays admin+ (see
+        // DecideAccessRequest gate below).
+        if (roleRank(role) >= ROLE_RANK.ADMIN) { return rows; }
+        const maps = await SELECT.from(COMPANY_USER_MAP).columns('COMPANY_ID').where({ USERNAME: user });
+        const mine = new Set(maps.map(m => m.COMPANY_ID));
+        return rows.filter(r => r.COMPANY_ID != null && mine.has(r.COMPANY_ID));
     });
 
     // Admin approves (creates the user) or rejects a pending request.
@@ -1214,7 +1222,10 @@ module.exports = cds.service.impl(function () {
         if (req.data.approve) {
             outcome = await createUserRow({
                 displayName: reqRow.DISPLAY_NAME, email: reqRow.EMAIL, role: reqRow.ROLE,
-                allowedObjects: reqRow.ALLOWEDOBJECTS, companyID: reqRow.COMPANY_ID
+                // createUserRow reads `companyIDs` (parseCompanyIDs); passing the old
+                // `companyID` key meant approved users got NO company mapping and were
+                // invisible to their company's superusers. Map the request's company.
+                allowedObjects: reqRow.ALLOWEDOBJECTS, companyIDs: reqRow.COMPANY_ID
             });
         }
         await UPDATE(ACCESS_REQUEST).set({
@@ -1307,7 +1318,8 @@ module.exports = cds.service.impl(function () {
     this.on('GetProjectCostStats', async req => {
         const user = currentUser(req);
         const role = await effectiveRoleOf(user);
-        if (roleRank(role) < ROLE_RANK.SUPERUSER) { return []; }
+        // Cost is admin/owner-only. Superusers and users get an empty list.
+        if (roleRank(role) < ROLE_RANK.ADMIN) { return []; }
         const projects = await SELECT.from(MSTR_PROJECT).columns('ID', 'PROJECT_NAME', 'COMPANY.ID as COMPANY_ID', 'ARCHIVED_AT');
         // Company names so the table shows a name, not a bare id.
         const companyRows = await SELECT.from(MSTR_COMPANY).columns('ID', 'COMPANY_NAME');

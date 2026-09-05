@@ -86,8 +86,10 @@
                 </VBox>
 
                 <!-- ============ ACCESS REQUESTS ============ -->
+                <!-- Admin/owner action requests; superuser sees them read-only,
+                     scoped to their company (backend filters the list). -->
                 <VBox class="sapUiLargeMarginBottom"
-                    visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }">
+                    visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' || ${visibleModel>/role} === 'SUPERUSER' }">
                     <Table id="requestsTable" items="{requestsModel>/requests}" growing="true" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
                         <headerToolbar>
                             <OverflowToolbar>
@@ -112,7 +114,7 @@
                                     <Text text="{requestsModel>ALLOWEDOBJECTS}"/>
                                     <Text text="{requestsModel>REQUESTED_BY}"/>
                                     <ObjectStatus text="{requestsModel>STATUS}" state="{path:'requestsModel>STATUS',formatter:'.formatStatusState'}"/>
-                                    <HBox justifyContent="Center" visible="{= ${requestsModel>STATUS} === 'PENDING' }">
+                                    <HBox justifyContent="Center" visible="{= ${requestsModel>STATUS} === 'PENDING' &amp;&amp; (${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER') }">
                                         <Button icon="sap-icon://accept" text="Approve" type="Accept" press="onApproveRequest" class="sapUiTinyMarginEnd"/>
                                         <Button icon="sap-icon://decline" text="Reject" type="Reject" press="onRejectRequest"/>
                                     </HBox>
@@ -123,7 +125,9 @@
                 </VBox>
 
                 <!-- ============ PROJECT STATS ============ -->
-                <VBox class="sapUiLargeMarginBottom">
+                <!-- Project-wise cost is admin/owner-only (backend also gates). -->
+                <VBox class="sapUiLargeMarginBottom"
+                    visible="{= ${visibleModel>/role} === 'ADMIN' || ${visibleModel>/role} === 'OWNER' }">
                     <Table id="statsTable" items="{statsModel>/stats}" growing="true" class="craGridTable" sticky="ColumnHeaders,HeaderToolbar">
                         <headerToolbar>
                             <OverflowToolbar>
@@ -189,7 +193,7 @@
                                     <Text text="{costLedgerModel>OBJECT_NAME}"/>
                                     <Text text="{costLedgerModel>PROJECT_NAME}"/>
                                     <Text text="{costLedgerModel>COMPANY_NAME}"/>
-                                    <Text text="{costLedgerModel>SOURCE}"/>
+                                    <ObjectStatus text="{path:'costLedgerModel>SOURCE',formatter:'.formatSource'}" state="{path:'costLedgerModel>SOURCE',formatter:'.formatSourceState'}"/>
                                     <Text text="{path:'costLedgerModel>TOTAL_TOKENS',formatter:'.formatTokens'}"/>
                                     <ObjectNumber number="{path:'costLedgerModel>COST_USD',formatter:'.formatUsd'}" emphasized="true"/>
                                     <Text text="{costLedgerModel>INCURRED_BY}"/>

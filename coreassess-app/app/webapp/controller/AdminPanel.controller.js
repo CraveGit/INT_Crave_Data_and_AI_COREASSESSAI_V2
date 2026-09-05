@@ -277,16 +277,24 @@ sap.ui.define([
                 error: function () { /* ignore */ }
             });
             this._projectsByCompany = {};
+            // COMPANY is a (key) association, so the OData entity carries a flat
+            // COMPANY_ID foreign key -- use that directly. $expand=COMPANY is kept
+            // only as a fallback; relying on it alone left projectsPreview empty
+            // ("None") because an un-expanded nav is a deferred object, not the id.
+            // $top avoids the default 100-row page silently dropping projects.
             oModel.read("/MSTR_PROJECT", {
-                urlParameters: { "$expand": "COMPANY" },
+                urlParameters: { "$expand": "COMPANY", "$top": 5000 },
                 success: function (r) {
                     var map = {};
                     (r.results || []).forEach(function (p) {
-                        var cid = (p.COMPANY && (p.COMPANY.ID != null ? p.COMPANY.ID : p.COMPANY)) || p.COMPANY_ID;
+                        var cid = (p.COMPANY_ID != null)
+                            ? p.COMPANY_ID
+                            : (p.COMPANY && p.COMPANY.ID != null ? p.COMPANY.ID : null);
                         if (cid == null) { return; }
                         (map[cid] = map[cid] || []).push(p.PROJECT_NAME);
                     });
                     this._projectsByCompany = map;
+                    this._refreshProjectPreview();
                 }.bind(this),
                 error: function () { /* ignore */ }
             });
@@ -340,6 +348,19 @@ sap.ui.define([
         formatUsd: function (v) {
             var n = Number(v || 0);
             return "$" + n.toFixed(4);
+        },
+
+        // Cost-ledger SOURCE -> human label. Stored values stay ANALYSIS/DOCGEN;
+        // only the display is friendly so analysis vs documentation spend is clear.
+        formatSource: function (s) {
+            switch (String(s || "").toUpperCase()) {
+                case "DOCGEN": return "Documentation";
+                case "ANALYSIS": return "Analysis";
+                default: return s || "";
+            }
+        },
+        formatSourceState: function (s) {
+            return String(s || "").toUpperCase() === "DOCGEN" ? "Information" : "Success";
         },
 
         // Compact token count: 29548 -> "29.5K", 1_200_000 -> "1.2M", 3e9 -> "3B".
